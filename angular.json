@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "quiz-netcracker-frontend"
+  "defaultProject": "quiz-netcracker-frontend",
+  "cli": {
+    "analytics": false
+  }
 }
