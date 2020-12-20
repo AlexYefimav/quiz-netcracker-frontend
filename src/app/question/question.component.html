@@ -1,7 +1,17 @@
-<h2>Вопросы</h2>
+<h3>Вопросы</h3>
 
-<ul class="heroes">
+<ul class="question">
   <li *ngFor="let question of questions">
-    <span>{{question.title}}</span>
+    <div class="card">
+      <h5 class="card-header">{{question.title}}</h5>
+      <div class="card-body">
+        <p class="card-text">{{question.description}}</p>
+        <ul>
+          <li *ngFor="let answer of question.answersSet">
+            <button type="button" class="btn btn-primary">{{answer.title}}</button>
+          </li>
+        </ul>
+      </div>
+    </div>
   </li>
 </ul>
