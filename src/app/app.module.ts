@@ -8,6 +8,7 @@ import { AppTopBarComponent } from './app-top-bar/app-top-bar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { QuestionComponent } from './question/question.component';
 import { AnswerComponent } from './answer/answer.component';
+import { EditQuestionComponent } from './edit-question/edit-question.component';
 import {UserComponent} from "./user/user.component";
 
 @NgModule({
@@ -16,7 +17,8 @@ import {UserComponent} from "./user/user.component";
     AppTopBarComponent,
     QuestionComponent,
     UserComponent,
-    AnswerComponent
+    AnswerComponent,
+    EditQuestionComponent
   ],
   imports: [
     BrowserModule,

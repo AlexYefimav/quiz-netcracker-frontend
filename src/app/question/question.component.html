@@ -5,7 +5,10 @@
 <form>
   <div class="container mt-3" *ngFor="let question of questions">
     <div class="card">
-      <h5 class="card-header">{{question.title}}</h5>
+      <h5 class="card-header">
+        {{question.title}}
+        <a class="btn btn-success" href="question/update/{{question.id}}" role="button">Edit</a>
+      </h5>
       <div class="card-body">
         <p class="card-text">{{question.description}}</p>
         <fieldset id="{{question.id}}">
