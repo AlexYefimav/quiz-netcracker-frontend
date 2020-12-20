@@ -6,19 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-top-bar.component.css']
 })
 export class AppTopBarComponent implements OnInit {
-  home: string;
-  quiz: string;
-  contact: string;
-  about: string
-
 
   constructor() { }
 
   ngOnInit(): void {
-    this.home = "Home";
-    this.quiz = "Quiz";
-    this.contact = "Contact";
-    this.about = "About";
   }
 
 }
