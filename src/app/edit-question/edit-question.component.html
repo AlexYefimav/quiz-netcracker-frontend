@@ -1,0 +1,22 @@
+<form>
+  <div class="container mt-3">
+    <div class="mb-3">
+      <label for="title" class="form-control-label">Title</label>
+      <input type="text" class="form-control" id="title" name="title"  [(ngModel)]="question.title">
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-control-label">Description</label>
+      <input type="text" class="form-control" id="description" name="description" [(ngModel)]="question.description">
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <input type="text" class="form-control" id="category" name="category" [(ngModel)]="question.category">
+    </div>
+    <div class="mb-3">
+      <label for="level" class="form-label">Level</label>
+      <input type="text" class="form-control" id="level" name="level" [(ngModel)]="question.level" #level="ngModel">
+    </div>
+    <a class="btn btn-primary" href="quiz" role="button" (click)="updateQuestion()">Save</a>
+  </div>
+</form>
+

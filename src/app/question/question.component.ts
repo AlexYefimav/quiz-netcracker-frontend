@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {QuestionService} from "../service/question.service";
-import {Wrapper} from "../model/wrapper";
 import {Question} from "../model/question";
 
 @Component({
@@ -10,18 +9,28 @@ import {Question} from "../model/question";
 })
 export class QuestionComponent implements OnInit {
   public questions: Question[];
+  public question: Question;
 
 
-  constructor(private questionService: QuestionService ) { }
+  constructor(private questionService: QuestionService) {
+  }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.getQuestionList();
   }
 
-private getQuestionList(): void {
+  private getQuestionList(): void {
     this.questionService.getQuestion().subscribe(wrapper => {
       this.questions = wrapper.values;
     })
-}
+  }
 
+  private getQuestion(questionId: string): void {
+    this.questionService.getQuestionById(questionId).subscribe(question =>
+      this.question = question);
+  }
+
+  private createQuestion(question: Question): void {
+    this.questionService.createQuestion(question).subscribe(question => this.question = question);
+  }
 }
