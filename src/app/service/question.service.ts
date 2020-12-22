@@ -11,14 +11,12 @@ export class QuestionService {
 
   url = 'http://127.0.0.1:8085/question/';
 
-
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   constructor(private http: HttpClient) {
   }
-
 
   getQuestion(): Observable<Wrapper> {
     return this.http.get<Wrapper>(this.url + "findAllQuestions");

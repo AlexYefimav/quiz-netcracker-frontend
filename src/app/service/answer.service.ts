@@ -8,14 +8,39 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class AnswerService {
 
-  httpOptions = {
-    header: new HttpHeaders({ 'Content-Type': 'application/json' })
+  private answerUrl = 'http://localhost:8085/answer';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    })
   };
-  answerUrl = 'http://localhost:8085/answer';
-
+  
   constructor(private http: HttpClient) { }
 
   getAnswers(): Observable<Answer[]> {
     return this.http.get<Answer[]>(this.answerUrl + '/all');
+  }
+
+  getAnswer(answerId: number): Observable<Answer> {
+    const resultUrl = `${this.answerUrl}/${answerId}`;
+    return this.http.get<Answer>(resultUrl);
+  }
+
+  addAnswer(answer: Answer): Observable<Answer> {
+    const resultUrl = this.answerUrl + '/answer';
+    return this.http.post<Answer>(resultUrl, answer, this.httpOptions);
+  }
+
+  updateAnswer(answer: Answer): Observable<Answer> {
+    const resultUrl = this.answerUrl + `/${answer.id}`;
+    return this.http.put<Answer>(resultUrl, answer, this.httpOptions);
+  }
+
+  deleteAnswer(answer: Answer | number): Observable<any> {
+    const id = typeof answer === 'number' ? answer : answer.id;
+    const resultUrl = `${this.answerUrl}/${id}`;
+
+    return this.http.delete(resultUrl, this.httpOptions);
   }
 }
