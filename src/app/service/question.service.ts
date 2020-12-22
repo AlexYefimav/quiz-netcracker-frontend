@@ -17,6 +17,6 @@ export class QuestionService {
 
 
   getQuestion(): Observable<Wrapper> {
-    return this.http.get<Wrapper>('http://127.0.0.1:8080/question/findAllQuestions');
+    return this.http.get<Wrapper>('http://127.0.0.1:8085/question/findAllQuestions');
   }
 }
