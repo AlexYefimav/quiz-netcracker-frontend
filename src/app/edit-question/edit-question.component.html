@@ -74,6 +74,6 @@
         </label>
       </mat-form-field>
     </mat-expansion-panel>
-    <a mat-button href="quiz" (click)="c?updateQuestion():createQuestion(question)">Save</a>
+    <a mat-raised-button href="quiz" color="primary" (click)="this.isUpdateQuestion?updateQuestion():createQuestion(question)">Save</a>
   </mat-accordion>
 </div>

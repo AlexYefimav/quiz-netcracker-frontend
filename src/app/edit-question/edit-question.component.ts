@@ -12,7 +12,7 @@ import {MatAccordion} from '@angular/material/expansion';
 export class EditQuestionComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   question: Question;
-  c:boolean;
+  isUpdateQuestion:boolean;
 
   constructor(private questionService: QuestionService, private route: ActivatedRoute) {
 
@@ -20,11 +20,11 @@ export class EditQuestionComponent implements OnInit {
 
   ngOnInit(){
     if(this.route.snapshot.params.id!=null){
+      this.isUpdateQuestion = true;
       this.getQuestion(this.route.snapshot.params.id);
-      this.c = true;
     } else {
-      this.c = false;
-      this.question.title = "Govno";
+      this.isUpdateQuestion = false;
+      this.question = new Question();
     }
 
   }

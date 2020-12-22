@@ -35,3 +35,7 @@
   max-width: 1000px;
   text-align: center;
 }
+
+.mat-raised-button {
+  margin-top: 20px;
+}
