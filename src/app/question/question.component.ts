@@ -25,12 +25,7 @@ export class QuestionComponent implements OnInit {
     })
   }
 
-  private getQuestion(questionId: string): void {
-    this.questionService.getQuestionById(questionId).subscribe(question =>
-      this.question = question);
-  }
-
-  private createQuestion(question: Question): void {
-    this.questionService.createQuestion(question).subscribe(question => this.question = question);
+  deleteQuestion(questionId: string) {
+    this.questionService.deleteQuestion(questionId).subscribe(question => this.question = question);
   }
 }

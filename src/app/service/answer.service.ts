@@ -11,7 +11,7 @@ export class AnswerService {
   httpOptions = {
     header: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  answerUrl = 'http://localhost:8080/answer';
+  answerUrl = 'http://localhost:8085/answer';
 
   constructor(private http: HttpClient) { }
 

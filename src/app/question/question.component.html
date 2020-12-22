@@ -1,27 +1,42 @@
-<div class="text-center">
-  <h3>Вопросы</h3>
+<div>
+  <h1>Вопросы</h1>
 </div>
-
 <form>
-  <div class="container mt-3" *ngFor="let question of questions">
-    <div class="card">
-      <h5 class="card-header">
+  <div *ngFor="let question of questions">
+    <mat-card>
+      <mat-card-title>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
         {{question.title}}
-        <a class="btn btn-success" href="question/update/{{question.id}}" role="button">Edit</a>
-      </h5>
-      <div class="card-body">
-        <p class="card-text">{{question.description}}</p>
-        <fieldset id="{{question.id}}">
-          <div class="mt-2" *ngFor="let answer of question.answersSet">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="{{question.id}}" id="{{answer.id}}">
-              <label class="form-check-label" for="{{answer.id}}">
-                {{answer.title}}
-              </label>
-            </div>
-          </div>
-        </fieldset>
-      </div>
-    </div>
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item href="question/update/{{question.id}}">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+            <span>Edit</span>
+          </a>
+          <a mat-menu-item href="quiz" (click)="deleteQuestion(question.id)">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+            <span>Delete</span>
+          </a>
+        </mat-menu>
+      </mat-card-title>
+      <mat-card-content>
+        {{question.description}}
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button *ngFor="let answer of question.answersSet" value="{{answer.id}}"
+                            color="accent">{{answer.title}}</mat-radio-button>
+        </mat-radio-group>
+      </mat-card-actions>
+    </mat-card>
   </div>
+  <a mat-mini-fab color="primary" href="question/create">
+    <mat-icon>add</mat-icon>
+  </a>
 </form>
+
+
+
+

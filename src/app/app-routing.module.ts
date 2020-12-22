@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'quiz', component: QuestionComponent },
   { path: 'answers', component: AnswerComponent },
   { path: 'question/update/:id', component: EditQuestionComponent },
+  { path: 'question/create', component: EditQuestionComponent },
   { path: 'users', component: UserComponent },
 ];
 

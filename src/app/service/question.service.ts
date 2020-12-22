@@ -9,7 +9,7 @@ import {Question} from "../model/question";
 })
 export class QuestionService {
 
-  url = 'http://127.0.0.1:8080/question/';
+  url = 'http://127.0.0.1:8085/question/';
 
 
   httpOptions = {
@@ -34,5 +34,9 @@ export class QuestionService {
 
   updateQuestion(question: Question): Observable<Question> {
     return this.http.put<Question>(this.url + "update/" + question.id, question);
+  }
+
+  deleteQuestion(questionId: string): Observable<Question> {
+    return this.http.delete<Question>(this.url + "delete/" + questionId);
   }
 }

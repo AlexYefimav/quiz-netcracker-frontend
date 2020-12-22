@@ -1,22 +1,79 @@
-<form>
-  <div class="container mt-3">
-    <div class="mb-3">
-      <label for="title" class="form-control-label">Title</label>
-      <input type="text" class="form-control" id="title" name="title"  [(ngModel)]="question.title">
-    </div>
-    <div class="mb-3">
-      <label for="description" class="form-control-label">Description</label>
-      <input type="text" class="form-control" id="description" name="description" [(ngModel)]="question.description">
-    </div>
-    <div class="mb-3">
-      <label for="category" class="form-label">Category</label>
-      <input type="text" class="form-control" id="category" name="category" [(ngModel)]="question.category">
-    </div>
-    <div class="mb-3">
-      <label for="level" class="form-label">Level</label>
-      <input type="text" class="form-control" id="level" name="level" [(ngModel)]="question.level" #level="ngModel">
-    </div>
-    <a class="btn btn-primary" href="quiz" role="button" (click)="updateQuestion()">Save</a>
+<div class="editQuestion">
+  <div class="example-action-buttons">
+    <button mat-button (click)="accordion.openAll()">Expand All</button>
+    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
   </div>
-</form>
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Title
+        </mat-panel-title>
+        <mat-panel-description>
+          {{question.title}}
+          <mat-icon>title</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field class="example-form">
+        <label>
+          <input matInput [(ngModel)]="question.title">
+        </label>
+      </mat-form-field>
+    </mat-expansion-panel>
 
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Description
+        </mat-panel-title>
+        <mat-panel-description>
+          {{question.description}}
+          <mat-icon>description</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="example-form">
+        <label>
+          <input matInput [(ngModel)]="question.description">
+        </label>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Category
+        </mat-panel-title>
+        <mat-panel-description>
+          {{question.category}}
+          <mat-icon>category</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="example-form">
+        <label>
+          <input matInput [(ngModel)]="question.category">
+        </label>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Level
+        </mat-panel-title>
+        <mat-panel-description>
+          {{question.level}}
+          <mat-icon>star_rate</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="example-form">
+        <label>
+          <input matInput [(ngModel)]="question.level">
+        </label>
+      </mat-form-field>
+    </mat-expansion-panel>
+    <a mat-button href="quiz" (click)="c?updateQuestion():createQuestion(question)">Save</a>
+  </mat-accordion>
+</div>
