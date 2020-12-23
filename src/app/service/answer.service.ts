@@ -15,7 +15,7 @@ export class AnswerService {
       'Content-Type': 'application/json'
     })
   };
-  
+
   constructor(private http: HttpClient) { }
 
   getAnswers(): Observable<Answer[]> {
@@ -37,9 +37,8 @@ export class AnswerService {
     return this.http.put<Answer>(resultUrl, answer, this.httpOptions);
   }
 
-  deleteAnswer(answer: Answer | number): Observable<any> {
-    const id = typeof answer === 'number' ? answer : answer.id;
-    const resultUrl = `${this.answerUrl}/${id}`;
+  deleteAnswer(answer: Answer): Observable<any> {
+    const resultUrl = `${this.answerUrl}/${answer.id}`;
 
     return this.http.delete(resultUrl, this.httpOptions);
   }

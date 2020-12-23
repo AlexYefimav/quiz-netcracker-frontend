@@ -20,6 +20,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
+import { AnswerDetailComponent } from './answer-detail/answer-detail.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { MatInputModule } from '@angular/material/input';
     QuestionComponent,
     UserComponent,
     AnswerComponent,
-    EditQuestionComponent
+    EditQuestionComponent,
+    AnswerDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { MatInputModule } from '@angular/material/input';
     MatGridListModule,
     MatIconModule,
     MatExpansionModule,
-    MatInputModule
+    MatInputModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

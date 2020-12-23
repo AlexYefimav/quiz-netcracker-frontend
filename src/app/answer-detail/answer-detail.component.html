@@ -1,0 +1,15 @@
+<div *ngIf="answer">
+  <mat-form-field appearance="fill">
+    <input
+      matInput
+      minlength="40"
+      [(ngModel)]="answer.title"
+      (blur)="updateAnswer(answer)">
+  </mat-form-field>
+  <mat-slide-toggle
+    [(ngModel)]="answer.right"
+    (change)="updateAnswer(answer)">
+  </mat-slide-toggle>
+  <button mat-flat-button color="warn" (click)="deleteAnswer(answer)">Удалить</button>
+</div>
+
