@@ -1,0 +1,24 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Добавление ответа
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <form>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Новый ответ"
+        name="title"
+        [(ngModel)]="title">
+      <mat-error>Необходимо заполнить поле</mat-error>
+<!--      <mat-error *ngIf="">Такой ответ уже существует</mat-error>-->
+    </mat-form-field>
+    <mat-slide-toggle
+      name="right"
+      [(ngModel)]="right">
+    </mat-slide-toggle>
+    <button mat-flat-button color="primary" (click)="addAnswer()">Добавить</button>
+  </form>
+</mat-expansion-panel>

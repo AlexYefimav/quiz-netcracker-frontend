@@ -1,7 +1,8 @@
 <div class="container">
-  <h2>Ответы</h2>
-
-  <div class="answer" *ngFor="let answer of answers; let i = index">
-    <app-answer-detail [answer]="answer"></app-answer-detail>
+  <div class="answer" *ngFor="let answer of question.answersSet">
+    <app-answer-detail
+      [question]="question"
+      [answer]="answer"></app-answer-detail>
   </div>
+  <app-add-answer [question]="question"></app-add-answer>
 </div>
