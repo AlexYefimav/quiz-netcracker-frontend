@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
+import { AnswerDetailComponent } from './answer-detail/answer-detail.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AddAnswerComponent } from './add-answer/add-answer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { MatInputModule } from '@angular/material/input';
     QuestionComponent,
     UserComponent,
     AnswerComponent,
-    EditQuestionComponent
+    EditQuestionComponent,
+    AnswerDetailComponent,
+    AddAnswerComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,9 @@ import { MatInputModule } from '@angular/material/input';
     MatGridListModule,
     MatIconModule,
     MatExpansionModule,
-    MatInputModule
+    MatInputModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

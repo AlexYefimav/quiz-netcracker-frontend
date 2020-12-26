@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Answer} from '../model/answer';
-import {AnswerService} from '../service/answer.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {Question} from '../model/question';
 
 @Component({
   selector: 'app-answer',
@@ -8,19 +7,10 @@ import {AnswerService} from '../service/answer.service';
   styleUrls: ['./answer.component.css']
 })
 export class AnswerComponent implements OnInit {
-  public answers: Answer[];
+  @Input() question: Question;
 
-  constructor(private answerService: AnswerService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getAnswers();
   }
-
-  private getAnswers(): void {
-    this.answerService.getAnswers()
-      .subscribe(answers => {
-        this.answers = answers;
-      });
-  }
-
 }
