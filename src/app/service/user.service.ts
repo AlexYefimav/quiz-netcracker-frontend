@@ -2,21 +2,39 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {WrapperForUser} from "../model/wrapperForUser";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
 
+  url = 'http://localhost:8085/users/';
+
   httpOptions = {
-    header: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  answerUrl = 'http://localhost:8085/users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getUsers(): Observable<WrapperForUser> {
-    return this.http.get<WrapperForUser>(this.answerUrl + '/findAllUsers');
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.url + "findAllUsers");
+  }
+
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(this.url + "findUser/" + userId);
+  }
+
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(this.url + "save", user)
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>(this.url + "update/" + user.id, user);
+  }
+
+  deleteUser(userId: string): Observable<User> {
+    console.log(userId);
+    return this.http.delete<User>(this.url + "delete/" + userId);
   }
 }

@@ -1,7 +1,35 @@
-<h2>Пользователи</h2>
+<div>
+  <h1>Пользователи</h1>
+</div>
+<form>
+  <div *ngFor="let user of users">
+    <mat-card>
+      <mat-card-title>
 
-<ul class="container mt-3">
-  <li *ngFor="let user of users">
-    <span>{{user.login}}</span>
-  </li>
-</ul>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        {{user.login}}
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item href="users/update/{{user.id}}">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+            <span>Edit</span>
+          </a>
+          <a mat-menu-item href="users" (click)="deleteUser(user.id)">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+            <span>Delete</span>
+          </a>
+        </mat-menu>
+      </mat-card-title>
+      <mat-card-content>
+        {{user.email}}
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <a mat-mini-fab color="primary" href="users/create">
+    <mat-icon>add</mat-icon>
+  </a>
+</form>
+
+
+

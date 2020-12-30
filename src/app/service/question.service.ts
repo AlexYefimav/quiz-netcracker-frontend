@@ -3,13 +3,15 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
 import {Wrapper} from "../model/wrapper";
 import {Question} from "../model/question";
+import {User} from "../model/user";
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionService {
 
-  url = 'http://127.0.0.1:8085/question/';
+  url = 'http://127.0.0.1:8080/question/';
+
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -17,6 +19,7 @@ export class QuestionService {
 
   constructor(private http: HttpClient) {
   }
+
 
   getQuestion(): Observable<Wrapper> {
     return this.http.get<Wrapper>(this.url + "findAllQuestions");
@@ -34,7 +37,7 @@ export class QuestionService {
     return this.http.put<Question>(this.url + "update/" + question.id, question);
   }
 
-  deleteQuestion(questionId: string): Observable<Question> {
+  deleteQuestion(questionId: string) {
     return this.http.delete<Question>(this.url + "delete/" + questionId);
   }
 }
