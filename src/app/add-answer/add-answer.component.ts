@@ -44,6 +44,7 @@ export class AddAnswerComponent implements OnInit {
     const answer = new Answer();
     answer.title = this.title;
     answer.right = this.right;
+    answer.question = this.question.id;
     this.question.answersSet.push(answer);
     this.title = '';
   }

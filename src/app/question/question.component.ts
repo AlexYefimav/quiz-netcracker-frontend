@@ -20,8 +20,8 @@ export class QuestionComponent implements OnInit {
   }
 
   private getQuestionList(): void {
-    this.questionService.getQuestion().subscribe(wrapper => {
-      this.questions = wrapper.values;
+    this.questionService.getQuestion().subscribe(questions => {
+      this.questions = questions;
     })
   }
 
