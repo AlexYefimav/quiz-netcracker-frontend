@@ -6,4 +6,6 @@ export class Question {
   description: string;
   category: string;
   level: string;
+  game: string;
+  answersSet: Answer[];
 }
