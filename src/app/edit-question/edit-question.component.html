@@ -74,6 +74,9 @@
         </label>
       </mat-form-field>
     </mat-expansion-panel>
+    <!--disabled = "{{isDisabled}}"-->
+    <a mat-raised-button href="quiz" color="primary" disabled="false"
+       (click)="this.isUpdateQuestion?updateQuestion():createQuestion(question)">Save</a>
   </mat-accordion>
   <app-answer [question]="question"></app-answer>
   <a mat-raised-button href="quiz" color="primary" (click)="this.isUpdateQuestion?updateQuestion():createQuestion(question)">Save</a>

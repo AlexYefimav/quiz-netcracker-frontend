@@ -24,12 +24,12 @@
       <mat-card-content>
         {{question.description}}
       </mat-card-content>
-      <mat-card-actions>
-        <mat-radio-group aria-label="Select an option">
-          <mat-radio-button *ngFor="let answer of question.answersSet" value="{{answer.id}}"
-                            color="accent">{{answer.title}}</mat-radio-button>
-        </mat-radio-group>
-      </mat-card-actions>
+<!--      <mat-card-actions>-->
+<!--        <mat-radio-group aria-label="Select an option">-->
+<!--          <mat-radio-button *ngFor="let answer of question.answersSet" value="{{answer.id}}"-->
+<!--                            color="accent">{{answer.title}}</mat-radio-button>-->
+<!--        </mat-radio-group>-->
+<!--      </mat-card-actions>-->
     </mat-card>
   </div>
   <a mat-mini-fab color="primary" href="question/create">

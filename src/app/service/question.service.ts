@@ -18,8 +18,8 @@ export class QuestionService {
   constructor(private http: HttpClient) {
   }
 
-  getQuestion(): Observable<Wrapper> {
-    return this.http.get<Wrapper>(this.url + "findAllQuestions");
+  getQuestion(): Observable<Question[]> {
+    return this.http.get<Question[]>(this.url + "findAllQuestions");
   }
 
   getQuestionById(questionId: string): Observable<Question> {
