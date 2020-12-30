@@ -23,6 +23,8 @@ import { MatInputModule } from '@angular/material/input';
 import { AnswerDetailComponent } from './answer-detail/answer-detail.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AddAnswerComponent } from './add-answer/add-answer.component';
+import {GameComponent} from "./game/game.component";
+import {AddGameComponent} from "./add-game/add-game.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AddAnswerComponent } from './add-answer/add-answer.component';
     AnswerComponent,
     EditQuestionComponent,
     AnswerDetailComponent,
-    AddAnswerComponent
+    AddAnswerComponent,
+    GameComponent,
+    AddGameComponent
   ],
   imports: [
     BrowserModule,

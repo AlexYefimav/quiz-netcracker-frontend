@@ -1,0 +1,37 @@
+<div>
+  <h1>Playable Games</h1>
+  <h1>Enjoy!</h1>
+</div>
+<form>
+  <div *ngFor="let game of games">
+    <mat-card>
+      <mat-card-title>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        {{game.name}}
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item href="game/update/{{game.id}}">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+            <span>Edit</span>
+          </a>
+          <a mat-menu-item href="games" (click)="deleteGame(game.id)">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+            <span>Delete</span>
+          </a>
+        </mat-menu>
+      </mat-card-title>
+      <mat-card-content>
+        {{game.description}}
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <a mat-mini-fab color="primary" href="game/create">
+    <mat-icon>add</mat-icon>
+  </a>
+</form>
+
+
+
+
