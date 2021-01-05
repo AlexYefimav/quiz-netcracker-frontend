@@ -23,11 +23,16 @@ export class AnswerDetailComponent implements OnInit {
     if (chosenAnswerIndex !== -1) {
       answers.splice(chosenAnswerIndex, 1);
     }
-    this.answerService.deleteAnswer(chosenAnswer).subscribe();
+    // this.answerService.deleteAnswer(chosenAnswer).subscribe();
   }
 
   updateAnswer(answer: Answer): void {
-    this.answerService.updateAnswer(answer).subscribe();
+    const answers = this.question.answersSet;
+    const chosenAnswerIndex = answers.indexOf(answer);
+    if (chosenAnswerIndex !== -1) {
+      answers[chosenAnswerIndex] = answer;
+    }
+    // this.answerService.updateAnswer(answer).subscribe();
   }
 
 }

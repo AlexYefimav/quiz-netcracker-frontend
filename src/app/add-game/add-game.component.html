@@ -1,0 +1,46 @@
+<div class="addGame">
+
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Title
+        </mat-panel-title>
+        <mat-panel-description>
+          {{game.name}}
+          <mat-icon>title</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field class="example-form">
+        <label>
+          <input matInput [(ngModel)]="game.name">
+        </label>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Description
+        </mat-panel-title>
+        <mat-panel-description>
+          {{game.description}}
+          <mat-icon>description</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="example-form">
+        <label>
+          <input matInput [(ngModel)]="game.description">
+        </label>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+
+
+
+  </mat-accordion>
+
+  <a mat-raised-button href="question/create" color="primary">Add question</a>
+  <a mat-raised-button href="quiz" color="primary" (click)="this.isUpdateGame?updateGame():createGame(game)">Save</a>
+</div>

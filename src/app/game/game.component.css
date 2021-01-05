@@ -1,0 +1,36 @@
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: oldlace;
+}
+.mat-card {
+  background: #e91e63;
+  color: oldlace;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  max-width: 750px;
+  text-align: center;
+}
+
+
+.mat-radio-button {
+  color: blanchedalmond;
+}
+
+.mat-icon-button {
+  color: #303030;
+  display: block;
+  margin-left: auto;
+}
+
+.mat-mini-fab {
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
