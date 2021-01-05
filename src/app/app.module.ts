@@ -25,6 +25,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AddAnswerComponent } from './add-answer/add-answer.component';
 import {GameComponent} from "./game/game.component";
 import {AddGameComponent} from "./add-game/add-game.component";
+import {EditUserComponent} from "./edit-user/edit-user.component";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {AddGameComponent} from "./add-game/add-game.component";
     AppTopBarComponent,
     QuestionComponent,
     UserComponent,
+    EditUserComponent,
     AnswerComponent,
     EditQuestionComponent,
     AnswerDetailComponent,

@@ -1,0 +1,80 @@
+
+<div class="editQuestion">
+  <div class="example-action-buttons">
+    <button mat-button (click)="accordion.openAll()">Expand All</button>
+    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+  </div>
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          User
+        </mat-panel-title>
+        <mat-panel-description>
+          {{user.login}}
+          <mat-icon>login</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field class="example-form">
+        <label>
+          <input matInput [(ngModel)]="user.login">
+        </label>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Email
+        </mat-panel-title>
+        <mat-panel-description>
+          {{user.email}}
+          <mat-icon>email</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="example-form">
+        <label>
+          <input matInput [(ngModel)]="user.email">
+        </label>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Role
+        </mat-panel-title>
+        <mat-panel-description>
+          {{user.role}}
+          <mat-icon>role</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="example-form">
+        <label>
+          <input matInput [(ngModel)]="user.password">
+        </label>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+<!--    <mat-expansion-panel>-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>-->
+<!--          Level-->
+<!--        </mat-panel-title>-->
+<!--        <mat-panel-description>-->
+<!--          {{user.l}}-->
+<!--          <mat-icon>star_rate</mat-icon>-->
+<!--        </mat-panel-description>-->
+<!--      </mat-expansion-panel-header>-->
+
+<!--      <mat-form-field class="example-form">-->
+<!--        <label>-->
+<!--          <input matInput [(ngModel)]="question.level">-->
+<!--        </label>-->
+<!--      </mat-form-field>-->
+<!--    </mat-expansion-panel>-->
+  </mat-accordion>
+  <a mat-raised-button href="users" color="primary" (click)="this.isUpdateUser?updateUser():createUser(user)">Save</a>
+</div>

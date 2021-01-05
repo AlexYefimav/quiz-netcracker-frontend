@@ -5,6 +5,7 @@ import {EditQuestionComponent} from "./edit-question/edit-question.component";
 import {UserComponent} from './user/user.component';
 import {GameComponent} from "./game/game.component";
 import {AddGameComponent} from "./add-game/add-game.component";
+import {EditUserComponent} from "./edit-user/edit-user.component";
 
 const routes: Routes = [
   { path: 'quiz', component: QuestionComponent },
@@ -14,6 +15,8 @@ const routes: Routes = [
   {path: 'games', component: GameComponent},
   {path: 'game/create', component: AddGameComponent},
   {path: 'game/update/:id', component: AddGameComponent},
+  {path: 'users/create', component: EditUserComponent},
+  {path: 'users/update/:id', component: EditUserComponent},
 ];
 
 @NgModule({
