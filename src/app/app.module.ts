@@ -26,6 +26,8 @@ import { AddAnswerComponent } from './add-answer/add-answer.component';
 import {GameComponent} from "./game/game.component";
 import {AddGameComponent} from "./add-game/add-game.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
+import {SigninComponent} from "./signin/signin.component";
+import {RegisterComponent} from "./register/register.component";
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import {EditUserComponent} from "./edit-user/edit-user.component";
     AnswerDetailComponent,
     AddAnswerComponent,
     GameComponent,
-    AddGameComponent
+    AddGameComponent,
+    SigninComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
