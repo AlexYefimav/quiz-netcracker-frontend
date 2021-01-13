@@ -27,7 +27,6 @@ export class AddGameComponent implements OnInit {
       this.isUpdateGame = false;
       this.game = new Game();
     }
-
   }
 
   private getGame(gameId: string): void {

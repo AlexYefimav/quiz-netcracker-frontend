@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Wrapper} from '../model/wrapper';
 import {Game} from '../model/game';
 
 @Injectable({
@@ -19,7 +18,7 @@ export class GameService {
   }
 
   getGame(): Observable<Game[]> {
-    return this.http.get<Game[]>(this.url + 'findAllGames');
+    return this.http.get<Game[]>(this.url + 'all');
   }
 
   getGameById(gameId: string): Observable<Game> {
@@ -31,7 +30,7 @@ export class GameService {
 //  }
 
   createGame(game: Game): Observable<Game> {
-    return this.http.post<Game>(this.url + 'createGame', game);
+    return this.http.post<Game>(this.url + 'game', game);
   }
 
   updateGame(game: Game): Observable<Game> {

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
-import {Wrapper} from "../model/wrapper";
 import {Question} from "../model/question";
 
 @Injectable({
@@ -22,8 +21,8 @@ export class QuestionService {
     return this.http.get<Question[]>(this.url + "findAllQuestions");
   }
 
-  getQuestionById(questionId: string): Observable<Question> {
-    return this.http.get<Question>(this.url + "findQuestion/" + questionId);
+  getQuestionById(id: string): Observable<Question> {
+    return this.http.get<Question>(this.url + "findQuestion/" + id);
   }
 
   createQuestion(question: Question): Observable<Question> {

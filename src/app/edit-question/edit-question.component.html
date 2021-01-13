@@ -7,7 +7,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Title
+          Вопрос
         </mat-panel-title>
         <mat-panel-description>
           {{question.title}}
@@ -24,7 +24,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Description
+          Описание
         </mat-panel-title>
         <mat-panel-description>
           {{question.description}}
@@ -42,25 +42,24 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Category
+          Категория
         </mat-panel-title>
         <mat-panel-description>
-          {{question.category}}
+          <span>{{categoryName}}</span>
           <mat-icon>category</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <mat-form-field class="example-form">
-        <label>
-          <input matInput [(ngModel)]="question.category">
-        </label>
-      </mat-form-field>
+      <div *ngFor="let category of categories">
+        <button mat-raised-button color="primary"
+                (click)="save(category);categoryName=category.name">{{category.name}}</button>
+      </div>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Level
+          Уровень сложности
         </mat-panel-title>
         <mat-panel-description>
           {{question.level}}
@@ -74,10 +73,8 @@
         </label>
       </mat-form-field>
     </mat-expansion-panel>
-    <!--disabled = "{{isDisabled}}"-->
-    <a mat-raised-button href="quiz" color="primary" disabled="false"
-       (click)="this.isUpdateQuestion?updateQuestion():createQuestion(question)">Save</a>
   </mat-accordion>
   <app-answer [question]="question"></app-answer>
-  <a mat-raised-button href="quiz" color="primary" (click)="this.isUpdateQuestion?updateQuestion():createQuestion(question)">Save</a>
+  <a mat-raised-button href="quiz" color="primary"
+     (click)="this.isUpdateQuestion?updateQuestion():createQuestion(question)">Save</a>
 </div>

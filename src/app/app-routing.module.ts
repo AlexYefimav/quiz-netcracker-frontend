@@ -10,10 +10,10 @@ import {SigninComponent} from "./signin/signin.component";
 import {RegisterComponent} from "./register/register.component";
 
 const routes: Routes = [
-  { path: 'quiz', component: QuestionComponent },
-  { path: 'question/update/:id', component: EditQuestionComponent },
-  { path: 'question/create', component: EditQuestionComponent },
-  { path: 'users', component: UserComponent },
+  {path: 'quiz', component: QuestionComponent},
+  {path: 'question/update/:id', component: EditQuestionComponent},
+  {path: 'question/create', component: EditQuestionComponent},
+  {path: 'users', component: UserComponent},
   {path: 'games', component: GameComponent},
   {path: 'game/create', component: AddGameComponent},
   {path: 'game/update/:id', component: AddGameComponent},
@@ -27,11 +27,12 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(
       routes,
-      { enableTracing: true } // <-- debugging purposes only
+      {enableTracing: true} // <-- debugging purposes only
     )
   ],
   exports: [
     RouterModule
   ]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}
