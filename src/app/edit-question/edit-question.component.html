@@ -39,40 +39,14 @@
       </mat-form-field>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Категория
-        </mat-panel-title>
-        <mat-panel-description>
-          <span>{{categoryName}}</span>
-          <mat-icon>category</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+    <app-category
+      [question]="question">
+    </app-category>
 
-      <div *ngFor="let category of categories">
-        <button mat-raised-button color="primary"
-                (click)="save(category);categoryName=category.name">{{category.name}}</button>
-      </div>
-    </mat-expansion-panel>
+    <app-level
+      [question]="question">
+    </app-level>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Уровень сложности
-        </mat-panel-title>
-        <mat-panel-description>
-          {{question.level}}
-          <mat-icon>star_rate</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <mat-form-field class="example-form">
-        <label>
-          <input matInput [(ngModel)]="question.level">
-        </label>
-      </mat-form-field>
-    </mat-expansion-panel>
   </mat-accordion>
   <app-answer [question]="question"></app-answer>
   <a mat-raised-button href="quiz" color="primary"

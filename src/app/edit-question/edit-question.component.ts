@@ -1,10 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Question} from "../model/question";
 import {ActivatedRoute} from "@angular/router";
 import {QuestionService} from "../service/question.service";
 import {MatAccordion} from '@angular/material/expansion';
-import {Category} from "../model/category";
-import {CategoryService} from "../service/category.service";
 
 @Component({
   selector: 'app-edit-question',
@@ -13,15 +11,12 @@ import {CategoryService} from "../service/category.service";
 })
 export class EditQuestionComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  question: Question;
+  @Input() question: Question;
   isUpdateQuestion: boolean;
   disable: string;
-  categories: Category[];
-  categoryName: string;
 
-  constructor(private questionService: QuestionService, private categoryService: CategoryService,
+  constructor(private questionService: QuestionService,
               private route: ActivatedRoute) {
-
   }
 
   ngOnInit() {
@@ -32,7 +27,6 @@ export class EditQuestionComponent implements OnInit {
       this.isUpdateQuestion = false;
       this.question = new Question();
     }
-    this.getCategoryList();
   }
 
   isDisable(): string {
@@ -57,19 +51,5 @@ export class EditQuestionComponent implements OnInit {
 
   createQuestion(question: Question): void {
     this.questionService.createQuestion(question).subscribe(question => this.question = question);
-  }
-
-  private getCategoryList(): void {
-    this.categoryService.getCategory().subscribe(categories => {
-      this.categories = categories;
-    })
-  }
-
-  save(category: Category) {
-    for (let i = 0; i < this.categories.length; ++i) {
-      if (category == this.categories[i]) {
-        this.question.category = this.categories[i].id;
-      }
-    }
   }
 }
