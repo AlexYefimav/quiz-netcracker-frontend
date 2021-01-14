@@ -43,6 +43,10 @@ export class EditQuestionComponent implements OnInit {
   private getQuestion(questionId: string): void {
     this.questionService.getQuestionById(questionId).subscribe(question =>
       this.question = question);
+    console.log(this.question.title);
+    console.log(this.question.description);
+    console.log(this.question.category);
+    console.log(this.question.level);
   }
 
   updateQuestion(): void {

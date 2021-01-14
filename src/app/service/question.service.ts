@@ -18,11 +18,11 @@ export class QuestionService {
   }
 
   getQuestion(): Observable<Question[]> {
-    return this.http.get<Question[]>(this.url + "findAllQuestions");
+    return this.http.get<Question[]>(this.url);
   }
 
   getQuestionById(id: string): Observable<Question> {
-    return this.http.get<Question>(this.url + "findQuestion/" + id);
+    return this.http.get<Question>(this.url + id);
   }
 
   createQuestion(question: Question): Observable<Question> {
@@ -33,7 +33,7 @@ export class QuestionService {
     return this.http.put<Question>(this.url + "update/" + question.id, question);
   }
 
-  deleteQuestion(questionId: string): Observable<Question> {
-    return this.http.delete<Question>(this.url + "delete/" + questionId);
+  deleteQuestion(id: string): Observable<Question> {
+    return this.http.delete<Question>(this.url + "delete/" + id);
   }
 }

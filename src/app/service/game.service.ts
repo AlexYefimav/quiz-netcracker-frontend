@@ -18,26 +18,26 @@ export class GameService {
   }
 
   getGame(): Observable<Game[]> {
-    return this.http.get<Game[]>(this.url + 'all');
+    return this.http.get<Game[]>(this.url);
   }
 
-  getGameById(gameId: string): Observable<Game> {
-    return this.http.get<Game>(this.url + 'findGame/' + gameId);
+  getGameById(id: string): Observable<Game> {
+    return this.http.get<Game>(this.url + id);
   }
 
-//  getGameByName(gameName: string): Observable<Game> {
-//    return this.http.get<Game>(this.url + 'findGame/' + gameName);
-//  }
+  getGameByName(name: string): Observable<Game> {
+    return this.http.get<Game>(this.url + name);
+  }
 
   createGame(game: Game): Observable<Game> {
-    return this.http.post<Game>(this.url + 'game', game);
+    return this.http.post<Game>(this.url + 'save', game);
   }
 
   updateGame(game: Game): Observable<Game> {
-    return this.http.put<Game>(this.url + 'updateGame/' + game.id, game);
+    return this.http.put<Game>(this.url + 'update/' + game.id, game);
   }
 
-  deleteGame(gameId: string): Observable<Game> {
-    return this.http.delete<Game>(this.url + 'deleteGame/' + gameId);
+  deleteGame(id: string): Observable<Game> {
+    return this.http.delete<Game>(this.url + 'delete/' + id);
   }
 }
