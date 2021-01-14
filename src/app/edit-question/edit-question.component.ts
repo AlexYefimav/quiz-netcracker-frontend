@@ -31,6 +31,7 @@ export class EditQuestionComponent implements OnInit {
     } else {
       this.isUpdateQuestion = false;
       this.question = new Question();
+      this.question.answersSet = [];
     }
     this.getCategoryList();
   }
@@ -52,11 +53,15 @@ export class EditQuestionComponent implements OnInit {
   }
 
   updateQuestion(): void {
-    this.questionService.updateQuestion(this.question).subscribe(question => this.question = question);
+    this.questionService.updateQuestion(this.question).subscribe(
+      question => this.question = question,
+      error => alert(error.details));
   }
 
   createQuestion(question: Question): void {
-    this.questionService.createQuestion(question).subscribe(question => this.question = question);
+    this.questionService.createQuestion(question).subscribe(
+      question => this.question = question,
+      error => alert(error.message));
   }
 
   private getCategoryList(): void {
