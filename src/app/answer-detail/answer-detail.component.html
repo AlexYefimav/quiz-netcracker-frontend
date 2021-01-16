@@ -1,14 +1,18 @@
 <div *ngIf="answer">
-  <mat-form-field appearance="fill">
-    <input
-      matInput
-      [(ngModel)]="answer.title"
-      (blur)="updateAnswer(answer)">
-  </mat-form-field>
-  <mat-slide-toggle
-    [(ngModel)]="answer.right"
-    (change)="updateAnswer(answer)">
-  </mat-slide-toggle>
-  <button mat-flat-button color="warn" (click)="deleteAnswer(answer)">Удалить</button>
+  <form [formGroup]="answerForm">
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="title" (focus)="setAnswer()" (blur)="updateAnswer()">
+      <mat-error *ngIf="answerForm.get('title').touched && answerForm.get('title').errors?.required">
+        Необходимо заполнить поле
+      </mat-error>
+      <mat-error *ngIf="answerForm.get('title').touched && answerForm.get('title').errors?.duplicate">
+        Такой ответ уже существует
+<!--        {{debug()}}-->
+      </mat-error>
+    </mat-form-field>
+    <mat-slide-toggle formControlName="right" (change)="updateAnswer()">
+    </mat-slide-toggle>
+    <button mat-flat-button color="warn" (click)="deleteAnswer()">Удалить</button>
+  </form>
 </div>
 
