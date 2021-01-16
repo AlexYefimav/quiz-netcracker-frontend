@@ -20,12 +20,12 @@ export class GameComponent implements OnInit {
   }
 
   private getGameList(): void {
-    this.gameService.getGame().subscribe(wrapper => {
-      this.games = wrapper;
+    this.gameService.getGame().subscribe(game => {
+      this.games = game;
     });
   }
 
-  deleteGame(gameId: string): void {
+  deleteGame(gameId: string) {
     this.gameService.deleteGame(gameId).subscribe(game => this.game = game);
   }
 }

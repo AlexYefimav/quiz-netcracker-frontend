@@ -1,10 +1,6 @@
-import {Question} from './question';
-
 export class Game{
   id: string;
-  name: string;
+  title: string;
   description: string;
-  numberOfQuestions: string;
-  questionList: Question[];
-
+  user: string;
 }

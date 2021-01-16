@@ -28,6 +28,8 @@ import {AddGameComponent} from "./add-game/add-game.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import {SigninComponent} from "./signin/signin.component";
 import {RegisterComponent} from "./register/register.component";
+import { CategoryComponent } from './category/category.component';
+import { LevelComponent } from './level/level.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import {RegisterComponent} from "./register/register.component";
     GameComponent,
     AddGameComponent,
     SigninComponent,
-    RegisterComponent
+    RegisterComponent,
+    CategoryComponent,
+    LevelComponent
   ],
   imports: [
     BrowserModule,

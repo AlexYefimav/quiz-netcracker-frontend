@@ -10,7 +10,7 @@
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
-        {{game.name}}
+        {{game.title}}
         <mat-menu #menu="matMenu">
           <a mat-menu-item href="game/update/{{game.id}}">
             <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>

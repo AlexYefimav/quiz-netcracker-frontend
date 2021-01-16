@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../model/game';
 import {ActivatedRoute} from '@angular/router';
 import {GameService} from '../service/game.service';

@@ -1,0 +1,16 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Уровень сложности
+    </mat-panel-title>
+    <mat-panel-description>
+      <span>{{levelName}}</span>
+      <mat-icon>star_rate</mat-icon>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <div *ngFor="let level of levels">
+    <button mat-raised-button color="primary"
+            (click)="save(level); levelName=level.title">{{level.title}}</button>
+  </div>
+</mat-expansion-panel>

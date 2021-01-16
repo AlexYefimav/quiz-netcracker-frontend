@@ -7,13 +7,13 @@
           Title
         </mat-panel-title>
         <mat-panel-description>
-          {{game.name}}
+          {{game.title}}
           <mat-icon>title</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field class="example-form">
         <label>
-          <input matInput [(ngModel)]="game.name">
+          <input matInput [(ngModel)]="game.title">
         </label>
       </mat-form-field>
     </mat-expansion-panel>
@@ -35,12 +35,8 @@
         </label>
       </mat-form-field>
     </mat-expansion-panel>
-
-
-
-
   </mat-accordion>
 
   <a mat-raised-button href="question/create" color="primary">Add question</a>
-  <a mat-raised-button href="quiz" color="primary" (click)="this.isUpdateGame?updateGame():createGame(game)">Save</a>
+  <a mat-raised-button href="games" color="primary" (click)="this.isUpdateGame?updateGame():createGame(game)">Save</a>
 </div>

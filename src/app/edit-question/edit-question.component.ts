@@ -1,10 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Question} from "../model/question";
 import {ActivatedRoute} from "@angular/router";
 import {QuestionService} from "../service/question.service";
 import {MatAccordion} from '@angular/material/expansion';
-import {Category} from "../model/category";
-import {CategoryService} from "../service/category.service";
 
 @Component({
   selector: 'app-edit-question',
@@ -13,15 +11,12 @@ import {CategoryService} from "../service/category.service";
 })
 export class EditQuestionComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  question: Question;
+  @Input() question: Question;
   isUpdateQuestion: boolean;
   disable: string;
-  categories: Category[];
-  categoryName: string;
 
-  constructor(private questionService: QuestionService, private categoryService: CategoryService,
+  constructor(private questionService: QuestionService,
               private route: ActivatedRoute) {
-
   }
 
   ngOnInit() {
@@ -33,7 +28,6 @@ export class EditQuestionComponent implements OnInit {
       this.question = new Question();
       this.question.answersSet = [];
     }
-    this.getCategoryList();
   }
 
   isDisable(): string {
@@ -50,6 +44,10 @@ export class EditQuestionComponent implements OnInit {
   private getQuestion(questionId: string): void {
     this.questionService.getQuestionById(questionId).subscribe(question =>
       this.question = question);
+    console.log(this.question.title);
+    console.log(this.question.description);
+    console.log(this.question.category);
+    console.log(this.question.level);
   }
 
   updateQuestion(): void {
@@ -62,19 +60,5 @@ export class EditQuestionComponent implements OnInit {
     this.questionService.createQuestion(question).subscribe(
       question => this.question = question,
       error => alert(error.message));
-  }
-
-  private getCategoryList(): void {
-    this.categoryService.getCategory().subscribe(categories => {
-      this.categories = categories;
-    })
-  }
-
-  save(category: Category) {
-    for (let i = 0; i < this.categories.length; ++i) {
-      if (category == this.categories[i]) {
-        this.question.category = this.categories[i].id;
-      }
-    }
   }
 }
