@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Question} from '../model/question';
 import {Answer} from '../model/answer';
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
+import {AddAnswerValidation} from '../service/validation/add-answer-validation.service';
 
 @Component({
   selector: 'app-add-answer',
@@ -10,43 +11,36 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 })
 export class AddAnswerComponent implements OnInit {
   @Input() question: Question;
-  title: string;
-  right: boolean;
+  answer: Answer;
   answerForm: FormGroup;
 
-  constructor() { }
-
-  ngOnInit(): void {
-    if (this.question.answersSet === undefined) {
-      this.question.answersSet = [];
-    }
-
-    this.answerForm = new FormGroup({
-      title: new FormControl('', [
-        Validators.required,
-        this.isDuplicate
-      ])
-    });
+  constructor(private answerValidation: AddAnswerValidation) {
   }
 
-  isDuplicate(control: AbstractControl): { duplicate: boolean } {
-    const answers = this.question.answersSet;
-    let isDuplicated = false;
-    answers.forEach(answer => {
-      if (answer.title === this.title) {
-        isDuplicated = true;
-      }
-    });
-    return isDuplicated ? { duplicate: true } : { duplicate: false };
+  ngOnInit(): void {
+    this.answerValidation.setQuestion(this.question);
+    this.answerForm = this.answerValidation.createAnswerForm();
+    console.log(this.answerForm);
   }
 
   addAnswer(): void {
-    const answer = new Answer();
-    answer.title = this.title;
-    answer.right = this.right;
-    answer.question = this.question.id;
-    this.question.answersSet.push(answer);
-    this.title = '';
+    if (this.answerForm.invalid) {
+      return;
+    }
+    this.answer = new Answer();
+    this.answer.title = this.getTitle();
+    this.answer.right = this.isRight();
+    this.answer.question = this.question.id;
+    this.question.answersSet.push(this.answer);
+
+    this.answerForm = this.answerValidation.createAnswerForm();
   }
 
+  getTitle(): any {
+    return this.answerForm.get('title').value;
+  }
+
+  isRight(): any {
+    return this.answerForm.get('right').value;
+  }
 }

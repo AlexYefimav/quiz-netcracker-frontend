@@ -3,5 +3,7 @@ export class Answer{
   title: string;
   right: boolean;
   question: string;
+  constructor() {
+  }
 }
 

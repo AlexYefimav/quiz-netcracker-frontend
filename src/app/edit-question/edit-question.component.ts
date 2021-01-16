@@ -26,6 +26,7 @@ export class EditQuestionComponent implements OnInit {
     } else {
       this.isUpdateQuestion = false;
       this.question = new Question();
+      this.question.answersSet = [];
     }
   }
 
@@ -43,13 +44,21 @@ export class EditQuestionComponent implements OnInit {
   private getQuestion(questionId: string): void {
     this.questionService.getQuestionById(questionId).subscribe(question =>
       this.question = question);
+    console.log(this.question.title);
+    console.log(this.question.description);
+    console.log(this.question.category);
+    console.log(this.question.level);
   }
 
   updateQuestion(): void {
-    this.questionService.updateQuestion(this.question).subscribe(question => this.question = question);
+    this.questionService.updateQuestion(this.question).subscribe(
+      question => this.question = question);
+      // error => alert(error.details));
   }
 
   createQuestion(question: Question): void {
-    this.questionService.createQuestion(question).subscribe(question => this.question = question);
+    this.questionService.createQuestion(question).subscribe(
+      question => this.question = question);
+      // error => alert(error.message));
   }
 }

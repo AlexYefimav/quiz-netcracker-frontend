@@ -25,7 +25,7 @@ export class QuestionComponent implements OnInit {
     })
   }
 
-  deleteQuestion(questionId: string) {
-    this.questionService.deleteQuestion(questionId).subscribe(question => this.question = question);
+  deleteQuestion(id: string) {
+    this.questionService.deleteQuestion(id).subscribe(question => this.question = question);
   }
 }
