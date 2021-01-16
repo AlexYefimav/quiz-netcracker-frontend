@@ -11,13 +11,13 @@
           User
         </mat-panel-title>
         <mat-panel-description>
-          {{user.login}}
+          {{user.username}}
           <mat-icon>login</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field class="example-form">
         <label>
-          <input matInput [(ngModel)]="user.login">
+          <input matInput [(ngModel)]="user.username">
         </label>
       </mat-form-field>
     </mat-expansion-panel>
@@ -58,23 +58,6 @@
       </mat-form-field>
     </mat-expansion-panel>
 
-<!--    <mat-expansion-panel>-->
-<!--      <mat-expansion-panel-header>-->
-<!--        <mat-panel-title>-->
-<!--          Level-->
-<!--        </mat-panel-title>-->
-<!--        <mat-panel-description>-->
-<!--          {{user.l}}-->
-<!--          <mat-icon>star_rate</mat-icon>-->
-<!--        </mat-panel-description>-->
-<!--      </mat-expansion-panel-header>-->
-
-<!--      <mat-form-field class="example-form">-->
-<!--        <label>-->
-<!--          <input matInput [(ngModel)]="question.level">-->
-<!--        </label>-->
-<!--      </mat-form-field>-->
-<!--    </mat-expansion-panel>-->
   </mat-accordion>
-  <a mat-raised-button href="users" color="primary" (click)="this.isUpdateUser?updateUser():createUser(user)">Save</a>
+  <a mat-raised-button  color="primary" (click)="this.isUpdateUser?updateUser():createUser(user)">Save</a>
 </div>

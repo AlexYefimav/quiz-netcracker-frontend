@@ -18,7 +18,6 @@ export class SigninService {
   }
 
   register(user: User): Observable<User> {
-    console.log(user.login);
     return this.http.post<User>(this.url +"users/register", user)
   }
 

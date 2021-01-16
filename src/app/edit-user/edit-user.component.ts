@@ -13,13 +13,14 @@ export class EditUserComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   user: User;
   isUpdateUser:boolean;
+  disable: string;
 
   constructor(private  userService: UserService, private route: ActivatedRoute) {
 
   }
 
   ngOnInit(){
-    if(this.route.snapshot.params.id!=null){
+    if(this.route.snapshot.params.id!=undefined){
       this.isUpdateUser = true;
       this.getUser(this.route.snapshot.params.id);
     } else {
@@ -29,8 +30,19 @@ export class EditUserComponent implements OnInit {
 
   }
 
+  isDisable(): string {
+    if (this.user.login != null && this.user.login != "" &&
+      this.user.mail != null && this.user.mail != "" &&
+      this.user.role != null) {
+      this.disable = "false";
+    } else {
+      this.disable = "disable"
+    }
+    return this.disable;
+  }
+
   private getUser( userId: string): void {
-    this.userService.getUserById( userId).subscribe( user =>
+    this.userService.getUserById(userId).subscribe( user =>
       this.user = user);
   }
 
@@ -39,8 +51,8 @@ export class EditUserComponent implements OnInit {
   }
 
   createUser(user: User): void {
-    console.log(user.login);
+    console.log(user)
     this.userService.createUser(user).subscribe(user => this.user = user);
-    console.log(this.user.login);
   }
+
 }

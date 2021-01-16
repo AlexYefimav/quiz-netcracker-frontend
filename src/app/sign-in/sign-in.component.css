@@ -1,0 +1,56 @@
+:host {
+  justify-content: center;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+mat-dialog-content {
+  display: flex;
+  justify-content: center;
+  overflow: unset;
+}
+
+.error {
+  padding: 16px;
+  width: 300px;
+  color: white;
+  background-color: red;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-small-ref {
+  cursor: pointer;
+  font-size: 13px;
+  color: darkgrey;
+}
+
+.sign-in-margin {
+  margin: 0 10px 0;
+}
+
+.checkbox-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.mat-checkbox-group {
+  align-content: center;
+  align-items: center;
+}

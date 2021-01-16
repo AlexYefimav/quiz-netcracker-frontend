@@ -26,10 +26,12 @@ import { AddAnswerComponent } from './add-answer/add-answer.component';
 import {GameComponent} from "./game/game.component";
 import {AddGameComponent} from "./add-game/add-game.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
-import {SigninComponent} from "./signin/signin.component";
-import {RegisterComponent} from "./register/register.component";
 import { CategoryComponent } from './category/category.component';
 import { LevelComponent } from './level/level.component';
+import {NavBarComponent} from "./nav-bar/nav-bar.component";
+import {SignInComponent} from "./sign-in/sign-in.component";
+import {MatDialogModule} from "@angular/material/dialog";
+import {SignUpComponent} from "./sign-up/sign-up.component";
 
 @NgModule({
   declarations: [
@@ -44,10 +46,11 @@ import { LevelComponent } from './level/level.component';
     AddAnswerComponent,
     GameComponent,
     AddGameComponent,
-    SigninComponent,
-    RegisterComponent,
     CategoryComponent,
-    LevelComponent
+    LevelComponent,
+    NavBarComponent,
+    SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,9 @@ import { LevelComponent } from './level/level.component';
     MatExpansionModule,
     MatInputModule,
     MatSlideToggleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    // MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

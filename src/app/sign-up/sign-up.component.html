@@ -1,0 +1,161 @@
+<!--<mat-card>-->
+<!--  <mat-card-title>Sign Up</mat-card-title>-->
+<!--  <mat-card-content>-->
+<!--    <form [formGroup]="form" (ngSubmit)="submit()">-->
+<!--      <p>-->
+<!--        <mat-form-field>-->
+<!--          <input type="text" matInput placeholder="Username" formControlName="username" [errorStateMatcher]="errorMatcher">-->
+<!--          <mat-error *ngIf="username.hasError('minlength') && !password.hasError('required')">-->
+<!--            Username should contain at least 3 characters-->
+<!--          </mat-error>-->
+<!--          <mat-error *ngIf="username.hasError('required')">-->
+<!--            Username is <strong>required</strong>-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
+<!--      </p>-->
+
+<!--      <p>-->
+<!--        <mat-form-field>-->
+<!--          <input type="email" matInput placeholder="Email" formControlName="email" [errorStateMatcher]="errorMatcher">-->
+<!--          <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">-->
+<!--            Please enter a valid email address-->
+<!--          </mat-error>-->
+<!--          <mat-error *ngIf="email.hasError('required')">-->
+<!--            Email is <strong>required</strong>-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
+<!--      </p>-->
+
+<!--&lt;!&ndash;      <p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;          <input type="text" matInput placeholder="Phone" formControlName="phone" [errorStateMatcher]="errorMatcher">&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-error *ngIf="phone.hasError('pattern') && !phone.hasError('required')">&ndash;&gt;-->
+<!--&lt;!&ndash;            Please enter a valid phone number&ndash;&gt;-->
+<!--&lt;!&ndash;          </mat-error>&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-error *ngIf="phone.hasError('required')">&ndash;&gt;-->
+<!--&lt;!&ndash;            Phone number is <strong>required</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;          </mat-error>&ndash;&gt;-->
+<!--&lt;!&ndash;        </mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;      </p>&ndash;&gt;-->
+
+<!--      <p>-->
+<!--        <mat-form-field>-->
+<!--          <input type="password" matInput placeholder="Password" formControlName="password" [errorStateMatcher]="errorMatcher">-->
+<!--          <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">-->
+<!--            Password should contain at least 6 characters-->
+<!--          </mat-error>-->
+<!--          <mat-error *ngIf="password.hasError('required')">-->
+<!--            Password is <strong>required</strong>-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
+<!--      </p>-->
+
+<!--      <p>-->
+<!--        <mat-form-field>-->
+<!--          <mat-label>Repeat Password</mat-label>-->
+<!--          <input type="password" matInput placeholder="Repeat Password" formControlName="passwordRepeat" [errorStateMatcher]="errorMatcher">-->
+<!--          <mat-error *ngIf="!checkPasswords()">-->
+<!--            Passwords do not match-->
+<!--          </mat-error>-->
+<!--          <mat-error *ngIf="passwordRepeat.hasError('required')">-->
+<!--            Confirm password-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
+<!--      </p>-->
+
+<!--&lt;!&ndash;      <section class="checkbox-section">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label class="sign-up-margin">Role</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-radio-group formControlName="role">&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-radio-button class="sign-up-margin" value="client">Client</mat-radio-button>&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-radio-button class="sign-up-margin" value="coach">Coach</mat-radio-button>&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-radio-button class="sign-up-margin" value="organization">Organization</mat-radio-button>&ndash;&gt;-->
+<!--&lt;!&ndash;        </mat-radio-group>&ndash;&gt;-->
+<!--&lt;!&ndash;      </section>&ndash;&gt;-->
+
+<!--      <p *ngIf="error && (passwordRepeat.dirty || passwordRepeat.touched)" class="error">-->
+<!--        {{ error }}-->
+<!--      </p>-->
+
+<!--      <div class="button">-->
+<!--        <button type="submit" mat-button [disabled]="form.invalid || error">Sign Up</button>-->
+<!--      </div>-->
+
+<!--      <div class="text-left">-->
+<!--        <a class="text-small-ref" (click)="redirect('login')">-->
+<!--          Already have an account? Sign in-->
+<!--        </a>-->
+<!--      </div>-->
+
+<!--    </form>-->
+<!--  </mat-card-content>-->
+<!--</mat-card>-->
+<mat-card>
+  <mat-card-title>Sign Up</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submitPlayer()">
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Username" formControlName="username" [errorStateMatcher]="errorMatcher">
+          <mat-error *ngIf="username.hasError('minlength') && !password.hasError('required')">
+            Username should contain at least 3 characters
+          </mat-error>
+          <mat-error *ngIf="username.hasError('required')">
+            Username is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input type="email" matInput placeholder="Email" formControlName="mail" [errorStateMatcher]="errorMatcher">
+          <mat-error *ngIf="mail.hasError('email') && !mail.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="mail.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password" [errorStateMatcher]="errorMatcher">
+          <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
+            Password should contain at least 6 characters
+          </mat-error>
+          <mat-error *ngIf="password.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-label>Repeat Password</mat-label>
+          <input type="password" matInput placeholder="Repeat Password" formControlName="passwordRepeat" [errorStateMatcher]="errorMatcher">
+          <mat-error *ngIf="!checkPasswords()">
+            Passwords do not match
+          </mat-error>
+          <mat-error *ngIf="passwordRepeat.hasError('required')">
+            Confirm password
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p *ngIf="error && (passwordRepeat.dirty || passwordRepeat.touched)" class="error">
+        {{ error }}
+      </p>
+
+      <div class="button">
+        <button type="submit" mat-button [disabled]="form.invalid || error">Sign Up</button>
+        <!--        <a mat-raised-button  color="primary" (click)="register(user)">Save</a>-->
+      </div>
+
+      <div class="text-left">
+        <a class="text-small-ref" (click)="redirect('login')">
+          Already have an account? Sign in
+        </a>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
