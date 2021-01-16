@@ -4,18 +4,17 @@
       Добавление ответа
     </mat-panel-title>
   </mat-expansion-panel-header>
-<!--  <div *ngFor="let answer of answers">-->
-    <form [formGroup]="answerForm">
-      <mat-form-field>
-        <input matInput placeholder="Новый ответ" name="title" formControlName="title" required>
-        <!--        [(ngModel)]="title">-->
-        <mat-error *ngIf="answerForm.get('title').hasError('required')">Необходимо заполнить поле</mat-error>
-      </mat-form-field>
-      <mat-slide-toggle
-        name="right"
-        [(ngModel)]="right">
-      </mat-slide-toggle>
-      <button mat-flat-button color="primary" (click)="addAnswer()">Добавить</button>
-    </form>
-<!--  </div>-->
+  <form [formGroup]="answerForm">
+    <mat-form-field>
+      <input matInput placeholder="Новый ответ" name="title" formControlName="title" required>
+      <mat-error *ngIf="answerForm.get('title').touched && answerForm.get('title').errors?.required">
+        Необходимо заполнить поле
+      </mat-error>
+      <mat-error *ngIf="answerForm.get('title').touched && answerForm.get('title').errors?.duplicate">
+        Такой ответ уже существует
+      </mat-error>
+    </mat-form-field>
+    <mat-slide-toggle name="right" formControlName="right"></mat-slide-toggle>
+    <button mat-flat-button color="primary" (click)="addAnswer()">Добавить</button>
+  </form>
 </mat-expansion-panel>

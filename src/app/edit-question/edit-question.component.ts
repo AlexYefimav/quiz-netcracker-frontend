@@ -52,13 +52,13 @@ export class EditQuestionComponent implements OnInit {
 
   updateQuestion(): void {
     this.questionService.updateQuestion(this.question).subscribe(
-      question => this.question = question,
-      error => alert(error.details));
+      question => this.question = question);
+      // error => alert(error.details));
   }
 
   createQuestion(question: Question): void {
     this.questionService.createQuestion(question).subscribe(
-      question => this.question = question,
-      error => alert(error.message));
+      question => this.question = question);
+      // error => alert(error.message));
   }
 }
