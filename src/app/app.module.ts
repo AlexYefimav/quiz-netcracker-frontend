@@ -32,6 +32,10 @@ import {NavBarComponent} from "./nav-bar/nav-bar.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SignUpComponent} from "./sign-up/sign-up.component";
+import {QuestionResolverService} from "./service/resolver/question-resolver.service";
+import { GameplayComponent } from './gameplay/gameplay.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
 
 @NgModule({
   declarations: [
@@ -46,11 +50,14 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
     AddAnswerComponent,
     GameComponent,
     AddGameComponent,
+    SignInComponent,
     CategoryComponent,
     LevelComponent,
     NavBarComponent,
     SignInComponent,
     SignUpComponent,
+    GameplayComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +79,7 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
     MatDialogModule,
     // MatDialogModule,
   ],
-  providers: [],
+  providers: [QuestionResolverService, GameplayResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
