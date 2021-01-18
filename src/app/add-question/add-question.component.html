@@ -1,0 +1,11 @@
+<div class="addQuestion">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Добавление вопроса
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-question-detail [question]="question"></app-question-detail>
+    <button mat-raised-button color="primary" (click)="addQuestion()">Добавить</button>
+  </mat-expansion-panel>
+</div>

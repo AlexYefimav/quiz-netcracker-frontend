@@ -1,42 +1,48 @@
-<div class="addGame">
+<div class="container">
+  <div class="addGame">
 
-  <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Title
-        </mat-panel-title>
-        <mat-panel-description>
-          {{game.title}}
-          <mat-icon>title</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-form-field class="example-form">
-        <label>
-          <input matInput [(ngModel)]="game.title">
-        </label>
-      </mat-form-field>
-    </mat-expansion-panel>
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Название
+          </mat-panel-title>
+          <mat-panel-description>
+            {{game?.title}}
+            <mat-icon>title</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field class="example-form">
+          <label>
+            <input matInput [(ngModel)]="game.title">
+          </label>
+        </mat-form-field>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Description
-        </mat-panel-title>
-        <mat-panel-description>
-          {{game.description}}
-          <mat-icon>description</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Описание
+          </mat-panel-title>
+          <mat-panel-description>
+            {{game.description}}
+            <mat-icon>description</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-      <mat-form-field class="example-form">
-        <label>
-          <input matInput [(ngModel)]="game.description">
-        </label>
-      </mat-form-field>
-    </mat-expansion-panel>
-  </mat-accordion>
+        <mat-form-field class="example-form">
+          <label>
+            <input matInput [(ngModel)]="game.description">
+          </label>
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 
-  <a mat-raised-button href="question/create" color="primary">Add question</a>
-  <a mat-raised-button href="games" color="primary" (click)="this.isUpdateGame?updateGame():createGame(game)">Save</a>
+  <app-question [game]="game"></app-question>
+  <app-add-question [(game)]="game"></app-add-question>
+
+  <div class="save-button">
+    <a mat-raised-button href="games" color="primary" (click)="this.isUpdateGame?updateGame():createGame(game)">Сохранить</a>
+  </div>
 </div>

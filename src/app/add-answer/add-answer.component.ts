@@ -20,7 +20,6 @@ export class AddAnswerComponent implements OnInit {
   ngOnInit(): void {
     this.answerValidation.setQuestion(this.question);
     this.answerForm = this.answerValidation.createAnswerForm();
-    console.log(this.answerForm);
   }
 
   addAnswer(): void {

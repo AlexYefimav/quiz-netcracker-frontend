@@ -1,9 +1,13 @@
-.editQuestion {
+.mat-expansion-panel {
+  margin-top: 25px;
+}
+
+.addQuestion {
   color: oldlace;
   margin-left: auto;
   margin-right: auto;
   margin-top: 15px;
-  max-width: 1000px;
+  max-width: 1080px;
   text-align: center;
 }
 

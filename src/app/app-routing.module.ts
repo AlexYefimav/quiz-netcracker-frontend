@@ -15,9 +15,10 @@ import {StatisticsComponent} from "./statistics/statistics.component";
 import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
 
 const routes: Routes = [
-  {path: 'quiz', component: QuestionComponent, resolve: {question: QuestionResolverService}},
-  {path: 'question/update/:id', component: EditQuestionComponent},
-  {path: 'question/create', component: EditQuestionComponent},
+  // {path: 'quiz', component: QuestionComponent, resolve: {question: QuestionResolverService}},
+  // {path: 'question/update/:id', component: EditQuestionComponent},
+  // {path: 'question/create', component: EditQuestionComponent},
+  {path: 'game/:gameId/question/update/:id', component: EditQuestionComponent},
   {path: 'users', component: UserComponent},
   {path: 'games', component: GameComponent},
   {path: 'game/create', component: AddGameComponent},
