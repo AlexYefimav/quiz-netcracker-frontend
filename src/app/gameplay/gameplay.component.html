@@ -1,0 +1,33 @@
+<div>
+  <h1>Вопрос {{questionNumber}}</h1>
+</div>
+<form>
+  <mat-card>
+    <mat-card-title>
+      {{question.title}}
+    </mat-card-title>
+    <mat-card-actions *ngIf="!check">
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button *ngFor="let answer of question.answersSet" (click)="setAnswer(answer.id)"
+                          value="{{answer.id}}"
+                          color="accent">{{answer.title}}</mat-radio-button>
+      </mat-radio-group>
+    </mat-card-actions>
+  </mat-card>
+  <button mat-raised-button color="warn" (click)="checkRight(); getAnswerById()" *ngIf="!check">Ответить</button>
+  <div *ngIf="check">
+    <div *ngIf="answer.right; else wrong" class="yes">{{question.description}}</div>
+    <div>
+      <ng-template #wrong>
+        <div class="no">{{question.description}}</div>
+      </ng-template>
+    </div>
+    <div *ngIf="questionNumber==questions.length;else next">
+      <a mat-raised-button color="primary" href="statistics">Статистика</a>
+    </div>
+    <ng-template #next>
+      <button mat-raised-button color="primary" (click)="setQuestion(); checkRight()">Далее</button>
+    </ng-template>
+  </div>
+</form>
+

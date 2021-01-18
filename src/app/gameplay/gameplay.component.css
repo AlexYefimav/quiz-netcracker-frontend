@@ -17,6 +17,11 @@ h1 {
   text-align: center;
 }
 
+
+.mat-radio-button {
+  color: blanchedalmond;
+}
+
 .mat-icon-button {
   color: #303030;
   display: block;
@@ -30,10 +35,25 @@ h1 {
   margin-right: auto;
 }
 
-.app-widget-search-bar {
-  hint : Search;
-  color : yellow;
-  backgroundColor : red;
-  textFieldHintColor : whitesmoke;
-  textFieldBackgroundColor : orangered;
+ng-template{
+  color: #f30327;
+}
+
+.mat-raised-button{
+  margin-top: 20px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.no {
+  text-align: center;
+  margin-top: 20px;
+  color: #f30327;
+}
+
+.yes {
+  text-align: center;
+  margin-top: 20px;
+  color: #37F303;
 }

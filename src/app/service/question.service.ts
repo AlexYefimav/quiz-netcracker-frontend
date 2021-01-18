@@ -25,6 +25,10 @@ export class QuestionService {
     return this.http.get<Question>(this.url + id);
   }
 
+  getQuestionByGameid(id: string): Observable<Question[]>{
+    return this.http.get<Question[]>(this.url + "game/" + id);
+  }
+
   createQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(this.url + "save", question)
   }

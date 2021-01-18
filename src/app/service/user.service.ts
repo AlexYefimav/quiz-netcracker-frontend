@@ -17,45 +17,38 @@ export class UserService {
   };
 
   constructor(private http: HttpClient) {
-    this.url = 'http://localhost:8085/users/';
+    this.url = 'http://localhost:8085/';
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url + "findAllUsers");
+    return this.http.get<User[]>(this.url + "users/findAllUsers");
   }
 
   getUserById(userId: string): Observable<User> {
-    return this.http.get<User>(this.url + "findUser/" + userId);
+    return this.http.get<User>(this.url + "users/findUser/" + userId);
   }
 
   public getUserByLogin(username: string): Observable<User> {
-    return this.http.get<User>(`${this.url}users/${username}`);
+    return this.http.get<User>(`${this.url}users/users/${username}`);
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.url + "save", user)
+    return this.http.post<User>(this.url + "users/save", user)
   }
 
   updateUser(user: User): Observable<User> {
     console.log(user);
-    return this.http.put<User>(this.url + "update/" + user.id, user);
+    return this.http.put<User>(this.url + "users/update/" + user.id, user);
   }
 
   deleteUser(userId: string): Observable<User> {
     console.log(userId);
-    return this.http.delete<User>(this.url + "delete/" + userId);
+    return this.http.delete<User>(this.url + "users/delete/" + userId);
   }
 
-  public loginClient(account: User): Observable<HttpResponse<User>> {
-    return this.http.post<User>(`${this.url}login`, account, {observe: 'response', responseType: 'json'});
-  }
-
-  public confirmAccount(token: string): Observable<any> {
-    return this.http.post(`${this.url}confirm-account?token=${token}`, {observe: 'response', responseType: 'json'});
-  }
-
-  public signUp(user: User): Observable<User> {
-    return this.http.post<User>(this.url +"register", user);
+  public signIn(account: User): Observable<HttpResponse<User>> {
+    account.username=account.login;
+   return this.http.post<User>(this.url +"login", account, {observe: 'response', responseType: 'json'});
   }
 
 }

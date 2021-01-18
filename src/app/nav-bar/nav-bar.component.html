@@ -7,11 +7,7 @@
     <button type="submit" mat-button (click)="openLoginDialog()">Sign In</button>
   </div>
   <div *ngIf="isAccount">
-    <button type="submit" mat-button (click)="redirect('services')"
-            *ngIf="authorizedAccount.manager_id || authorizedAccount.admin_id">
-      Services
-    </button>
-    <button mat-button (click)="redirect('quiz')" *ngIf="authorizedAccount.player_id">Quiz</button>
+    <button mat-button (click)="redirect('quiz')" *ngIf="authorizedAccount.id">Quiz</button>
     <button type="submit" mat-button (click)="redirect('games')">MyGames</button>
     <button mat-button [matMenuTriggerFor]="beforeMenu">{{authorizedAccount.username}}</button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">

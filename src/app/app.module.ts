@@ -35,6 +35,10 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import {SearchModule} from "./search/search.module";
 import {WidgetSearchBarButtonComponent} from "./search/widget-search-bar-button/widget-search-bar-button.component";
 import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search-bar.component";
+import {QuestionResolverService} from "./service/resolver/question-resolver.service";
+import { GameplayComponent } from './gameplay/gameplay.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
 
 
 @NgModule({
@@ -50,11 +54,14 @@ import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search
     AddAnswerComponent,
     GameComponent,
     AddGameComponent,
+    SignInComponent,
     CategoryComponent,
     LevelComponent,
     NavBarComponent,
     SignInComponent,
     SignUpComponent,
+    GameplayComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +84,7 @@ import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search
     SearchModule,
     // MatDialogModule,
   ],
-  providers: [],
+  providers: [QuestionResolverService, GameplayResolverService],
   bootstrap: [AppComponent],
   exports: [WidgetSearchBarButtonComponent, WidgetSearchBarComponent],
 })

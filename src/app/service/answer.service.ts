@@ -22,7 +22,7 @@ export class AnswerService {
     return this.http.get<Answer[]>(this.answerUrl + '/all');
   }
 
-  getAnswer(answerId: number): Observable<Answer> {
+  getAnswer(answerId: string): Observable<Answer> {
     const resultUrl = `${this.answerUrl}/${answerId}`;
     return this.http.get<Answer>(resultUrl);
   }

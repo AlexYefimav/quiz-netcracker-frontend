@@ -17,7 +17,6 @@ export class NavBarComponent implements OnInit {
   isAccount: boolean;
 
   constructor(private router: Router,
-              private clientService: UserService,
               public storageService: StorageService,
               public dialog: MatDialog) {
     this.isAccount = false;
@@ -47,20 +46,17 @@ export class NavBarComponent implements OnInit {
   }
 
   checkAuthorized() {
-    // console.log("check");
-    // if (!StorageService.isEmpty()) {
-    //   console.log("check 1");
-    //   if (this.storageService.currentToken) {
-    //     console.log("check 2");
+    if (!StorageService.isEmpty()) {
+      if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
         this.isAccount = true;
-    //   } else { StorageService.clear();
-    //     console.log("check 3");}
-    // } else {
-    //   console.log("check 4");
-    //   this.authorizedAccount = undefined;
-    //   this.isAccount = false;
-    // }
+       } else {
+       // StorageService.clear();
+        }
+    } else{
+      this.authorizedAccount = undefined;
+      this.isAccount = false;
+     }
   }
 
 
@@ -82,13 +78,13 @@ export class NavBarComponent implements OnInit {
 
   toAccount() {
     if (this.authorizedAccount.player_id) {
-      this.redirectTo(`/users/${this.authorizedAccount.player_id}`);
+      this.redirectTo(`/users/${this.authorizedAccount.login}`);
     }
     if (this.authorizedAccount.manager_id) {
-      this.redirectTo(`/users/${this.authorizedAccount.manager_id}`);
+      this.redirectTo(`/users/${this.authorizedAccount.login}`);
     }
     if (this.authorizedAccount.admin_id) {
-      this.redirectTo(`/users/${this.authorizedAccount.admin_id}`);
+      this.redirectTo(`/users/${this.authorizedAccount.login}`);
     }
   }
 
