@@ -28,4 +28,8 @@ export class GameComponent implements OnInit {
   deleteGame(gameId: string) {
     this.gameService.deleteGame(gameId).subscribe(game => this.game = game);
   }
+
+  setGame(game: Game){
+    this.game = game;
+  }
 }

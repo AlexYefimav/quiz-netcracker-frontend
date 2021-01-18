@@ -11,7 +11,7 @@ import {MatAccordion} from '@angular/material/expansion';
 })
 export class EditQuestionComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  @Input() question: Question;
+  question: Question;
   isUpdateQuestion: boolean;
   disable: string;
 
@@ -41,13 +41,9 @@ export class EditQuestionComponent implements OnInit {
     return this.disable;
   }
 
-  private getQuestion(questionId: string): void {
-    this.questionService.getQuestionById(questionId).subscribe(question =>
+  private getQuestion(id: string): void {
+    this.questionService.getQuestionById(id).subscribe(question =>
       this.question = question);
-    console.log(this.question.title);
-    console.log(this.question.description);
-    console.log(this.question.category);
-    console.log(this.question.level);
   }
 
   updateQuestion(): void {

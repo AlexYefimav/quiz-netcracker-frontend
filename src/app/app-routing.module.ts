@@ -9,9 +9,13 @@ import {EditUserComponent} from "./edit-user/edit-user.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
 // import {RegisterComponent} from "./register/register.component";
 import {SignUpComponent} from "./sign-up/sign-up.component";
+import {QuestionResolverService} from "./service/resolver/question-resolver.service";
+import {GameplayComponent} from "./gameplay/gameplay.component";
+import {StatisticsComponent} from "./statistics/statistics.component";
+import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
 
 const routes: Routes = [
-  {path: 'quiz', component: QuestionComponent},
+  {path: 'quiz', component: QuestionComponent, resolve: {question: QuestionResolverService}},
   {path: 'question/update/:id', component: EditQuestionComponent},
   {path: 'question/create', component: EditQuestionComponent},
   {path: 'users', component: UserComponent},
@@ -24,6 +28,8 @@ const routes: Routes = [
   {path: 'login', component: SignInComponent },
   // {path: 'register', component: RegisterComponent},
   {path: 'sign_up', component: SignUpComponent},
+  {path: 'gameplay/:id', component: GameplayComponent, resolve: {question: GameplayResolverService}},
+  {path: 'statistics', component: StatisticsComponent},
 ];
 
 @NgModule({

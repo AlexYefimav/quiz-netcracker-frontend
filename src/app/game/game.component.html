@@ -26,6 +26,7 @@
         {{game.description}}
       </mat-card-content>
     </mat-card>
+    <a href="/gameplay/{{game.id}}" (click)="setGame(game)" class="play">Играть</a>
   </div>
   <a mat-mini-fab color="primary" href="game/create">
     <mat-icon>add</mat-icon>

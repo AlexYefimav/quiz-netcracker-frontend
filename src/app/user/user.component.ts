@@ -3,7 +3,7 @@ import {User} from '../model/user';
 import {UserService} from '../service/user.service';
 
 @Component({
-  selector: 'app-question',
+  selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })

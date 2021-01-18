@@ -17,6 +17,11 @@ h1 {
   text-align: center;
 }
 
+
+.mat-radio-button {
+  color: blanchedalmond;
+}
+
 .mat-icon-button {
   color: #303030;
   display: block;
@@ -28,4 +33,27 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+ng-template{
+  color: #f30327;
+}
+
+.mat-raised-button{
+  margin-top: 20px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.no {
+  text-align: center;
+  margin-top: 20px;
+  color: #f30327;
+}
+
+.yes {
+  text-align: center;
+  margin-top: 20px;
+  color: #37F303;
 }

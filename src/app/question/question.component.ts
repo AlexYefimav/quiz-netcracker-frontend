@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {QuestionService} from "../service/question.service";
 import {Question} from "../model/question";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-question',
@@ -12,7 +13,8 @@ export class QuestionComponent implements OnInit {
   public question: Question;
 
 
-  constructor(private questionService: QuestionService) {
+  constructor(private questionService: QuestionService,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -20,9 +22,7 @@ export class QuestionComponent implements OnInit {
   }
 
   private getQuestionList(): void {
-    this.questionService.getQuestion().subscribe(questions => {
-      this.questions = questions;
-    })
+    this.questions = this.activatedRoute.snapshot.data['question'];
   }
 
   deleteQuestion(id: string) {
