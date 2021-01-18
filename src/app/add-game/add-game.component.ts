@@ -18,27 +18,40 @@ export class AddGameComponent implements OnInit {
 
   }
 
-  // tslint:disable-next-line:typedef
-  ngOnInit(){
+  async ngOnInit() {
     if (this.route.snapshot.params.id != null){
       this.isUpdateGame = true;
-      this.getGame(this.route.snapshot.params.id);
+      this.game = await this.getGame(this.route.snapshot.params.id);
     } else {
       this.isUpdateGame = false;
       this.game = new Game();
+      this.game.questions = [];
+      this.game.id = null;
     }
   }
 
-  private getGame(gameId: string): void {
-    this.gameService.getGameById(gameId).subscribe(question =>
-      this.game = question);
+  private getGame(gameId: string): Promise<Game> {
+    return this.gameService.getGameById(gameId).toPromise();
   }
 
-  updateGame(): void {
-    this.gameService.updateGame(this.game).subscribe(question => this.game = question);
+  async updateGame() {
+    this.game = await this.updateAndGetGame();
   }
 
-  createGame(game: Game): void {
-    this.gameService.createGame(game).subscribe(question => this.game = game);
+  async createGame(game: Game) {
+    if (game.questions.length === 0) {
+      this.game = await this.createAndGetGame(game);
+    }
+    else {
+      this.game = await this.updateAndGetGame();
+    }
+  }
+
+  createAndGetGame(game: Game): Promise<Game> {
+    return this.gameService.createGame(game).toPromise();
+  }
+
+  updateAndGetGame(): Promise<Game> {
+    return this.gameService.updateGame(this.game).toPromise();
   }
 }

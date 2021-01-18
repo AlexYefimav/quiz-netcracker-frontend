@@ -1,0 +1,50 @@
+<div class="example-action-buttons">
+  <button mat-button (click)="accordion.openAll()">Expand All</button>
+  <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+</div>
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Вопрос
+      </mat-panel-title>
+      <mat-panel-description>
+        {{question.title}}
+        <mat-icon>title</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field class="example-form">
+      <label>
+        <input matInput [(ngModel)]="question.title">
+      </label>
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Описание
+      </mat-panel-title>
+      <mat-panel-description>
+        {{question.description}}
+        <mat-icon>description</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field class="example-form">
+      <label>
+        <input matInput [(ngModel)]="question.description">
+      </label>
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <app-category
+    [question]="question">
+  </app-category>
+
+  <app-level
+    [question]="question">
+  </app-level>
+
+</mat-accordion>
+<app-answer [question]="question"></app-answer>

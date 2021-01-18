@@ -11,9 +11,8 @@ import {SignInComponent} from "./sign-in/sign-in.component";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 
 const routes: Routes = [
-  {path: 'quiz', component: QuestionComponent},
-  {path: 'question/update/:id', component: EditQuestionComponent},
-  {path: 'question/create', component: EditQuestionComponent},
+  // {path: 'quiz', component: QuestionComponent},
+  {path: 'game/:gameId/question/update/:id', component: EditQuestionComponent},
   {path: 'users', component: UserComponent},
   {path: 'games', component: GameComponent},
   {path: 'game/create', component: AddGameComponent},

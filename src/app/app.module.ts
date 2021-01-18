@@ -32,6 +32,8 @@ import {NavBarComponent} from "./nav-bar/nav-bar.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SignUpComponent} from "./sign-up/sign-up.component";
+import { QuestionDetailComponent } from './question-detail/question-detail.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
     NavBarComponent,
     SignInComponent,
     SignUpComponent,
+    QuestionDetailComponent,
+    AddQuestionComponent,
   ],
   imports: [
     BrowserModule,
