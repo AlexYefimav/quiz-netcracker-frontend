@@ -34,11 +34,3 @@ h1 {
   margin-left: auto;
   margin-right: auto;
 }
-
-.app-widget-search-bar {
-  hint : Search;
-  color : yellow;
-  backgroundColor : red;
-  textFieldHintColor : whitesmoke;
-  textFieldBackgroundColor : orangered;
-}

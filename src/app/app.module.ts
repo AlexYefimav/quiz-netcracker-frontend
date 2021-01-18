@@ -32,6 +32,10 @@ import {NavBarComponent} from "./nav-bar/nav-bar.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SignUpComponent} from "./sign-up/sign-up.component";
+import {SearchModule} from "./search/search.module";
+import {WidgetSearchBarButtonComponent} from "./search/widget-search-bar-button/widget-search-bar-button.component";
+import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search-bar.component";
+
 
 @NgModule({
   declarations: [
@@ -70,9 +74,11 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatDialogModule,
+    SearchModule,
     // MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [WidgetSearchBarButtonComponent, WidgetSearchBarComponent],
 })
 export class AppModule { }
