@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Question} from '../model/question';
 import {MatAccordion} from '@angular/material/expansion';
 
@@ -10,6 +10,7 @@ import {MatAccordion} from '@angular/material/expansion';
 export class QuestionDetailComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @Input() question: Question;
+  @Output() questionChange = new EventEmitter<Question>();
 
   constructor() { }
 
