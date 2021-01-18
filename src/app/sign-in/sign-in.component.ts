@@ -5,8 +5,6 @@ import {Router} from '@angular/router';
 import {UserService} from '../service/user.service';
 import {Player} from '../model/player';
 import {User} from '../model/user';
-// import {Coach} from '../../model/coach';
-// import {Organization} from '../../model/organization';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 
 @Component({
@@ -17,10 +15,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Valid
 export class SignInComponent implements OnInit {
 
   client: Player = new Player();
-  account: User = new User();
-  // coach: Coach;
-  // organization: Organization;
-
+  account:User = new User();
   form: FormGroup;
 
   @Input() error: string | null;
@@ -52,38 +47,19 @@ export class SignInComponent implements OnInit {
       this.login.value.toString().indexOf('@') === -1 ? this.client.name = this.login.value : this.client.email = this.login.value;
       this.account.login = this.login.value;
       this.account.password = this.password.value;
-
-      this.clientService.loginClient(this.account).subscribe(
+      this.account.username = this.login.value;
+      console.log(this.account.username);
+      this.clientService.signIn(this.account).subscribe(
         response => {
           this.storageService.currentToken = response.headers.get('Authorization');
         },
         error => { console.log(error); }
       );
-      this.account.password = undefined;
-      this.clientService.getUserByLogin(this.account.login).subscribe(
-        account => {
-          this.account = account;
-          if (!this.account.player_id) {
-            this.account.player_id = undefined;
-          }
-          if (!this.account.manager_id) {
-            this.account.manager_id = undefined;
-          }
-          if (!this.account.admin_id) {
-            this.account.admin_id = undefined;
-          }
-          setTimeout(() => {
-            if (this.storageService.currentToken) {
-            this.storageService.currentUser = this.account;
-          }}, 2000);
-
-          //this.dialogAccount = this.account;
-        }
-      );
     }
   }
 
   redirect(url: string) {
+    this.onNoClick();
     this.router.navigate([url]);
   }
 

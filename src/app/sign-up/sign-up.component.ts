@@ -259,10 +259,6 @@ export class SignUpComponent implements OnInit {
 
 
   sendData() {
-    // this.user.username = "dary123";
-    // this.user.mail = "dary123";
-    // this.user.password = "dary123";
-    // console.log("send");
     this.clientService.register(this.user).subscribe(() =>
       this.redirect('/games'));
   }
@@ -277,21 +273,6 @@ export class SignUpComponent implements OnInit {
     }
     return this.isPasswordsEqual;
   }
-
-  // register(user: User): void {
-  //   console.log("redirect");
-  //   user.username = "dary123";
-  //   user.mail = "dary123";
-  //   user.password = "dary123";
-  //   console.log(user);
-  //   console.log(user.username);
-  //   console.log(user.mail);
-  //   console.log(user.password);
-  //   this.clientService.register(user).subscribe(user => this.user = user);
-  // }
-
-
-
 
   redirect(url: string) {
     this.router.navigate([url]);
