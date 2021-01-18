@@ -39,6 +39,8 @@ import {QuestionResolverService} from "./service/resolver/question-resolver.serv
 import { GameplayComponent } from './gameplay/gameplay.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
+import { QuestionDetailComponent } from './question-detail/question-detail.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
 
 
 @NgModule({
@@ -62,6 +64,8 @@ import {GameplayResolverService} from "./service/resolver/gameplay-resolver.serv
     SignUpComponent,
     GameplayComponent,
     StatisticsComponent,
+    QuestionDetailComponent,
+    AddQuestionComponent,
   ],
   imports: [
     BrowserModule,

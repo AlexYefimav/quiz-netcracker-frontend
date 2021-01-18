@@ -18,6 +18,8 @@ const routes: Routes = [
   {path: 'quiz', component: QuestionComponent, resolve: {question: QuestionResolverService}},
   {path: 'question/update/:id', component: EditQuestionComponent},
   {path: 'question/create', component: EditQuestionComponent},
+  // {path: 'quiz', component: QuestionComponent},
+  {path: 'game/:gameId/question/update/:id', component: EditQuestionComponent},
   {path: 'users', component: UserComponent},
   {path: 'games', component: GameComponent},
   {path: 'game/create', component: AddGameComponent},

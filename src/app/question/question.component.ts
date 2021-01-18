@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {QuestionService} from "../service/question.service";
 import {Question} from "../model/question";
-import {ActivatedRoute} from "@angular/router";
+import {Game} from '../model/game';
 
 @Component({
   selector: 'app-question',
@@ -9,23 +9,19 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
-  public questions: Question[];
-  public question: Question;
+  @Input() game: Game;
 
-
-  constructor(private questionService: QuestionService,
-              private activatedRoute: ActivatedRoute) {
+  constructor(private questionService: QuestionService) {
   }
 
   ngOnInit(): void {
-    this.getQuestionList();
   }
 
-  private getQuestionList(): void {
-    this.questions = this.activatedRoute.snapshot.data['question'];
-  }
-
-  deleteQuestion(id: string) {
-    this.questionService.deleteQuestion(id).subscribe(question => this.question = question);
+  deleteQuestion(question: Question): void {
+    const questions = this.game.questions;
+    const chosenQuestionIndex = questions.indexOf(question);
+    if (chosenQuestionIndex !== -1) {
+      questions.splice(chosenQuestionIndex, 1);
+    }
   }
 }
