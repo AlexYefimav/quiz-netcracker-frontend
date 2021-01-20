@@ -24,7 +24,7 @@ export class StorageService {
 
   get currentUser(): User {
     if (localStorage.getItem(this.USER_KEY)) {
-      return null;
+    //  return null;
     }
   const decrypted = CryptoJS.AES.decrypt(localStorage.getItem(this.USER_KEY), this.PASSPHRASE, 256);
     return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
@@ -36,7 +36,8 @@ export class StorageService {
 
   get currentToken(): string {
     if (localStorage.getItem(this.TOKEN_KEY)) {
-      return null;
+     // return null;
+      JSON.parse(localStorage.getItem(this.TOKEN_KEY));
     }
     return JSON.parse(localStorage.getItem(this.TOKEN_KEY));
   }

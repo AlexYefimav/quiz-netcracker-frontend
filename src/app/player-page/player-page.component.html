@@ -1,0 +1,36 @@
+<div class="user-page" xmlns="http://www.w3.org/1999/html">
+  <div class="container">
+    <h1 *ngIf="player">{{player.name}}</h1>
+    <mat-card class="card" *ngIf="player">
+      <img mat-card-image [src]="player.photo" alt="you">
+      <!--      <img mat-card-image src="https://vk.com/images/dquestion_app_widget_1_c.png" alt="you">-->
+      <mat-card-actions>
+<!--        <div *ngIf="!isOwnAccount">-->
+<!--          <button class="button" mat-button (click)="redirectToChat()">Write message</button>-->
+<!--        </div>-->
+        <div class="edit-inf" *ngIf="isOwnAccount">
+          <label for="file" class="file-label">
+            <i class="material-icons">camera_enhance</i>
+            <input type="file" id="file" (change)="onFileChanged($event)" accept=".jpg, .jpeg, .png"
+                   class="photo-input">
+          </label>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="container" *ngIf="player">
+    <br>
+    <br>
+    <br>
+    <h3>Email: {{player.email}}</h3>
+
+<!--    <div *ngIf="pageObserverRole === 'ADMIN' && !isOwnAccount">-->
+<!--      <button class="block-button" mat-button (click)="blockUser()">Block</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="schedule" *ngIf="player">-->
+<!--    <app-schedule [type]="type" [id]="player.id"></app-schedule>-->
+<!--  </div>-->
+
+</div>

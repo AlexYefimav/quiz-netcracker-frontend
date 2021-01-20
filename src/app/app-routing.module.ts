@@ -13,6 +13,7 @@ import {QuestionResolverService} from "./service/resolver/question-resolver.serv
 import {GameplayComponent} from "./gameplay/gameplay.component";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
+import {PlayerPageComponent} from "./player-page/player-page.component";
 
 const routes: Routes = [
   // {path: 'quiz', component: QuestionComponent, resolve: {question: QuestionResolverService}},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'sign_up', component: SignUpComponent},
   {path: 'gameplay/:id', component: GameplayComponent, resolve: {question: GameplayResolverService}},
   {path: 'statistics', component: StatisticsComponent},
+  {path: 'user/:id', component: PlayerPageComponent},
 ];
 
 @NgModule({

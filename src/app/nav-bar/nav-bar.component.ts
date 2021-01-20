@@ -31,13 +31,14 @@ export class NavBarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        console.log("after cl result");
         this.authorizedAccount = result;
         this.isAccount = true;
       }
       setTimeout(() => {
         this.checkAuthorized();
         location.reload();
-      }, 3000);
+      }, 30000);
     });
   }
 
@@ -49,9 +50,10 @@ export class NavBarComponent implements OnInit {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
+        console.log("Для Макса: "+this.authorizedAccount.id);
         this.isAccount = true;
        } else {
-       // StorageService.clear();
+        StorageService.clear();
         }
     } else{
       this.authorizedAccount = undefined;
@@ -77,14 +79,13 @@ export class NavBarComponent implements OnInit {
   }
 
   toAccount() {
+    console.log("to account");
     if (this.authorizedAccount.player_id) {
-      this.redirectTo(`/users/${this.authorizedAccount.login}`);
-    }
-    if (this.authorizedAccount.manager_id) {
-      this.redirectTo(`/users/${this.authorizedAccount.login}`);
+      console.log("to player");
+      this.redirectTo(`/users/${this.authorizedAccount.player_id}`);
     }
     if (this.authorizedAccount.admin_id) {
-      this.redirectTo(`/users/${this.authorizedAccount.login}`);
+      this.redirectTo(`/coach/${this.authorizedAccount.admin_id}`);
     }
   }
 

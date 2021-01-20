@@ -48,12 +48,29 @@ export class SignInComponent implements OnInit {
       this.account.login = this.login.value;
       this.account.password = this.password.value;
       this.account.username = this.login.value;
-      console.log(this.account.username);
       this.clientService.signIn(this.account).subscribe(
         response => {
           this.storageService.currentToken = response.headers.get('Authorization');
         },
         error => { console.log(error); }
+      );
+      this.account.password = undefined;
+      this.clientService.getUserByLogin(this.account.username).subscribe(
+        account => {
+          this.account = account;
+          if (!this.account.player_id) {
+            this.account.player_id = undefined;
+          }
+          if (!this.account.admin_id) {
+            this.account.admin_id = undefined;
+          }
+          setTimeout(() => {
+            if (this.storageService.currentToken) {
+              this.storageService.currentUser = this.account;
+            }}, 2000);
+
+          this.dialogAccount = this.account;
+        }
       );
     }
   }

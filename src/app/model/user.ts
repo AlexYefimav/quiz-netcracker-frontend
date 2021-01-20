@@ -7,11 +7,11 @@ export class User{
   username: string;
   password: string;
   mail: string;
-  role: Role;
+  role: string;
   active: number;
-  player_id: number;
+  player_id: string;
   manager_id: number;
-  admin_id: number;
+  admin_id: string;
   constructor() {
   }
 

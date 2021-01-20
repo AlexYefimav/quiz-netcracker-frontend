@@ -38,6 +38,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { QuestionDetailComponent } from './question-detail/question-detail.component';
+import { PlayerPageComponent } from './player-page/player-page.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { QuestionDetailComponent } from './question-detail/question-detail.compo
     GameplayComponent,
     StatisticsComponent,
     QuestionDetailComponent,
-    AddQuestionComponent
+    AddQuestionComponent,
+    PlayerPageComponent
   ],
   imports: [
     BrowserModule,
