@@ -1,59 +1,52 @@
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
+.c1{
+  background: #303030;
 }
 
-h1 {
-  text-align: center;
-  margin-top: 20px;
-  color: oldlace;
+.c2{
+  background: #c2185b;
 }
-.mat-card {
-  background: #e91e63;
-  color: oldlace;
+
+.c3{
+  background: #4e4a4a;
+}
+
+.titleQuestion{
+  position: absolute;
+  left: 10px;
+}
+
+.myButtons{
+  position: absolute;
+  right: 10px;
+}
+
+mat-grid-list{
+  margin-top: 100px;
+}
+
+.mat-stroked-button{
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.mat-progress-bar{
+  margin-top: 20px;
+  width: 40pc;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 15px;
-  max-width: 750px;
-  text-align: center;
 }
 
-
-.mat-radio-button {
-  color: blanchedalmond;
+.answers{
+  position: absolute;
+  left: 10px;
 }
 
-.mat-icon-button {
-  color: #303030;
-  display: block;
-  margin-left: auto;
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
 }
 
-.mat-mini-fab {
-  margin-top: 20px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-ng-template{
-  color: #f30327;
-}
-
-.mat-raised-button{
-  margin-top: 20px;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-.no {
-  text-align: center;
-  margin-top: 20px;
-  color: #f30327;
-}
-
-.yes {
-  text-align: center;
-  margin-top: 20px;
-  color: #37F303;
+.example-radio-button {
+  margin: 5px;
 }

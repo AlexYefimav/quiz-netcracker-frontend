@@ -1,8 +1,7 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Question} from "../model/question";
 import {ActivatedRoute} from "@angular/router";
 import {QuestionService} from "../service/question.service";
-import {MatAccordion} from '@angular/material/expansion';
 import {GameService} from '../service/game.service';
 import {Game} from '../model/game';
 
@@ -24,7 +23,7 @@ export class EditQuestionComponent implements OnInit {
     if (this.route.snapshot.params.gameId != null) {
       this.game = await this.getGame(this.route.snapshot.params.gameId);
       if (this.route.snapshot.params.id != null) {
-        this.getQuestion(this.route.snapshot.params.id);
+        this.question = await this.getQuestion(this.route.snapshot.params.id);
       }
     }
   }
@@ -33,17 +32,11 @@ export class EditQuestionComponent implements OnInit {
     return this.gameService.getGameById(gameId).toPromise();
   }
 
-  private getQuestion(id: string): void {
-    this.questionService.getQuestionById(id).subscribe(question =>
-      this.question = question);
-    // console.log(this.question.title);
-    // console.log(this.question.description);
-    // console.log(this.question.category);
-    // console.log(this.question.level);
+  private getQuestion(id: string): Promise<Question> {
+    return this.questionService.getQuestionById(id).toPromise();
   }
 
-  updateQuestion(): void {
-    this.questionService.updateQuestion(this.question)
-      .subscribe(question => this.question = question);
+  async updateQuestion() {
+    this.question = await this.questionService.updateQuestion(this.question).toPromise();
   }
 }

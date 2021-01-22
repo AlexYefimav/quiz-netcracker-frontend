@@ -3,8 +3,9 @@ import {Question} from "../model/question";
 import {QuestionService} from "../service/question.service";
 import {AnswerService} from "../service/answer.service";
 import {Answer} from "../model/answer";
-import {Game} from "../model/game";
 import {ActivatedRoute} from "@angular/router";
+import {StatisticsService} from "../service/statistics.service";
+import {StorageService} from "../service/storage/storage.service";
 
 @Component({
   selector: 'app-gameplay',
@@ -12,47 +13,87 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./gameplay.component.css']
 })
 export class GameplayComponent implements OnInit {
-  game: Game;
-  questions: Question[];
-  question: Question;
-  answer: Answer = new Answer();
-  favoriteAnswer: string;
-  questionNumber: number = 1;
-  check: boolean;
-  //statistics: number = 0;
+  gameId: string; //id игры
+  playerId: string; //id играющего
+  questions: Question[]; //вопросы данной игры
+  question: Question; //текущий вопрос
+  answer: Answer = null; //ответ который дал игрок
+  questionNumber: number = 0; //номер данного вопроса
+  answeredQuestion: number = 0; //сколько вопросов ответил игрок
+  check: boolean; //просто нужно (:
+  progress: number; //тоже самое что и answeredQuestion только для mat-progress-bar
+  endProgress: number; //всего количество вопросов
+  quantityQuestion: number; //количество вопросов минус answeredQuestion
+  isBlock: boolean;
 
 
   constructor(private questionService: QuestionService,
               private answerService: AnswerService,
-              private activatedRoute: ActivatedRoute) {
+              private statisticsService: StatisticsService,
+              private storageService: StorageService,
+              private route: ActivatedRoute) {
   }
 
-  ngOnInit(): void {
-    this.check = false;
-    this.getQuestionList();
-    this.question = this.questions[0];
-  }
+  async ngOnInit() {
+    this.gameId = this.route.snapshot.params.id;
+    this.playerId = this.storageService.currentUser.id;
 
-  private getQuestionList(): void {
-    this.questions = this.activatedRoute.snapshot.data['question'];
-  }
-
-  getAnswerById(): void {
-    this.answerService.getAnswer(this.favoriteAnswer).subscribe(answer=>{
-      this.answer = answer;
-    });
-  }
-
-  setQuestion() {
+    this.questions = await this.getQuestionList(this.gameId);
     this.question = this.questions[this.questionNumber];
-    this.questionNumber++;
+    this.quantityQuestion = this.questions.length;
+    this.endProgress = this.questions.length;
+    for (let i = 0; i < this.quantityQuestion; i++) {
+      this.questions[i].index = i;
+    }
+    this.isBlock = false;
   }
 
-  checkRight() {
+  private getQuestionList(id: string): Promise<Question[]> {
+    return this.questionService.getQuestionByGameId(id).toPromise();
+  }
+
+  async addAnswer() {
+    this.answer = await this.getAnswerById(this.answer.id, this.playerId);
+    this.incProgress();
     this.check = !this.check;
+    this.questions.splice(this.questionNumber, 1);
+    this.quantityQuestion = this.questions.length;
+    console.log(this.questions);
+    this.isBlock = true;
   }
 
-  setAnswer(id: string) {
-    this.favoriteAnswer = id;
+  getAnswerById(answerId: string, playerId: string): Promise<Answer> {
+    return this.answerService.getAnswerAndSaveStatistics(answerId, playerId).toPromise();
+  }
+
+  setNextQuestion(next: boolean) {
+    if(next){
+      this.check = !this.check;
+      this.isBlock = false;
+      if(this.questionNumber==this.quantityQuestion){
+        this.answer = null;
+        this.setBackQuestion();
+        return;
+      }
+    }
+    else {
+      this.questionNumber++;
+    }
+    this.question = this.questions[this.questionNumber];
+    this.answer = null;
+  }
+
+  setBackQuestion() {
+    this.questionNumber--;
+    this.question = this.questions[this.questionNumber];
+    console.log(this.question);
+  }
+
+  incProgress() {
+    this.answeredQuestion++;
+    this.progress = this.answeredQuestion / this.endProgress * 100;
+  }
+
+  answerColor(color: string) {
   }
 }

@@ -15,7 +15,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Valid
 export class SignInComponent implements OnInit {
 
   client: Player = new Player();
-  account:User = new User();
+  account: User = new User();
   form: FormGroup;
 
   @Input() error: string | null;
@@ -52,7 +52,9 @@ export class SignInComponent implements OnInit {
         response => {
           this.storageService.currentToken = response.headers.get('Authorization');
         },
-        error => { console.log(error); }
+        error => {
+          console.log(error);
+        }
       );
       this.account.password = undefined;
       this.clientService.getUserByLogin(this.account.username).subscribe(
@@ -67,7 +69,8 @@ export class SignInComponent implements OnInit {
           setTimeout(() => {
             if (this.storageService.currentToken) {
               this.storageService.currentUser = this.account;
-            }}, 2000);
+            }
+          }, 2000);
 
           this.dialogAccount = this.account;
         }
@@ -80,16 +83,20 @@ export class SignInComponent implements OnInit {
     this.router.navigate([url]);
   }
 
-  get login() { return this.form.get('login'); }
+  get login() {
+    return this.form.get('login');
+  }
 
-  get password() { return this.form.get('password'); }
+  get password() {
+    return this.form.get('password');
+  }
 
 }
 
 export function loginValidator(emailRegExp: RegExp, nameRegExp: RegExp): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} | null => {
+  return (control: AbstractControl): { [key: string]: any } | null => {
     return control.value.toString().indexOf('@') !== -1 ?
-      emailRegExp.test(control.value) ? null : { emailError : {value: control.value} }
-      : nameRegExp.test(control.value) ? null : { nameError : {value: control.value} };
+      emailRegExp.test(control.value) ? null : {emailError: {value: control.value}}
+      : nameRegExp.test(control.value) ? null : {nameError: {value: control.value}};
   };
 }

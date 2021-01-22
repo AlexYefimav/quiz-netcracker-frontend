@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {QuestionService} from "../service/question.service";
 import {Question} from "../model/question";
-import {ActivatedRoute} from "@angular/router";
 import {Game} from '../model/game';
 
 @Component({
@@ -15,16 +14,15 @@ export class QuestionComponent implements OnInit {
   public question: Question;
 
 
-  constructor(private questionService: QuestionService,
-              private activatedRoute: ActivatedRoute) {
+  constructor(private questionService: QuestionService) {
   }
 
-  ngOnInit(): void {
-    this.getQuestionList();
+  async ngOnInit() {
+    this.questions = await this.getQuestionList();
   }
 
-  private getQuestionList(): void {
-    this.questions = this.activatedRoute.snapshot.data['question'];
+  private getQuestionList(): Promise<Question[]> {
+    return this.questionService.getQuestion().toPromise();
   }
 
   deleteQuestion(question: Question): void {

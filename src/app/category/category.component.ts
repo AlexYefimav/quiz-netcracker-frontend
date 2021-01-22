@@ -16,14 +16,12 @@ export class CategoryComponent implements OnInit {
 
   constructor(private categoryService: CategoryService) { }
 
-  ngOnInit(): void {
-    this.getCategoryList();
+  async ngOnInit() {
+    this.categories = await this.getCategoryList();
   }
 
-  private getCategoryList(): void {
-    this.categoryService.getCategories().subscribe(categories => {
-      this.categories = categories;
-    })
+  private getCategoryList(): Promise<Category[]> {
+    return this.categoryService.getCategories().toPromise();
   }
 
   save(category: Category) {

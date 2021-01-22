@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserService} from '../service/user.service';
 import {StorageService} from '../service/storage/storage.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SignInComponent} from '../sign-in/sign-in.component';
 import {User} from "../model/user";
+
 //import {OfferComponent} from '../offer/offer.component';
 
 @Component({
@@ -50,15 +50,14 @@ export class NavBarComponent implements OnInit {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
-        console.log("Для Макса: "+this.authorizedAccount.id);
         this.isAccount = true;
-       } else {
+      } else {
         StorageService.clear();
-        }
-    } else{
+      }
+    } else {
       this.authorizedAccount = undefined;
       this.isAccount = false;
-     }
+    }
   }
 
 

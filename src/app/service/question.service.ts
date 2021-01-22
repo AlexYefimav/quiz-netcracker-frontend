@@ -25,7 +25,7 @@ export class QuestionService {
     return this.http.get<Question>(this.url + id);
   }
 
-  getQuestionByGameid(id: string): Observable<Question[]>{
+  getQuestionByGameId(id: string): Observable<Question[]> {
     return this.http.get<Question[]>(this.url + "game/" + id);
   }
 

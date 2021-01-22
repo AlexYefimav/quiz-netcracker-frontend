@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 // import {Client} from '../../model/client';
 // import {Account} from '../../model/account';
- import {UserService} from '../service/user.service';
 import {Router} from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material/core';
 //import {StorageService} from '../../service/storage/storage.service';
@@ -11,7 +10,6 @@ import {ErrorStateMatcher} from '@angular/material/core';
 // import {RegistrationDto} from '../../model/registration-dto';
 // import {ScheduleEnum} from '../../model/schedule.enum';
 import {User} from "../model/user";
-import {Player} from "../model/player";
 import {MatAccordion} from "@angular/material/expansion";
 import {SigninService} from "../service/signin.service";
 
@@ -210,7 +208,7 @@ export class SignUpComponent implements OnInit {
   //login: string;
 //  mail: string;
   // password: string;
-  isRegisterUser:boolean;
+  isRegisterUser: boolean;
   form: FormGroup;
 
   errorMatcher: ErrorStateMatcher;

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Answer} from '../model/answer';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -22,9 +22,13 @@ export class AnswerService {
     return this.http.get<Answer[]>(this.answerUrl + '/all');
   }
 
-  getAnswer(answerId: string): Observable<Answer> {
-    const resultUrl = `${this.answerUrl}/${answerId}`;
+  getAnswerAndSaveStatistics(answerId: string, playerId: string): Observable<Answer> {
+    const resultUrl = `${this.answerUrl}/${answerId}/${playerId}`;
     return this.http.get<Answer>(resultUrl);
+  }
+
+  getAnswer(id: string): Observable<Answer>{
+    return this.http.get<Answer>(this.answerUrl + "/" + id);
   }
 
   addAnswer(answer: Answer): Observable<Answer> {
