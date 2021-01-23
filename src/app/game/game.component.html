@@ -1,7 +1,9 @@
-<div>
-  <h1>Playable Games</h1>
-  <h1>Enjoy!</h1>
-</div>
+<div class="container">
+  <h1>Available Games to play</h1>
+
+  <app-widget-search-bar-button></app-widget-search-bar-button>
+  </div>
+
 <form>
   <div *ngFor="let game of games">
     <mat-card>
@@ -22,15 +24,33 @@
           </a>
         </mat-menu>
       </mat-card-title>
-      <mat-card-content>
-        {{game.description}}
-      </mat-card-content>
+       <mat-card-subtitle>
+
+         <h1>  {{game.description}} </h1>
+
+       </mat-card-subtitle>
+
+      <mat-card-subtitle>
+        <h1> <a href="/game/{{game.id}}" (click)="setGame(game)" >Просмотреть</a> </h1>
+      </mat-card-subtitle>
+
+
+
+
     </mat-card>
-    <a href="/gameplay/{{game.id}}" (click)="setGame(game)" class="play">Играть</a>
+
+  <!--  <a href="/gameplay/{{game.id}}" (click)="setGame(game)" class="play">Играть</a>
+    <div>
+      <a href="/game/{{game.id}}" (click)="setGame(game)" >Превью</a>
+    </div>-->
+
   </div>
+
   <a mat-mini-fab color="primary" href="game/create">
     <mat-icon>add</mat-icon>
   </a>
+
+
 </form>
 
 

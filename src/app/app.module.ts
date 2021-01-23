@@ -40,6 +40,16 @@ import {PlayerPageComponent} from './player-page/player-page.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {SearchModule} from "./search/search.module";
+import {WidgetSearchBarButtonComponent} from "./search/widget-search-bar-button/widget-search-bar-button.component";
+import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search-bar.component";
+import {QuestionResolverService} from "./service/resolver/question-resolver.service";
+import { GameplayComponent } from './gameplay/gameplay.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
+import { QuestionDetailComponent } from './question-detail/question-detail.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
+import { GamePreviewComponent } from './game-preview/game-preview.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +74,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     StatisticsComponent,
     QuestionDetailComponent,
     AddQuestionComponent,
-    PlayerPageComponent
+    PlayerPageComponent,
+    GamePreviewComponent
   ],
   imports: [
     MatTableModule,
@@ -87,8 +98,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatDialogModule,
+    SearchModule,
+    // MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [WidgetSearchBarButtonComponent, WidgetSearchBarComponent],
 })
 export class AppModule { }

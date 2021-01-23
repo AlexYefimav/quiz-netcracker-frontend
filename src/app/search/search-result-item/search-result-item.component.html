@@ -1,0 +1,14 @@
+<div class="mt-4 mb-4" *ngIf="searchService.option$ | async as selectedOption">
+	<header *ngIf="selectedOption.id">
+		<h3>Selected Product</h3>
+	</header>
+	<div class="card">
+		<div class="row" *ngIf="selectedOption.id">
+			<div class="col-9 p-4">
+				<h1>{{selectedOption.title}}</h1>
+				<p>{{selectedOption.description}}</p>
+			</div>
+		</div>
+	</div>
+
+</div>

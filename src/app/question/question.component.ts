@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {QuestionService} from "../service/question.service";
 import {Question} from "../model/question";
 import {Game} from '../model/game';
@@ -10,6 +10,7 @@ import {Game} from '../model/game';
 })
 export class QuestionComponent implements OnInit {
   @Input() game: Game;
+
   public questions: Question[];
   public question: Question;
 
