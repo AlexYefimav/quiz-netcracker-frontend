@@ -41,7 +41,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
 import { QuestionDetailComponent } from './question-detail/question-detail.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
-
+import { GamePreviewComponent } from './game-preview/game-preview.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +66,8 @@ import { AddQuestionComponent } from './add-question/add-question.component';
     StatisticsComponent,
     QuestionDetailComponent,
     AddQuestionComponent,
+    AddQuestionComponent,
+    GamePreviewComponent
   ],
   imports: [
     BrowserModule,

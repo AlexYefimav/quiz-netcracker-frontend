@@ -1,6 +1,9 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {QuestionService} from "../service/question.service";
 import {Question} from "../model/question";
+
+import {ActivatedRoute} from "@angular/router";
+
 import {Game} from '../model/game';
 
 @Component({
@@ -10,6 +13,10 @@ import {Game} from '../model/game';
 })
 export class QuestionComponent implements OnInit {
   @Input() game: Game;
+
+  public questions: Question[];
+  public question: Question;
+
 
   constructor(private questionService: QuestionService) {
   }

@@ -31,9 +31,7 @@ h1 {
 }
 
 .app-widget-search-bar {
-  hint : Search;
-  color : yellow;
-  backgroundColor : red;
-  textFieldHintColor : whitesmoke;
-  textFieldBackgroundColor : orangered;
+  max-width: 500px;
+  padding-bottom: 50px;
+  margin:auto;
 }
