@@ -5,6 +5,7 @@ import {StorageService} from '../service/storage/storage.service';
 import {MatDialog} from '@angular/material/dialog';
 import {SignInComponent} from '../sign-in/sign-in.component';
 import {User} from "../model/user";
+import {PlayerService} from "../service/player.service";
 //import {OfferComponent} from '../offer/offer.component';
 
 @Component({
@@ -15,9 +16,12 @@ import {User} from "../model/user";
 export class NavBarComponent implements OnInit {
   authorizedAccount: User;
   isAccount: boolean;
+//  userService: UserService;
 
   constructor(private router: Router,
               public storageService: StorageService,
+              public userService: UserService,
+              public playerService: PlayerService,
               public dialog: MatDialog) {
     this.isAccount = false;
   }
@@ -31,7 +35,6 @@ export class NavBarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("after cl result");
         this.authorizedAccount = result;
         this.isAccount = true;
       }
@@ -50,7 +53,17 @@ export class NavBarComponent implements OnInit {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
-        console.log("Для Макса: "+this.authorizedAccount.id);
+        //this.authorizedAccount.role=this.authorizedAccount.role;
+       // console.log("Для полли: "+this.authorizedAccount.id);
+        this.userService.getUserById(this.storageService.currentUser.id).subscribe(
+          account => {
+           if (account.role=="USER") {
+             this.authorizedAccount.player_id = account.id;
+            }
+            if (account.role=="ADMIN") {
+              this.authorizedAccount.admin_id = account.id;
+            }
+      })
         this.isAccount = true;
        } else {
         StorageService.clear();
@@ -75,17 +88,30 @@ export class NavBarComponent implements OnInit {
     StorageService.clear();
     this.authorizedAccount = undefined;
     this.isAccount = false;
-    this.redirect('/main');
+    this.redirect('');
   }
 
   toAccount() {
-    console.log("to account");
+    this.authorizedAccount = this.storageService.currentUser;
+    this.playerService.getUserByPlayerId(this.storageService.currentUser.id).subscribe(
+      account => {
+        console.log("Для меня: "+account.id+account.name);
+      //   if (account.role=="USER") {
+      //     this.authorizedAccount.player_id = account.id;
+      //   }
+      //   if (account.role=="ADMIN") {
+      //     this.authorizedAccount.admin_id = account.id;
+      //   }
+       }
+      )
+    console.log("to account" + this.authorizedAccount.role+this.authorizedAccount.player_id);
     if (this.authorizedAccount.player_id) {
       console.log("to player");
       this.redirectTo(`/users/${this.authorizedAccount.player_id}`);
     }
     if (this.authorizedAccount.admin_id) {
-      this.redirectTo(`/coach/${this.authorizedAccount.admin_id}`);
+      console.log("to admin");
+      this.redirectTo(`/admin/${this.authorizedAccount.admin_id}`);
     }
   }
 

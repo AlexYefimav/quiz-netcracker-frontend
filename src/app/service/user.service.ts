@@ -28,8 +28,12 @@ export class UserService {
     return this.http.get<User>(this.url + "users/findUser/" + userId);
   }
 
+  // getUserByPlayerId(userId: string): Observable<User> {
+  //   return this.http.get<User>(this.url + "player/" + userId);
+  // }
+
   public getUserByLogin(username: string): Observable<User> {
-    return this.http.get<User>(`${this.url}users/users/${username}`);
+    return this.http.get<User>(`${this.url}users/player/${username}`);
   }
 
   createUser(user: User): Observable<User> {

@@ -46,6 +46,11 @@
       Users
     </button>
     <button mat-button (click)="redirect('bookmark')" *ngIf="authorizedAccount.player_id">Bookmarks</button>
+    <button mat-menu-item (click)="toAccount()">Account</button>
+    <!--      <button mat-menu-item (click)="openOfferDialog()"-->
+    <!--              *ngIf="authorizedAccount.coach_id || authorizedAccount.organization_id">Offers-->
+    <!--      </button>-->
+    <button mat-menu-item (click)="logout()">Logout</button>
     <button mat-button [matMenuTriggerFor]="beforeMenu">{{authorizedAccount.username}}</button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
       <button mat-menu-item (click)="toAccount()">Account</button>

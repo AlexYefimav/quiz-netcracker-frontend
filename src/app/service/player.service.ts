@@ -6,6 +6,7 @@ import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 //import {PageAccount} from '../../model/pageAccount';
 //import {RegistrationDto} from '../../model/registration-dto';
 import {PhotoDto} from '../model/photoDto';
+import {User} from "../model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class PlayerService {
 
   public getOnePlayer(id: string): Observable<Player> {
     return this.http.get<Player>(`${this.clientUrl}/finsUser/${id}`);
+  }
+
+  getUserByPlayerId(userId: string): Observable<Player> {
+    return this.http.get<Player>( "/player/" + userId);
   }
 
   public changePhoto(formData: FormData): Observable<PhotoDto> {
