@@ -1,8 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../model/game';
 import {ActivatedRoute} from '@angular/router';
 import {GameService} from '../service/game.service';
 import {MatAccordion} from '@angular/material/expansion';
+import {StorageService} from "../service/storage/storage.service";
+import {UserService} from "../service/user.service";
+import {User} from "../model/user";
 
 @Component({
   selector: 'app-add-game',
@@ -14,14 +17,17 @@ export class AddGameComponent implements OnInit {
   game: Game;
   isUpdateGame: boolean;
 
-  constructor(private gameService: GameService, private route: ActivatedRoute) {
+  constructor(private gameService: GameService,
+              private route: ActivatedRoute,
+              private userService: UserService,
+              private storageService: StorageService) {
 
   }
 
   async ngOnInit() {
     if (this.route.snapshot.params.id != null){
-      this.isUpdateGame = true;
       this.game = await this.getGame(this.route.snapshot.params.id);
+      this.isUpdateGame = true;
     } else {
       this.isUpdateGame = false;
       this.game = new Game();
@@ -40,11 +46,16 @@ export class AddGameComponent implements OnInit {
 
   async createGame(game: Game) {
     if (game.questions.length === 0) {
+      this.game.player = this.storageService.currentUser.id;
       this.game = await this.createAndGetGame(game);
     }
     else {
       this.game = await this.updateAndGetGame();
     }
+  }
+
+  getUser(id: string): Promise<User>{
+    return this.userService.getUserById(id).toPromise();
   }
 
   createAndGetGame(game: Game): Promise<Game> {

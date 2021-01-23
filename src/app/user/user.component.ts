@@ -15,17 +15,16 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService) {
   }
 
-  ngOnInit(): void {
-    this.getUser();
+  async ngOnInit() {
+    this.users = await this.getUser();
   }
 
-  private getUser(): void {
-    this.userService.getUsers().subscribe(user =>
-      this.users = user);
+  private getUser(): Promise<User[]> {
+    return this.userService.getUsers().toPromise();
   }
 
-  deleteUser(id: string) {
-    this.userService.deleteUser(id).subscribe(user => this.user = user);
+  async deleteUser(id: string) {
+    this.user = await this.userService.deleteUser(id).toPromise();
   }
 }
 

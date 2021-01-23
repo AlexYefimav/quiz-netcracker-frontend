@@ -16,14 +16,12 @@ export class LevelComponent implements OnInit {
 
   constructor(private levelService: LevelService) { }
 
-  ngOnInit(): void {
-    this.getLevels();
+  async ngOnInit() {
+    this.levels = await this.getLevels();
   }
 
-  private getLevels(): void{
-    this.levelService.getLevels().subscribe(levels=>{
-      this.levels = levels
-    });
+  private getLevels(): Promise<Level[]>{
+    return this.levelService.getLevels().toPromise()
   }
 
   save(level: Level) {

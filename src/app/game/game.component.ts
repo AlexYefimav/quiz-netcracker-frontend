@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from '../service/game.service';
 import {Game} from '../model/game';
+import {StatisticsService} from "../service/statistics.service";
+import {Statistics} from "../model/statistics";
 
 @Component({
   selector: 'app-game',
@@ -15,18 +17,16 @@ export class GameComponent implements OnInit {
   constructor(private gameService: GameService) {
   }
 
-  ngOnInit(): void {
-    this.getGameList();
+  async ngOnInit() {
+    this.games = await this.getGameList();
   }
 
-  private getGameList(): void {
-    this.gameService.getGame().subscribe(game => {
-      this.games = game;
-    });
+  private getGameList(): Promise<Game[]> {
+    return this.gameService.getGame().toPromise();
   }
 
-  deleteGame(gameId: string) {
-    this.gameService.deleteGame(gameId).subscribe(game => this.game = game);
+  async deleteGame(id: string){
+    this.game = await this.gameService.deleteGame(id).toPromise()
   }
 
   setGame(game: Game){

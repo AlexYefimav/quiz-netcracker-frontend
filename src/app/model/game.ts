@@ -5,7 +5,7 @@ export class Game{
   title: string;
   description: string;
   questions: Question[];
-  user: string;
+  player: string;
 
   constructor() {
   }
