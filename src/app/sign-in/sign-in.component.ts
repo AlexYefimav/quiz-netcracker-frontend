@@ -14,7 +14,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Valid
 })
 export class SignInComponent implements OnInit {
 
-  client: Player = new Player();
+  player: Player = new Player();
   account: User = new User();
   form: FormGroup;
 
@@ -23,7 +23,7 @@ export class SignInComponent implements OnInit {
   @Output() submitEM = new EventEmitter();
 
   constructor(private router: Router,
-              private clientService: UserService,
+              private userService: UserService,
               private storageService: StorageService,
               public dialogRef: MatDialogRef<SignInComponent>,
               @Inject(MAT_DIALOG_DATA) public dialogAccount: User,
@@ -44,11 +44,11 @@ export class SignInComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      this.login.value.toString().indexOf('@') === -1 ? this.client.name = this.login.value : this.client.email = this.login.value;
+      this.login.value.toString().indexOf('@') === -1 ? this.player.name = this.login.value : this.player.email = this.login.value;
       this.account.login = this.login.value;
       this.account.password = this.password.value;
       this.account.username = this.login.value;
-      this.clientService.signIn(this.account).subscribe(
+      this.userService.signIn(this.account).subscribe(
         response => {
           this.storageService.currentToken = response.headers.get('Authorization');
         },
@@ -57,7 +57,7 @@ export class SignInComponent implements OnInit {
         }
       );
       this.account.password = undefined;
-      this.clientService.getUserByLogin(this.account.username).subscribe(
+      this.userService.getUserByLogin(this.account.username).subscribe(
         account => {
           this.account = account;
           if (!this.account.player_id) {
@@ -73,6 +73,7 @@ export class SignInComponent implements OnInit {
           }, 2000);
 
           this.dialogAccount = this.account;
+          this.router.navigate(['/games/']);
         }
       );
     }

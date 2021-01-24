@@ -38,15 +38,18 @@ export class PlayerPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.getClient();
-   this.isOwnAccount = this.userID === this.storageService.currentUser.player_id;
+   this.isOwnAccount = this.userID === this.storageService.currentUser.player;
+    console.log("Init player"+this.storageService.currentUser.player);
     if (!StorageService.isEmpty()) {
       this.pageObserverRole = this.storageService.currentUser.role;
     }
   }
 
   getClient() {
-    this.userID = this.route.snapshot.paramMap.get('id');
+  //  this.userID = this.route.snapshot.paramMap.get('id');
+    this.userID =  this.storageService.currentUser.player;
     this.playerService.getOnePlayer(this.userID).subscribe(player=> {
       this.player = player;
     });

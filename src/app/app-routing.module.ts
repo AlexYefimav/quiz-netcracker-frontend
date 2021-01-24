@@ -10,6 +10,7 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import {GameplayComponent} from "./gameplay/gameplay.component";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {PlayerPageComponent} from "./player-page/player-page.component";
+import {ErrorAuthenticationConnectionComponent} from "./error-authentication-connection/error-authentication-connection.component";
 
 const routes: Routes = [
 
@@ -25,7 +26,9 @@ const routes: Routes = [
   {path: 'sign_up', component: SignUpComponent},
   {path: 'gameplay/:id', component: GameplayComponent},
   {path: 'statistics/:id', component: StatisticsComponent},
-  {path: 'user/:id', component: PlayerPageComponent}
+  {path: 'player/:id', component: PlayerPageComponent},
+  {path: '403', component: ErrorAuthenticationConnectionComponent},
+
 ];
 
 @NgModule({

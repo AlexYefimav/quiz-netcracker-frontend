@@ -13,22 +13,17 @@ import {User} from "../model/user";
 })
 export class PlayerService {
 
-  private readonly clientUrl: string;
+  url = 'http://localhost:8085/player';
 
   constructor(private http: HttpClient) {
-    this.clientUrl = '/users';
   }
 
   public getOnePlayer(id: string): Observable<Player> {
-    return this.http.get<Player>(`${this.clientUrl}/finsUser/${id}`);
-  }
-
-  getUserByPlayerId(userId: string): Observable<Player> {
-    return this.http.get<Player>( "/player/" + userId);
+    return this.http.get<Player>(`${this.url}/id/${id}`);
   }
 
   public changePhoto(formData: FormData): Observable<PhotoDto> {
-    return this.http.post<PhotoDto>(`${this.clientUrl}/users/photo`, formData);
+    return this.http.post<PhotoDto>(`${this.url}/users/photo`, formData);
   }
 
 }
