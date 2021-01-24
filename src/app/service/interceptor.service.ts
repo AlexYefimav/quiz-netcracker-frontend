@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {StorageService} from '../storage/storage.service';
+import {StorageService} from './storage.service';
 import {catchError} from 'rxjs/operators';
 
 @Injectable({
@@ -13,23 +13,7 @@ export class InterceptorService implements HttpInterceptor {
   }
 
   handleError(errorResponse: HttpErrorResponse) {
-    let errorMessage: string;
-    if (errorResponse.error.Authorization ) {
-      errorMessage = `
-            Error code: 403!!!
-            Title: ${errorResponse.error.title}
-            Message: ${errorResponse.error.message}
-            HttpStatus: ${errorResponse.error.httpStatus}`;
-    }
-    if (errorResponse.error != null) {
-      errorMessage = `
-            Error code: ${errorResponse.error.errorCode}
-            Title: ${errorResponse.error.title}
-            Message: ${errorResponse.error.message}
-            HttpStatus: ${errorResponse.error.httpStatus}`;
-    }
-    window.alert(errorMessage+" "+errorResponse.error);
-    return throwError(errorMessage);
+    return throwError(errorResponse.error.status);
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

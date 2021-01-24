@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../model/user";
 import {Router} from "@angular/router";
-import {StorageService} from "../service/storage/storage.service";
+import {StorageService} from "../service/storage.service";
 import {MatDialog} from "@angular/material/dialog";
 import {SignInComponent} from "../sign-in/sign-in.component";
 
@@ -29,7 +29,6 @@ export class AppTopBarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("after cl result");
         this.authorizedAccount = result;
         this.isAccount = true;
       }
@@ -49,7 +48,7 @@ export class AppTopBarComponent implements OnInit {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
         this.isAccount = true;
-        console.log("to pl"+this.storageService.currentUser+" "+this.storageService.currentUser.role);
+          console.log("check"+ this.storageService.currentUser.role)
         if(this.authorizedAccount.role=="ADMIN")
         {
           this.authorizedAccount.admin_id=this.authorizedAccount.id;

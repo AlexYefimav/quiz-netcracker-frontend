@@ -5,14 +5,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { HttpParams, HttpResponse} from '@angular/common/http';
 import {catchError, delay} from "rxjs/operators";
 import {Router} from '@angular/router';
-import {StorageService} from "./storage/storage.service";
+import {StorageService} from "./storage.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
 
-  url = 'http://localhost:8085/users/';
+  url = 'http://localhost:8085/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -58,7 +58,6 @@ export class UserService {
 
   public signIn(account: User): Observable<HttpResponse<User>> {
     account.username=account.login;
-    console.log(account.login+account.password)
    return this.http.post<User>(this.url +"login", account, {observe: 'response', responseType: 'json'});
   }
 

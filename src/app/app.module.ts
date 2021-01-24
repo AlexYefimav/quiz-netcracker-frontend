@@ -41,7 +41,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ErrorAuthenticationConnectionComponent } from './error-authentication-connection/error-authentication-connection.component';
 import * as Http from '@angular/common/http';
-import { InterceptorService } from './service/interceptor/interceptor.service';
+import { InterceptorService } from './service/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -94,11 +94,11 @@ import { InterceptorService } from './service/interceptor/interceptor.service';
   providers: [
    // { provide: XHRBackend, useClass: AuthenticationConnectionBackend },
     { provide: Http, useClass:  ErrorAuthenticationConnectionComponent },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: InterceptorService,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

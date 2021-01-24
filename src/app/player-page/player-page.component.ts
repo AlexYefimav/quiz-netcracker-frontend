@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {PlayerService} from '../service/player.service';
 import {UserService} from '../service/user.service';
-import {StorageService} from '../service/storage/storage.service';
+import {StorageService} from '../service/storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../model/user';
 import {Player} from "../model/player";
@@ -39,15 +39,18 @@ export class PlayerPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getClient();
+    this.getPlayer();
    this.isOwnAccount = this.userID === this.storageService.currentUser.player;
-    console.log("Init player"+this.storageService.currentUser.player);
     if (!StorageService.isEmpty()) {
       this.pageObserverRole = this.storageService.currentUser.role;
     }
   }
 
-  getClient() {
+  redirect(url: string) {
+    this.router.navigate([url]);
+  }
+
+  getPlayer() {
   //  this.userID = this.route.snapshot.paramMap.get('id');
     this.userID =  this.storageService.currentUser.player;
     this.playerService.getOnePlayer(this.userID).subscribe(player=> {
