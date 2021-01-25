@@ -8,16 +8,16 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          User
+          Login
         </mat-panel-title>
         <mat-panel-description>
-          {{user.username}}
+          {{user.login}}
           <mat-icon>login</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field class="example-form">
         <label>
-          <input matInput [(ngModel)]="user.username">
+          <input matInput [(ngModel)]="user.login">
         </label>
       </mat-form-field>
     </mat-expansion-panel>
@@ -40,23 +40,23 @@
       </mat-form-field>
     </mat-expansion-panel>
 
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Password
-        </mat-panel-title>
-        <mat-panel-description>
-          {{user.password}}
-          <mat-icon>password</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+<!--    <mat-expansion-panel>-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title>-->
+<!--          Password-->
+<!--        </mat-panel-title>-->
+<!--        <mat-panel-description>-->
 
-      <mat-form-field class="example-form">
-        <label>
-          <input matInput [(ngModel)]="user.password">
-        </label>
-      </mat-form-field>
-    </mat-expansion-panel>
+<!--          <mat-icon>password</mat-icon>-->
+<!--        </mat-panel-description>-->
+<!--      </mat-expansion-panel-header>-->
+
+<!--      <mat-form-field class="example-form">-->
+<!--        <label>-->
+<!--          <input matInput [(ngModel)]="user.password">-->
+<!--        </label>-->
+<!--      </mat-form-field>-->
+<!--    </mat-expansion-panel>-->
 
   </mat-accordion>
   <a mat-raised-button  color="primary" (click)="this.isUpdateUser?updateUser():createUser(user)">Save</a>

@@ -29,14 +29,13 @@ export class AppTopBarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("after cl result");
         this.authorizedAccount = result;
         this.isAccount = true;
       }
       setTimeout(() => {
         this.checkAuthorized();
         location.reload();
-      }, 30000);
+      }, 2000);
     });
   }
 
@@ -49,11 +48,6 @@ export class AppTopBarComponent implements OnInit {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
         this.isAccount = true;
-        console.log("to pl"+this.storageService.currentUser+" "+this.storageService.currentUser.role);
-        if(this.authorizedAccount.role=="ADMIN")
-        {
-          this.authorizedAccount.admin_id=this.authorizedAccount.id;
-        }
       } else {
         StorageService.clear();
       }
@@ -81,12 +75,11 @@ export class AppTopBarComponent implements OnInit {
   }
 
   toAccount() {
-    if (this.authorizedAccount.player) {
-      console.log("to player");
+    if (this.authorizedAccount.role=='USER') {
       this.redirectTo(`/player/${this.authorizedAccount.player}`);
     }
-    if (this.authorizedAccount.admin_id) {
-      this.redirectTo(`/admin/${this.authorizedAccount.admin_id}`);
+    if (this.authorizedAccount.role=='ADMIN') {
+      this.redirectTo(`/admin/${this.authorizedAccount.id}`);
     }
   }
 }

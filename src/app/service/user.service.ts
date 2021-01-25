@@ -58,7 +58,6 @@ export class UserService {
 
   public signIn(account: User): Observable<HttpResponse<User>> {
     account.username=account.login;
-    console.log(account.login+account.password)
    return this.http.post<User>(this.url +"login", account, {observe: 'response', responseType: 'json'});
   }
 
