@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Level} from "../model/level";
 import {Question} from "../model/question";
 import {LevelService} from "../service/level.service";
+import {AbstractControl} from '@angular/forms';
 
 @Component({
   selector: 'app-level',
@@ -13,6 +14,8 @@ export class LevelComponent implements OnInit {
   levels: Level[];
   levelName: string;
   @Input() question: Question;
+  @Input() levelControl: AbstractControl;
+  @Output() levelControlChange = new EventEmitter<AbstractControl>();
 
   constructor(private levelService: LevelService) { }
 
@@ -21,14 +24,25 @@ export class LevelComponent implements OnInit {
   }
 
   private getLevels(): Promise<Level[]>{
-    return this.levelService.getLevels().toPromise()
+    return this.levelService.getLevels().toPromise();
   }
 
-  save(level: Level) {
-    for (let i = 0; i < this.levels.length; ++i) {
-      if (level == this.levels[i]) {
-        this.question.level = this.levels[i].id;
+  getLevelId(): string {
+    for (const level of this.levels) {
+      if (this.levelControl.value === level.title) {
+        this.levelName = level.title;
+        return level.id;
       }
     }
+  }
+
+  checkForm(): void {
+    if (this.levelControl.valid) {
+      this.question.level = this.getLevelId();
+    }
+    else {
+      this.question.level = null;
+    }
+    this.levelControlChange.emit(this.levelControl);
   }
 }

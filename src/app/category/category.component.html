@@ -4,13 +4,16 @@
       Категория
     </mat-panel-title>
     <mat-panel-description>
-      <span>{{categoryName}}</span>
+      {{categoryName}}
       <mat-icon>category</mat-icon>
     </mat-panel-description>
   </mat-expansion-panel-header>
-
-  <div *ngFor="let category of categories">
-    <button mat-raised-button color="primary"
-            (click)="save(category); categoryName=category.title">{{category.title}}</button>
-  </div>
+  <mat-form-field appearance="fill">
+    <mat-select [formControl]="categoryControl" (selectionChange)="checkForm();" disableOptionCentering required>
+      <mat-option *ngFor="let category of categories" [value]="category.title">
+        {{category.title}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="categoryControl.errors?.required">Пожалуйста, выберите категорию</mat-error>
+  </mat-form-field>
 </mat-expansion-panel>

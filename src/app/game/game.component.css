@@ -8,15 +8,15 @@ h1 {
   color: oldlace;
 }
 
-.mat-card {
-  background: #e91e63 url(src/assets/images/sky.jpg);
-  color: oldlace;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 15px;
-  max-width: 750px;
-  text-align: center;
-}
+/*.mat-card {*/
+/*  background: #e91e63 url(src/assets/images/sky.jpg);*/
+/*  color: oldlace;*/
+/*  margin-left: auto;*/
+/*  margin-right: auto;*/
+/*  margin-top: 15px;*/
+/*  max-width: 750px;*/
+/*  text-align: center;*/
+/*}*/
 
 .mat-icon-button {
   color: #303030;

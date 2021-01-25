@@ -6,6 +6,9 @@ import {MatAccordion} from '@angular/material/expansion';
 import {StorageService} from "../service/storage/storage.service";
 import {UserService} from "../service/user.service";
 import {User} from "../model/user";
+import {FormGroup} from '@angular/forms';
+import {UpdateGameValidation} from '../service/validation/update-game-validation';
+import {AddGameValidation} from '../service/validation/add-game-validation';
 
 @Component({
   selector: 'app-add-game',
@@ -16,23 +19,27 @@ export class AddGameComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   game: Game;
   isUpdateGame: boolean;
+  gameForm: FormGroup;
 
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
               private userService: UserService,
-              private storageService: StorageService) {
-
+              private storageService: StorageService,
+              private addGameValidation: AddGameValidation,
+              private updateGameValidation: UpdateGameValidation) {
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     if (this.route.snapshot.params.id != null){
       this.game = await this.getGame(this.route.snapshot.params.id);
       this.isUpdateGame = true;
+      this.gameForm = this.updateGameValidation.createGameForm(this.game);
     } else {
       this.isUpdateGame = false;
       this.game = new Game();
       this.game.questions = [];
       this.game.id = null;
+      this.gameForm = this.addGameValidation.createGameForm();
     }
   }
 
@@ -40,22 +47,15 @@ export class AddGameComponent implements OnInit {
     return this.gameService.getGameById(gameId).toPromise();
   }
 
-  async updateGame() {
-    this.game = await this.updateAndGetGame();
+  getTitle(): string {
+    return this.gameForm.get('title').value;
   }
 
-  async createGame(game: Game) {
-    if (game.questions.length === 0) {
-      this.game.player = this.storageService.currentUser.id;
-      console.log(this.game);
-      this.game = await this.createAndGetGame(game);
-    }
-    else {
-      this.game = await this.updateAndGetGame();
-    }
+  getDescription(): string {
+    return this.gameForm.get('description').value;
   }
 
-  getUser(id: string): Promise<User>{
+  getUser(id: string): Promise<User> {
     return this.userService.getUserById(id).toPromise();
   }
 
@@ -65,5 +65,30 @@ export class AddGameComponent implements OnInit {
 
   updateAndGetGame(): Promise<Game> {
     return this.gameService.updateGame(this.game).toPromise();
+  }
+
+  async updateGame(): Promise<void> {
+    if (this.gameForm.valid) {
+      this.game = await this.updateAndGetGame();
+    }
+  }
+
+  async createGame(game: Game): Promise<void> {
+    if (this.gameForm.valid) {
+      if (game.questions.length === 0) {
+        this.game.player = this.storageService.currentUser.id;
+        this.game = await this.createAndGetGame(game);
+      }
+      else {
+        this.game = await this.updateAndGetGame();
+      }
+    }
+  }
+
+  checkForm(): void {
+    if (this.gameForm.valid) {
+      this.game.title = this.getTitle();
+      this.game.description = this.getDescription();
+    }
   }
 }

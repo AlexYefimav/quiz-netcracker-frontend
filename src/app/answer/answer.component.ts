@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {Question} from '../model/question';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-answer',
@@ -8,6 +9,7 @@ import {Question} from '../model/question';
 })
 export class AnswerComponent implements OnInit {
   @Input() question: Question;
+  @Input() answerForm: FormGroup;
 
   constructor() { }
 

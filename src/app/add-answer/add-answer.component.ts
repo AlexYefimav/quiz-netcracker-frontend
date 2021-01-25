@@ -12,7 +12,7 @@ import {AddAnswerValidation} from '../service/validation/add-answer-validation.s
 export class AddAnswerComponent implements OnInit {
   @Input() question: Question;
   answer: Answer;
-  answerForm: FormGroup;
+  @Input() answerForm: FormGroup;
 
   constructor(private answerValidation: AddAnswerValidation) {
   }
@@ -23,16 +23,15 @@ export class AddAnswerComponent implements OnInit {
   }
 
   addAnswer(): void {
-    if (this.answerForm.invalid) {
-      return;
-    }
-    this.answer = new Answer();
-    this.answer.title = this.getTitle();
-    this.answer.right = this.isRight();
-    this.answer.question = this.question.id;
-    this.question.answersSet.push(this.answer);
+    if (this.answerForm.valid) {
+      this.answer = new Answer();
+      this.answer.title = this.getTitle();
+      this.answer.right = this.isRight();
+      this.answer.question = this.question.id;
+      this.question.answersSet.push(this.answer);
 
-    this.answerForm = this.answerValidation.createAnswerForm();
+      this.answerForm = this.answerValidation.createAnswerForm();
+    }
   }
 
   getTitle(): any {

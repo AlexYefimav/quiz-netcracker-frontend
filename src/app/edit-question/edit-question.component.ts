@@ -4,6 +4,8 @@ import {ActivatedRoute} from "@angular/router";
 import {QuestionService} from "../service/question.service";
 import {GameService} from '../service/game.service';
 import {Game} from '../model/game';
+import {FormGroup} from '@angular/forms';
+import {UpdateQuestionValidation} from '../service/validation/update-question-validation';
 
 @Component({
   selector: 'app-edit-question',
@@ -13,17 +15,21 @@ import {Game} from '../model/game';
 export class EditQuestionComponent implements OnInit {
   question: Question;
   game: Game;
+  questionForm: FormGroup;
 
   constructor(private questionService: QuestionService,
               private gameService: GameService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private questionValidation: UpdateQuestionValidation) {
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     if (this.route.snapshot.params.gameId != null) {
       this.game = await this.getGame(this.route.snapshot.params.gameId);
+      this.questionValidation.setGame(this.game);
       if (this.route.snapshot.params.id != null) {
         this.question = await this.getQuestion(this.route.snapshot.params.id);
+        this.questionForm = await this.questionValidation.createQuestionForm(this.question);
       }
     }
   }
@@ -36,7 +42,10 @@ export class EditQuestionComponent implements OnInit {
     return this.questionService.getQuestionById(id).toPromise();
   }
 
-  async updateQuestion() {
-    this.question = await this.questionService.updateQuestion(this.question).toPromise();
+  updateQuestion(): void {
+    if (this.questionForm.valid) {
+      this.questionService.updateQuestion(this.question)
+        .subscribe(question => this.question = question);
+    }
   }
 }
