@@ -12,7 +12,7 @@ import {StorageService} from "./storage/storage.service";
 })
 export class UserService {
 
-  url = 'http://localhost:8085/users/';
+  url = 'http://localhost:8085/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

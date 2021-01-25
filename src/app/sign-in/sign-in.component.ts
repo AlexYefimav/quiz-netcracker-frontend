@@ -73,7 +73,6 @@ export class SignInComponent implements OnInit {
           }, 2000);
 
           this.dialogAccount = this.account;
-          this.router.navigate(['/games/']);
         }
       );
     }

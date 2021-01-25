@@ -26,4 +26,7 @@ export class PlayerService {
     return this.http.post<PhotoDto>(`${this.url}/users/photo`, formData);
   }
 
+  getPlayerById(playerId: string): Observable<Player> {
+    return this.http.get<Player>('http://127.0.0.1:8085/users/id/' + playerId);
+  }
 }

@@ -62,7 +62,7 @@
     </ng-template>
     <ng-template #answered>
       <div *ngIf="answeredQuestion==endProgress;else next">
-        <a mat-flat-button class="statistics" color="accent" href="statistics/{{gameId}}">Статистика</a>
+        <a mat-flat-button class="statistics" color="accent" href="statistics/{{gameId}}" (click)="disconnect()">Статистика</a>
       </div>
       <ng-template #next class="myButtons">
         <button mat-flat-button color="primary" (click)="setNextQuestion(true)">Далее</button>

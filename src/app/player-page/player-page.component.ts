@@ -38,7 +38,6 @@ export class PlayerPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.getClient();
    this.isOwnAccount = this.userID === this.storageService.currentUser.player;
     console.log("Init player"+this.storageService.currentUser.player);

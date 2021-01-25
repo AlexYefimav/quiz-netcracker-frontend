@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Зал ожидания</h1>
+<div *ngFor="let player of data.gameRoom.players">
+  <div mat-dialog-content>{{player.name}}</div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <a mat-button href="/gameplay/{{data.gameId}}/{{data.gameRoom.id}}" style="right: 0">Играть</a>
+</div>
