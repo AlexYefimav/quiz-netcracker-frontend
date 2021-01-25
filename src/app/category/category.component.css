@@ -11,3 +11,7 @@
 .mat-raised-button {
   margin-top: 20px;
 }
+
+.mat-form-field {
+  display: flex;
+}

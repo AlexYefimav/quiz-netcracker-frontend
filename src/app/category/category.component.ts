@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Category} from "../model/category";
 import {CategoryService} from "../service/category.service";
 import {Question} from "../model/question";
+import {AbstractControl, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-category',
@@ -13,6 +14,8 @@ export class CategoryComponent implements OnInit {
   categories: Category[];
   categoryName: string;
   @Input() question: Question;
+  @Input() categoryControl: AbstractControl;
+  @Output() categoryControlChange = new EventEmitter<AbstractControl>();
 
   constructor(private categoryService: CategoryService) { }
 
@@ -24,11 +27,22 @@ export class CategoryComponent implements OnInit {
     return this.categoryService.getCategories().toPromise();
   }
 
-  save(category: Category) {
-    for (let i = 0; i < this.categories.length; ++i) {
-      if (category == this.categories[i]) {
-        this.question.category = this.categories[i].id;
+  getCategoryId(): string {
+    for (const category of this.categories) {
+      if (this.categoryControl.value === category.title) {
+        this.categoryName = category.title;
+        return category.id;
       }
     }
+  }
+
+  checkForm(): void {
+    if (this.categoryControl.valid) {
+      this.question.category = this.getCategoryId();
+    }
+    else {
+      this.question.category = null;
+    }
+    this.categoryControlChange.emit(this.categoryControl);
   }
 }

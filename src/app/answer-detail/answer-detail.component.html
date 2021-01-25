@@ -1,13 +1,12 @@
 <div *ngIf="answer">
   <form [formGroup]="answerForm">
     <mat-form-field appearance="fill">
-      <input matInput formControlName="title" (focus)="setAnswer()" (blur)="updateAnswer()">
+      <input matInput formControlName="title" (blur)="updateAnswer()">
       <mat-error *ngIf="answerForm.get('title').touched && answerForm.get('title').errors?.required">
         Необходимо заполнить поле
       </mat-error>
       <mat-error *ngIf="answerForm.get('title').touched && answerForm.get('title').errors?.duplicate">
         Такой ответ уже существует
-<!--        {{debug()}}-->
       </mat-error>
     </mat-form-field>
     <mat-slide-toggle formControlName="right" (change)="updateAnswer()">

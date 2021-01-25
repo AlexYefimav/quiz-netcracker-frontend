@@ -1,5 +1,8 @@
 <div class="editQuestion">
-  <app-question-detail [question]="question"></app-question-detail>
-  <a mat-raised-button href="game/update/{{game?.id}}" color="primary"
-     (click)="updateQuestion()">Сохранить</a>
+  <app-question-detail [question]="question" [questionForm]="questionForm"></app-question-detail>
+  <app-answer [question]="question"></app-answer>
+  <div *ngIf="questionForm">
+    <a mat-raised-button href="game/update/{{game?.id}}" color="primary" [disabled]="!questionForm.valid"
+       (click)="updateQuestion()">Сохранить</a>
+  </div>
 </div>

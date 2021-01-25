@@ -1,6 +1,8 @@
 <div class="container">
-  <div class="answer" *ngFor="let answer of question.answersSet">
-    <app-answer-detail [question]="question" [answer]="answer"></app-answer-detail>
+  <div *ngIf="question">
+    <div class="answer" *ngFor="let answer of question.answersSet">
+      <app-answer-detail [question]="question" [answer]="answer"></app-answer-detail>
+    </div>
+    <app-add-answer [question]="question" [answerForm]="answerForm"></app-add-answer>
   </div>
-  <app-add-answer [question]="question"></app-add-answer>
 </div>

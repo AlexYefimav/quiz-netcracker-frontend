@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Question} from '../../model/question';
 import {Answer} from '../../model/answer';
+import {DuplicateValidator} from './duplicate-validation';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class UpdateAnswerValidation {
   question: Question;
   chosenAnswer: Answer;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private duplicateValidator: DuplicateValidator) {
   }
 
   setQuestion(question: Question): void {
@@ -23,23 +25,10 @@ export class UpdateAnswerValidation {
   }
 
   createAnswerForm(): FormGroup {
+    console.log(this.chosenAnswer);
     return this.formBuilder.group({
       title: [this.chosenAnswer.title, [Validators.required]],
       right: [this.chosenAnswer.right, []]
-    }, {validators: this.validate.bind(this)});
-  }
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    if (control) {
-      const title = control.get('title').value;
-      const answers = this.question.answersSet;
-      answers.forEach(answer => {
-        if (answer.title === title && answer !== this.chosenAnswer) {
-          control.get('title')?.setErrors({duplicate: true});
-          return { duplicate: true };
-        }
-      });
-    }
-    return null;
+    }, { validators: this.duplicateValidator.duplicateValidation(this.question.answersSet, this.chosenAnswer) });
   }
 }

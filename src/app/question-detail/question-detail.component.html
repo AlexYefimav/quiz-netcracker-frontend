@@ -3,48 +3,116 @@
   <button mat-button (click)="accordion.closeAll()">Collapse All</button>
 </div>
 <mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Вопрос
-      </mat-panel-title>
-      <mat-panel-description>
-        {{question.title}}
-        <mat-icon>title</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-form-field class="example-form">
-      <label>
-        <input matInput [(ngModel)]="question.title">
-      </label>
-    </mat-form-field>
-  </mat-expansion-panel>
+  <div *ngIf="questionForm">
+    <form [formGroup]="questionForm">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Вопрос
+          </mat-panel-title>
+          <mat-panel-description>
+            {{getTitle()}}
+            <mat-icon>title</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field class="example-form">
+          <label>
+            <input matInput placeholder="Формулировка вопроса" formControlName="title" (input)="checkForm()" required>
+          </label>
+          <mat-error *ngIf="questionForm?.get('title').touched && questionForm.get('title').errors?.required">
+            Необходимо заполнить поле
+          </mat-error>
+          <mat-error *ngIf="questionForm?.get('title').touched && questionForm.get('title').errors?.duplicate">
+            Такой вопрос уже существует
+          </mat-error>
+          <mat-error *ngIf="questionForm?.get('title').touched && questionForm.get('title').errors?.minlength">
+            Формулировка должна содержать минимум 6 символов
+          </mat-error>
+        </mat-form-field>
+      </mat-expansion-panel>
 
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Описание
-      </mat-panel-title>
-      <mat-panel-description>
-        {{question.description}}
-        <mat-icon>description</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Описание
+          </mat-panel-title>
+          <mat-panel-description>
+            {{getDescription()}}
+            <mat-icon>description</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-    <mat-form-field class="example-form">
-      <label>
-        <input matInput [(ngModel)]="question.description">
-      </label>
-    </mat-form-field>
-  </mat-expansion-panel>
+        <mat-form-field class="example-form">
+          <label>
+            <input matInput placeholder="Описание вопроса" formControlName="description" (input)="checkForm()" required>
+          </label>
+          <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.required">
+            Необходимо заполнить поле
+          </mat-error>
+          <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.duplicate">
+            Такое описание уже существует
+          </mat-error>
+          <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.minlength">
+            Описание должно содержать минимум 6 символов
+          </mat-error>
+        </mat-form-field>
+      </mat-expansion-panel>
 
-  <app-category
-    [question]="question">
-  </app-category>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Категория
+          </mat-panel-title>
+          <mat-panel-description>
+            {{getCategory()}}
+            <mat-icon>category</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field appearance="fill" class="category">
+          <mat-select formControlName="category" (selectionChange)="checkForm();" disableOptionCentering required>
+            <mat-option *ngFor="let category of categories" [value]="category.title">
+              {{category.title}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="questionForm?.get('category').touched && questionForm?.get('category').errors?.required">
+            Пожалуйста, выберите категорию
+          </mat-error>
+        </mat-form-field>
+      </mat-expansion-panel>
 
-  <app-level
-    [question]="question">
-  </app-level>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Уровень сложности
+          </mat-panel-title>
+          <mat-panel-description>
+            {{getLevel()}}
+            <mat-icon>star_rate</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field appearance="fill" class="level">
+          <mat-select formControlName="level" (selectionChange)="checkForm()" disableOptionCentering required>
+            <mat-option *ngFor="let level of levels" [value]="level.title">
+              {{level.title}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="questionForm?.get('level').touched && questionForm?.get('level').errors?.required">
+            Пожалуйста, выберите сложность
+          </mat-error>
+        </mat-form-field>
+      </mat-expansion-panel>
+
+      <!--    <app-category [categoryControl]="questionForm.get('category')"-->
+      <!--                  [question]="question"-->
+      <!--                  (categoryControlChange)="setCategoryControl($event)">-->
+      <!--    </app-category>-->
+
+      <!--    <app-level-->
+      <!--      [levelControl]="questionForm.get('level')"-->
+      <!--      [question]="question"-->
+      <!--      (levelControlChange)="setLevelControl($event)">-->
+      <!--    </app-level>-->
+    </form>
+  </div>
 
 </mat-accordion>
-<app-answer [question]="question"></app-answer>
