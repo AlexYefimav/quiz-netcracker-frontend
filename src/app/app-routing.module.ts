@@ -11,6 +11,7 @@ import {GameplayComponent} from "./gameplay/gameplay.component";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {PlayerPageComponent} from "./player-page/player-page.component";
 import {GamePreviewComponent} from "./game-preview/game-preview.component";
+import {ErrorAuthenticationConnectionComponent} from "./error-authentication-connection/error-authentication-connection.component";
 
 const routes: Routes = [
 
@@ -30,6 +31,9 @@ const routes: Routes = [
   {path: 'statistics/:id', component: StatisticsComponent},
   {path: 'user/:id', component: PlayerPageComponent},
   {path: 'game/:id', component: GamePreviewComponent},
+  {path: 'player/:id', component: PlayerPageComponent},
+  {path: '403', component: ErrorAuthenticationConnectionComponent},
+
 ];
 
 @NgModule({

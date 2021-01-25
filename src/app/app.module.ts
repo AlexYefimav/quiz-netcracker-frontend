@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {AppTopBarComponent} from './app-top-bar/app-top-bar.component';
@@ -28,7 +28,6 @@ import {AddGameComponent} from "./add-game/add-game.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import {CategoryComponent} from './category/category.component';
 import {LevelComponent} from './level/level.component';
-import {NavBarComponent} from "./nav-bar/nav-bar.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SignUpComponent} from "./sign-up/sign-up.component";
@@ -44,6 +43,9 @@ import {SearchModule} from "./search/search.module";
 import {WidgetSearchBarButtonComponent} from "./search/widget-search-bar-button/widget-search-bar-button.component";
 import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search-bar.component";
 import { GamePreviewComponent } from './game-preview/game-preview.component';
+import { ErrorAuthenticationConnectionComponent } from './error-authentication-connection/error-authentication-connection.component';
+import * as Http from '@angular/common/http';
+import { InterceptorService } from './service/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,6 @@ import { GamePreviewComponent } from './game-preview/game-preview.component';
     SignInComponent,
     CategoryComponent,
     LevelComponent,
-    NavBarComponent,
     SignInComponent,
     SignUpComponent,
     GameplayComponent,
@@ -69,7 +70,8 @@ import { GamePreviewComponent } from './game-preview/game-preview.component';
     QuestionDetailComponent,
     AddQuestionComponent,
     PlayerPageComponent,
-    GamePreviewComponent
+    GamePreviewComponent,
+    ErrorAuthenticationConnectionComponent
   ],
   imports: [
     MatTableModule,
@@ -95,7 +97,13 @@ import { GamePreviewComponent } from './game-preview/game-preview.component';
     SearchModule,
     // MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   exports: [WidgetSearchBarButtonComponent, WidgetSearchBarComponent],
 })

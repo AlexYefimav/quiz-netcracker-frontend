@@ -1,35 +1,45 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {User} from '../model/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { HttpParams, HttpResponse} from '@angular/common/http';
+import {catchError, delay} from "rxjs/operators";
+import {Router} from '@angular/router';
+import {StorageService} from "./storage/storage.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
 
-  private readonly url: string;
- // url = 'http://localhost:8085/users/';
+  url = 'http://localhost:8085/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  constructor(private http: HttpClient) {
-    this.url = 'http://localhost:8085/';
+  constructor(private http: HttpClient, private router: Router,private storageService: StorageService) {
   }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.url + "users/findAllUsers");
+    return this.http.get<User[]>(this.url + "users/findAllUsers")
+ //  return this.http.get<User[]>(this.url + "users/findAllUsers", {observe: 'response', responseType: 'json'})
+      .pipe(
+        delay(403),
+        catchError(error => {
+            this.router.navigate(['403']);
+          return throwError(error)
+        })
+      );
   }
 
   getUserById(userId: string): Observable<User> {
     return this.http.get<User>(this.url + "users/findUser/" + userId);
   }
 
-  public getUserByLogin(username: string): Observable<User> {
-    return this.http.get<User>(`${this.url}users/users/${username}`);
+
+  getUserByLogin(username: string): Observable<User> {
+    return this.http.get<User>(`${this.url}users/${username}`);
   }
 
   createUser(user: User): Observable<User> {
@@ -48,7 +58,6 @@ export class UserService {
 
   public signIn(account: User): Observable<HttpResponse<User>> {
     account.username=account.login;
-    console.log(account.login+account.password)
    return this.http.post<User>(this.url +"login", account, {observe: 'response', responseType: 'json'});
   }
 

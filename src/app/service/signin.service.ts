@@ -20,8 +20,4 @@ export class SigninService {
   register(user: User): Observable<User> {
     return this.http.post<User>(this.url +"users/register", user)
   }
-
-  // signIn(user: User): Observable<User> {
-  //   return this.http.post<User>(this.url + "login", user)
-  // }
 }

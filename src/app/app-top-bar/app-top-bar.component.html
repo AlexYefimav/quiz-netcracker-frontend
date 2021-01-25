@@ -1,15 +1,29 @@
-<mat-toolbar color="primary">
+<!--<mat-toolbar color="primary">-->
+<!--  <a mat-button href="">Home</a>-->
+<!--  <button mat-button [matMenuTriggerFor]="belowMenu">Game</button>-->
+<!--  <mat-menu #belowMenu="matMenu" yPosition="below">-->
+<!--&lt;!&ndash;    <a mat-menu-item href="quiz">Quiz</a>&ndash;&gt;-->
+<!--    <a mat-menu-item href="users">User</a>-->
+<!--    <a mat-menu-item href="games"> Games</a>-->
+<!--  </mat-menu>-->
+<!--  <a mat-button href="" disabled="true">About</a>-->
+<!--  <a mat-button>My Games</a>-->
+<!--</mat-toolbar>-->
+<mat-toolbar color="primary" role="heading">
   <a mat-button href="">Home</a>
-  <button mat-button [matMenuTriggerFor]="belowMenu">Game</button>
-  <mat-menu #belowMenu="matMenu" yPosition="below">
-<!--    <a mat-menu-item href="quiz">Quiz</a>-->
-    <a mat-menu-item href="users">User</a>
-    <a mat-menu-item href="games"> Games</a>
-  </mat-menu>
-  <a mat-button href="" disabled="true">About</a>
-  <a mat-button href="userGames">My Games</a>
-<!--  <a mat-button routerLink="auth" routerLinkActive="active">Login</a>-->
-<!--  &lt;!&ndash;     <a (click)="logout()">Logout</a>&ndash;&gt;-->
-<!--  <a mat-button mat-raised-button routerLink="register" routerLinkActive="active">Register</a>-->
-
+  <span class="nav-fill-remaining-space"></span>
+  <div class="navigation">
+    <button  mat-button (click)="redirect('games')">Викторины</button>
+  </div>
+  <div *ngIf="!isAccount">
+    <button  mat-button (click)="redirect('sign_up')">Зарегистрироваться</button>
+    <button  mat-button (click)="openLoginDialog()">Войти</button>
+  </div>
+  <div *ngIf="isAccount">
+    <button  mat-button (click)="toAccount()" *ngIf="authorizedAccount.role=='USER'">Личный кабинет</button>
+    <button  mat-button (click)="redirect('users')" *ngIf="authorizedAccount.role=='ADMIN'">Пользователи</button>
+  </div>
+  <div *ngIf="isAccount">
+    <button mat-button (click)="logout()">Выйти</button>
+  </div>
 </mat-toolbar>

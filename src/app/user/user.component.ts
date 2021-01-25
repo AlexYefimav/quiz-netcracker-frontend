@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../model/user';
 import {UserService} from '../service/user.service';
+import {StorageService} from "../service/storage/storage.service";
 
 @Component({
   selector: 'app-user',
@@ -12,15 +13,15 @@ export class UserComponent implements OnInit {
   public user: User;
 
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,  private storageService: StorageService,) {
   }
 
   async ngOnInit() {
     this.users = await this.getUser();
   }
 
-  private getUser(): Promise<User[]> {
-    return this.userService.getUsers().toPromise();
+  private getUser() {
+     return this.userService.getUsers().toPromise();
   }
 
   async deleteUser(id: string) {

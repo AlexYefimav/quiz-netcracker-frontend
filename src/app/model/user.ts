@@ -5,10 +5,7 @@ export class User{
   password: string;
   mail: string;
   role: string;
-  active: number;
-  player_id: string;
-  manager_id: number;
-  admin_id: string;
+  player: string;
   constructor() {
   }
 

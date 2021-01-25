@@ -14,8 +14,8 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Valid
 })
 export class SignInComponent implements OnInit {
 
-  client: Player = new Player();
-  account: User = new User();
+  player: Player = new Player();
+  user: User = new User();
   form: FormGroup;
 
   @Input() error: string | null;
@@ -23,7 +23,7 @@ export class SignInComponent implements OnInit {
   @Output() submitEM = new EventEmitter();
 
   constructor(private router: Router,
-              private clientService: UserService,
+              private userService: UserService,
               private storageService: StorageService,
               public dialogRef: MatDialogRef<SignInComponent>,
               @Inject(MAT_DIALOG_DATA) public dialogAccount: User,
@@ -44,11 +44,11 @@ export class SignInComponent implements OnInit {
 
   submit() {
     if (this.form.valid) {
-      this.login.value.toString().indexOf('@') === -1 ? this.client.name = this.login.value : this.client.email = this.login.value;
-      this.account.login = this.login.value;
-      this.account.password = this.password.value;
-      this.account.username = this.login.value;
-      this.clientService.signIn(this.account).subscribe(
+      this.login.value.toString().indexOf('@') === -1 ? this.player.name = this.login.value : this.player.email = this.login.value;
+      this.user.login = this.login.value;
+      this.user.password = this.password.value;
+      this.user.username = this.login.value;
+      this.userService.signIn(this.user).subscribe(
         response => {
           this.storageService.currentToken = response.headers.get('Authorization');
         },
@@ -56,23 +56,18 @@ export class SignInComponent implements OnInit {
           console.log(error);
         }
       );
-      this.account.password = undefined;
-      this.clientService.getUserByLogin(this.account.username).subscribe(
-        account => {
-          this.account = account;
-          if (!this.account.player_id) {
-            this.account.player_id = undefined;
-          }
-          if (!this.account.admin_id) {
-            this.account.admin_id = undefined;
-          }
+      this.user.password = undefined;
+      this.userService.getUserByLogin(this.user.username).subscribe(
+        user => {
+          this.user = user;
           setTimeout(() => {
             if (this.storageService.currentToken) {
-              this.storageService.currentUser = this.account;
+              this.storageService.currentUser = this.user;
             }
           }, 2000);
 
-          this.dialogAccount = this.account;
+          this.dialogAccount = this.user;
+          this.router.navigate(['/games/']);
         }
       );
     }
