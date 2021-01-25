@@ -10,7 +10,6 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import {GameplayComponent} from "./gameplay/gameplay.component";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {PlayerPageComponent} from "./player-page/player-page.component";
-import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
 import {GamePreviewComponent} from "./game-preview/game-preview.component";
 
 const routes: Routes = [
@@ -29,7 +28,7 @@ const routes: Routes = [
   {path: 'sign_up', component: SignUpComponent},
   {path: 'gameplay/:id', component: GameplayComponent},
   {path: 'statistics/:id', component: StatisticsComponent},
-  {path: 'user/:id', component: PlayerPageComponent}
+  {path: 'user/:id', component: PlayerPageComponent},
   {path: 'game/:id', component: GamePreviewComponent},
 ];
 

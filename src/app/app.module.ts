@@ -43,12 +43,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {SearchModule} from "./search/search.module";
 import {WidgetSearchBarButtonComponent} from "./search/widget-search-bar-button/widget-search-bar-button.component";
 import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search-bar.component";
-import {QuestionResolverService} from "./service/resolver/question-resolver.service";
-import { GameplayComponent } from './gameplay/gameplay.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import {GameplayResolverService} from "./service/resolver/gameplay-resolver.service";
-import { QuestionDetailComponent } from './question-detail/question-detail.component';
-import { AddQuestionComponent } from './add-question/add-question.component';
 import { GamePreviewComponent } from './game-preview/game-preview.component';
 
 @NgModule({
