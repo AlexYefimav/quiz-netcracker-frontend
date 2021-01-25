@@ -47,6 +47,7 @@ export class AddGameComponent implements OnInit {
   async createGame(game: Game) {
     if (game.questions.length === 0) {
       this.game.player = this.storageService.currentUser.id;
+      console.log(this.game);
       this.game = await this.createAndGetGame(game);
     }
     else {

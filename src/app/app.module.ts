@@ -39,6 +39,10 @@ import {PlayerPageComponent} from './player-page/player-page.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {SearchModule} from "./search/search.module";
+import {WidgetSearchBarButtonComponent} from "./search/widget-search-bar-button/widget-search-bar-button.component";
+import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search-bar.component";
+import { GamePreviewComponent } from './game-preview/game-preview.component';
 import { ErrorAuthenticationConnectionComponent } from './error-authentication-connection/error-authentication-connection.component';
 import * as Http from '@angular/common/http';
 import { InterceptorService } from './service/interceptor.service';
@@ -66,6 +70,7 @@ import { InterceptorService } from './service/interceptor.service';
     QuestionDetailComponent,
     AddQuestionComponent,
     PlayerPageComponent,
+    GamePreviewComponent,
     ErrorAuthenticationConnectionComponent
   ],
   imports: [
@@ -89,7 +94,8 @@ import { InterceptorService } from './service/interceptor.service';
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatDialogModule,
-   // ErrorAuthenticationConnectionComponent
+    SearchModule,
+    // MatDialogModule,
   ],
   providers: [
     {
@@ -98,6 +104,7 @@ import { InterceptorService } from './service/interceptor.service';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [WidgetSearchBarButtonComponent, WidgetSearchBarComponent],
 })
 export class AppModule { }

@@ -17,6 +17,11 @@ h1 {
   text-align: center;
 }
 
+
+.mat-radio-button {
+  color: blanchedalmond;
+}
+
 .mat-icon-button {
   color: #303030;
   display: block;
@@ -28,10 +33,4 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-.app-widget-search-bar {
-  max-width: 500px;
-  padding-bottom: 50px;
-  margin:auto;
 }

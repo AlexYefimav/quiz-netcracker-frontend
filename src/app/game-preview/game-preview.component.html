@@ -1,0 +1,34 @@
+<div>
+  <h1>Game Preview</h1>
+</div>
+
+<div>
+  <h1> Here must be Image of the game</h1>
+</div>
+
+
+<form>
+  <div>
+    <mat-card>
+      <mat-card-title>
+
+
+        {{game.title}}
+
+      </mat-card-title>
+      <mat-card-content>
+        {{game.description}}
+      </mat-card-content>
+
+    </mat-card>
+    <a href="/gameplay/{{game.id}}" (click)="setGame(game)" class="play">Играть</a>
+
+
+  </div>
+
+
+</form>
+
+
+
+

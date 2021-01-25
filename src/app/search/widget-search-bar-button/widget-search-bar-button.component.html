@@ -1,0 +1,21 @@
+<mat-card class="search">
+  <mat-card-title>Search</mat-card-title>
+
+
+  <mat-card-content>
+    <div class="container">
+      <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+        <mat-form-field class="example-form">
+          <span><input matInput class="form-control" type="search" name="search" ngModel placeholder="Search by name"
+                 aria-label="Search"></span>
+          <span class="btnSearch">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </span>
+        </mat-form-field>
+
+      </form>
+    </div>
+
+  </mat-card-content>
+</mat-card>
