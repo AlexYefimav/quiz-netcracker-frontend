@@ -89,11 +89,8 @@ import { InterceptorService } from './service/interceptor.service';
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatDialogModule,
-   // ErrorAuthenticationConnectionComponent
   ],
   providers: [
-   // { provide: XHRBackend, useClass: AuthenticationConnectionBackend },
-    { provide: Http, useClass:  ErrorAuthenticationConnectionComponent },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

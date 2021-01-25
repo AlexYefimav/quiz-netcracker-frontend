@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { HttpParams, HttpResponse} from '@angular/common/http';
 import {catchError, delay} from "rxjs/operators";
 import {Router} from '@angular/router';
-import {StorageService} from "./storage.service";
+import {StorageService} from "./storage/storage.service";
 
 @Injectable({
   providedIn: 'root',

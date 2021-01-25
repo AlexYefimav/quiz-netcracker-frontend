@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import CryptoJS from "crypto-js";
-import {User} from "../model/user";
+import {User} from "../../model/user";
 
 @Injectable({
   providedIn: 'root'

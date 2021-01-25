@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {StorageService} from '../service/storage.service';
+import {StorageService} from '../service/storage/storage.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {UserService} from '../service/user.service';
@@ -15,7 +15,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Valid
 export class SignInComponent implements OnInit {
 
   player: Player = new Player();
-  account: User = new User();
+  user: User = new User();
   form: FormGroup;
 
   @Input() error: string | null;
@@ -45,10 +45,10 @@ export class SignInComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       this.login.value.toString().indexOf('@') === -1 ? this.player.name = this.login.value : this.player.email = this.login.value;
-      this.account.login = this.login.value;
-      this.account.password = this.password.value;
-      this.account.username = this.login.value;
-      this.userService.signIn(this.account).subscribe(
+      this.user.login = this.login.value;
+      this.user.password = this.password.value;
+      this.user.username = this.login.value;
+      this.userService.signIn(this.user).subscribe(
         response => {
           this.storageService.currentToken = response.headers.get('Authorization');
         },
@@ -56,23 +56,17 @@ export class SignInComponent implements OnInit {
           console.log(error);
         }
       );
-      this.account.password = undefined;
-      this.userService.getUserByLogin(this.account.username).subscribe(
-        account => {
-          this.account = account;
-          if (!this.account.player_id) {
-            this.account.player_id = undefined;
-          }
-          if (!this.account.admin_id) {
-            this.account.admin_id = undefined;
-          }
+      this.user.password = undefined;
+      this.userService.getUserByLogin(this.user.username).subscribe(
+        user => {
+          this.user = user;
           setTimeout(() => {
             if (this.storageService.currentToken) {
-              this.storageService.currentUser = this.account;
+              this.storageService.currentUser = this.user;
             }
           }, 2000);
 
-          this.dialogAccount = this.account;
+          this.dialogAccount = this.user;
           this.router.navigate(['/games/']);
         }
       );

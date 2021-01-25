@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StatisticsService} from "../service/statistics.service";
 import {ActivatedRoute} from "@angular/router";
-import {StorageService} from "../service/storage.service";
+import {StorageService} from "../service/storage/storage.service";
 import {Question} from "../model/question";
 import {GameService} from "../service/game.service";
 import {Game} from "../model/game";

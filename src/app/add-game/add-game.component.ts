@@ -3,7 +3,7 @@ import {Game} from '../model/game';
 import {ActivatedRoute} from '@angular/router';
 import {GameService} from '../service/game.service';
 import {MatAccordion} from '@angular/material/expansion';
-import {StorageService} from "../service/storage.service";
+import {StorageService} from "../service/storage/storage.service";
 import {UserService} from "../service/user.service";
 import {User} from "../model/user";
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../model/user";
 import {Router} from "@angular/router";
-import {StorageService} from "../service/storage.service";
+import {StorageService} from "../service/storage/storage.service";
 import {MatDialog} from "@angular/material/dialog";
 import {SignInComponent} from "../sign-in/sign-in.component";
 
@@ -35,7 +35,7 @@ export class AppTopBarComponent implements OnInit {
       setTimeout(() => {
         this.checkAuthorized();
         location.reload();
-      }, 30000);
+      }, 2000);
     });
   }
 
@@ -48,11 +48,6 @@ export class AppTopBarComponent implements OnInit {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
         this.isAccount = true;
-          console.log("check"+ this.storageService.currentUser.role)
-        if(this.authorizedAccount.role=="ADMIN")
-        {
-          this.authorizedAccount.admin_id=this.authorizedAccount.id;
-        }
       } else {
         StorageService.clear();
       }
@@ -80,12 +75,11 @@ export class AppTopBarComponent implements OnInit {
   }
 
   toAccount() {
-    if (this.authorizedAccount.player) {
-      console.log("to player");
+    if (this.authorizedAccount.role=='USER') {
       this.redirectTo(`/player/${this.authorizedAccount.player}`);
     }
-    if (this.authorizedAccount.admin_id) {
-      this.redirectTo(`/admin/${this.authorizedAccount.admin_id}`);
+    if (this.authorizedAccount.role=='ADMIN') {
+      this.redirectTo(`/admin/${this.authorizedAccount.id}`);
     }
   }
 }

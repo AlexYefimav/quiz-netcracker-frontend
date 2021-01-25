@@ -20,8 +20,8 @@
     <button  mat-button (click)="openLoginDialog()">Войти</button>
   </div>
   <div *ngIf="isAccount">
-    <button  mat-button (click)="toAccount()" *ngIf="authorizedAccount.player">Личный кабинет</button>
-    <button  mat-button (click)="redirect('users')" *ngIf="authorizedAccount.admin_id">Пользователи</button>
+    <button  mat-button (click)="toAccount()" *ngIf="authorizedAccount.role=='USER'">Личный кабинет</button>
+    <button  mat-button (click)="redirect('users')" *ngIf="authorizedAccount.role=='ADMIN'">Пользователи</button>
   </div>
   <div *ngIf="isAccount">
     <button mat-button (click)="logout()">Выйти</button>
