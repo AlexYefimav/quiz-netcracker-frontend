@@ -32,7 +32,7 @@ export class PlayerPageComponent implements OnInit {
   }
 
   getPlayer() {
-    this.playerService.getOnePlayer(this.storageService.currentUser.player).subscribe(player=> {
+    this.playerService.getOnePlayer(this.storageService.currentUser.id).subscribe(player=> {
       this.player = player;
     });
   }

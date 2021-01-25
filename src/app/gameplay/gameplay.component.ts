@@ -81,7 +81,7 @@ export class GameplayComponent implements OnInit {
   }
 
   getPlayer(playerId: string): Promise<Player> {
-    return this.playerService.getPlayerById(playerId).toPromise();
+    return this.playerService.getOnePlayer(playerId).toPromise();
   }
 
   async addAnswer() {

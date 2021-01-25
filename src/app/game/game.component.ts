@@ -36,7 +36,7 @@ export class GameComponent implements OnInit {
   }
 
   getPlayer(playerId: string): Promise<Player> {
-    return this.playerService.getPlayerById(playerId).toPromise();
+    return this.playerService.getOnePlayer(playerId).toPromise();
   }
 
   private getGameList(): Promise<Game[]> {
