@@ -40,7 +40,8 @@
 
             <mat-form-field class="example-form">
               <label>
-                <input matInput placeholder="Описание игры" formControlName="description" (input)="checkForm()" required>
+                <input matInput placeholder="Описание игры" formControlName="description" (input)="checkForm()"
+                       required>
               </label>
               <mat-error *ngIf="gameForm.get('description').touched && gameForm.get('description').errors?.required">
                 Необходимо заполнить поле
@@ -57,13 +58,9 @@
     <app-question [game]="game"></app-question>
     <app-add-question [(game)]="game"></app-add-question>
 
-<<<<<<< HEAD
-  <div class="save-button">
-    <a mat-raised-button color="primary" (click)="this.isUpdateGame?updateGame():createGame(game)">Сохранить</a>
-=======
     <div class="save-button">
-      <a mat-raised-button href="games" color="primary" [disabled]="!gameForm.valid" (click)="this.isUpdateGame?updateGame():createGame(game)">Сохранить</a>
+      <a mat-raised-button href="games" color="primary" [disabled]="!gameForm.valid"
+         (click)="this.isUpdateGame?updateGame():createGame(game)">Сохранить</a>
     </div>
->>>>>>> b62583f... Fixed merge conflict
   </div>
 </div>

@@ -7,6 +7,7 @@ import {GameService} from '../service/game.service';
 import {FormGroup} from '@angular/forms';
 import {AddQuestionValidation} from '../service/validation/add-question-validation';
 import {AddAnswerValidation} from '../service/validation/add-answer-validation.service';
+import {StorageService} from '../service/storage/storage.service';
 
 @Component({
   selector: 'app-add-question',
@@ -24,7 +25,8 @@ export class AddQuestionComponent implements OnInit {
   constructor(private questionService: QuestionService,
               private gameService: GameService,
               private questionValidation: AddQuestionValidation,
-              private answerValidation: AddAnswerValidation) { }
+              private answerValidation: AddAnswerValidation,
+              private storageService: StorageService) { }
 
   async ngOnInit(): Promise<void> {
     await this.initializeProperties();
@@ -34,6 +36,7 @@ export class AddQuestionComponent implements OnInit {
     if (this.questionForm.valid) {
       if (this.game.id == null) {
         this.game.questions.push(this.question);
+        this.game.player = this.storageService.currentUser.id;
         this.game = await this.createGame();
       }
       else {

@@ -48,6 +48,9 @@ import {DialogElementsExampleDialog, GamePreviewComponent} from './game-preview/
 import { ErrorAuthenticationConnectionComponent } from './error-authentication-connection/error-authentication-connection.component';
 import * as Http from '@angular/common/http';
 import { InterceptorService } from './service/interceptor.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -99,6 +102,8 @@ import { InterceptorService } from './service/interceptor.service';
     MatDialogModule,
     SearchModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     {
