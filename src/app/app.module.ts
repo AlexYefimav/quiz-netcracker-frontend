@@ -31,10 +31,12 @@ import {LevelComponent} from './level/level.component';
 import {SignInComponent} from "./sign-in/sign-in.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SignUpComponent} from "./sign-up/sign-up.component";
-import {GameplayComponent} from './gameplay/gameplay.component';
-import {StatisticsComponent} from './statistics/statistics.component';
-import {AddQuestionComponent} from './add-question/add-question.component';
-import {QuestionDetailComponent} from './question-detail/question-detail.component';
+import { GameplayComponent } from './gameplay/gameplay.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { AddQuestionComponent } from './add-question/add-question.component';
+import { QuestionDetailComponent } from './question-detail/question-detail.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+
 import {PlayerPageComponent} from './player-page/player-page.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -95,7 +97,8 @@ import { InterceptorService } from './service/interceptor.service';
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatDialogModule,
-    SearchModule
+    SearchModule,
+    MatPaginatorModule,
   ],
   providers: [
     {

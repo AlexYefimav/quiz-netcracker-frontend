@@ -5,6 +5,8 @@ export class Game{
   title: string;
   description: string;
   questions: Question[];
+  user: string;
+  photo: string;
   player: string;
 
   constructor() {

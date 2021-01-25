@@ -7,8 +7,9 @@ h1 {
   margin-top: 20px;
   color: oldlace;
 }
+
 .mat-card {
-  background: #e91e63;
+  background: #e91e63 url(src/assets/images/sky.jpg);
   color: oldlace;
   margin-left: auto;
   margin-right: auto;
@@ -24,10 +25,40 @@ h1 {
 }
 
 .mat-mini-fab {
-  margin-top: 20px;
+  margin-top: 0px;
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+/*.container {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  height: 720px;*/
+/*}*/
+
+/*.games {*/
+/*  flex: 1 1 auto;*/
+/*}*/
+
+/*.footer{*/
+/*  align-items: flex-end;*/
+/*}*/
+
+.footer {
+  position: fixed;
+  /*left: 50pc;*/
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.games{
+  margin-bottom: 100px;
+}
+
+.place{
+  height: 20px;
 }
 
 .app-widget-search-bar {

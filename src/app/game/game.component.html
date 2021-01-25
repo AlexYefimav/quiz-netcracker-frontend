@@ -47,6 +47,24 @@
 
 </form>
 
+<div>
+  <div class="footer">
+    <mat-paginator [length]="this.games?.length"
+                   [pageSize]="3"
+                   [pageSizeOptions]="[3,6]"
+                   (page)="OnPageChange($event)">
+
+    </mat-paginator>
+  </div>
+
+<!--<label for="file" class="file-label">
+    <input type="file" id="file" (change)="selectFile($event)" accept=".jpg, .jpeg, .png"
+           class="photo-input">
+  </label>-->
+
+  <div class="place">
+  </div>
+</div>
 
 
 
