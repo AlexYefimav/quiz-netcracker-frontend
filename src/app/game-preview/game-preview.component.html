@@ -21,9 +21,8 @@
       </mat-card-content>
 
     </mat-card>
-    <a href="/gameplay/{{game.id}}" (click)="setGame(game)" class="play">Играть</a>
-
-
+    <!--    <a href="/gameplay/{{game.id}}" (click)="setGame(game)" class="play">Играть</a>-->
+    <button mat-button (click)="openDialog(game)">Играть</button>
   </div>
 
 

@@ -42,7 +42,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {SearchModule} from "./search/search.module";
 import {WidgetSearchBarButtonComponent} from "./search/widget-search-bar-button/widget-search-bar-button.component";
 import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search-bar.component";
-import { GamePreviewComponent } from './game-preview/game-preview.component';
+import {DialogElementsExampleDialog, GamePreviewComponent} from './game-preview/game-preview.component';
 import { ErrorAuthenticationConnectionComponent } from './error-authentication-connection/error-authentication-connection.component';
 import * as Http from '@angular/common/http';
 import { InterceptorService } from './service/interceptor.service';
@@ -71,6 +71,7 @@ import { InterceptorService } from './service/interceptor.service';
     AddQuestionComponent,
     PlayerPageComponent,
     GamePreviewComponent,
+    DialogElementsExampleDialog,
     ErrorAuthenticationConnectionComponent
   ],
   imports: [
@@ -94,8 +95,7 @@ import { InterceptorService } from './service/interceptor.service';
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatDialogModule,
-    SearchModule,
-    // MatDialogModule,
+    SearchModule
   ],
   providers: [
     {

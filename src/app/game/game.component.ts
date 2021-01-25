@@ -16,27 +16,12 @@ import {GameRoomService} from "../service/game-room.service";
 export class GameComponent implements OnInit {
   public games: Game[];
   public game: Game;
-  public gameRoom: GameRoom;
 
-  player: Player;
-
-
-  constructor(private gameService: GameService,
-              public dialog: MatDialog,
-              private playerService: PlayerService,
-              private storageService: StorageService,
-              private gameRoomService: GameRoomService) {
+  constructor(private gameService: GameService) {
   }
 
   async ngOnInit() {
-    let playerId = this.storageService.currentUser.id;
-    this.player = await this.getPlayer(playerId);
     this.games = await this.getGameList();
-
-  }
-
-  getPlayer(playerId: string): Promise<Player> {
-    return this.playerService.getOnePlayer(playerId).toPromise();
   }
 
   private getGameList(): Promise<Game[]> {
@@ -46,30 +31,5 @@ export class GameComponent implements OnInit {
   async deleteGame(id: string) {
     this.game = await this.gameService.deleteGame(id).toPromise()
   }
-
-  async getGameRoom(game: Game) {
-    return  this.gameRoomService.findGameRoom(game.id, this.player.id).toPromise();
-  }
-
-  async openDialog(game: Game) {
-    this.game = game;
-    this.gameRoom = await this.getGameRoom(game);
-    this.dialog.open(DialogElementsExampleDialog, {
-      data: {name: this.player.name, gameId: game.id, gameRoom: this.gameRoom}
-    });
-
-  }
-}
-
-@Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-element/dialog-elements-example-dialog.html',
-})
-export class DialogElementsExampleDialog {
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { name, gameId, gameRoom }) {
-  }
-
-
 }
 
