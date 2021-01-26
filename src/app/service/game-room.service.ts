@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {GameRoom} from "../model/game-room";
+import {Player} from "../model/player";
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +24,13 @@ export class GameRoomService {
 
   getById(id: string): Observable<GameRoom> {
     return this.http.get<GameRoom>(this.url + id);
+  }
+
+  delete(id: string): Observable<GameRoom> {
+    return this.http.delete<GameRoom>(this.url + "delete/" + id);
+  }
+
+  deletePlayer(gameRoomId: string, playerId: number): Observable<GameRoom> {
+    return this.http.delete<GameRoom>(this.url + gameRoomId + "/" + playerId);
   }
 }
