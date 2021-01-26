@@ -57,7 +57,7 @@ export class SignInComponent implements OnInit {
         }
       );
       this.user.password = undefined;
-      this.userService.getUserByLogin(this.user.username).subscribe(
+      this.userService.getUserByLoginOrEmail(this.user.username).subscribe(
         user => {
           this.user = user;
           setTimeout(() => {
