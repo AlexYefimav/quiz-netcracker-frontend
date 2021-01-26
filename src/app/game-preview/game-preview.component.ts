@@ -8,6 +8,7 @@ import {StorageService} from "../service/storage/storage.service";
 import {GameRoom} from "../model/game-room";
 import {Player} from "../model/player";
 import {PlayerService} from "../service/player.service";
+import {WebSocketAPI} from "../webSocket/web-socket-api";
 
 @Component({
   selector: 'app-game-preview',
@@ -15,20 +16,15 @@ import {PlayerService} from "../service/player.service";
   styleUrls: ['./game-preview.component.css']
 })
 export class GamePreviewComponent implements OnInit {
-
-
+  webSocketAPI: WebSocketAPI;
   public game: Game;
   public id: string;
-
   public gameRoom: GameRoom;
-
   player: Player;
 
   constructor(private gameService: GameService, private route: ActivatedRoute,
               private gameRoomService: GameRoomService, private storageService: StorageService,
               private playerService: PlayerService, public dialog: MatDialog) {
-
-
   }
 
   async ngOnInit() {
@@ -50,17 +46,40 @@ export class GamePreviewComponent implements OnInit {
     this.game = game;
   }
 
-  async getGameRoom(game: Game) {
+  getGameRoom(game: Game) {
     return this.gameRoomService.findGameRoom(game.id, this.player.id).toPromise();
   }
 
   async openDialog(game: Game) {
     this.game = game;
     this.gameRoom = await this.getGameRoom(game);
-    this.dialog.open(DialogElementsExampleDialog, {
-      data: {name: this.player.name, gameId: game.id, gameRoom: this.gameRoom}
+    this.webSocketAPI = new WebSocketAPI(this, this.player, this.gameRoom.id, this.gameRoomService);
+    this.connect();
+    const dialog = this.dialog.open(DialogElementsExampleDialog, {
+      data: {name: this.player.name, gameId: game.id, gameRoom: this.gameRoom, player: this.player}
     });
+    dialog.afterClosed().subscribe(() => {
+      this.disconnect();
+    })
+  }
 
+  connect() {
+    this.webSocketAPI._connect();
+  }
+
+  async disconnect() {
+    this.gameRoom = await this.deletePlayer(this.gameRoom.id, this.player.id);
+    this.webSocketAPI.sendPlayerExited(this.gameRoom);
+    this.webSocketAPI._disconnect();
+  }
+
+  async handleMessage(message) {
+    this.gameRoom.players = message;
+    console.log(this.gameRoom.players);
+  }
+
+  private deletePlayer(gameId: string, playerId: number): Promise<GameRoom> {
+    return this.gameRoomService.deletePlayer(this.gameRoom.id, this.player.id).toPromise()
   }
 }
 

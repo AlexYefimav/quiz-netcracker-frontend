@@ -65,10 +65,7 @@ export class GameplayComponent implements OnInit {
     }
     this.isBlock = false;
 
-    this.webSocketAPI = new WebSocketAPI(new GameplayComponent(
-      this.questionService, this.answerService, this.statisticsService,
-      this.storageService, this.playerService, this.route, this.gameRoomService),
-      new StorageService(), this.player.id);
+    this.webSocketAPI = new WebSocketAPI(this, this.player, this.gameRoomId, this.gameRoomService);
     this.connect();
   }
 
@@ -142,7 +139,7 @@ export class GameplayComponent implements OnInit {
   }
 
   sendMessage(message) {
-    this.webSocketAPI._send(message);
+    this.webSocketAPI.sendGameMessage(message);
   }
 
   handleMessage(message) {
