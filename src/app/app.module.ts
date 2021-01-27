@@ -50,6 +50,7 @@ import * as Http from '@angular/common/http';
 import {InterceptorService} from './service/interceptor.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {UserGameComponent} from "./user-game/user-game.component";
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {MatSelectModule} from '@angular/material/select';
     GamePreviewComponent,
     DialogElementsExampleDialog,
     ErrorAuthenticationConnectionComponent,
-  ],
+    UserGameComponent,
+    ],
   imports: [
     MatTableModule,
     MatCheckboxModule,
