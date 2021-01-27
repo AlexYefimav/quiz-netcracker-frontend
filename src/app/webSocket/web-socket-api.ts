@@ -1,7 +1,7 @@
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import {StorageService} from "../service/storage/storage.service";
-import {GameplayComponent} from "../gameplay/gameplay.component";
+import {GameRoomService} from "../service/game-room.service";
+import {Player} from "../model/player";
 
 export class WebSocketAPI {
   webSocketEndPoint: string = 'http://localhost:8085/ws';
@@ -9,22 +9,22 @@ export class WebSocketAPI {
   topic: string;
   stompClient: any;
 
-  storageService: StorageService;
+  component: any;
 
-  component: GameplayComponent;
+  player: Player;
 
-  playerId: number;
+  gameRoomService: GameRoomService;
+  gameRoomId: string
 
-
-  constructor(component: GameplayComponent, storageService: StorageService, id: number) {
-    this.storageService = storageService;
+  constructor(component: any, player: Player, gameRoomId: string, gameRoomService: GameRoomService) {
     this.component = component;
-    this.playerId = id;
+    this.player = player;
+    this.gameRoomId = gameRoomId;
+    this.gameRoomService = gameRoomService;
   }
 
   _connect() {
-    this.topic = "/topic/game/" + this.playerId;
-    console.log("Initialize WebSocket Connection");
+    this.topic = "/topic/game/" + this.player.id;
     let ws = new SockJS(this.webSocketEndPoint);
     this.stompClient = Stomp.over(ws);
 
@@ -41,7 +41,6 @@ export class WebSocketAPI {
     if (this.stompClient !== null) {
       this.stompClient.disconnect();
     }
-    console.log("Disconnected");
   }
 
   // on error, schedule a reconnection attempt
@@ -52,25 +51,15 @@ export class WebSocketAPI {
     }, 5000);
   }
 
-  /**
-   * Send message to sever via web socket
-   * @param message
-   */
-  _send(message) {
-    console.log("calling logout api via web socket");
+  sendGameMessage(message) {
     this.stompClient.send("/app/gameplay", {}, JSON.stringify(message));
   }
 
-  onMessageReceived(message) {
-    // console.log("Message Recieved from Server :: " + message);
-    let mess = JSON.parse(message.body);
-    this.component.handleMessage(JSON.parse(message.body));
+  sendPlayerExited(message) {
+    this.stompClient.send("/app/game-room/close", {}, JSON.stringify(message));
+  }
 
-    // this.stompClient.onmessage = function (mess){
-    //   var messageElem = document.createElement('div');
-    //   messageElem.appendChild(document.createTextNode("123"));
-    //   document.getElementById('subscribe').appendChild(messageElem);
-    // }
-    //console.log(message.body)
+  onMessageReceived(message) {
+    this.component.handleMessage(JSON.parse(message.body));
   }
 }

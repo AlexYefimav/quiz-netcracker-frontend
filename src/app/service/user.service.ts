@@ -42,21 +42,27 @@ export class UserService {
     return this.http.get<User>(`${this.url}users/${username}`);
   }
 
+  getUserByLoginOrEmail(username: string): Observable<User> {
+    return this.http.get<User>(`${this.url}users/${username}`);
+  }
+
   createUser(user: User): Observable<User> {
     return this.http.post<User>(this.url + "users/save", user)
   }
 
   updateUser(user: User): Observable<User> {
-    console.log(user);
     return this.http.put<User>(this.url + "users/update/" + user.id, user);
   }
 
   deleteUser(userId: string): Observable<User> {
-    console.log(userId);
     return this.http.delete<User>(this.url + "users/delete/" + userId);
   }
 
-  public signIn(account: User): Observable<HttpResponse<User>> {
+  blockUser(userId: string): Observable<User> {
+    return this.http.post<User>(this.url + "users/block/" + userId, userId);
+  }
+
+  signIn(account: User): Observable<HttpResponse<User>> {
     account.username=account.login;
    return this.http.post<User>(this.url +"login", account, {observe: 'response', responseType: 'json'});
   }

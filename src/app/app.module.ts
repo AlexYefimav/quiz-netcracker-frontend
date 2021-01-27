@@ -47,7 +47,9 @@ import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search
 import {DialogElementsExampleDialog, GamePreviewComponent} from './game-preview/game-preview.component';
 import { ErrorAuthenticationConnectionComponent } from './error-authentication-connection/error-authentication-connection.component';
 import * as Http from '@angular/common/http';
-import { InterceptorService } from './service/interceptor.service';
+import {InterceptorService} from './service/interceptor.service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,7 @@ import { InterceptorService } from './service/interceptor.service';
     PlayerPageComponent,
     GamePreviewComponent,
     DialogElementsExampleDialog,
-    ErrorAuthenticationConnectionComponent
+    ErrorAuthenticationConnectionComponent,
   ],
   imports: [
     MatTableModule,
@@ -99,6 +101,8 @@ import { InterceptorService } from './service/interceptor.service';
     MatDialogModule,
     SearchModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     {

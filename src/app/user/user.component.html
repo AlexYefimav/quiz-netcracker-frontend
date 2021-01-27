@@ -15,6 +15,14 @@
             <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
             <span>Edit</span>
           </a>
+          <a mat-menu-item href="users" (click)="blockUser(user.id)" *ngIf="user.active==true">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">block</mat-icon>
+            <span>Block</span>
+          </a>
+          <a mat-menu-item href="users" (click)="blockUser(user.id)" *ngIf="user.active==false">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">block</mat-icon>
+            <span>Unlock</span>
+          </a>
           <a mat-menu-item href="users" (click)="deleteUser(user.id)">
             <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
             <span>Delete</span>
@@ -26,7 +34,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <a mat-mini-fab color="primary" href="users/create">
+   <a mat-mini-fab color="primary" href="users/create">
     <mat-icon>add</mat-icon>
   </a>
 </form>

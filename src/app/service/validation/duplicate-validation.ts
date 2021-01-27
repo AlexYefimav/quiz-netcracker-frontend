@@ -2,6 +2,7 @@ import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 import {Injectable} from '@angular/core';
 import {Answer} from '../../model/answer';
 import {Question} from '../../model/question';
+import {element} from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -30,40 +31,21 @@ export class DuplicateValidator {
   validate(control: AbstractControl, array: any[], comparingValue: string, propertyName: string, entity?: any):
     ValidationErrors | null {
     if (array) {
-      // if (entity && entity.id == null) {
-      //   return this.validateWithEntity(control, array, comparingValue, propertyName, entity);
-      // }
-      if (entity) {
-        return this.validateWithEntity(control, array, comparingValue, propertyName, entity);
-      }
-      else {
-        return this.validateWithoutEntity(control, array, comparingValue, propertyName);
-      }
+      array.forEach(arrayElement => {
+        if (arrayElement[propertyName] === comparingValue) {
+          if (entity) {
+            if (entity.id !== arrayElement.id) {
+              control.get(propertyName)?.setErrors({duplicate: true});
+              return {duplicate: true};
+            }
+          }
+          else {
+            control.get(propertyName)?.setErrors({duplicate: true});
+            return { duplicate: true };
+          }
+        }
+      });
     }
-  }
-
-  validateWithEntity(control: AbstractControl, array: any[], comparingValue: string, propertyName: string, entity?: any): ValidationErrors | null {
-    array.forEach(element => {
-      // if ((element[propertyName] === comparingValue && entity.id !== element.id) ||
-      //     (element[propertyName] === comparingValue && !this.areEntitiesEqual(entity, element))) {
-      //   control.get(propertyName)?.setErrors({duplicate: true});
-      //   return { duplicate: true };
-      // }
-      if (element[propertyName] === comparingValue && entity.id !== element.id) {
-        control.get(propertyName)?.setErrors({duplicate: true});
-        return { duplicate: true };
-      }
-    });
-    return null;
-  }
-
-  validateWithoutEntity(control: AbstractControl, array: any[], comparingValue: string, propertyName: string): ValidationErrors | null {
-    array.forEach(element => {
-      if (element[propertyName] === comparingValue) {
-        control.get(propertyName)?.setErrors({duplicate: true});
-        return { duplicate: true };
-      }
-    });
     return null;
   }
 

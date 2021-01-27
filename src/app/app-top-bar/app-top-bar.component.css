@@ -10,3 +10,16 @@
 {
   display: inline-flex;
 }
+
+.username div{
+  size: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  max-width: 1080px;
+  text-align: center;
+}
+p {
+  font-family: 'Times New Roman', Times, serif; /* Шрифт с засечками */
+  font-style: italic; /* Курсивное начертание */
+}

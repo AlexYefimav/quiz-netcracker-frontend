@@ -9,10 +9,12 @@
 <!--  <a mat-button href="" disabled="true">About</a>-->
 <!--  <a mat-button>My Games</a>-->
 <!--</mat-toolbar>-->
+
 <mat-toolbar color="primary" role="heading">
-  <a mat-button href="">Home</a>
+  <div *ngIf="isAccount"> <p>{{authorizedAccount.login}}</p></div>
   <span class="nav-fill-remaining-space"></span>
   <div class="navigation">
+    <a mat-button href="">Home</a>
     <button  mat-button (click)="redirect('games')">Викторины</button>
   </div>
   <div *ngIf="!isAccount">

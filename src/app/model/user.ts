@@ -6,6 +6,8 @@ export class User{
   mail: string;
   role: string;
   player: string;
+  isActive: boolean;
+  active: boolean;
   constructor() {
   }
 
