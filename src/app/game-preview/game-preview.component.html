@@ -1,36 +1,37 @@
-<div>
-  <h1>Game Preview</h1>
-</div>
-
-<div>
-  <h1> Here must be Image of the game</h1>
-</div>
-
-
-<form>
-  <div>
-    <mat-card>
-      <mat-card-title>
-
-
+<div class="container">
+<mat-card>
+  <h1>
+    <mat-card-title class="title">
+      <div>
         {{game.title}}
+      </div>
+    </mat-card-title>
 
-      </mat-card-title>
-      <mat-card-content>
+    <mat-card-subtitle class="image">
+      <img class="displayed" src="url(src/assets/images/meme.png)"
+      alt="Here must be the photo">
+    </mat-card-subtitle>
+
+
+      <mat-card-subtitle class="descr">
+        <div>
+          <h1>
         {{game.description}}
-      </mat-card-content>
+          </h1>
+        </div>
+      </mat-card-subtitle>
 
-<!--      <mat-card class="container">-->
-<!--        <div class="title">{{game.title}}</div>-->
-<!--        <div class="body">{{game.description}}</div>-->
-    </mat-card>
-    <!--    <a href="/gameplay/{{game.id}}" (click)="setGame(game)" class="play">Играть</a>-->
-    <button mat-button (click)="openDialog(game)">Играть</button>
-  </div>
+  <mat-card-subtitle class="playbutton">
+    <form>
+      <div>
+        <h1>
+      <button mat-button (click)="openDialog(game)">Играть</button>
+        </h1>
+      </div>
+    </form>
+  </mat-card-subtitle>
+  </h1>
+</mat-card>
 
 
-</form>
-
-
-
-
+</div>

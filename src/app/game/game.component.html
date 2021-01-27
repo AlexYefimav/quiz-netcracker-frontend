@@ -1,14 +1,15 @@
-<div class="container">
-  <h1>Available Games to play</h1>
+<div >
 
   <app-widget-search-bar-button></app-widget-search-bar-button>
+  <h1>Available Games to play</h1>
   </div>
 
-<form>
-  <div *ngFor="let game of pageSlice">
+<div class="container">
+  <div  *ngFor="let game of games">
+    <div >
     <mat-card>
       <mat-card-title>
-
+        {{game.title}}
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -36,17 +37,15 @@
       </mat-card-subtitle>
 
 
-
-
     </mat-card>
+    </div>
   </div>
 
-  <a mat-mini-fab color="primary" href="game/create">
-    <mat-icon>add</mat-icon>
-  </a>
+</div>
 
-
-</form>
+<a mat-mini-fab color="primary" href="game/create">
+  <mat-icon>add</mat-icon>
+</a>
 
 <div>
   <div class="footer">

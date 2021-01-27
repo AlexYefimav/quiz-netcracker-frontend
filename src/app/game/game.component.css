@@ -2,26 +2,49 @@
   margin-left: 16px;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 1pc;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+}
+
 h1 {
   text-align: center;
   margin-top: 20px;
   color: oldlace;
 }
 
-/*.mat-card {*/
-/*  background: #e91e63 url(src/assets/images/sky.jpg);*/
-/*  color: oldlace;*/
-/*  margin-left: auto;*/
-/*  margin-right: auto;*/
-/*  margin-top: 15px;*/
-/*  max-width: 750px;*/
-/*  text-align: center;*/
-/*}*/
+.mat-card {
+  /*background: #e91e63 url(src/assets/images/meme.png);*/
+  display: flex;
+  background: #e91e63;
+  color: oldlace;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  /*margin-top: 15px;*/
+  /*max-width: 500px;*/
+  /*max-height: 300px;*/
+  text-align: center;
+  margin: 5pc;
+  padding: 5pc;
+
+}
 
 .mat-icon-button {
   color: #303030;
   display: block;
   margin-left: auto;
+  margin-right: 0;
+  justify-content: right;
+
 }
 
 .mat-mini-fab {
@@ -53,8 +76,18 @@ h1 {
   width: 100%;
 }
 
-.games{
-  margin-bottom: 100px;
+.gamess{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  /*flex-wrap: wrap;*/
+  /*margin-right: 50px ;*/
+  /*margin-left: 50px;*/
+  /*width: 30%;*/
+  /*height: 200px;*/
+  /*flex-basis: 30%;*/
 }
 
 .place{
@@ -66,3 +99,8 @@ h1 {
   padding-bottom: 50px;
   margin:auto;
 }
+
+.mat-card-subtitle{
+  color: white;
+}
+

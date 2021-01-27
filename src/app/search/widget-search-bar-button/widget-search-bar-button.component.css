@@ -6,7 +6,7 @@
 .form-control {
   max-width: 500px;
   margin:auto;
-
+  color: white;
 }
 
 .container {
@@ -88,4 +88,13 @@ mat-card-content {
 
 .mat-form-field .example-form {
   display: flex;
+  color: white;
 }
+
+.mat-expansion-panel-header-title{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+
