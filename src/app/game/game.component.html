@@ -5,7 +5,7 @@
   </div>
 
 <form>
-  <div *ngFor="let game of games">
+  <div *ngFor="let game of pageSlice">
     <mat-card>
       <mat-card-title>
 
@@ -13,6 +13,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         {{game.title}}
+        <a><img src="{{game.photo}}" alt="Панда"></a>
         <mat-menu #menu="matMenu">
           <a mat-menu-item href="game/update/{{game.id}}">
             <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
