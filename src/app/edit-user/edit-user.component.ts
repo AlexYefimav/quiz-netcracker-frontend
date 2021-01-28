@@ -14,7 +14,7 @@ import {AbstractControl} from "@angular/forms";
 export class EditUserComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   user: User;
-  roles: string[] = ["USER", "ADMIN", "hjjk"];
+  roles: string[] = ["USER", "ADMIN"];
   isUpdateUser:boolean;
   disable: string;
   authorizedAccount: User;

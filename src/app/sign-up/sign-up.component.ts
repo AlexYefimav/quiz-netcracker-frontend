@@ -44,6 +44,7 @@ export class SignUpComponent implements OnInit {
 
   errorMatcher: ErrorStateMatcher;
   isPasswordsEqual: boolean;
+  isUserFromDB: boolean;
 
   @Input() error: string | null;
 
@@ -73,11 +74,28 @@ export class SignUpComponent implements OnInit {
       this.user.password = this.password.value;
       this.sendData();
     }
+    return "Успешно";
   }
 
   sendData() {
-    this.signinService.register(this.user).subscribe(() =>
-      this.redirect('/games'));
+    this.signinService.register(this.user).subscribe(() => {
+             //if (this.user.id == undefined) {
+          //this.redirect('/403')
+        //} else {
+          this.redirect('/games')
+      //  }
+      }
+    );
+  }
+
+  checkUsersFromDB() {
+    this.isUserFromDB = this.user.id == undefined;
+    if (this.isUserFromDB) {
+      this.error = 'Пользователь с таким именем/почтой уже существуем';
+    } else {
+      this.error = null;
+    }
+    return  !this.isUserFromDB;
   }
 
   checkPasswords() {

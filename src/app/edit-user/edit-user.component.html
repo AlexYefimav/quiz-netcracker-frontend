@@ -49,15 +49,11 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field class="example-form" appearance="fill">
-        <label>
-          <input matInput [(ngModel)]="user.role">
-        </label>
-
-<!--        <mat-select >-->
-<!--                    <mat-option *ngFor="let role of roles">-->
-<!--                      {{role}}-->
-<!--                    </mat-option>-->
-<!--                  </mat-select>-->
+        <mat-select [(ngModel)]="user.role">
+                    <mat-option *ngFor="let role of roles" [value]="role"   >
+                      {{role}}
+                    </mat-option>
+                  </mat-select>
       </mat-form-field>
     </mat-expansion-panel>
       </mat-accordion>

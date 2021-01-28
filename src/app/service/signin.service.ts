@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {User} from '../model/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {catchError, delay} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +16,18 @@ export class SigninService {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   register(user: User): Observable<User> {
     return this.http.post<User>(this.url +"users/register", user)
+      // .pipe(
+      //   delay(null),
+      //   catchError(error => {
+      //     this.router.navigate(['403']);
+      //     return throwError(error)
+      //   })
+      // );
   }
+
 }

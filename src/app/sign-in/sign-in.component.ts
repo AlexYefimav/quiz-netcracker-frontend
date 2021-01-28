@@ -17,6 +17,7 @@ export class SignInComponent implements OnInit {
   player: Player = new Player();
   user: User = new User();
   form: FormGroup;
+  showErrorMessage: boolean ;
 
   @Input() error: string | null;
 
@@ -28,29 +29,42 @@ export class SignInComponent implements OnInit {
               public dialogRef: MatDialogRef<SignInComponent>,
               @Inject(MAT_DIALOG_DATA) public dialogAccount: User,
               private formBuilder: FormBuilder) {
+
     this.form = formBuilder.group({
       login: new FormControl('', [Validators.required, Validators.minLength(3),
         loginValidator(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i, /[a-zA-Z0-9]+/)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
+
   }
 
   ngOnInit(): void {
-  }
-
+    this.showErrorMessage=true;
+}
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+
+
   submit() {
     if (this.form.valid) {
+
       this.login.value.toString().indexOf('@') === -1 ? this.player.name = this.login.value : this.player.email = this.login.value;
       this.user.login = this.login.value;
       this.user.password = this.password.value;
       this.user.username = this.login.value;
+
       this.userService.signIn(this.user).subscribe(
         response => {
-          this.storageService.currentToken = response.headers.get('Authorization');
+          if (this.user.active==true) {
+            this.showErrorMessage=true;
+            this.storageService.currentToken = response.headers.get('Authorization');
+          }
+    else{window.alert("Ваш профиль заблокирован");
+
+            this.showErrorMessage=false;
+          }
         },
         error => {
           console.log(error);
@@ -60,21 +74,24 @@ export class SignInComponent implements OnInit {
       this.userService.getUserByLoginOrEmail(this.user.username).subscribe(
         user => {
           this.user = user;
-          setTimeout(() => {
-            if (this.storageService.currentToken) {
-              this.storageService.currentUser = this.user;
-            }
-          }, 2000);
-
-          this.dialogAccount = this.user;
-          this.router.navigate(['/games/']);
+          if(this.user.active) {
+            this.showErrorMessage=true;
+            setTimeout(() => {
+              if (this.storageService.currentToken) {
+                this.storageService.currentUser = this.user;
+              }
+            }, 2000);     this.dialogAccount = this.user;     this.router.navigate(['/games/']);
+          }
+          else {
+            this.showErrorMessage=false;
+          }
         }
       );
     }
   }
 
   redirect(url: string) {
-    this.onNoClick();
+  this.onNoClick();
     this.router.navigate([url]);
   }
 
