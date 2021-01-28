@@ -58,6 +58,10 @@ export class GameService {
   public uploadFile(formData: FormData): Observable<Photo1> {
     return this.http.post<Photo1>(this.url + 'uploadFile', formData);
   }
+
+  updateFile(id: string, fileUrl: string): Observable<Game>{
+    return this.http.post<Game>(this.url + 'updateFile/' + id, fileUrl);
+  }
 }
 
 

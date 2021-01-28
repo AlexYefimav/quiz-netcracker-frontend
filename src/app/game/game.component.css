@@ -8,15 +8,17 @@ h1 {
   color: oldlace;
 }
 
-/*.mat-card {*/
-/*  background: #e91e63 url(src/assets/images/sky.jpg);*/
-/*  color: oldlace;*/
-/*  margin-left: auto;*/
-/*  margin-right: auto;*/
-/*  margin-top: 15px;*/
-/*  max-width: 750px;*/
-/*  text-align: center;*/
-/*}*/
+.mat-card {
+  background: #add90c;
+  color: oldlace;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  max-width: 750px;
+  text-align: center;
+  width: 350px;
+  height: 400px;
+}
 
 .mat-icon-button {
   color: #303030;
@@ -25,29 +27,14 @@ h1 {
 }
 
 .mat-mini-fab {
-  margin-top: 0px;
+  margin-top: 0;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-/*.container {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  height: 720px;*/
-/*}*/
-
-/*.games {*/
-/*  flex: 1 1 auto;*/
-/*}*/
-
-/*.footer{*/
-/*  align-items: flex-end;*/
-/*}*/
-
 .footer {
   position: fixed;
-  /*left: 50pc;*/
   right: 0;
   bottom: 0;
   width: 100%;
@@ -64,5 +51,16 @@ h1 {
 .app-widget-search-bar {
   max-width: 500px;
   padding-bottom: 50px;
-  margin:auto;
+  margin: auto;
+}
+
+.inner-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-right: 50px;
+}
+
+.outer-container {
+  margin-bottom: 100px;
 }

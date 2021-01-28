@@ -1,0 +1,101 @@
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 1pc;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+.header{
+  color: white;
+}
+
+.card {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
+
+}
+
+.title {
+  background-color: #c2185b;
+}
+
+h2{
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+.body {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+}
+
+
+.displayed{
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.action {
+  align-self: flex-end;
+  margin-right: 20px;
+}
+
+.mat-flat-button{
+  margin-bottom: 20px;
+}
+
+.legs{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.index{
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.players{
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
+  margin: 20px 0 0;
+  width: 600px;
+}
+
+.name-player{
+  text-align: center;
+  background-color: #3c629b;
+}
+
+h4{
+  height: 40px;
+}
+
+.mat-icon-button{
+  position: absolute;
+  right: 0;
+  top: 0;
+}

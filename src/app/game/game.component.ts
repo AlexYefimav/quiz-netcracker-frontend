@@ -71,6 +71,8 @@ export class GameComponent implements OnInit {
     formData.append('file', this.picture);
     this.gameService.uploadFile(formData).subscribe(result => this.game.photo = result.photo);
   }
+
+  
 }
 
 

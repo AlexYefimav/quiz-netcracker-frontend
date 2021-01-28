@@ -8,7 +8,7 @@ import {UserService} from '../service/user.service';
   styleUrls: ['./user-game.component.css']
 })
 export class UserGameComponent implements OnInit {
-  public users: User[];
+  public users: () => IterableIterator<User>;
 
   constructor(private userService: UserService) { }
 

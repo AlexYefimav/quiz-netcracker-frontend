@@ -1,21 +1,42 @@
 <mat-card class="search">
   <mat-card-title>Search</mat-card-title>
-
+  <mat-card-subtitle>
+    <mat-expansion-panel>
+      <mat-panel-title>
+        <mat-checkbox class="example-margin">
+          Name
+        </mat-checkbox>
+        <mat-checkbox>
+          Views
+        </mat-checkbox>
+        <mat-checkbox>
+         Rating
+        </mat-checkbox>
+        <button class="btn btn-outline-success" type="submit">
+          Apply filters
+        </button>
+      </mat-panel-title>
+    <mat-expansion-panel-header>
+      Filters
+    </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-card-subtitle>
 
   <mat-card-content>
     <div class="container">
       <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit(f)">
 
         <mat-form-field class="example-form">
-          <span><input matInput class="form-control" type="search" name="search" ngModel placeholder="Search by name"
+          <span><input matInput class="form-control" type="search" name="search"
+                       ngModel placeholder="Search by name"
                  aria-label="Search"></span>
           <span class="btnSearch">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+
           </span>
         </mat-form-field>
-
+        <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
-
   </mat-card-content>
+
 </mat-card>

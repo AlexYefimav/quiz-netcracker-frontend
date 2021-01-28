@@ -1,51 +1,46 @@
 <div class="container">
   <h1>Available Games to play</h1>
-
   <app-widget-search-bar-button></app-widget-search-bar-button>
-  </div>
+</div>
 
-<form>
-  <div *ngFor="let game of pageSlice">
-    <mat-card>
-      <mat-card-title>
+<div class="outer-container">
+  <form>
+    <div class="inner-container">
+      <div *ngFor="let game of pageSlice" style="margin-left: 100px;">
+        <mat-card>
+          <mat-card-title>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            {{game.title}}
+            <mat-menu #menu="matMenu">
+              <a mat-menu-item href="game/update/{{game.id}}">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+                <span>Edit</span>
+              </a>
+              <a mat-menu-item href="games" (click)="deleteGame(game.id)">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+                <span>Delete</span>
+              </a>
+            </mat-menu>
+          </mat-card-title>
+          <mat-card-subtitle>
+            <h1>{{game.description}}</h1>
+          </mat-card-subtitle>
+          <a><img src="{{game.photo}}" width="200" height="200" alt="Photo from Amazon S3"></a>
+          <mat-card-subtitle style="margin-top: 20px;">
+            <a mat-raised-button href="/game/{{game.id}}">Просмотреть</a>
+          </mat-card-subtitle>
+        </mat-card>
+      </div>
+    </div>
+    <a mat-mini-fab color="primary" href="game/create" style="margin-top: 20px;">
+      <mat-icon>add</mat-icon>
+    </a>
+  </form>
+</div>
 
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        {{game.title}}
-        <mat-menu #menu="matMenu">
-          <a mat-menu-item href="game/update/{{game.id}}">
-            <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
-            <span>Edit</span>
-          </a>
-          <a mat-menu-item href="games" (click)="deleteGame(game.id)">
-            <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
-            <span>Delete</span>
-          </a>
-        </mat-menu>
-      </mat-card-title>
-       <mat-card-subtitle>
-
-         <h1>  {{game.description}} </h1>
-
-       </mat-card-subtitle>
-
-      <mat-card-subtitle>
-        <h1> <a href="/game/{{game.id}}">Просмотреть</a> </h1>
-      </mat-card-subtitle>
-
-
-
-
-    </mat-card>
-  </div>
-
-  <a mat-mini-fab color="primary" href="game/create">
-    <mat-icon>add</mat-icon>
-  </a>
-
-
-</form>
+<div class="place"></div>
 
 <div>
   <div class="footer">
@@ -53,16 +48,7 @@
                    [pageSize]="3"
                    [pageSizeOptions]="[3,6]"
                    (page)="OnPageChange($event)">
-
     </mat-paginator>
-  </div>
-
-<!--<label for="file" class="file-label">
-    <input type="file" id="file" (change)="selectFile($event)" accept=".jpg, .jpeg, .png"
-           class="photo-input">
-  </label>-->
-
-  <div class="place">
   </div>
 </div>
 

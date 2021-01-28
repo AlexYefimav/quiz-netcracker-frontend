@@ -8,7 +8,6 @@ export class Question {
   level: string;
   answersSet: Answer[];
   game: string;
-  index: number;
 
   constructor() {
   }

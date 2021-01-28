@@ -8,18 +8,29 @@ h1 {
   color: oldlace;
 }
 .mat-card {
+  /*background: #e91e63 url(src/assets/images/meme.png);*/
+  display: flex;
   background: #e91e63;
   color: oldlace;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 15px;
-  max-width: 750px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  /*margin-top: 15px;*/
+  /*max-width: 500px;*/
+  /*max-height: 300px;*/
   text-align: center;
+  margin: 5pc;
+  padding: 5pc;
+
 }
 
 
 .mat-radio-button {
-  color: blanchedalmond;
+  color: #303030;
+  display: block;
+  margin-left: auto;
 }
 
 .mat-icon-button {
@@ -29,7 +40,7 @@ h1 {
 }
 
 .mat-mini-fab {
-  margin-top: 20px;
+  margin-top: 0px;
   display: block;
   margin-left: auto;
   margin-right: auto;

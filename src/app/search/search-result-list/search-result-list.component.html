@@ -1,12 +1,27 @@
 <ng-template [ngIf]="searchService.isOptionsEmpty$ | async" [ngIfElse]="show">
 	<p>
-		No Search List Available
+    <mat-card>
+      <mat-card-title>
+      No games found
+      </mat-card-title>
+    </mat-card>
+    <mat-card>
+    <mat-card-title>
+      <h1> <a href="games"> Вернуться</a></h1>
+    </mat-card-title>
+    </mat-card>
 	</p>
 </ng-template>
 
 <ng-template #show>
+  <div class="container">
 <div class="mt-4 mb-4" *ngIf="searchService.options$ | async as selectedOptions">
 <form>
+  <mat-card>
+    <mat-card-title>
+      <h1> <a href="games"> Вернуться</a></h1>
+    </mat-card-title>
+  </mat-card>
   <div *ngFor="let item of selectedOptions">
     <mat-card>
       <mat-card-title>
@@ -16,7 +31,7 @@
         </button>
         {{item.title}}
         <mat-menu #menu="matMenu">
-          <a mat-menu-item href="game/updateGame/{{item.id}}">
+          <a mat-menu-item href="game/update/{{item.id}}">
             <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
             <span>Edit</span>
           </a>
@@ -26,17 +41,15 @@
           </a>
         </mat-menu>
       </mat-card-title>
-      <mat-card-content>
+      <mat-card-subtitle>
         {{item.description}}
-      </mat-card-content>
-
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        <h1> <a href="/game/{{item.id}}">Просмотреть</a> </h1>
+      </mat-card-subtitle>
     </mat-card>
   </div>
-  <mat-card>
-    <mat-card-title>
-      <h1> <a href="games"> Вернуться</a></h1>
-    </mat-card-title>
-  </mat-card>
 </form>
 </div>
+  </div>
 </ng-template>

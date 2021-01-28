@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="header">
+    <h1>
+      Вопрос {{questionNumber + 1}} из {{index.length}}
+    </h1>
+  </div>
+  <div class="body">
+    <div>
+      <div *ngIf="questionNumber!=0 && !isBlockAnswers; else blockBack">
+        <h2>
+          <button mat-stroked-button (click)="setBackQuestion()">Предыдущий<br/>вопрос</button>
+        </h2>
+      </div>
+      <ng-template #blockBack>
+        <h2>
+          <button mat-stroked-button disabled>Предыдущий<br/>вопрос</button>
+        </h2>
+      </ng-template>
+    </div>
+    <mat-card class="card">
+      <div class="title">
+        <h2>{{question.title}}</h2>
+      </div>
+      <div class="image">
+        <img class="displayed" src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+             alt="Photo of a Shiba Inu">
+      </div>
+      <div>
+        <div class="answers">
+          <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [(ngModel)]="answer">
+            <mat-radio-button class="example-radio-button" disabled="{{isBlockAnswers}}"
+                              *ngFor="let answer of question.answersSet" [value]="answer">
+              {{answer.title}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div class="action">
+        <div *ngIf="answer; else blockAnswer" class="myButtons">
+          <button mat-flat-button color="warn" (click)="addAnswer()"
+                  *ngIf="!isBlockAnswers; else answered">Ответить
+          </button>
+        </div>
+        <ng-template #blockAnswer>
+          <button mat-flat-button class="myButtons" color="warn" disabled>Ответить</button>
+        </ng-template>
+        <ng-template #answered>
+          <div *ngIf="answeredQuestion == index.length;else next">
+            <a mat-flat-button class="statistics" color="accent" href="statistics/{{gameId}}">Статистика</a>
+          </div>
+          <ng-template #next class="myButtons">
+            <button mat-flat-button color="primary" (click)="setNextQuestion(true)">Далее</button>
+          </ng-template>
+        </ng-template>
+      </div>
+    </mat-card>
+    <div>
+      <div *ngIf="questionNumber!=quantityQuestion-1 && !isBlockAnswers; else blockNext">
+        <h2>
+          <button mat-stroked-button (click)="setNextQuestion(false)">Следующий<br/>вопрос</button>
+        </h2>
+      </div>
+      <ng-template #blockNext>
+        <h2>
+          <button mat-stroked-button disabled>Следующий<br/>вопрос</button>
+        </h2>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<mat-progress-bar mode="determinate" value="{{progress}}" color="warn"></mat-progress-bar>

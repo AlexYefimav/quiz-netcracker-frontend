@@ -45,4 +45,8 @@ export class SearchService {
   deleteGame(id: string): Observable<Game> {
     return this.http.delete<Game>(this.SERVER_URL + 'delete/' + id);
   }
+
+  updateGame(game: Game): Observable<Game> {
+    return this.http.put<Game>(this.SERVER_URL + 'update/' + game.id, game);
+  }
 }

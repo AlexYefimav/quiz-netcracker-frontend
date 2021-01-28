@@ -16,18 +16,19 @@ export class AnswerService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getAnswers(): Observable<Answer[]> {
     return this.http.get<Answer[]>(this.answerUrl + '/all');
   }
 
-  getAnswerAndSaveStatistics(answerId: string, playerId: string): Observable<Answer> {
-    const resultUrl = `${this.answerUrl}/${answerId}/${playerId}`;
+  getAnswerAndSaveStatistics(answerId: string, playerId: string, gameRoomId: string, numberAnswer: number): Observable<Answer> {
+    const resultUrl = `${this.answerUrl}/${answerId}/${playerId}/${gameRoomId}/${numberAnswer}`;
     return this.http.get<Answer>(resultUrl);
   }
 
-  getAnswer(id: string): Observable<Answer>{
+  getAnswer(id: string): Observable<Answer> {
     return this.http.get<Answer>(this.answerUrl + "/" + id);
   }
 

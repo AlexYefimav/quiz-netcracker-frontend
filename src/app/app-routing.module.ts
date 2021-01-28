@@ -7,11 +7,12 @@ import {AddGameComponent} from "./add-game/add-game.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
 import {SignUpComponent} from "./sign-up/sign-up.component";
-import {GameplayComponent} from "./gameplay/gameplay.component";
+import {GameplayComponent} from "./single-player-game/gameplay.component";
 import {StatisticsComponent} from "./statistics/statistics.component";
 import {PlayerPageComponent} from "./player-page/player-page.component";
 import {GamePreviewComponent} from "./game-preview/game-preview.component";
 import {ErrorAuthenticationConnectionComponent} from "./error-authentication-connection/error-authentication-connection.component";
+import {MultiplayerComponent} from "./multiplayer/multiplayer.component";
 
 const routes: Routes = [
 
@@ -25,7 +26,7 @@ const routes: Routes = [
   {path: 'auth', component: SignInComponent},
   {path: 'login', component: SignInComponent},
   {path: 'sign_up', component: SignUpComponent},
-  {path: 'gameplay/:gameId/:gameRoomId', component: GameplayComponent},
+  {path: 'gameplay/:gameId/:gameRoomId', component: MultiplayerComponent},
   {path: 'statistics/:id', component: StatisticsComponent},
   {path: 'user/:id', component: PlayerPageComponent},
   {path: 'game/:id', component: GamePreviewComponent},
