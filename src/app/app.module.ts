@@ -31,10 +31,10 @@ import {LevelComponent} from './level/level.component';
 import {SignInComponent} from "./sign-in/sign-in.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {SignUpComponent} from "./sign-up/sign-up.component";
-import { GameplayComponent } from './gameplay/gameplay.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { AddQuestionComponent } from './add-question/add-question.component';
-import { QuestionDetailComponent } from './question-detail/question-detail.component';
+import {GameplayComponent} from './single-player-game/gameplay.component';
+import {StatisticsComponent} from './statistics/statistics.component';
+import {AddQuestionComponent} from './add-question/add-question.component';
+import {QuestionDetailComponent} from './question-detail/question-detail.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 
 import {PlayerPageComponent} from './player-page/player-page.component';
@@ -45,12 +45,13 @@ import {SearchModule} from "./search/search.module";
 import {WidgetSearchBarButtonComponent} from "./search/widget-search-bar-button/widget-search-bar-button.component";
 import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search-bar.component";
 import {DialogElementsExampleDialog, GamePreviewComponent} from './game-preview/game-preview.component';
-import { ErrorAuthenticationConnectionComponent } from './error-authentication-connection/error-authentication-connection.component';
-import * as Http from '@angular/common/http';
+import {ErrorAuthenticationConnectionComponent} from './error-authentication-connection/error-authentication-connection.component';
 import {InterceptorService} from './service/interceptor.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MultiplayerComponent} from './multiplayer/multiplayer.component';
 import {UserGameComponent} from "./user-game/user-game.component";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -78,8 +79,11 @@ import {UserGameComponent} from "./user-game/user-game.component";
     GamePreviewComponent,
     DialogElementsExampleDialog,
     ErrorAuthenticationConnectionComponent,
+    MultiplayerComponent,
     UserGameComponent,
-    ],
+    ErrorAuthenticationConnectionComponent,
+    UserGameComponent,
+  ],
   imports: [
     MatTableModule,
     MatCheckboxModule,
@@ -104,7 +108,8 @@ import {UserGameComponent} from "./user-game/user-game.component";
     SearchModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
   providers: [
     {
@@ -116,4 +121,5 @@ import {UserGameComponent} from "./user-game/user-game.component";
   bootstrap: [AppComponent],
   exports: [WidgetSearchBarButtonComponent, WidgetSearchBarComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

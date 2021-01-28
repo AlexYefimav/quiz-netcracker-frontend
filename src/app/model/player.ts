@@ -1,8 +1,7 @@
-
 import { User } from './user';
 
 export class Player {
-  id: number;
+  id: string;
   name: string;
   email: string;
   user: User;

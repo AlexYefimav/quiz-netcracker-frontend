@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="header">
+    <h1>
+      Вопрос {{questionNumber + 1}} из {{quantityQuestion}}
+    </h1>
+  </div>
+  <mat-card class="card">
+    <div class="title">
+      <h2>{{question.title}}</h2>
+    </div>
+    <div class="image">
+      <img class="displayed" src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+           alt="Photo of a Shiba Inu">
+    </div>
+    <div class="body">
+      <div class="answers">
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          [(ngModel)]="answer">
+          <mat-radio-button class="example-radio-button" disabled="{{isBlockAnswers}}"
+                            *ngFor="let answer of question.answersSet" [value]="answer">
+            {{answer.title}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="action">
+      <div *ngIf="answer; else blockAnswer" class="myButtons">
+        <button mat-flat-button color="warn" (click)="addAnswer()"
+                *ngIf="!isBlockAnswers; else answered">Ответить
+        </button>
+      </div>
+      <ng-template #blockAnswer>
+        <button mat-flat-button class="myButtons" color="warn" disabled>Ответить</button>
+      </ng-template>
+      <ng-template #answered>
+        <div *ngIf="answeredQuestion == quantityQuestion;else next">
+          <a mat-flat-button class="statistics" color="accent" href="statistics/{{gameId}}" (click)="disconnect()">Статистика</a>
+        </div>
+        <ng-template #next class="myButtons">
+          <button mat-flat-button color="primary" (click)="setNextQuestion()">Далее</button>
+        </ng-template>
+      </ng-template>
+    </div>
+  </mat-card>
+
+  <div *ngFor="let player of players">
+    <mat-card class="players">
+      <div>
+        <div class="name-player">
+          <h4>{{player.player.name}}</h4>
+          <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon" (click)="sendMessage(player.player)">
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </div>
+
+        <div class="legs">
+          <div *ngFor="let i of index">
+            <mat-card class="index" style="background: {{player.answerColor[i]}};">
+              {{i + 1}}
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+

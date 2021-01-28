@@ -75,10 +75,9 @@ export class GamePreviewComponent implements OnInit {
 
   async handleMessage(message) {
     this.gameRoom.players = message;
-    console.log(this.gameRoom.players);
   }
 
-  private deletePlayer(gameId: string, playerId: number): Promise<GameRoom> {
+  private deletePlayer(gameId: string, playerId: string): Promise<GameRoom> {
     return this.gameRoomService.deletePlayer(this.gameRoom.id, this.player.id).toPromise()
   }
 }
