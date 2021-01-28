@@ -26,7 +26,7 @@ const routes: Routes = [
   {path: 'auth', component: SignInComponent},
   {path: 'login', component: SignInComponent},
   {path: 'sign_up', component: SignUpComponent},
-  {path: 'gameplay/:gameId/:gameRoomId', component: MultiplayerComponent},
+  {path: 'multiplayer/:gameId/:gameRoomId', component: MultiplayerComponent},
   {path: 'statistics/:id', component: StatisticsComponent},
   {path: 'user/:id', component: PlayerPageComponent},
   {path: 'game/:id', component: GamePreviewComponent},

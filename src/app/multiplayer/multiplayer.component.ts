@@ -13,6 +13,8 @@ import {GameRoom} from "../model/game-room";
 import {GameRoomService} from "../service/game-room.service";
 import {Playing} from "../model/playing";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Game} from "../model/game";
+import {GameService} from "../service/game.service";
 
 @Component({
   selector: 'app-multiplayer',
@@ -20,16 +22,17 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./multiplayer.component.css']
 })
 export class MultiplayerComponent implements OnInit {
-  webSocketAPI: WebSocketAPI; //веб сокет для передачи инфы
+  private webSocketAPI: WebSocketAPI; //веб сокет для передачи инфы
 
   player: Player; // игрок
   players: Playing[] = []; //игроки играющие против player-а
-  gameRoomId: string; // id игровой комнаты
-  gameRoom: GameRoom; // игровая комната
+  private gameRoomId: string; // id игровой комнаты
+  private gameRoom: GameRoom; // игровая комната
 
   gameId: string; //id игры
-  playerId: string; //id играющего
-  questions: Question[] = []; //вопросы данной игры
+  game: Game;
+  private playerId: string; //id играющего
+  private questions: Question[] = []; //вопросы данной игры
   question: Question; //текущий вопрос
   answer: Answer = null; //ответ который дал игрок
   questionNumber: number = 0; //номер данного вопроса
@@ -40,6 +43,10 @@ export class MultiplayerComponent implements OnInit {
   quantityQuestion: number; //количество вопросов
   isBlockAnswers: boolean; //для блокирования ответов
 
+  count: number = 30; //счетчик
+  timeIsOver: boolean = false;
+  private answerButtonNotPressed: boolean = false;
+
   constructor(private questionService: QuestionService,
               private answerService: AnswerService,
               private statisticsService: StatisticsService,
@@ -47,7 +54,8 @@ export class MultiplayerComponent implements OnInit {
               private playerService: PlayerService,
               private route: ActivatedRoute,
               private gameRoomService: GameRoomService,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              private gameService: GameService) {
   }
 
   async ngOnInit() {
@@ -58,6 +66,7 @@ export class MultiplayerComponent implements OnInit {
     this.player = await this.getPlayer(this.playerId);
     this.gameRoom = await this.getGameRoom();
     this.questions = await this.getQuestionList(this.gameId);
+    this.game = await this.getGameById();
 
     this.question = this.questions[this.questionNumber];
     this.quantityQuestion = this.questions.length;
@@ -76,14 +85,13 @@ export class MultiplayerComponent implements OnInit {
 
     this.webSocketAPI = new WebSocketAPI(this, this.player, this.gameRoomId, this.gameRoomService);
     this.connect();
+
+    await this.delay();
+    this.timeIsOver = true;
   }
 
-  private setColor(): string[] {
-    let color: string[] = [];
-    for (let i = 0; i < this.quantityQuestion; i++) {
-      color.push("gray");
-    }
-    return color;
+  private getGameById(): Promise<Game> {
+    return this.gameService.getGameById(this.gameId).toPromise()
   }
 
   private getGameRoom(): Promise<GameRoom> {
@@ -98,33 +106,25 @@ export class MultiplayerComponent implements OnInit {
     return this.playerService.getOnePlayer(playerId).toPromise();
   }
 
-  async addAnswer() {
-    this.answer = await this.getAnswerById();
-
-    this.answeredQuestion++;
-
-    for (let i = 0; i < this.players.length; i++) {
-      if (this.player.id == this.players[i].player.id) {
-        if (this.answer.right) {
-          this.players[i].answerColor[this.questionNumber] = "green";
-        } else {
-          this.players[i].answerColor[this.questionNumber] = "red";
-        }
-      }
-    }
-
-    this.isBlockAnswers = true;
-  }
-
   getAnswerById(): Promise<Answer> {
     return this.answerService.getAnswerAndSaveStatistics(this.answer.id, this.player.id, this.gameRoomId, this.questionNumber).toPromise();
   }
 
   setNextQuestion() {
-    this.isBlockAnswers = false;
-    this.questionNumber++;
-    this.question = this.questions[this.questionNumber];
-    this.answer = null;
+    this.webSocketAPI.sendNextQuestion(this.gameRoom);
+  }
+
+  private setColor(): string[] {
+    let color: string[] = [];
+    for (let i = 0; i < this.quantityQuestion; i++) {
+      color.push("gray");
+    }
+    return color;
+  }
+
+  async addAnswer() {
+    this.isBlockAnswers = true;
+    this.answerButtonNotPressed = true;
   }
 
   connect() {
@@ -144,8 +144,18 @@ export class MultiplayerComponent implements OnInit {
     this.webSocketAPI.sendGameMessage(message);
   }
 
-  handleMessage(message) {
-    if (message.playerId == undefined) {
+  async handleMessage(message) {
+    if (message == "next") {
+      this.isBlockAnswers = false;
+      this.timeIsOver = false;
+      this.answerButtonNotPressed = false;
+      this.questionNumber++;
+      this.question = this.questions[this.questionNumber];
+      this.answer = null;
+      this.count = 30;
+      await this.delay();
+      this.timeIsOver = true;
+    } else if (message.playerId == undefined) {
       this.openSnackBar(message, "Like");
     } else {
       for (let i = 0; i < this.players.length; i++) {
@@ -160,9 +170,35 @@ export class MultiplayerComponent implements OnInit {
     }
   }
 
+  async delay() {
+    for (let i = 0; i < 30; i++) {
+      await new Promise(resolve => setTimeout(() => resolve(), 1000));
+      this.count--;
+    }
+    this.answeredQuestion++;
+    if (this.answer == null || !this.answerButtonNotPressed) {
+      return;
+    }
+    this.answer = await this.getAnswerById();
+
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.player.id == this.players[i].player.id) {
+        if (this.answer.right) {
+          this.players[i].answerColor[this.questionNumber] = "green";
+        } else {
+          this.players[i].answerColor[this.questionNumber] = "red";
+        }
+      }
+    }
+  }
+
   openSnackBar(message, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  isDisabled() {
+    return this.timeIsOver || this.isBlockAnswers;
   }
 }

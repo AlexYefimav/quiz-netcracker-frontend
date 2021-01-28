@@ -6,7 +6,7 @@
   margin-top: 1pc;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+
 }
 
 .header{
@@ -19,11 +19,15 @@
   justify-content: center;
   flex-direction: column;
   padding: 0;
-
+  width: 800px;
 }
 
 .title {
   background-color: #c2185b;
+  display: flex;
+  /*align-items: stretch;*/
+  /*justify-content: center;*/
+  flex-direction: row;
 }
 
 h2{
@@ -98,4 +102,21 @@ h4{
   position: absolute;
   right: 0;
   top: 0;
+}
+
+/*.mat-progress-bar{*/
+/*  width: 60%;*/
+/*  margin-top: 15px;*/
+/*}*/
+
+
+
+.time{
+  margin-left: 20px;
+  margin-top: 20px;
+  position: absolute;
+  right: 20px;
+  font-size: xx-large;
+  color: white;
+  font-family: DejaVu Sans Mono, monospace;
 }

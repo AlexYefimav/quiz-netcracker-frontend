@@ -11,7 +11,7 @@
 <!--</mat-toolbar>-->
 
 <mat-toolbar color="primary" role="heading">
-  <div *ngIf="isAccount"> <p>{{authorizedAccount.login}}</p></div>
+
   <span class="nav-fill-remaining-space"></span>
   <div class="navigation">
     <a mat-button href="">Home</a>
@@ -25,6 +25,7 @@
     <button  mat-button (click)="toAccount()" *ngIf="authorizedAccount.role=='USER'">Личный кабинет</button>
     <button  mat-button (click)="redirect('users')" *ngIf="authorizedAccount.role=='ADMIN'">Пользователи</button>
   </div>
+  <div *ngIf="isAccount"> <p>{{authorizedAccount.login}}</p></div>
   <div *ngIf="isAccount">
     <button mat-button (click)="logout()">Выйти</button>
   </div>

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Route} from "@angular/router";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {GameRoomService} from "../service/game-room.service";
 import {StorageService} from "../service/storage/storage.service";
@@ -15,6 +15,7 @@ import {WebSocketAPI} from "../webSocket/web-socket-api";
   templateUrl: './game-preview.component.html',
   styleUrls: ['./game-preview.component.css']
 })
+
 export class GamePreviewComponent implements OnInit {
   webSocketAPI: WebSocketAPI;
   public game: Game;
@@ -53,10 +54,12 @@ export class GamePreviewComponent implements OnInit {
   async openDialog(game: Game) {
     this.game = game;
     this.gameRoom = await this.getGameRoom(game);
+    console.log(this.gameRoom.players);
     this.webSocketAPI = new WebSocketAPI(this, this.player, this.gameRoom.id, this.gameRoomService);
     this.connect();
+
     const dialog = this.dialog.open(DialogElementsExampleDialog, {
-      data: {name: this.player.name, gameId: game.id, gameRoom: this.gameRoom, player: this.player}
+      data: {game: game, gameRoom: this.gameRoom, player: this.player, socket: this.webSocketAPI}
     });
     dialog.afterClosed().subscribe(() => {
       this.disconnect();
@@ -68,16 +71,20 @@ export class GamePreviewComponent implements OnInit {
   }
 
   async disconnect() {
-    this.gameRoom = await this.deletePlayer(this.gameRoom.id, this.player.id);
+    this.gameRoom = await this.deletePlayer();
     this.webSocketAPI.sendPlayerExited(this.gameRoom);
     this.webSocketAPI._disconnect();
   }
 
   async handleMessage(message) {
-    this.gameRoom.players = message;
+    if (message == "go") {
+      window.location.href = "http://localhost:4200/multiplayer/" + this.game.id + "/" + this.gameRoom.id;
+    } else {
+      this.gameRoom.players = message;
+    }
   }
 
-  private deletePlayer(gameId: string, playerId: string): Promise<GameRoom> {
+  private deletePlayer(): Promise<GameRoom> {
     return this.gameRoomService.deletePlayer(this.gameRoom.id, this.player.id).toPromise()
   }
 }
@@ -87,8 +94,17 @@ export class GamePreviewComponent implements OnInit {
   templateUrl: 'dialog-element/dialog-elements-example-dialog.html',
 })
 export class DialogElementsExampleDialog {
+  isCreator: boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { name, gameId, gameRoom }) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {game, gameRoom, player, socket}) {
+    if (this.data.player.id == this.data.game.player) {
+      this.isCreator = true;
+    }
+  }
+
+  startGame(){
+    this.data.socket.sendGoGame(this.data.gameRoom);
+    this.data.socket.disconnect();
   }
 }
 

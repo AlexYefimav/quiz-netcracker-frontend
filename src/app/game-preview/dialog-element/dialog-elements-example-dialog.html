@@ -4,5 +4,8 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
-  <a mat-button href="/gameplay/{{data.gameId}}/{{data.gameRoom.id}}" style="right: 0">Играть</a>
+  <div *ngIf="isCreator">
+    <a mat-button (click)="startGame()" style="right: 0">Играть</a>
+<!--       href="/gameplay/{{data.game.id}}/{{data.gameRoom.id}}"-->
+  </div>
 </div>
