@@ -46,6 +46,10 @@ export class UserService {
     return this.http.get<User>(`${this.url}users/${username}`);
   }
 
+  checkUserByLoginOrEmail(username: string): Observable<User> {
+    return this.http.get<User>(`${this.url}users/check/${username}`);
+  }
+
   createUser(user: User): Observable<User> {
     return this.http.post<User>(this.url + "users/save", user)
   }

@@ -1,6 +1,24 @@
 <mat-card>
   <mat-card-title>Sign Up</mat-card-title>
   <mat-card-content>
+
+<!--    <div *ngIf="userForm">-->
+<!--      <form [formGroup]="userForm">-->
+<!--        <mat-form-field>-->
+<!--          <input matInput placeholder="Новый ответ" name="title" formControlName="title" required>-->
+<!--          <mat-error *ngIf="userForm?.get('login').touched && userForm?.get('login').errors?.required">-->
+<!--            Необходимо заполнить поле-->
+<!--          </mat-error>-->
+<!--          <mat-error *ngIf="userForm?.get('login').touched && userForm?.get('login').errors?.duplicate">-->
+<!--            Такой ответ уже существует-->
+<!--          </mat-error>-->
+<!--        </mat-form-field>-->
+<!--        <mat-slide-toggle name="mail" formControlName="mail"></mat-slide-toggle>-->
+<!--        <button mat-flat-button color="primary">Добавить</button>-->
+<!--      </form>-->
+<!--    </div>-->
+
+
     <form [formGroup]="form" (ngSubmit)="submitPlayer()">
       <p>
         <mat-form-field>

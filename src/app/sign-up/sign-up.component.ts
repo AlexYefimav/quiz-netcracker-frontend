@@ -5,6 +5,9 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {User} from "../model/user";
 import {MatAccordion} from "@angular/material/expansion";
 import {SigninService} from "../service/signin.service";
+import {AddAnswerValidation} from "../service/validation/add-answer-validation.service";
+import {SignUpValidation} from "../service/validation/sign-up-validator";
+import {UserService} from "../service/user.service";
 
 export class SignUpErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,7 +43,9 @@ export class SignUpComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
   user: User;
+  userCheck: User;
   form: FormGroup;
+  userForm: FormGroup;
 
   errorMatcher: ErrorStateMatcher;
   isPasswordsEqual: boolean;
@@ -52,10 +57,12 @@ export class SignUpComponent implements OnInit {
 
   constructor(private signinService: SigninService,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private signUpValidation: SignUpValidation,
+              private userService: UserService) {
 
     this.form = formBuilder.group({
-      username: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
       mail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       passwordRepeat: new FormControl('', Validators.required),
@@ -65,6 +72,8 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
     this.user = new User();
     this.errorMatcher = new SignUpErrorStateMatcher();
+    this.signUpValidation.setUser(this.user);
+    this.userForm = this.signUpValidation.createUserForm();
   }
 
   submitPlayer() {
@@ -72,30 +81,32 @@ export class SignUpComponent implements OnInit {
       this.user.username = this.username.value;
       this.user.mail = this.mail.value;
       this.user.password = this.password.value;
-      this.sendData();
+      this.checkUsersFromDB();
+      return "Успешно";
     }
     return "Успешно";
   }
 
   sendData() {
     this.signinService.register(this.user).subscribe(() => {
-             //if (this.user.id == undefined) {
-          //this.redirect('/403')
-        //} else {
           this.redirect('/games')
-      //  }
       }
     );
   }
 
   checkUsersFromDB() {
-    this.isUserFromDB = this.user.id == undefined;
-    if (this.isUserFromDB) {
-      this.error = 'Пользователь с таким именем/почтой уже существуем';
-    } else {
-      this.error = null;
-    }
-    return  !this.isUserFromDB;
+    this.userService.checkUserByLoginOrEmail(this.user.username).subscribe(
+      user => {
+        this.userCheck = user;
+        this.isUserFromDB = this.userCheck== null;
+        if (!this.isUserFromDB) {
+          window.alert('Пользователь с таким именем/почтой уже существуем');
+        } else {
+          this.sendData();
+          window.alert('Регистрация прошла успешно')
+        }
+      }
+     );
   }
 
   checkPasswords() {
