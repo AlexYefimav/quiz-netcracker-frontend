@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {User} from "../model/user";
 import {Router} from "@angular/router";
 import {StorageService} from "../service/storage/storage.service";
@@ -13,11 +13,14 @@ import {SignInComponent} from "../sign-in/sign-in.component";
 export class AppTopBarComponent implements OnInit {
   authorizedAccount: User;
   isAccount: boolean;
+  @Input() languages;
+  @Output() languageChange = new EventEmitter<string>();
 
   constructor(private router: Router,
               public storageService: StorageService,
               public dialog: MatDialog) {
     this.isAccount = false;
+
   }
 
   openLoginDialog(): void {
@@ -81,5 +84,9 @@ export class AppTopBarComponent implements OnInit {
     if (this.authorizedAccount.role=='ADMIN') {
       this.redirectTo(`/admin/${this.authorizedAccount.id}`);
     }
+  }
+
+  changeLanguage(lang: string): void {
+    this.languageChange.emit(lang);
   }
 }

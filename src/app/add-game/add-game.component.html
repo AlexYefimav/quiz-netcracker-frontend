@@ -23,7 +23,7 @@
                 Необходимо заполнить поле
               </mat-error>
               <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.minlength">
-                Название должно быть не менее 6 символов
+                Название должно быть не менее 3 символов
               </mat-error>
             </mat-form-field>
           </mat-expansion-panel>
@@ -48,7 +48,7 @@
                 Необходимо заполнить поле
               </mat-error>
               <mat-error *ngIf="gameForm.get('description').touched && gameForm.get('description').errors?.minlength">
-                Описание должно быть не менее 6 символов
+                Описание должно быть не менее 3 символов
               </mat-error>
             </mat-form-field>
           </mat-expansion-panel>

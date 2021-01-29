@@ -1,0 +1,14 @@
+{
+  "NAV_BAR": {
+    "HOME": "Home",
+    "QUIZ": "Play games",
+    "SIGN_UP": "Sign up",
+    "SIGN_IN": "Sign in"
+  },
+  "BUTTON": {
+    "LANG": {
+      "RU": "Russian",
+      "EN": "English"
+    }
+  }
+}
