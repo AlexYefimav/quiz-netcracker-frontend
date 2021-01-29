@@ -27,8 +27,10 @@
           <mat-card-subtitle>
             <h1>{{game.description}}</h1>
           </mat-card-subtitle>
+          <div class="photo" *ngIf="game.photo">-->
           <a><img src="{{game.photo}}" width="200" height="200" alt="Photo from Amazon S3"></a>
-          <mat-card-subtitle style="margin-top: 20px;">
+          </div>
+           <mat-card-subtitle style="margin-top: 20px;">
             <a mat-raised-button href="/game/{{game.id}}">Просмотреть</a>
           </mat-card-subtitle>
         </mat-card>

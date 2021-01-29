@@ -1,4 +1,4 @@
-export class Photo1 {
+export class Photo {
   photo: string;
 
   constructor() {

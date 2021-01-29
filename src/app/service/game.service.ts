@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Game} from '../model/game';
 import {Message} from "../model/message";
-import {Photo1} from "../photo1";
+import {Photo} from "../photo";
+
 
 @Injectable({
   providedIn: 'root',
@@ -55,12 +56,12 @@ export class GameService {
     return this.http.delete<Game>(this.url + 'delete/' + id);
   }
 
-  public uploadFile(formData: FormData): Observable<Photo1> {
-    return this.http.post<Photo1>(this.url + 'uploadFile', formData);
+  uploadFile(formData: FormData): Observable<Photo> {
+    return this.http.post<Photo>(this.url + 'uploadFile', formData);
   }
 
-  updateFile(id: string, fileUrl: string): Observable<Game>{
-    return this.http.post<Game>(this.url + 'updateFile/' + id, fileUrl);
+  updateFile(id: string, formData: FormData): Observable<Game>{
+    return this.http.post<Game>(this.url + 'updateFile/' + id, formData);
   }
 }
 

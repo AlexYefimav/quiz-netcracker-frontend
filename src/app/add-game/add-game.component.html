@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="add-game.component.css">
 <div class="container">
   <div *ngIf="gameForm">
 
@@ -51,6 +52,21 @@
               </mat-error>
             </mat-form-field>
           </mat-expansion-panel>
+          <mat-card class="photo">
+            <div class="title">
+              Фото
+            </div>
+            <div class="description">
+              <input type="file" id="file" (change)="selectFile($event)" accept=".jpg, .jpeg, .png"
+                     class="photo-input">
+            </div>
+            <div class="icon">
+              <mat-icon>
+                party_mode
+              </mat-icon>
+            </div>
+
+          </mat-card>
         </form>
       </mat-accordion>
     </div>
