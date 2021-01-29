@@ -1,22 +1,22 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      Добавление ответа
+      {{ 'ADD_GAME.ANSWER.ADD_ANSWER.TITLE' | translate }}
     </mat-panel-title>
   </mat-expansion-panel-header>
   <div *ngIf="answerForm">
     <form [formGroup]="answerForm">
       <mat-form-field>
-        <input matInput placeholder="Новый ответ" name="title" formControlName="title" required>
+        <input matInput placeholder="{{ 'ADD_GAME.ANSWER.ADD_ANSWER.PLACEHOLDER' | translate }}" name="title" formControlName="title" required>
         <mat-error *ngIf="answerForm?.get('title').touched && answerForm?.get('title').errors?.required">
-          Необходимо заполнить поле
+          {{ 'ADD_GAME.ANSWER.ERROR.REQUIRED' | translate }}
         </mat-error>
         <mat-error *ngIf="answerForm?.get('title').touched && answerForm?.get('title').errors?.duplicate">
-          Такой ответ уже существует
+          {{ 'ADD_GAME.ANSWER.ERROR.DUPLICATE' | translate }}
         </mat-error>
       </mat-form-field>
       <mat-slide-toggle name="right" formControlName="right"></mat-slide-toggle>
-      <button mat-flat-button color="primary" (click)="addAnswer()">Добавить</button>
+      <button mat-flat-button color="primary" (click)="addAnswer()">{{ 'ADD_GAME.ANSWER.ADD_ANSWER.ADD' | translate }}</button>
     </form>
   </div>
 </mat-expansion-panel>

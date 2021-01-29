@@ -25,7 +25,6 @@ export class UpdateAnswerValidation {
   }
 
   createAnswerForm(): FormGroup {
-    console.log(this.chosenAnswer);
     return this.formBuilder.group({
       title: [this.chosenAnswer.title, [Validators.required]],
       right: [this.chosenAnswer.right, []]

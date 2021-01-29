@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from '../service/game.service';
 import {Game} from '../model/game';
-import {PageEvent} from "@angular/material/paginator";
-import {Message} from "../model/message";
+import {PageEvent} from '@angular/material/paginator';
+import {Message} from '../model/message';
+import {TranslateService} from '@ngx-translate/core';
+import {LocalSettingsService} from '../service/localization/LocalSettingsService';
 
 const pageSize: number = 3;
 
@@ -24,10 +26,15 @@ export class GameComponent implements OnInit {
   games: Array<Game> = [];
   pageIndexes: Array<number> = [];
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService,
+              private translateService: TranslateService,
+              private localSettingsService: LocalSettingsService) {
   }
 
   async ngOnInit() {
+    const currentLanguage = this.localSettingsService.getLanguage();
+    this.translateService.use(currentLanguage);
+
     await this.getPage(0);
     this.games = await this.getGameList();
     this.pageSlice = this.games.slice(0, pageSize);
@@ -60,6 +67,14 @@ export class GameComponent implements OnInit {
 
   OnPageChange(event: PageEvent) {
     this.pageSlice = this.games.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize)
+  }
+
+  // Don't use now
+  selectFile(event) {
+    this.picture = event.target.files[0];
+    const formData = new FormData();
+    formData.append('file', this.picture);
+    this.gameService.uploadFile(formData).subscribe(result => this.game.photo = result.photo);
   }
 }
 

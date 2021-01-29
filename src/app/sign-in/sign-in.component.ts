@@ -17,7 +17,7 @@ export class SignInComponent implements OnInit {
   player: Player = new Player();
   user: User = new User();
   form: FormGroup;
-  showErrorMessage: boolean ;
+  showErrorMessage: boolean;
 
   @Input() error: string | null;
 
@@ -39,12 +39,12 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showErrorMessage=true;
-}
+    this.showErrorMessage = true;
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 
 
   submit() {
@@ -57,13 +57,13 @@ export class SignInComponent implements OnInit {
 
       this.userService.signIn(this.user).subscribe(
         response => {
-          if (this.user.active==true) {
-            this.showErrorMessage=true;
+          if (this.user.active == true) {
+            this.showErrorMessage = true;
             this.storageService.currentToken = response.headers.get('Authorization');
-          }
-    else{window.alert("Ваш профиль заблокирован");
+          } else {
+            window.alert('Ваш профиль заблокирован');
 
-            this.showErrorMessage=false;
+            this.showErrorMessage = false;
           }
         },
         error => {
@@ -74,16 +74,18 @@ export class SignInComponent implements OnInit {
       this.userService.getUserByLoginOrEmail(this.user.username).subscribe(
         user => {
           this.user = user;
-          if(this.user.active) {
-            this.showErrorMessage=true;
+          alert(this.user.active);
+          if (this.user.active) {
+            this.showErrorMessage = true;
             setTimeout(() => {
               if (this.storageService.currentToken) {
                 this.storageService.currentUser = this.user;
               }
-            }, 2000);     this.dialogAccount = this.user;     this.router.navigate(['/games/']);
-          }
-          else {
-            this.showErrorMessage=false;
+            }, 2000);
+            this.dialogAccount = this.user;
+            this.router.navigate(['/games/']);
+          } else {
+            this.showErrorMessage = false;
           }
         }
       );
@@ -91,7 +93,7 @@ export class SignInComponent implements OnInit {
   }
 
   redirect(url: string) {
-  this.onNoClick();
+    this.onNoClick();
     this.router.navigate([url]);
   }
 

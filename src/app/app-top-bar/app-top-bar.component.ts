@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {StorageService} from "../service/storage/storage.service";
 import {MatDialog} from "@angular/material/dialog";
 import {SignInComponent} from "../sign-in/sign-in.component";
+import {TranslateService} from '@ngx-translate/core';
+import {LocalSettingsService} from '../service/localization/LocalSettingsService';
 
 @Component({
   selector: 'app-top-bar',
@@ -15,10 +17,13 @@ export class AppTopBarComponent implements OnInit {
   isAccount: boolean;
   @Input() languages;
   @Output() languageChange = new EventEmitter<string>();
+  currentLanguage: string;
 
   constructor(private router: Router,
               public storageService: StorageService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private translateService: TranslateService,
+              private localSettingsService: LocalSettingsService) {
     this.isAccount = false;
 
   }
@@ -43,6 +48,8 @@ export class AppTopBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const currentLanguage = this.localSettingsService.getLanguage();
+    this.translateService.use(currentLanguage);
     this.checkAuthorized();
   }
 

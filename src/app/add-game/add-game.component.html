@@ -8,7 +8,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Название
+                {{ 'ADD_GAME.GAME_TITLE' | translate }}
               </mat-panel-title>
               <mat-panel-description>
                 {{getTitle()}}
@@ -17,13 +17,13 @@
             </mat-expansion-panel-header>
             <mat-form-field class="example-form">
               <label>
-                <input matInput placeholder="Название игры" formControlName="title" (input)="checkForm()" required>
+                <input matInput placeholder="{{ 'ADD_GAME.GAME_TITLE' | translate }}" formControlName="title" (input)="checkForm()" required>
               </label>
               <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.required">
-                Необходимо заполнить поле
+                {{ 'ADD_GAME.ERROR.TITLE.REQUIRED' | translate }}
               </mat-error>
               <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.minlength">
-                Название должно быть не менее 3 символов
+                {{ 'ADD_GAME.ERROR.TITLE.MINLENGTH' | translate }}
               </mat-error>
             </mat-form-field>
           </mat-expansion-panel>
@@ -31,7 +31,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Описание
+                {{ 'ADD_GAME.GAME_DESCRIPTION' | translate }}
               </mat-panel-title>
               <mat-panel-description>
                 {{getDescription()}}
@@ -41,14 +41,14 @@
 
             <mat-form-field class="example-form">
               <label>
-                <input matInput placeholder="Описание игры" formControlName="description" (input)="checkForm()"
+                <input matInput placeholder="{{ 'ADD_GAME.GAME_DESCRIPTION' | translate }}" formControlName="description" (input)="checkForm()"
                        required>
               </label>
               <mat-error *ngIf="gameForm.get('description').touched && gameForm.get('description').errors?.required">
-                Необходимо заполнить поле
+                {{ 'ADD_GAME.ERROR.DESCRIPTION.REQUIRED' | translate }}
               </mat-error>
               <mat-error *ngIf="gameForm.get('description').touched && gameForm.get('description').errors?.minlength">
-                Описание должно быть не менее 3 символов
+                {{ 'ADD_GAME.ERROR.DESCRIPTION.MINLENGTH' | translate }}
               </mat-error>
             </mat-form-field>
           </mat-expansion-panel>
@@ -76,7 +76,7 @@
 
     <div class="save-button">
       <a mat-raised-button href="games" color="primary" [disabled]="!gameForm.valid"
-         (click)="this.isUpdateGame?updateGame():createGame(game)">Сохранить</a>
+         (click)="this.isUpdateGame?updateGame():createGame(game)">{{ 'ADD_GAME.SAVE' | translate }}</a>
     </div>
   </div>
 </div>

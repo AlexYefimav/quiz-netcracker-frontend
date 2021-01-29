@@ -17,9 +17,12 @@
 <!--    <a mat-button href="">Home</a>-->
 <!--    <button  mat-button (click)="redirect('games')">Викторины</button>-->
   <a mat-button href="">{{ 'NAV_BAR.HOME' | translate }}</a>
-  <div *ngIf="languages">
-    <mat-form-field appearance="fill">
-      <mat-select>
+  <div class="navigation">
+    <button  mat-button (click)="redirect('games')">{{ 'NAV_BAR.QUIZ' | translate }}</button>
+  </div>
+  <div *ngIf="languages.RU">
+    <mat-form-field class="language-container">
+      <mat-select [value]="languages.RU">
         <mat-option [value]="languages.RU" (click)="changeLanguage('ru')">
           {{ languages.RU }}
         </mat-option>
@@ -30,19 +33,16 @@
     </mat-form-field>
   </div>
   <span class="nav-fill-remaining-space"></span>
-  <div class="navigation">
-    <button  mat-button (click)="redirect('games')">{{ 'NAV_BAR.QUIZ' | translate }}</button>
-  </div>
   <div *ngIf="!isAccount">
     <button  mat-button (click)="redirect('sign_up')">{{ 'NAV_BAR.SIGN_UP' | translate }}</button>
     <button  mat-button (click)="openLoginDialog()">{{ 'NAV_BAR.SIGN_IN' | translate }}</button>
   </div>
   <div *ngIf="isAccount">
-    <button  mat-button (click)="toAccount()" *ngIf="authorizedAccount.role=='USER'">Личный кабинет</button>
-    <button  mat-button (click)="redirect('users')" *ngIf="authorizedAccount.role=='ADMIN'">Пользователи</button>
+    <button  mat-button (click)="toAccount()" *ngIf="authorizedAccount.role=='USER'">{{ 'NAV_BAR.OFFICE' | translate }}</button>
+    <button  mat-button (click)="redirect('users')" *ngIf="authorizedAccount.role=='ADMIN'">{{ 'NAV_BAR.USERS' | translate }}</button>
   </div>
 <!--  <div *ngIf="isAccount"> <p>{{authorizedAccount.login}}</p></div>-->
   <div *ngIf="isAccount">
-    <button mat-button (click)="logout()">Выйти</button>
+    <button mat-button (click)="logout()">{{ 'NAV_BAR.SIGN_OUT' | translate }}</button>
   </div>
 </mat-toolbar>
