@@ -62,4 +62,12 @@ export class WebSocketAPI {
   onMessageReceived(message) {
     this.component.handleMessage(JSON.parse(message.body));
   }
+
+  sendGoGame(message) {
+    this.stompClient.send("/app/go-game", {}, JSON.stringify(message));
+  }
+
+  sendNextQuestion(message) {
+    this.stompClient.send("/app/next-question", {}, JSON.stringify(message));
+  }
 }

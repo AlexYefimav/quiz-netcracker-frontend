@@ -45,3 +45,23 @@
   justify-content: center;
   align-items: center;
 }
+
+.photo{
+  display: flex;
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  flex-direction: row;
+  height: 17px;
+}
+
+.description{
+  flex-basis: 84%;
+}
+
+.title{
+  margin-left: 10px;
+}
+
+.icon{
+  margin-left: 70px;
+}

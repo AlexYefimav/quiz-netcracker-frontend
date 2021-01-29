@@ -23,8 +23,6 @@ export class GameComponent implements OnInit {
   totalPages: number = 0;
   games: Array<Game> = [];
   pageIndexes: Array<number> = [];
-  picture: any;
-
 
   constructor(private gameService: GameService) {
   }
@@ -63,16 +61,6 @@ export class GameComponent implements OnInit {
   OnPageChange(event: PageEvent) {
     this.pageSlice = this.games.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize)
   }
-
-  // Don't use now
-  selectFile(event) {
-    this.picture = event.target.files[0];
-    const formData = new FormData();
-    formData.append('file', this.picture);
-    this.gameService.uploadFile(formData).subscribe(result => this.game.photo = result.photo);
-  }
-
-  
 }
 
 
