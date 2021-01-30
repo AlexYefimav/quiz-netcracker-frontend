@@ -70,12 +70,12 @@ export class GameComponent implements OnInit {
   }
 
   // Don't use now
-  selectFile(event) {
-    this.picture = event.target.files[0];
-    const formData = new FormData();
-    formData.append('file', this.picture);
-    this.gameService.uploadFile(formData).subscribe(result => this.game.photo = result.photo);
-  }
+  // selectFile(event) {
+  //   this.picture = event.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('file', this.picture);
+  //   this.gameService.uploadFile(formData).subscribe(result => this.game.photo = result.photo);
+  // }
 }
 
 

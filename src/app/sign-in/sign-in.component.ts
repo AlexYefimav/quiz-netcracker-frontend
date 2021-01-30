@@ -74,7 +74,7 @@ export class SignInComponent implements OnInit {
       this.userService.getUserByLoginOrEmail(this.user.username).subscribe(
         user => {
           this.user = user;
-          alert(this.user.active);
+          // alert(this.user.active);
           if (this.user.active) {
             this.showErrorMessage = true;
             setTimeout(() => {
