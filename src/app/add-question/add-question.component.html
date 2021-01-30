@@ -3,12 +3,12 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Добавление вопроса
+          {{ 'ADD_GAME.ADD_QUESTION.TITLE' | translate }}
         </mat-panel-title>
       </mat-expansion-panel-header>
       <app-question-detail [question]="question" [questionForm]="questionForm"></app-question-detail>
       <app-answer [question]="question" [answerForm]="answerForm"></app-answer>
-      <button mat-raised-button color="primary" [disabled]="!questionForm.valid" (click)="addQuestion()">Добавить</button>
+      <button mat-raised-button color="primary" [disabled]="!questionForm.valid" (click)="addQuestion()">{{ 'ADD_GAME.ADD_QUESTION.ADD' | translate }}</button>
     </mat-expansion-panel>
   </div>
 </div>

@@ -3,15 +3,15 @@
     <mat-form-field appearance="fill">
       <input matInput formControlName="title" (blur)="updateAnswer()">
       <mat-error *ngIf="answerForm.get('title').touched && answerForm.get('title').errors?.required">
-        Необходимо заполнить поле
+        {{ 'ADD_GAME.ANSWER.ERROR.REQUIRED' | translate }}
       </mat-error>
       <mat-error *ngIf="answerForm.get('title').touched && answerForm.get('title').errors?.duplicate">
-        Такой ответ уже существует
+        {{ 'ADD_GAME.ANSWER.ERROR.DUPLICATE' | translate }}
       </mat-error>
     </mat-form-field>
     <mat-slide-toggle formControlName="right" (change)="updateAnswer()">
     </mat-slide-toggle>
-    <button mat-flat-button color="warn" (click)="deleteAnswer()">Удалить</button>
+    <button mat-flat-button color="warn" (click)="deleteAnswer()">{{ 'ADD_GAME.ANSWER.ANSWER_DETAIL.DELETE' | translate }}</button>
   </form>
 </div>
 

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {User} from "../model/user";
 import {Router} from "@angular/router";
 import {StorageService} from "../service/storage/storage.service";
 import {MatDialog} from "@angular/material/dialog";
 import {SignInComponent} from "../sign-in/sign-in.component";
+import {TranslateService} from '@ngx-translate/core';
+import {LocalSettingsService} from '../service/localization/LocalSettingsService';
 
 @Component({
   selector: 'app-top-bar',
@@ -13,11 +15,17 @@ import {SignInComponent} from "../sign-in/sign-in.component";
 export class AppTopBarComponent implements OnInit {
   authorizedAccount: User;
   isAccount: boolean;
+  @Input() languages;
+  @Output() languageChange = new EventEmitter<string>();
+  currentLanguage: string;
 
   constructor(private router: Router,
               public storageService: StorageService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private translateService: TranslateService,
+              private localSettingsService: LocalSettingsService) {
     this.isAccount = false;
+
   }
 
   openLoginDialog(): void {
@@ -40,6 +48,8 @@ export class AppTopBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const currentLanguage = this.localSettingsService.getLanguage();
+    this.translateService.use(currentLanguage);
     this.checkAuthorized();
   }
 
@@ -81,5 +91,9 @@ export class AppTopBarComponent implements OnInit {
     if (this.authorizedAccount.role=='ADMIN') {
       this.redirectTo(`/admin/${this.authorizedAccount.id}`);
     }
+  }
+
+  changeLanguage(lang: string): void {
+    this.languageChange.emit(lang);
   }
 }

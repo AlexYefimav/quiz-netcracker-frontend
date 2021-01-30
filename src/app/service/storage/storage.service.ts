@@ -23,8 +23,10 @@ export class StorageService {
   }
 
   get currentUser(): User {
-  const decrypted = CryptoJS.AES.decrypt(localStorage.getItem(this.USER), this.PASSPHRASE, 256);
-    return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+    if (localStorage[this.USER]) {
+      const decrypted = CryptoJS.AES.decrypt(localStorage.getItem(this.USER), this.PASSPHRASE, 256);
+      return JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
+    }
   }
 
   set currentToken(token: string) {
@@ -39,6 +41,8 @@ export class StorageService {
   }
 
   static clear(): void {
-    localStorage.clear();
+    localStorage.removeItem('currentToken');
+    localStorage.removeItem('currentUser');
+    // localStorage.clear();
   }
 }

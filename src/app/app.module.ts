@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {AppTopBarComponent} from './app-top-bar/app-top-bar.component';
@@ -52,7 +52,12 @@ import {MatSelectModule} from '@angular/material/select';
 import {MultiplayerComponent} from './multiplayer/multiplayer.component';
 import {UserGameComponent} from "./user-game/user-game.component";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { EditPlayerComponent } from './edit-player/edit-player.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -84,7 +89,6 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     UserGameComponent,
     ErrorAuthenticationConnectionComponent,
     UserGameComponent,
-    EditPlayerComponent,
   ],
   imports: [
     MatTableModule,
@@ -111,7 +115,15 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     MatPaginatorModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'ru'
+    })
   ],
   providers: [
     {

@@ -10,7 +10,6 @@ export class UpdateGameValidation {
   }
 
   createGameForm(game: Game): FormGroup {
-    console.log(game);
     return this.formBuilder.group({
       title: [game.title, [Validators.required, Validators.minLength(3)]],
       description: [game.description, [Validators.required, Validators.minLength(3)]]

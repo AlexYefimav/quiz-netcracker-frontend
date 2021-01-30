@@ -2,9 +2,9 @@
   flex: 1 1 auto;
 }
 
-.navigation {
-  margin-right: 100px;
-}
+/*.navigation {*/
+/*  margin-right: 100px;*/
+/*}*/
 
 .navigation button
 {
@@ -22,4 +22,17 @@
 p {
   font-family: 'Times New Roman', Times, serif; /* Шрифт с засечками */
   font-style: italic; /* Курсивное начертание */
+}
+
+.language-container {
+  margin-top: 7px;
+  max-width: 50px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mat-option {
+  height: 40px !important;
+  line-height: 40px !important;
 }
