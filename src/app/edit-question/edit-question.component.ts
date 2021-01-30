@@ -6,6 +6,8 @@ import {GameService} from '../service/game.service';
 import {Game} from '../model/game';
 import {FormGroup} from '@angular/forms';
 import {UpdateQuestionValidation} from '../service/validation/update-question-validation';
+import {TranslateService} from '@ngx-translate/core';
+import {LocalSettingsService} from '../service/localization/LocalSettingsService';
 
 @Component({
   selector: 'app-edit-question',
@@ -20,10 +22,14 @@ export class EditQuestionComponent implements OnInit {
   constructor(private questionService: QuestionService,
               private gameService: GameService,
               private route: ActivatedRoute,
-              private questionValidation: UpdateQuestionValidation) {
+              private questionValidation: UpdateQuestionValidation,
+              private translateService: TranslateService,
+              private localSettingsService: LocalSettingsService) {
   }
 
   async ngOnInit(): Promise<void> {
+    const currentLanguage = this.localSettingsService.getLanguage();
+    this.translateService.use(currentLanguage);
     if (this.route.snapshot.params.gameId != null) {
       this.game = await this.getGame(this.route.snapshot.params.gameId);
       this.questionValidation.setGame(this.game);

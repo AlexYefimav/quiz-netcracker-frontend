@@ -1,6 +1,6 @@
 <div class="example-action-buttons">
-  <button mat-button (click)="accordion.openAll()">Expand All</button>
-  <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+  <button mat-button (click)="accordion.openAll()">{{ 'ADD_GAME.QUESTION_DETAIL.EXPAND_ALL' | translate }}</button>
+  <button mat-button (click)="accordion.closeAll()">{{ 'ADD_GAME.QUESTION_DETAIL.COLLAPSE_ALL' | translate }}</button>
 </div>
 <mat-accordion class="example-headers-align" multi>
   <div *ngIf="questionForm">
@@ -8,7 +8,7 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Вопрос
+            {{ 'ADD_GAME.QUESTION_DETAIL.TITLE' | translate }}
           </mat-panel-title>
           <mat-panel-description>
             {{getTitle()}}
@@ -17,16 +17,16 @@
         </mat-expansion-panel-header>
         <mat-form-field class="example-form">
           <label>
-            <input matInput placeholder="Формулировка вопроса" formControlName="title" (input)="checkForm()" required>
+            <input matInput placeholder="{{ 'ADD_GAME.QUESTION_DETAIL.TITLE' | translate }}" formControlName="title" (input)="checkForm()" required>
           </label>
           <mat-error *ngIf="questionForm?.get('title').touched && questionForm.get('title').errors?.required">
-            Необходимо заполнить поле
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.REQUIRED' | translate }}
           </mat-error>
           <mat-error *ngIf="questionForm?.get('title').touched && questionForm.get('title').errors?.duplicate">
-            Такой вопрос уже существует
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.DUPLICATE' | translate }}
           </mat-error>
           <mat-error *ngIf="questionForm?.get('title').touched && questionForm.get('title').errors?.minlength">
-            Формулировка должна содержать минимум 6 символов
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.MINLENGTH' | translate }}
           </mat-error>
         </mat-form-field>
       </mat-expansion-panel>
@@ -34,7 +34,7 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Описание
+            {{ 'ADD_GAME.QUESTION_DETAIL.DESCRIPTION' | translate }}
           </mat-panel-title>
           <mat-panel-description>
             {{getDescription()}}
@@ -44,16 +44,16 @@
 
         <mat-form-field class="example-form">
           <label>
-            <input matInput placeholder="Описание вопроса" formControlName="description" (input)="checkForm()" required>
+            <input matInput placeholder="{{ 'ADD_GAME.QUESTION_DETAIL.DESCRIPTION' | translate }}" formControlName="description" (input)="checkForm()" required>
           </label>
           <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.required">
-            Необходимо заполнить поле
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.REQUIRED' | translate }}
           </mat-error>
           <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.duplicate">
-            Такое описание уже существует
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.DUPLICATE' | translate }}
           </mat-error>
           <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.minlength">
-            Описание должно содержать минимум 6 символов
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.MINLENGTH' | translate }}
           </mat-error>
         </mat-form-field>
       </mat-expansion-panel>
@@ -61,7 +61,7 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Категория
+            {{ 'ADD_GAME.QUESTION_DETAIL.CATEGORY' | translate }}
           </mat-panel-title>
           <mat-panel-description>
             {{getCategory()}}
@@ -75,7 +75,7 @@
             </mat-option>
           </mat-select>
           <mat-error *ngIf="questionForm?.get('category').touched && questionForm?.get('category').errors?.required">
-            Пожалуйста, выберите категорию
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.REQUIRED' | translate }}
           </mat-error>
         </mat-form-field>
       </mat-expansion-panel>
@@ -83,7 +83,7 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Уровень сложности
+            {{ 'ADD_GAME.QUESTION_DETAIL.LEVEL' | translate }}
           </mat-panel-title>
           <mat-panel-description>
             {{getLevel()}}
@@ -97,7 +97,7 @@
             </mat-option>
           </mat-select>
           <mat-error *ngIf="questionForm?.get('level').touched && questionForm?.get('level').errors?.required">
-            Пожалуйста, выберите сложность
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.REQUIRED' | translate }}
           </mat-error>
         </mat-form-field>
       </mat-expansion-panel>

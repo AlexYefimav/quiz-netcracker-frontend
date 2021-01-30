@@ -9,6 +9,8 @@ import {User} from "../model/user";
 import {FormGroup} from '@angular/forms';
 import {UpdateGameValidation} from '../service/validation/update-game-validation';
 import {AddGameValidation} from '../service/validation/add-game-validation';
+import {TranslateService} from '@ngx-translate/core';
+import {LocalSettingsService} from '../service/localization/LocalSettingsService';
 
 @Component({
   selector: 'app-add-game',
@@ -28,10 +30,14 @@ export class AddGameComponent implements OnInit {
               private userService: UserService,
               private storageService: StorageService,
               private addGameValidation: AddGameValidation,
-              private updateGameValidation: UpdateGameValidation) {
+              private updateGameValidation: UpdateGameValidation,
+              private translateService: TranslateService,
+              private localeSettingsService: LocalSettingsService) {
   }
 
   async ngOnInit(): Promise<void> {
+    const currentLanguage = this.localeSettingsService.getLanguage();
+    this.translateService.use(currentLanguage);
     if (this.route.snapshot.params.id != null){
       this.game = await this.getGame(this.route.snapshot.params.id);
       this.isUpdateGame = true;
