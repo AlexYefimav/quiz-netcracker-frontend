@@ -54,6 +54,7 @@ import {UserGameComponent} from "./user-game/user-game.component";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -91,6 +92,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserGameComponent,
   ],
   imports: [
+    MatProgressSpinnerModule,
     MatTableModule,
     MatCheckboxModule,
     MatProgressBarModule,

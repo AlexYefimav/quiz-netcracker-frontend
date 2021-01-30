@@ -1,11 +1,42 @@
-<h1 mat-dialog-title>Зал ожидания</h1>
-<div *ngFor="let player of data.gameRoom.players">
-  <div mat-dialog-content>{{player.name}}</div>
-</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-  <div *ngIf="isCreator">
-    <a mat-button (click)="startGame()" style="right: 0">Играть</a>
-<!--       href="/gameplay/{{data.game.id}}/{{data.gameRoom.id}}"-->
+<div class="container">
+  <div class="header">
+    <h1 mat-dialog-title>{{ 'PLAYROOM.TITLE' | translate }}</h1>
+  </div>
+  <div class="body">
+    <div class="title">
+      <div class="column-number">
+        <h3>№</h3>
+      </div>
+      <div class="column-name">
+        <h3>{{ 'PLAYROOM.COLUMN_NAME' | translate }}</h3>
+      </div>
+    </div>
+    <div *ngFor="let player of data.gameRoom.players; let i = index">
+      <div class="players">
+        <div class="column-number">
+          {{i + 1}}
+        </div>
+        <div class="column-name">
+          {{player.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div mat-dialog-actions>
+      <div class="close">
+        <button mat-button mat-dialog-close>{{ 'PLAYROOM.BUTTON_LEAVE' | translate }}</button>
+      </div>
+      <div *ngIf="isCreator; else notCreator">
+        <div class="play">
+          <a mat-button (click)="startGame()" style="right: 0">{{ 'PLAYROOM.BUTTON_PLAY' | translate }}</a>
+        </div>
+      </div>
+      <ng-template #notCreator>
+        <div class="spinner">
+          <mat-spinner [diameter]="30"></mat-spinner>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>

@@ -74,5 +74,27 @@
   },
   "SIGN_UP": {
     "TITLE": "Sign up"
+  },
+
+  "PLAYROOM": {
+    "TITLE": "Playroom",
+    "COLUMN_NAME": "Player",
+    "BUTTON_LEAVE": "Leave",
+    "BUTTON_PLAY": "Play"
+  },
+
+  "MULTIPLAYER": {
+    "QUESTION": "Question",
+    "OF": "of",
+    "BUTTON_REPLY": "Reply",
+    "BUTTON_STATISTICS": "Statistics",
+    "BUTTON_NEXT": "Next",
+    "LIKE": "Like"
+  },
+
+  "STATISTICS": {
+    "QUESTION": "Question",
+    "YOUR_RESPONSE": "Your response",
+    "RIGHT_ANSWER": "Right answer"
   }
 }

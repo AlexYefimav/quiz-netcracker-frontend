@@ -77,5 +77,27 @@
   },
   "GAME": {
 
+  },
+
+  "PLAYROOM": {
+    "TITLE": "Игровая комната",
+    "COLUMN_NAME": "Игрок",
+    "BUTTON_LEAVE": "Выйти",
+    "BUTTON_PLAY": "Играть"
+  },
+
+  "MULTIPLAYER": {
+    "QUESTION": "Вопрос",
+    "OF": "из",
+    "BUTTON_REPLY": "Ответить",
+    "BUTTON_STATISTICS": "Статистика",
+    "BUTTON_NEXT": "Далее",
+    "LIKE": "Понравилось"
+  },
+
+  "STATISTICS": {
+    "QUESTION": "Вопрос",
+    "YOUR_RESPONSE": "Ваш ответ",
+    "RIGHT_ANSWER": "Правильный ответ"
   }
 }

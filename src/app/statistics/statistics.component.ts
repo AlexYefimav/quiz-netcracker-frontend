@@ -31,7 +31,7 @@ export class StatisticsComponent implements OnInit {
     this.playerId = this.storageService.currentUser.id;
     this.statistics = await this.getStatistics();
     for (let i = 0; i < this.statistics.length; i++) {
-      this.statistics[i].index = i;
+      this.statistics[i].index = i + 1;
     }
     this.game = await this.getGame();
   }

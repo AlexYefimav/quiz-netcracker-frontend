@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
-import {ActivatedRoute, Route} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {GameRoomService} from "../service/game-room.service";
 import {StorageService} from "../service/storage/storage.service";
@@ -92,17 +92,18 @@ export class GamePreviewComponent implements OnInit {
 @Component({
   selector: 'dialog-elements-example-dialog',
   templateUrl: 'dialog-element/dialog-elements-example-dialog.html',
+  styleUrls: ['dialog-element/dialog-elements-example-dialog.css']
 })
 export class DialogElementsExampleDialog {
   isCreator: boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {game, gameRoom, player, socket}) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { game, gameRoom, player, socket }) {
     if (this.data.player.id == this.data.game.player) {
       this.isCreator = true;
     }
   }
 
-  startGame(){
+  startGame() {
     this.data.socket.sendGoGame(this.data.gameRoom);
     this.data.socket.disconnect();
   }
