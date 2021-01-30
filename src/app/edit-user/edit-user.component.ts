@@ -43,13 +43,11 @@ export class EditUserComponent implements OnInit {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
-       // this.isAccount = true;
       } else {
         StorageService.clear();
       }
     } else {
       this.authorizedAccount = undefined;
-    //  this.isAccount = false;
     }
   }
 
@@ -66,8 +64,10 @@ export class EditUserComponent implements OnInit {
 
   private getUser( userId: string): void {
     this.userService.getUserById(userId).subscribe( user =>
-    {  console.log(user);
-      this.user = user });
+    {
+      this.user = user
+    }
+    );
   }
 
   updateUser(): void {
@@ -75,7 +75,6 @@ export class EditUserComponent implements OnInit {
   }
 
   createUser(user: User): void {
-    console.log(user)
     this.userService.createUser(user).subscribe(user => this.user = user);
   }
 
@@ -83,7 +82,6 @@ export class EditUserComponent implements OnInit {
 
     for (const role of this.roles) {
       if (this.roleControl.value === role) {
-        console.log(role);
         this.user.role = role;
         return role;
       }

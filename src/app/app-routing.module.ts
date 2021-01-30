@@ -13,6 +13,7 @@ import {PlayerPageComponent} from "./player-page/player-page.component";
 import {GamePreviewComponent} from "./game-preview/game-preview.component";
 import {ErrorAuthenticationConnectionComponent} from "./error-authentication-connection/error-authentication-connection.component";
 import {MultiplayerComponent} from "./multiplayer/multiplayer.component";
+import {EditPlayerComponent} from "./edit-player/edit-player.component";
 
 const routes: Routes = [
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'game/update/:id', component: AddGameComponent},
   {path: 'users/create', component: EditUserComponent},
   {path: 'users/update/:id', component: EditUserComponent},
+  {path: 'player/update/:id', component: EditPlayerComponent},
   {path: 'auth', component: SignInComponent},
   {path: 'login', component: SignInComponent},
   {path: 'sign_up', component: SignUpComponent},

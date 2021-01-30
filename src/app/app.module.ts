@@ -52,6 +52,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MultiplayerComponent} from './multiplayer/multiplayer.component';
 import {UserGameComponent} from "./user-game/user-game.component";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { EditPlayerComponent } from './edit-player/edit-player.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     UserGameComponent,
     ErrorAuthenticationConnectionComponent,
     UserGameComponent,
+    EditPlayerComponent,
   ],
   imports: [
     MatTableModule,

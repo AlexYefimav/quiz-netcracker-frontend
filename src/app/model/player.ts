@@ -5,6 +5,7 @@ export class Player {
   name: string;
   email: string;
   user: User;
+  photo: string;
 
   constructor() {
   }

@@ -3,16 +3,11 @@
     <h1 *ngIf="player">{{player.name}}</h1>
   </div>
 
+  <div class="photo" *ngIf="player.photo">-->
+    <a><img src="{{player.photo}}" width="200" height="200" alt="Photo from Amazon S3"></a>
+  </div>
+
   <div class="container" *ngIf="player">
     <h3>Email: {{player.email}}</h3>
-    <button mat-button (click)="redirect('users/update/'+player.user)">Редактировать данные</button>
-
-<!--    <div *ngIf="pageObserverRole === 'ADMIN' && !isOwnAccount">-->
-<!--      <button class="block-button" mat-button (click)="blockUser()">Block</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="schedule" *ngIf="player">-->
-<!--    <app-schedule [type]="type" [id]="player.id"></app-schedule>-->
-<!--  </div>-->
-
+    <button mat-button (click)="redirect('player/update/'+player.user)">Редактировать данные</button>
 </div>

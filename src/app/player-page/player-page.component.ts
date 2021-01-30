@@ -6,6 +6,7 @@ import {StorageService} from '../service/storage/storage.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../model/user';
 import {Player} from "../model/player";
+import {Game} from "../model/game";
 //import {Dialog} from '../../model/dialog';
 //import {DialogsService} from '../../service/dialogs/dialogs.service';
 //import {ScheduleEnum} from '../../model/schedule.enum';
@@ -36,5 +37,4 @@ export class PlayerPageComponent implements OnInit {
       this.player = player;
     });
   }
-
-}
+  }
