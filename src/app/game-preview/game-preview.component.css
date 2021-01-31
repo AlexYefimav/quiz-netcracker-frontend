@@ -11,7 +11,7 @@ h1 {
 
 .mat-card {
   display: flex;
-  background: url(src/assets/images/quiz.png);
+  /*background: url(src/assets/images/quiz.png);*/
   color: oldlace;
   align-items: center;
   justify-content: center;
