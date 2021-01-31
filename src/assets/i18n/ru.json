@@ -17,6 +17,10 @@
   "ADD_GAME": {
     "GAME_TITLE": "Название игры",
     "GAME_DESCRIPTION": "Описание игры",
+    "PHOTO": {
+      "TITLE": "Фото",
+      "CHOOSE": "Выберите фото"
+    },
     "QUESTIONS": {
       "TITLE": "Вопросы",
       "EDIT_QUESTION": "Редактировать",

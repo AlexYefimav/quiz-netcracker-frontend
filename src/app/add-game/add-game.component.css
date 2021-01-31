@@ -48,14 +48,15 @@
 
 .photo{
   display: flex;
-  /*justify-content: center;*/
-  /*align-items: center;*/
   flex-direction: row;
+  justify-content: space-between;
   height: 17px;
 }
 
 .description{
-  flex-basis: 84%;
+  display: flex;
+  align-items: center;
+  flex-basis: 30%;
 }
 
 .title{

@@ -17,6 +17,10 @@
   "ADD_GAME": {
     "GAME_TITLE": "Game title",
     "GAME_DESCRIPTION": "Game description",
+    "PHOTO": {
+      "TITLE": "Photo",
+      "CHOOSE": "Choose photo"
+    },
     "QUESTIONS": {
       "TITLE": "Questions",
       "EDIT_QUESTION": "Edit",
