@@ -8,6 +8,7 @@ export class Game{
   user: string;
   photo: string;
   player: string;
+  index: number;
 
   constructor() {
   }

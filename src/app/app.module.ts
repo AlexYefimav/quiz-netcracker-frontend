@@ -55,6 +55,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {EditPlayerComponent} from "./edit-player/edit-player.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -90,6 +91,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserGameComponent,
     ErrorAuthenticationConnectionComponent,
     UserGameComponent,
+    EditPlayerComponent
   ],
   imports: [
     MatProgressSpinnerModule,
@@ -124,7 +126,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
-      defaultLanguage: 'ru'
+      defaultLanguage: 'RU'
     })
   ],
   providers: [

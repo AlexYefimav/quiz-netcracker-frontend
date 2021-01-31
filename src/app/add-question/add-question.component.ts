@@ -17,7 +17,6 @@ import {StorageService} from '../service/storage/storage.service';
 export class AddQuestionComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @Input() game: Game;
-  @Output() gameChange = new EventEmitter<Game>();
   question: Question;
   questionForm: FormGroup;
   answerForm: FormGroup;
@@ -35,26 +34,12 @@ export class AddQuestionComponent implements OnInit {
   async addQuestion(): Promise<void> {
     if (this.questionForm.valid) {
       if (this.game.id == null) {
-        this.game.questions.push(this.question);
         this.game.player = this.storageService.currentUser.id;
-        this.game = await this.createGame();
       }
-      else {
-        this.question = await this.createQuestion();
-        this.game.questions.push(this.question);
-      }
-      this.gameChange.emit(this.game);
+      this.game.questions.push(this.question);
       await this.initializeProperties();
       this.answerForm = this.answerValidation.createAnswerForm();
     }
-  }
-
-  createGame(): Promise<Game> {
-    return this.gameService.createGame(this.game).toPromise();
-  }
-
-  createQuestion(): Promise<Question> {
-    return this.questionService.createQuestion(this.question).toPromise();
   }
 
   async initializeProperties(): Promise<void> {
