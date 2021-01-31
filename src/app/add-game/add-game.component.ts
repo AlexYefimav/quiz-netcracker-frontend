@@ -46,7 +46,6 @@ export class AddGameComponent implements OnInit {
       this.isUpdateGame = false;
       this.game = new Game();
       this.game.questions = [];
-      this.game.id = null;
       this.gameForm = this.addGameValidation.createGameForm();
     }
   }
@@ -83,12 +82,12 @@ export class AddGameComponent implements OnInit {
 
   async createGame(game: Game): Promise<void> {
     if (this.gameForm.valid) {
-      if (game.questions.length === 0) {
-        this.game.player = this.storageService.currentUser.id;
-        this.game = await this.createAndGetGame(game);
+      if (game.id) {
+        this.game = await this.updateAndGetGame();
       }
       else {
-        this.game = await this.updateAndGetGame();
+        this.game.player = this.storageService.currentUser.id;
+        this.game = await this.createAndGetGame(game);
       }
     }
   }
