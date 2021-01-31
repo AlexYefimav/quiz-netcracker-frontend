@@ -99,5 +99,16 @@
     "QUESTION": "Вопрос",
     "YOUR_RESPONSE": "Ваш ответ",
     "RIGHT_ANSWER": "Правильный ответ"
+  },
+
+  "INTERCEPTOR": {
+    "SNACKBAR": {
+      "ACTION": "Закрыть",
+      "ERROR": {
+        "TITLE": "Заголовок",
+        "CODE": "Код ошибки",
+        "MESSAGE": "Содержание"
+      }
+    }
   }
 }

@@ -96,5 +96,16 @@
     "QUESTION": "Question",
     "YOUR_RESPONSE": "Your response",
     "RIGHT_ANSWER": "Right answer"
+  },
+
+  "INTERCEPTOR": {
+    "SNACKBAR": {
+      "ACTION": "Close",
+      "ERROR": {
+        "TITLE": "Title",
+        "CODE": "Code",
+        "MESSAGE": "Message"
+      }
+    }
   }
 }
