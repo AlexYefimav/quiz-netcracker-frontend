@@ -11,22 +11,22 @@
 <!--</mat-toolbar>-->
 
 <mat-toolbar color="primary" role="heading">
-  <div *ngIf="isAccount"> <p>{{authorizedAccount.login}}</p></div>
-<!--  <span class="nav-fill-remaining-space"></span>-->
-<!--  <div class="navigation">-->
-<!--    <a mat-button href="">Home</a>-->
-<!--    <button  mat-button (click)="redirect('games')">Викторины</button>-->
+  <div *ngIf="isAccount"><p>{{authorizedAccount.login}}</p></div>
+  <!--  <span class="nav-fill-remaining-space"></span>-->
+  <!--  <div class="navigation">-->
+  <!--    <a mat-button href="">Home</a>-->
+  <!--    <button  mat-button (click)="redirect('games')">Викторины</button>-->
   <a mat-button href="">{{ 'NAV_BAR.HOME' | translate }}</a>
   <div class="navigation">
-    <button  mat-button (click)="redirect('games')">{{ 'NAV_BAR.QUIZ' | translate }}</button>
+    <button mat-button (click)="redirect('games')">{{ 'NAV_BAR.QUIZ' | translate }}</button>
   </div>
   <div *ngIf="languages.RU">
     <mat-form-field class="language-container">
-      <mat-select [value]="languages.RU">
-        <mat-option [value]="languages.RU" (click)="changeLanguage('ru')">
+      <mat-select [value]="currentLanguage">
+        <mat-option [value]="languages.RU" (click)="changeLanguage(languages.RU)">
           {{ languages.RU }}
         </mat-option>
-        <mat-option [value]="languages.EN" (click)="changeLanguage('en')">
+        <mat-option [value]="languages.EN" (click)="changeLanguage(languages.EN)">
           {{ languages.EN }}
         </mat-option>
       </mat-select>
@@ -34,14 +34,16 @@
   </div>
   <span class="nav-fill-remaining-space"></span>
   <div *ngIf="!isAccount">
-    <button  mat-button (click)="redirect('sign_up')">{{ 'NAV_BAR.SIGN_UP' | translate }}</button>
-    <button  mat-button (click)="openLoginDialog()">{{ 'NAV_BAR.SIGN_IN' | translate }}</button>
+    <button mat-button (click)="redirect('sign_up')">{{ 'NAV_BAR.SIGN_UP' | translate }}</button>
+    <button mat-button (click)="openLoginDialog()">{{ 'NAV_BAR.SIGN_IN' | translate }}</button>
   </div>
   <div *ngIf="isAccount">
-    <button  mat-button (click)="toAccount()" *ngIf="authorizedAccount.role=='USER'">{{ 'NAV_BAR.OFFICE' | translate }}</button>
-    <button  mat-button (click)="redirect('users')" *ngIf="authorizedAccount.role=='ADMIN'">{{ 'NAV_BAR.USERS' | translate }}</button>
+    <button mat-button (click)="toAccount()"
+            *ngIf="authorizedAccount.role=='USER'">{{ 'NAV_BAR.OFFICE' | translate }}</button>
+    <button mat-button (click)="redirect('users')"
+            *ngIf="authorizedAccount.role=='ADMIN'">{{ 'NAV_BAR.USERS' | translate }}</button>
   </div>
-<!--  <div *ngIf="isAccount"> <p>{{authorizedAccount.login}}</p></div>-->
+  <!--  <div *ngIf="isAccount"> <p>{{authorizedAccount.login}}</p></div>-->
   <div *ngIf="isAccount">
     <button mat-button (click)="logout()">{{ 'NAV_BAR.SIGN_OUT' | translate }}</button>
   </div>

@@ -25,7 +25,7 @@ export class InterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentUser && this.storageService.currentToken && localStorage.lang) {
-        const lang = localStorage.lang.replace(/['"]+/g, '');
+        const lang = localStorage.lang.toLowerCase().replace(/['"]+/g, '');
         req = req.clone({
           setHeaders: {
             Authorization: `${this.storageService.currentToken}`
