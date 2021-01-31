@@ -17,10 +17,6 @@
   "ADD_GAME": {
     "GAME_TITLE": "Game title",
     "GAME_DESCRIPTION": "Game description",
-    "PHOTO": {
-      "TITLE": "Photo",
-      "CHOOSE": "Choose photo"
-    },
     "QUESTIONS": {
       "TITLE": "Questions",
       "EDIT_QUESTION": "Edit",
@@ -102,14 +98,15 @@
     "RIGHT_ANSWER": "Right answer"
   },
 
-  "INTERCEPTOR": {
-    "SNACKBAR": {
-      "ACTION": "Close",
-      "ERROR": {
-        "TITLE": "Title",
-        "CODE": "Code",
-        "MESSAGE": "Message"
-      }
-    }
+  "PLAYER_PAGE": {
+    "BUTTON_EDIT": "Edit profile",
+    "PERSONAL_DATA": "Title",
+    "NAME_PLAYER": "Name",
+    "EMAIL": "Email",
+    "YOUR_GAME": "Your game",
+    "NAME_GAME": "Name of the game",
+    "PLAY": "Play",
+    "DELETE": "Delete",
+    "SHARE": "Share"
   }
 }

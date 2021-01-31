@@ -114,5 +114,17 @@
         "MESSAGE": "Содержание"
       }
     }
+  },
+
+  "PLAYER_PAGE": {
+    "BUTTON_EDIT": "Редактировать профиль",
+    "PERSONAL_DATA": "Личные данные",
+    "NAME_PLAYER": "Имя",
+    "EMAIL": "Email",
+    "YOUR_GAME": "Ваши игры",
+    "NAME_GAME": "Название игры",
+    "PLAY": "Играть",
+    "DELETE": "Удалить",
+    "SHARE": "Поделиться"
   }
 }

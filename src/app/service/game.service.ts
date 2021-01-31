@@ -63,6 +63,10 @@ export class GameService {
   updateFile(id: string, formData: FormData): Observable<Game>{
     return this.http.post<Game>(this.url + 'updateFile/' + id, formData);
   }
+
+  getGameByPlayerId(playerId: string): Observable<Game[]> {
+    return this.http.get<Game[]>(this.url + 'player/' + playerId);
+  }
 }
 
 
