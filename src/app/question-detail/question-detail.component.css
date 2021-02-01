@@ -30,3 +30,24 @@
 .category, .level {
   display: flex;
 }
+
+.photo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 17px;
+}
+
+.description{
+  display: flex;
+  align-items: center;
+  flex-basis: 30%;
+}
+
+.title{
+  margin-left: 10px;
+}
+
+.icon{
+  margin-left: 70px;
+}

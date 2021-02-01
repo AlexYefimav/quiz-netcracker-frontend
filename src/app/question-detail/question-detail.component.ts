@@ -7,6 +7,7 @@ import {CategoryService} from '../service/category.service';
 import {LevelService} from '../service/level.service';
 import {Category} from '../model/category';
 import {Level} from '../model/level';
+import {PhotoService} from '../service/photo.service';
 
 @Component({
   selector: 'app-question-detail',
@@ -16,16 +17,17 @@ import {Level} from '../model/level';
 export class QuestionDetailComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @Input() question: Question;
-  // @Output() questionChange = new EventEmitter<Question>();
   categories: Category[];
   levels: Level[];
   @Input() questionForm: FormGroup;
+  picture: any;
 
   constructor(private questionValidation: AddQuestionValidation,
               private categoryService: CategoryService,
-              private levelService: LevelService) { }
+              private levelService: LevelService,
+              private photoService: PhotoService) { }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.categories = await this.getCategoryList();
     this.levels = await this.getLevelList();
   }
@@ -77,6 +79,14 @@ export class QuestionDetailComponent implements OnInit {
       this.question.category = this.getCategoryId();
       this.question.level = this.getLevelId();
     }
-    // this.questionFormChange.emit(this.questionForm);
+  }
+
+  selectFile(event): void {
+    this.picture = event.target.files[0];
+    const formData = new FormData();
+    formData.append('file', this.picture);
+    this.photoService.uploadFile(formData).subscribe((result) => {
+      this.question.photo = result.photo;
+    });
   }
 }
