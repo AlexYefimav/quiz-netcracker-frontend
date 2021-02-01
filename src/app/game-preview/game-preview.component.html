@@ -25,7 +25,8 @@
     <form>
       <div>
         <h1>
-      <button mat-button (click)="openDialog(game)">Играть</button>
+      <button mat-button *ngIf="isAuthorized" (click)="openDialog(game)">Играть</button>
+          <button mat-button *ngIf="!isAuthorized" (click)="openLoginDialog()">Прежде, чем начать игру, введите свой логин</button>
         </h1>
       </div>
     </form>

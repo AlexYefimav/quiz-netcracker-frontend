@@ -8,6 +8,9 @@ import {SigninService} from "../service/signin.service";
 import {AddAnswerValidation} from "../service/validation/add-answer-validation.service";
 import {SignUpValidation} from "../service/validation/sign-up-validator";
 import {UserService} from "../service/user.service";
+import {SignInOnceComponent} from "../sign-in-once/sign-in-once.component";
+import {MatDialog} from "@angular/material/dialog";
+import {SignInComponent} from "../sign-in/sign-in.component";
 
 export class SignUpErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -59,6 +62,7 @@ export class SignUpComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder,
               private signUpValidation: SignUpValidation,
+              public dialog: MatDialog,
               private userService: UserService) {
 
     this.form = formBuilder.group({
@@ -121,6 +125,25 @@ export class SignUpComponent implements OnInit {
 
   redirect(url: string) {
     this.router.navigate([url]);
+  }
+
+  openLoginDialog(): void {
+    const dialogRef = this.dialog.open(SignInComponent, {
+      minWidth: '400px',
+      minHeight: '300px',
+    //  data: this.authorizedAccount
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result) {
+    //     this.authorizedAccount = result;
+    //     this.isAuthorized = true;
+    //   }
+    //   setTimeout(() => {
+    //     this.checkAuthorized();
+    //     location.reload();
+    //   }, 2000);
+    // });
   }
 
 }

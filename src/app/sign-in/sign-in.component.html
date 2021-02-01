@@ -38,13 +38,6 @@
       <p *ngIf="!showErrorMessage" >
          Ваш профиль заблокирован
       </p>
-<!--      <p *ngIf="!user.active" >-->
-<!--        Ваш аккаунт заблокирован-->
-<!--      </p>-->
-<!--      <p *ngIf="showErrorMessage">-->
-<!--        <h1>Invalid username and password Please try again</h1>-->
-<!--      </p>-->
-
       <div class="button">
         <button mat-button (click)="onNoClick()">Exit</button>
         <button type="submit" mat-button [disabled]="form.invalid"   [mat-dialog-close]="dialogAccount">Login</button>

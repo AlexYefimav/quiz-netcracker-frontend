@@ -54,6 +54,8 @@ import {UserGameComponent} from "./user-game/user-game.component";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {EditPlayerComponent} from "./edit-player/edit-player.component";
+import { SignInOnceComponent } from './sign-in-once/sign-in-once.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -89,6 +91,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserGameComponent,
     ErrorAuthenticationConnectionComponent,
     UserGameComponent,
+    EditPlayerComponent,
+    SignInOnceComponent
   ],
   imports: [
     MatTableModule,

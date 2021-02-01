@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {StorageService} from "../service/storage/storage.service";
 import {MatDialog} from "@angular/material/dialog";
 import {SignInComponent} from "../sign-in/sign-in.component";
+// @ts-ignore
 import {TranslateService} from '@ngx-translate/core';
 import {LocalSettingsService} from '../service/localization/LocalSettingsService';
 
@@ -29,6 +30,7 @@ export class AppTopBarComponent implements OnInit {
   }
 
   openLoginDialog(): void {
+    console.log("authorization acc"+this.authorizedAccount);
     const dialogRef = this.dialog.open(SignInComponent, {
       minWidth: '400px',
       minHeight: '300px',

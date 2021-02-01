@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Game} from '../model/game';
 import {ActivatedRoute} from '@angular/router';
 import {GameService} from '../service/game.service';
@@ -6,7 +6,7 @@ import {MatAccordion} from '@angular/material/expansion';
 import {StorageService} from "../service/storage/storage.service";
 import {UserService} from "../service/user.service";
 import {User} from "../model/user";
-import {FormGroup} from '@angular/forms';
+import {AbstractControl, FormGroup} from '@angular/forms';
 import {UpdateGameValidation} from '../service/validation/update-game-validation';
 import {AddGameValidation} from '../service/validation/add-game-validation';
 import {TranslateService} from '@ngx-translate/core';
@@ -24,6 +24,9 @@ export class AddGameComponent implements OnInit {
   gameForm: FormGroup;
   picture: any;
   fileUrl: string;
+  accesses: string[] = ["PUBLIC", "PRIVATE"];
+  @Input() accessControl: AbstractControl;
+  @Output() accessControlChange = new EventEmitter<AbstractControl>();
 
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
@@ -63,6 +66,12 @@ export class AddGameComponent implements OnInit {
     return this.gameForm.get('description').value;
   }
 
+  getAccess(): string {
+  //  this.game.access=this.gameForm.get('access').value;
+    console.log("acceeeee "+this.gameForm.get('access').value);
+    return this.gameForm.get('access').value;//.get('access').value;
+  }
+
   getUser(id: string): Promise<User> {
     return this.userService.getUserById(id).toPromise();
   }
@@ -97,8 +106,33 @@ export class AddGameComponent implements OnInit {
     if (this.gameForm.valid) {
       this.game.title = this.getTitle();
       this.game.description = this.getDescription();
+     //  this.game.access =  this.getAccess();
+   //    alert(this.game.access+this.getAccess())
+    //  this.game.access = "PRIVATE";
+     //  window.alert(this.game.access);
     }
+  //  this.game.access = this.getAccess();
+    // if (this.accessControl.valid) {
+       this.game.access = this.getAccess();
+    // }
+    // else {
+    //   this.game.access = null;
+    // }
+    // this.accessControlChange.emit(this.accessControl);
   }
+
+
+  // getAccess(): string {
+  //   for (const access of this.accesses) {
+  //     if (this.accessControl.value === access) {
+  //       this.game.access = access;
+  //       console.log("acess"+access);
+  //       this.game.access = "PRIVATE";
+  //       console.log("acess2"+this.game.access);
+  //       return "PRIVATE";
+  //     }
+  //   }
+  // }
 
   selectFile(event) {
     this.picture = event.target.files[0];

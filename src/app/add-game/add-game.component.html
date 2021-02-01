@@ -67,6 +67,24 @@
             </div>
 
           </mat-card>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Access
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-form-field class="example-form" appearance="fill">
+              <mat-select [(ngModel)]="game.access">
+                <mat-option *ngFor="let access of accesses" [value]="access">
+                  {{access}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </mat-expansion-panel>
+
         </form>
       </mat-accordion>
     </div>
@@ -74,8 +92,12 @@
     <app-question [game]="game"></app-question>
     <app-add-question [(game)]="game"></app-add-question>
 
+<!--    <div class="save-button">-->
+<!--      <a mat-raised-button href="games" color="primary" [disabled]="!gameForm.valid"-->
+<!--         (click)="this.isUpdateGame?updateGame():createGame(game)">{{ 'ADD_GAME.SAVE' | translate }}</a>-->
+<!--    </div>-->
     <div class="save-button">
-      <a mat-raised-button href="games" color="primary" [disabled]="!gameForm.valid"
+      <a mat-raised-button color="primary" [disabled]="!gameForm.valid"
          (click)="this.isUpdateGame?updateGame():createGame(game)">{{ 'ADD_GAME.SAVE' | translate }}</a>
     </div>
   </div>
