@@ -17,10 +17,6 @@
   "ADD_GAME": {
     "GAME_TITLE": "Название игры",
     "GAME_DESCRIPTION": "Описание игры",
-    "PHOTO": {
-      "TITLE": "Фото",
-      "CHOOSE": "Выберите фото"
-    },
     "QUESTIONS": {
       "TITLE": "Вопросы",
       "EDIT_QUESTION": "Редактировать",
@@ -71,6 +67,10 @@
         "MINLENGTH": "Описание должно быть не менее 3 символов"
       }
     }
+  },
+  "PHOTO": {
+    "TITLE": "Фото",
+    "CHOOSE": "Выберите фото"
   },
   "ERROR_AUTHENTICATION_CONNECTION": "Страница не найдена",
   "SIGN_IN": {

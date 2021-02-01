@@ -8,6 +8,7 @@ export class Question {
   level: string;
   answersSet: Answer[];
   game: string;
+  photo: string;
 
   constructor() {
   }

@@ -68,6 +68,10 @@
       }
     }
   },
+  "PHOTO": {
+    "TITLE": "Photo",
+    "CHOOSE": "Choose photo"
+  },
   "ERROR_AUTHENTICATION_CONNECTION": "Page not found",
   "SIGN_IN": {
 
