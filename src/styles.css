@@ -10,3 +10,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #303030
 }
+
+.snackbar {
+  min-width: 600px !important;
+  min-height: 100px !important;
+  white-space: pre-wrap
+}

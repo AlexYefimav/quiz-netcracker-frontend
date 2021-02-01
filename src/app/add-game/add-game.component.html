@@ -16,8 +16,11 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-form-field class="example-form">
+
+<!--              Вернуть required-->
+
               <label>
-                <input matInput placeholder="{{ 'ADD_GAME.GAME_TITLE' | translate }}" formControlName="title" (input)="checkForm()" required>
+                <input matInput placeholder="{{ 'ADD_GAME.GAME_TITLE' | translate }}" formControlName="title" (input)="checkForm()">
               </label>
               <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.required">
                 {{ 'ADD_GAME.ERROR.TITLE.REQUIRED' | translate }}
@@ -52,13 +55,18 @@
               </mat-error>
             </mat-form-field>
           </mat-expansion-panel>
+
           <mat-card class="photo">
             <div class="title">
-              Фото
+              {{ 'PHOTO.TITLE' | translate }}
             </div>
             <div class="description">
-              <input type="file" id="file" (change)="selectFile($event)" accept=".jpg, .jpeg, .png"
-                     class="photo-input">
+              <button mat-button (click)="fileInput.click()">{{ 'PHOTO.CHOOSE' | translate }}</button>
+              <input hidden type="file" id="file" class="photo-input" (change)="selectFile($event)"
+                     #fileInput accept=".jpg, .jpeg, .png">
+              <div *ngIf="picture">
+                {{ picture.name }}
+              </div>
             </div>
             <div class="icon">
               <mat-icon>
@@ -90,14 +98,10 @@
     </div>
 
     <app-question [game]="game"></app-question>
-    <app-add-question [(game)]="game"></app-add-question>
+    <app-add-question [game]="game"></app-add-question>
 
-<!--    <div class="save-button">-->
-<!--      <a mat-raised-button href="games" color="primary" [disabled]="!gameForm.valid"-->
-<!--         (click)="this.isUpdateGame?updateGame():createGame(game)">{{ 'ADD_GAME.SAVE' | translate }}</a>-->
-<!--    </div>-->
     <div class="save-button">
-      <a mat-raised-button color="primary" [disabled]="!gameForm.valid"
+      <a mat-raised-button href="games" color="primary" [disabled]="!gameForm.valid"
          (click)="this.isUpdateGame?updateGame():createGame(game)">{{ 'ADD_GAME.SAVE' | translate }}</a>
     </div>
   </div>

@@ -17,7 +17,6 @@ export class AppTopBarComponent implements OnInit {
   authorizedAccount: User;
   isAccount: boolean;
   @Input() languages;
-  @Output() languageChange = new EventEmitter<string>();
   currentLanguage: string;
 
   constructor(private router: Router,
@@ -26,7 +25,6 @@ export class AppTopBarComponent implements OnInit {
               private translateService: TranslateService,
               private localSettingsService: LocalSettingsService) {
     this.isAccount = false;
-
   }
 
   openLoginDialog(): void {
@@ -50,8 +48,11 @@ export class AppTopBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const currentLanguage = this.localSettingsService.getLanguage();
-    this.translateService.use(currentLanguage);
+    this.currentLanguage = this.localSettingsService.getLanguage();
+    if (!this.currentLanguage) {
+      this.currentLanguage = 'RU';
+    }
+    this.translateService.use(this.currentLanguage);
     this.checkAuthorized();
   }
 
@@ -96,6 +97,8 @@ export class AppTopBarComponent implements OnInit {
   }
 
   changeLanguage(lang: string): void {
-    this.languageChange.emit(lang);
+    this.currentLanguage = lang;
+    this.translateService.use(lang);
+    this.localSettingsService.setLanguage(lang);
   }
 }

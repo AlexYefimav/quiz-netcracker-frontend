@@ -8,17 +8,17 @@
     </ng-container>
 
     <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> Вопрос</th>
+      <th mat-header-cell *matHeaderCellDef> {{ 'STATISTICS.QUESTION' | translate }}</th>
       <td mat-cell *matCellDef="let element"> {{element.question.title}} </td>
     </ng-container>
 
     <ng-container matColumnDef="yourAnswer">
-      <th mat-header-cell *matHeaderCellDef> Ваш ответ</th>
+      <th mat-header-cell *matHeaderCellDef> {{ 'STATISTICS.YOUR_RESPONSE' | translate }}</th>
       <td mat-cell *matCellDef="let element"> {{element.answer.title}} </td>
     </ng-container>
 
     <ng-container matColumnDef="rightAnswer">
-      <th mat-header-cell *matHeaderCellDef> Правильный ответ</th>
+      <th mat-header-cell *matHeaderCellDef> {{ 'STATISTICS.RIGHT_ANSWER' | translate }}</th>
       <td mat-cell *matCellDef="let element"> {{rightAnswer(element.question)}} </td>
     </ng-container>
 

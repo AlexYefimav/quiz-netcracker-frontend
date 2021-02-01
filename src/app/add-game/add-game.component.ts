@@ -49,7 +49,6 @@ export class AddGameComponent implements OnInit {
       this.isUpdateGame = false;
       this.game = new Game();
       this.game.questions = [];
-      this.game.id = null;
       this.gameForm = this.addGameValidation.createGameForm();
     }
   }
@@ -92,12 +91,12 @@ export class AddGameComponent implements OnInit {
 
   async createGame(game: Game): Promise<void> {
     if (this.gameForm.valid) {
-      if (game.questions.length === 0) {
-        this.game.player = this.storageService.currentUser.id;
-        this.game = await this.createAndGetGame(game);
+      if (game.id) {
+        this.game = await this.updateAndGetGame();
       }
       else {
-        this.game = await this.updateAndGetGame();
+        this.game.player = this.storageService.currentUser.id;
+        this.game = await this.createAndGetGame(game);
       }
     }
   }
@@ -136,27 +135,20 @@ export class AddGameComponent implements OnInit {
 
   selectFile(event) {
     this.picture = event.target.files[0];
-    console.log(this.picture);
     const formData = new FormData();
     const formData2 = new FormData();
-
-
     formData.append('file', this.picture);
     this.gameService.uploadFile(formData).subscribe((result) =>
-      {console.log(result);
+      {
         this.fileUrl = result.photo;
-        console.log(this.fileUrl);
-        console.log(this.game.id);
         formData2.append('url', this.fileUrl);
         formData2.append('gameId', this.game.id);
         this.gameService.updateFile(this.game.id, formData2).subscribe((res: Game) =>
           {
-            console.log(res);
             this.game.photo = res.photo;
           },
           err => console.error('Observer got an error: ' + err)
         );
-
       },
       err => console.error('Observer got an error: ' + err)
     );

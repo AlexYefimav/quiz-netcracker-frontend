@@ -68,6 +68,10 @@
       }
     }
   },
+  "PHOTO": {
+    "TITLE": "Фото",
+    "CHOOSE": "Выберите фото"
+  },
   "ERROR_AUTHENTICATION_CONNECTION": "Страница не найдена",
   "SIGN_IN": {
 
@@ -77,5 +81,50 @@
   },
   "GAME": {
 
+  },
+
+  "PLAYROOM": {
+    "TITLE": "Игровая комната",
+    "COLUMN_NAME": "Игрок",
+    "BUTTON_LEAVE": "Выйти",
+    "BUTTON_PLAY": "Играть"
+  },
+
+  "MULTIPLAYER": {
+    "QUESTION": "Вопрос",
+    "OF": "из",
+    "BUTTON_REPLY": "Ответить",
+    "BUTTON_STATISTICS": "Статистика",
+    "BUTTON_NEXT": "Далее",
+    "LIKE": "Понравилось"
+  },
+
+  "STATISTICS": {
+    "QUESTION": "Вопрос",
+    "YOUR_RESPONSE": "Ваш ответ",
+    "RIGHT_ANSWER": "Правильный ответ"
+  },
+
+  "INTERCEPTOR": {
+    "SNACKBAR": {
+      "ACTION": "Закрыть",
+      "ERROR": {
+        "TITLE": "Заголовок",
+        "CODE": "Код ошибки",
+        "MESSAGE": "Содержание"
+      }
+    }
+  },
+
+  "PLAYER_PAGE": {
+    "BUTTON_EDIT": "Редактировать профиль",
+    "PERSONAL_DATA": "Личные данные",
+    "NAME_PLAYER": "Имя",
+    "EMAIL": "Email",
+    "YOUR_GAME": "Ваши игры",
+    "NAME_GAME": "Название игры",
+    "PLAY": "Играть",
+    "DELETE": "Удалить",
+    "SHARE": "Поделиться"
   }
 }

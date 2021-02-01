@@ -101,6 +101,25 @@
           </mat-error>
         </mat-form-field>
       </mat-expansion-panel>
+      <mat-card class="photo">
+        <div class="title">
+          {{ 'PHOTO.TITLE' | translate }}
+        </div>
+        <div class="description">
+          <button mat-button (click)="fileInput.click()">{{ 'PHOTO.CHOOSE' | translate }}</button>
+          <input hidden type="file" id="file" class="photo-input" (change)="selectFile($event)"
+                 #fileInput accept=".jpg, .jpeg, .png">
+          <div *ngIf="picture">
+            {{ picture.name }}
+          </div>
+        </div>
+        <div class="icon">
+          <mat-icon>
+            party_mode
+          </mat-icon>
+        </div>
+
+      </mat-card>
 
 <!--          <app-category [categoryControl]="questionForm.get('category')"-->
 <!--                        [question]="question"-->

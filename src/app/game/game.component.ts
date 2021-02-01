@@ -16,7 +16,6 @@ const pageSize: number = 3;
 
 export class GameComponent implements OnInit {
 
-
   public game: Game;
   public pageSlice: Game[];
   page: number;

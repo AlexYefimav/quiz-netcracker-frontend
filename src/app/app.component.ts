@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {LocalSettingsService} from './service/localization/LocalSettingsService';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +11,9 @@ export class AppComponent {
   currentLanguage: string;
   languages = [];
 
-  constructor(public translateService: TranslateService,
-              private localSettingsService: LocalSettingsService) {
+  constructor(public translateService: TranslateService) {
     this.translateService.stream('BUTTON.LANG').subscribe(value => {
       this.languages = value;
     });
-  }
-
-  setLanguage(lang: string): void {
-    this.translateService.use(lang);
-    this.localSettingsService.setLanguage(lang);
   }
 }

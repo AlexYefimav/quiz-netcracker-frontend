@@ -1,22 +1,18 @@
 <div class="container">
-<mat-card>
-  <h1>
-    <mat-card-title class="title">
-      <div>
-        {{game.title}}
-      </div>
-    </mat-card-title>
-
-    <mat-card-subtitle class="image">
-      <img class="displayed" src="url(src/assets/images/meme.png)"
-      alt="Here must be the photo">
-    </mat-card-subtitle>
-
-
+  <mat-card>
+    <h1>
+      <mat-card-title class="title">
+        <div>
+          {{game.title}}
+        </div>
+      </mat-card-title>
+      <mat-card-subtitle class="image" *ngIf="game.photo">
+        <a><img src="{{game.photo}}" width="200" height="200" alt="Photo from Amazon S3"></a>
+      </mat-card-subtitle>
       <mat-card-subtitle class="descr">
         <div>
           <h1>
-        {{game.description}}
+            {{game.description}}
           </h1>
         </div>
       </mat-card-subtitle>
@@ -35,4 +31,18 @@
 </mat-card>
 
 
+<!--      <mat-card-subtitle class="playbutton">-->
+<!--        <form>-->
+<!--          <div>-->
+<!--            <h1 style="margin-bottom: 20px;">-->
+<!--              <a mat-flat-button (click)="openDialog(game)">Играть</a>-->
+<!--            </h1>-->
+<!--            <h1>-->
+<!--              <a mat-flat-button href="games">Вернуться</a>-->
+<!--            </h1>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </mat-card-subtitle>-->
+<!--    </h1>-->
+<!--  </mat-card>-->
 </div>

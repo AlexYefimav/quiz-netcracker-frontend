@@ -1,0 +1,56 @@
+.mat-dialog-container{
+  padding: 0;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
+  width: 250px;
+}
+
+.header{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.body{
+
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+}
+
+.column-number{
+  margin-left: 20px;
+  flex-basis: 30%;
+}
+
+.column-name{
+  margin-right: 20px;
+}
+
+.players{
+  display: flex;
+  flex-direction: row;
+}
+
+.actions{
+  display: flex;
+  flex-direction: row;
+}
+
+.close{
+  margin-left: 10px;
+}
+
+.play{
+  margin-left: 80px;
+}
+
+.spinner{
+  margin-left: 100px;
+}

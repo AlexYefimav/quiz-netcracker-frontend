@@ -5,21 +5,17 @@
 h1 {
   text-align: center;
   margin-top: 20px;
-  color: oldlace;
+  color: #5d6cd7;
+  font-family: 'Roboto Slab', serif;
 }
+
 .mat-card {
-  /*background: #e91e63 url(src/assets/images/meme.png);*/
   display: flex;
-  background: #e91e63;
+  background: url(src/assets/images/img.png);
   color: oldlace;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /*margin-left: auto;*/
-  /*margin-right: auto;*/
-  /*margin-top: 15px;*/
-  /*max-width: 500px;*/
-  /*max-height: 300px;*/
   text-align: center;
   margin: 5pc;
   padding: 5pc;
@@ -55,7 +51,7 @@ h1 {
   color : yellow;
 }
 
-.container {
+.card {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,18 +62,8 @@ h1 {
   flex-wrap: wrap;
 }
 
-/*.container{*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*  flex-direction: column;*/
-/*  !*background: #1abc9c;*!*/
-/*  !*color: #1abc9c;*!*/
-/*}*/
 
-/*.title, .body{*/
-/*  background: #eef3f2;*/
-/*  width: 100%;*/
-/*  height: 100%;*/
-/*  color: red*/
-/*}*/
+
+
+
+

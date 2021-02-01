@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header">
     <h1>
-      Вопрос {{questionNumber + 1}} из {{quantityQuestion}}
+      {{ 'MULTIPLAYER.QUESTION' | translate }} {{questionNumber + 1}} {{ 'MULTIPLAYER.OF' | translate }} {{quantityQuestion}}
     </h1>
   </div>
   <mat-card class="card">
@@ -38,21 +38,21 @@
     <div class="action">
       <div *ngIf="answer && !timeIsOver; else blockButtonReply" class="myButtons">
         <button mat-flat-button color="warn" (click)="addAnswer()"
-                disabled="{{isBlockAnswers}}">Ответить
+                disabled="{{isBlockAnswers}}">{{ 'MULTIPLAYER.BUTTON_REPLY' | translate }}
         </button>
       </div>
       <ng-template #blockButtonReply>
         <div *ngIf="answeredQuestion == quantityQuestion; else nextQuestionOrBlockButtonReply">
           <a mat-flat-button class="statistics" color="accent" href="statistics/{{gameId}}"
-             (click)="disconnect()">Статистика</a>
+             (click)="disconnect()">{{ 'MULTIPLAYER.BUTTON_STATISTICS' | translate }}</a>
         </div>
       </ng-template>
       <ng-template #nextQuestionOrBlockButtonReply>
         <div *ngIf="player.id==game.player && timeIsOver; else timerIsOver">
-          <button mat-flat-button color="primary" (click)="setNextQuestion()">Далее</button>
+          <button mat-flat-button color="primary" (click)="setNextQuestion()">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>
         </div>
         <ng-template #timerIsOver>
-          <button mat-flat-button class="myButtons" color="warn" disabled>Ответить</button>
+          <button mat-flat-button class="myButtons" color="warn" disabled>{{ 'MULTIPLAYER.BUTTON_REPLY' | translate }}</button>
         </ng-template>
       </ng-template>
     </div>

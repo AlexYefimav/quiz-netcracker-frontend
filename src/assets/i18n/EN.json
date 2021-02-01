@@ -68,11 +68,49 @@
       }
     }
   },
+  "PHOTO": {
+    "TITLE": "Photo",
+    "CHOOSE": "Choose photo"
+  },
   "ERROR_AUTHENTICATION_CONNECTION": "Page not found",
   "SIGN_IN": {
 
   },
   "SIGN_UP": {
     "TITLE": "Sign up"
+  },
+
+  "PLAYROOM": {
+    "TITLE": "Playroom",
+    "COLUMN_NAME": "Player",
+    "BUTTON_LEAVE": "Leave",
+    "BUTTON_PLAY": "Play"
+  },
+
+  "MULTIPLAYER": {
+    "QUESTION": "Question",
+    "OF": "of",
+    "BUTTON_REPLY": "Reply",
+    "BUTTON_STATISTICS": "Statistics",
+    "BUTTON_NEXT": "Next",
+    "LIKE": "Like"
+  },
+
+  "STATISTICS": {
+    "QUESTION": "Question",
+    "YOUR_RESPONSE": "Your response",
+    "RIGHT_ANSWER": "Right answer"
+  },
+
+  "PLAYER_PAGE": {
+    "BUTTON_EDIT": "Edit profile",
+    "PERSONAL_DATA": "Title",
+    "NAME_PLAYER": "Name",
+    "EMAIL": "Email",
+    "YOUR_GAME": "Your game",
+    "NAME_GAME": "Name of the game",
+    "PLAY": "Play",
+    "DELETE": "Delete",
+    "SHARE": "Share"
   }
 }
