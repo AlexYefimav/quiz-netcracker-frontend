@@ -24,6 +24,7 @@ export class AddGameComponent implements OnInit {
   gameForm: FormGroup;
   picture: any;
   fileUrl: string;
+  selectedAccess: string="PUBLIC";
   accesses: string[] = ["PUBLIC", "PRIVATE"];
   @Input() accessControl: AbstractControl;
   @Output() accessControlChange = new EventEmitter<AbstractControl>();
@@ -66,6 +67,10 @@ export class AddGameComponent implements OnInit {
     return this.gameForm.get('description').value;
   }
 
+  setSelectedAccess(access){
+    this.selectedAccess=access;
+  }
+
   // getAccess(): string {
   // //  this.game.access=this.gameForm.get('access').value;
   //   console.log("acceeeee "+this.gameForm.get('access').value);
@@ -74,11 +79,11 @@ export class AddGameComponent implements OnInit {
 
   getAccess(): string {
     for (let access of this.accesses) {
-      access="PRIVATE";
-     // if (this.accessControl.value === access) {
+     // access="PRIVATE";
+      if (this.accessControl.value === access) {
         this.game.access = access;
         return access;
-      //}
+      }
     }
   }
 
@@ -133,7 +138,7 @@ export class AddGameComponent implements OnInit {
     if (this.gameForm.valid) {
       this.game.title = this.getTitle();
       this.game.description = this.getDescription();
-      this.game.access =  this.getAccess();
+      this.game.access =  this.selectedAccess;
        //  this.game.access = "PUBLIC";
     }
  }

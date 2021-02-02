@@ -84,8 +84,8 @@
             </mat-expansion-panel-header>
 
             <mat-form-field class="example-form" appearance="fill">
-              <mat-select [(ngModel)]="game.access" > >
-                <mat-option *ngFor="let access of accesses" [value]="access" >
+              <mat-select [value]="selectedAccess" >
+                <mat-option *ngFor="let access of accesses" [value]="access" (click)="setSelectedAccess(access)" >
                   {{access}}
                 </mat-option>
               </mat-select>
