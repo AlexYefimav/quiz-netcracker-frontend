@@ -18,73 +18,80 @@
 <!--      </form>-->
 <!--    </div>-->
 
+    <div *ngIf="userForm">
+      <form [formGroup]="userForm" (ngSubmit)="submitPlayer()">
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Username" formControlName="login" [errorStateMatcher]="errorMatcher">
+            <mat-error *ngIf="login.hasError('minlength')">
+              Username should contain at least 3 characters
+            </mat-error>
+            <mat-error *ngIf="login.hasError('required')">
+              Username is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="login.hasError('duplicate')">
+              User with this login already exists
+            </mat-error>
+          </mat-form-field>
+        </p>
 
-    <form [formGroup]="form" (ngSubmit)="submitPlayer()">
-      <p>
-        <mat-form-field>
-          <input type="text" matInput placeholder="Username" formControlName="username" [errorStateMatcher]="errorMatcher">
-          <mat-error *ngIf="username.hasError('minlength') && !password.hasError('required')">
-            Username should contain at least 3 characters
-          </mat-error>
-          <mat-error *ngIf="username.hasError('required')">
-            Username is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </p>
+        <p>
+          <mat-form-field>
+            <input type="email" matInput placeholder="Email" formControlName="mail" [errorStateMatcher]="errorMatcher">
+            <mat-error *ngIf="mail.hasError('email') && !mail.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="mail.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="mail.hasError('duplicate')">
+              User with this email already exists
+            </mat-error>
+          </mat-form-field>
+        </p>
 
-      <p>
-        <mat-form-field>
-          <input type="email" matInput placeholder="Email" formControlName="mail" [errorStateMatcher]="errorMatcher">
-          <mat-error *ngIf="mail.hasError('email') && !mail.hasError('required')">
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="mail.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </p>
+        <p>
+          <mat-form-field>
+            <input type="password" matInput placeholder="Password" formControlName="password" [errorStateMatcher]="errorMatcher">
+            <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
+              Password should contain at least 6 characters
+            </mat-error>
+            <mat-error *ngIf="password.hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
 
-      <p>
-        <mat-form-field>
-          <input type="password" matInput placeholder="Password" formControlName="password" [errorStateMatcher]="errorMatcher">
-          <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
-            Password should contain at least 6 characters
-          </mat-error>
-          <mat-error *ngIf="password.hasError('required')">
-            Password is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </p>
+        <p>
+          <mat-form-field>
+            <mat-label>Repeat Password</mat-label>
+            <input type="password" matInput placeholder="Repeat Password" formControlName="passwordRepeat" [errorStateMatcher]="errorMatcher">
+            <mat-error *ngIf="!checkPasswords()">
+              Passwords do not match
+            </mat-error>
+            <mat-error *ngIf="passwordRepeat.hasError('required')">
+              Confirm password
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p *ngIf="error && (passwordRepeat.dirty || passwordRepeat.touched)" class="error">
+          {{ error }}
+        </p>
 
-      <p>
-        <mat-form-field>
-          <mat-label>Repeat Password</mat-label>
-          <input type="password" matInput placeholder="Repeat Password" formControlName="passwordRepeat" [errorStateMatcher]="errorMatcher">
-          <mat-error *ngIf="!checkPasswords()">
-            Passwords do not match
-          </mat-error>
-          <mat-error *ngIf="passwordRepeat.hasError('required')">
-            Confirm password
-          </mat-error>
-        </mat-form-field>
-      </p>
-      <p *ngIf="error && (passwordRepeat.dirty || passwordRepeat.touched)" class="error">
-        {{ error }}
-      </p>
+        <div class="button">
+          <button type="submit" mat-button [disabled]="userForm.invalid || error">Sign Up</button>
+          <!--        <a mat-raised-button  color="primary" (click)="register(user)">Save</a>-->
+        </div>
+        <div class="text-left">
+          <!--        <a class="text-small-ref" (click)="redirect('login')">-->
+          <!--          Already have an account? Sign in-->
+          <!--        </a>-->
+          <!--        <a class="text-small-ref" (click)="redirect('login')">-->
+          <!--          Already have an account? Sign in-->
+          <!--        </a>-->
+        </div>
 
-      <div class="button">
-        <button type="submit" mat-button [disabled]="form.invalid || error">Sign Up</button>
-        <!--        <a mat-raised-button  color="primary" (click)="register(user)">Save</a>-->
-      </div>
-      <div class="text-left">
-<!--        <a class="text-small-ref" (click)="redirect('login')">-->
-<!--          Already have an account? Sign in-->
-<!--        </a>-->
-        <!--        <a class="text-small-ref" (click)="redirect('login')">-->
-        <!--          Already have an account? Sign in-->
-        <!--        </a>-->
-      </div>
-
-    </form>
+      </form>
+    </div>
   </mat-card-content>
 </mat-card>

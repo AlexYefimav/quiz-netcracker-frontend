@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../model/game';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {GameService} from '../service/game.service';
 import {MatAccordion} from '@angular/material/expansion';
 import {StorageService} from "../service/storage/storage.service";
@@ -32,7 +32,8 @@ export class AddGameComponent implements OnInit {
               private addGameValidation: AddGameValidation,
               private updateGameValidation: UpdateGameValidation,
               private translateService: TranslateService,
-              private localeSettingsService: LocalSettingsService) {
+              private localeSettingsService: LocalSettingsService,
+              private router: Router) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -74,22 +75,39 @@ export class AddGameComponent implements OnInit {
     return this.gameService.updateGame(this.game).toPromise();
   }
 
+  redirectTo(uri: string): void {
+    this.router.navigateByUrl('/games', {skipLocationChange: true}).then(() =>
+      this.router.navigate([uri]));
+  }
+
   async updateGame(): Promise<void> {
     if (this.gameForm.valid) {
-      this.game = await this.updateAndGetGame();
+      try {
+        this.game = await this.updateAndGetGame();
+      }
+      catch (error) {
+        window.setTimeout(() => {}, 10000);
+      }
     }
+    this.redirectTo('games');
   }
 
   async createGame(game: Game): Promise<void> {
     if (this.gameForm.valid) {
-      if (game.id) {
-        this.game = await this.updateAndGetGame();
+      try {
+        if (game.id) {
+          this.game = await this.updateAndGetGame();
+        }
+        else {
+          this.game.player = this.storageService.currentUser.id;
+          this.game = await this.createAndGetGame(game);
+        }
       }
-      else {
-        this.game.player = this.storageService.currentUser.id;
-        this.game = await this.createAndGetGame(game);
+      catch (error) {
+        window.setTimeout(() => {}, 10000);
       }
     }
+    this.redirectTo('games');
   }
 
   checkForm(): void {
