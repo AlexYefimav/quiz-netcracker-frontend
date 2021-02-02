@@ -89,22 +89,23 @@ export class SignUpComponent implements OnInit {
   }
 
   submitPlayer() {
-    if (this.form.valid) {
+    if (this.userForm.valid) {
       this.user.username = this.login.value;
       this.user.mail = this.mail.value;
       this.user.password = this.password.value;
+      this.sendData();
       // this.checkUsersFromDB();
       return "Успешно";
     }
     return "Успешно";
   }
 
-  // sendData() {
-  //   this.signinService.register(this.user).subscribe(() => {
-  //         this.redirect('/games')
-  //     }
-  //   );
-  // }
+  sendData() {
+    this.signinService.register(this.user).subscribe(() => {
+          this.redirect('/games')
+      }
+    );
+  }
 
   // checkUsersFromDB() {
   //   this.userService.checkUserByLoginOrEmail(this.user.username).subscribe(
