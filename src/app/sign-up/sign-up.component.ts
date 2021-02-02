@@ -8,9 +8,7 @@ import {SigninService} from "../service/signin.service";
 import {AddAnswerValidation} from "../service/validation/add-answer-validation.service";
 import {SignUpValidation} from "../service/validation/sign-up-validator";
 import {UserService} from "../service/user.service";
-import {SignInOnceComponent} from "../sign-in-once/sign-in-once.component";
-import {MatDialog} from "@angular/material/dialog";
-import {SignInComponent} from "../sign-in/sign-in.component";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export class SignUpErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -27,32 +25,34 @@ export class SignUpErrorStateMatcher implements ErrorStateMatcher {
 
 export class SignUpComponent implements OnInit {
 
-  get username() {
-    return this.form.get('username');
+  get login() {
+    return this.userForm.get('login');
   }
 
   get mail() {
-    return this.form.get('mail');
+    return this.userForm.get('mail');
   }
 
   get password() {
-    return this.form.get('password');
+    return this.userForm.get('password');
   }
 
   get passwordRepeat() {
-    return this.form.get('passwordRepeat');
+    return this.userForm.get('passwordRepeat');
   }
 
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
   user: User;
-  userCheck: User;
+  // userCheck: User;
   form: FormGroup;
   userForm: FormGroup;
 
   errorMatcher: ErrorStateMatcher;
   isPasswordsEqual: boolean;
-  isUserFromDB: boolean;
+  // isUserFromDB: boolean;
+
+  existingUsers: User[];
 
   @Input() error: string | null;
 
@@ -62,30 +62,39 @@ export class SignUpComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder,
               private signUpValidation: SignUpValidation,
-              public dialog: MatDialog,
               private userService: UserService) {
 
-    this.form = formBuilder.group({
-      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      mail: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      passwordRepeat: new FormControl('', Validators.required),
-    });
+    // this.form = formBuilder.group({
+    //   username: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    //   mail: new FormControl('', [Validators.required, Validators.email]),
+    //   password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    //   passwordRepeat: new FormControl('', Validators.required),
+    // });
   }
 
-  ngOnInit() {
+  async ngOnInit(): Promise<void> {
+    this.existingUsers = await this.getUsers();
+    if (this.existingUsers) {
+      this.signUpValidation.setUsers(this.existingUsers);
+      this.userForm = this.signUpValidation.createUserForm();
+    }
     this.user = new User();
     this.errorMatcher = new SignUpErrorStateMatcher();
-    this.signUpValidation.setUser(this.user);
-    this.userForm = this.signUpValidation.createUserForm();
+    // this.signUpValidation.setUser(this.user);
+    // this.userForm = this.signUpValidation.createUserForm();
+  }
+
+  async getUsers(): Promise<User[]> {
+    return this.userService.getUsers().toPromise();
   }
 
   submitPlayer() {
-    if (this.form.valid) {
-      this.user.username = this.username.value;
+    if (this.userForm.valid) {
+      this.user.username = this.login.value;
       this.user.mail = this.mail.value;
       this.user.password = this.password.value;
-      this.checkUsersFromDB();
+      this.sendData();
+      // this.checkUsersFromDB();
       return "Успешно";
     }
     return "Успешно";
@@ -98,20 +107,25 @@ export class SignUpComponent implements OnInit {
     );
   }
 
-  checkUsersFromDB() {
-    this.userService.checkUserByLoginOrEmail(this.user.username).subscribe(
-      user => {
-        this.userCheck = user;
-        this.isUserFromDB = this.userCheck== null;
-        if (!this.isUserFromDB) {
-          window.alert('Пользователь с таким именем/почтой уже существуем');
-        } else {
-          this.sendData();
-          window.alert('Регистрация прошла успешно')
-        }
-      }
-     );
-  }
+  // checkUsersFromDB() {
+  //   this.userService.checkUserByLoginOrEmail(this.user.username).subscribe(
+  //     user => {
+  //       this.userCheck = user;
+  //       this.isUserFromDB = this.userCheck== null;
+  //       const snackbarAction = 'Закрыть';
+  //       if (!this.isUserFromDB) {
+  //         this.snackBar.open('Пользователь с таким именем/почтой уже существует', snackbarAction, {
+  //           panelClass: ['snackbar']
+  //         });
+  //       } else {
+  //         this.sendData();
+  //         this.snackBar.open('Регистрация прошла успешно', snackbarAction, {
+  //           panelClass: ['snackbar']
+  //         });
+  //       }
+  //     }
+  //    );
+  // }
 
   checkPasswords() {
     this.isPasswordsEqual = this.password.value === this.passwordRepeat.value;
@@ -125,25 +139,6 @@ export class SignUpComponent implements OnInit {
 
   redirect(url: string) {
     this.router.navigate([url]);
-  }
-
-  openLoginDialog(): void {
-    const dialogRef = this.dialog.open(SignInComponent, {
-      minWidth: '400px',
-      minHeight: '300px',
-    //  data: this.authorizedAccount
-    });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     this.authorizedAccount = result;
-    //     this.isAuthorized = true;
-    //   }
-    //   setTimeout(() => {
-    //     this.checkAuthorized();
-    //     location.reload();
-    //   }, 2000);
-    // });
   }
 
 }

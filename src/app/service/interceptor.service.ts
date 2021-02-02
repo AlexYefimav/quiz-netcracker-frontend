@@ -15,7 +15,7 @@ import {TranslateService} from '@ngx-translate/core';
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
   constructor(private storageService: StorageService,
-              private snackBar: MatSnackBar,
+              public snackBar: MatSnackBar,
               private injector: Injector) {
   }
 
@@ -53,16 +53,20 @@ export class InterceptorService implements HttpInterceptor {
       errorMessage = value.ERROR.MESSAGE;
     });
     if (errorResponse.error) {
-      message = `${errorTitle}: ${errorResponse.error.errorTitle}\n` +
-                 `${errorCode}: ${errorResponse.error.errorCode}\n` +
-                 `${errorMessage}: ${errorResponse.error.message}`;
+      if (errorResponse.error.errorTitle && errorResponse.error.errorCode && errorResponse.error.message) {
+        message = `${errorTitle}: ${errorResponse.error.errorTitle}\n` +
+                  `${errorCode}: ${errorResponse.error.errorCode}\n` +
+                  `${errorMessage}: ${errorResponse.error.message}`;
+      }
+      else {
+        message = errorResponse.error;
+      }
     }
     if (snackbarAction) {
       this.snackBar.open(message, snackbarAction, {
-        duration: 10000,
         panelClass: ['snackbar']
       });
     }
-    return throwError(errorResponse.error.status);
+    return throwError(errorResponse.error);
   }
 }
