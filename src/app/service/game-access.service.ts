@@ -21,7 +21,7 @@ export class GameAccessService {
   }
 
   getGameAccessByGameAndPlayer(gameId,playerId: string): Observable<boolean> {
-       return this.http.get<boolean>(this.url+'check/' + gameId+'/play/'+playerId);
+       return this.http.get<boolean>(this.url+'check/' + gameId+'/'+playerId);
   }
 }
 
