@@ -92,7 +92,7 @@ export class AppTopBarComponent implements OnInit {
       this.redirectTo(`/player/${this.authorizedAccount.player}`);
     }
     if (this.authorizedAccount.role=='ADMIN') {
-      this.redirectTo(`/admin/${this.authorizedAccount.id}`);
+      this.redirectTo(`/player/${this.authorizedAccount.id}`);
     }
   }
 

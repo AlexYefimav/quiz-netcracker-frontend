@@ -65,10 +65,20 @@ export class AddGameComponent implements OnInit {
     return this.gameForm.get('description').value;
   }
 
+  // getAccess(): string {
+  // //  this.game.access=this.gameForm.get('access').value;
+  //   console.log("acceeeee "+this.gameForm.get('access').value);
+  //   return this.gameForm.get('access').value;//.get('access').value;
+  // }
+
   getAccess(): string {
-  //  this.game.access=this.gameForm.get('access').value;
-    console.log("acceeeee "+this.gameForm.get('access').value);
-    return this.gameForm.get('access').value;//.get('access').value;
+    for (let access of this.accesses) {
+      access="PRIVATE";
+     // if (this.accessControl.value === access) {
+        this.game.access = access;
+        return access;
+      //}
+    }
   }
 
   getUser(id: string): Promise<User> {
@@ -105,34 +115,10 @@ export class AddGameComponent implements OnInit {
     if (this.gameForm.valid) {
       this.game.title = this.getTitle();
       this.game.description = this.getDescription();
-     //  this.game.access =  this.getAccess();
-   //    alert(this.game.access+this.getAccess())
-    //  this.game.access = "PRIVATE";
-     //  window.alert(this.game.access);
+      this.game.access =  this.getAccess();
+       //  this.game.access = "PUBLIC";
     }
-  //  this.game.access = this.getAccess();
-    // if (this.accessControl.valid) {
-       this.game.access = this.getAccess();
-    // }
-    // else {
-    //   this.game.access = null;
-    // }
-    // this.accessControlChange.emit(this.accessControl);
-  }
-
-
-  // getAccess(): string {
-  //   for (const access of this.accesses) {
-  //     if (this.accessControl.value === access) {
-  //       this.game.access = access;
-  //       console.log("acess"+access);
-  //       this.game.access = "PRIVATE";
-  //       console.log("acess2"+this.game.access);
-  //       return "PRIVATE";
-  //     }
-  //   }
-  // }
-
+ }
   selectFile(event) {
     this.picture = event.target.files[0];
     const formData = new FormData();

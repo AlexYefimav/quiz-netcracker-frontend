@@ -12,6 +12,7 @@ import {WebSocketAPI} from "../webSocket/web-socket-api";
 import {User} from "../model/user";
 import {SignInComponent} from "../sign-in/sign-in.component";
 import {SignInOnceComponent} from "../sign-in-once/sign-in-once.component";
+import {GameAccessService} from "../service/gameAccess.service";
 
 @Component({
   selector: 'app-game-preview',
@@ -27,9 +28,11 @@ export class GamePreviewComponent implements OnInit {
   player: Player;
   authorizedAccount: User;
   isAuthorized: boolean;
+  isAccess: boolean;
 
   constructor(private gameService: GameService, private route: ActivatedRoute,
               private gameRoomService: GameRoomService, private storageService: StorageService,
+              private gameAccessService: GameAccessService,
               private playerService: PlayerService, public dialog: MatDialog) {
   }
 
@@ -39,6 +42,7 @@ export class GamePreviewComponent implements OnInit {
     this.game = await this.getGameById();
     let playerId = this.storageService.currentUser.id;
     this.player = await this.getPlayer(playerId);
+    this.isAccess= await this.getGameAccessByGameAndPlayer(this.game.id, this.player.id);
   }
 
   getPlayer(playerId: string): Promise<Player> {
@@ -47,6 +51,10 @@ export class GamePreviewComponent implements OnInit {
 
   private getGameById(): Promise<Game> {
     return this.gameService.getGameById(this.id).toPromise()
+  }
+
+  private getGameAccessByGameAndPlayer(gameId,playerId: string): Promise<boolean> {
+    return this.gameAccessService.getGameAccessByGameAndPlayer(gameId, playerId).toPromise()
   }
 
   setGame(game: Game) {
@@ -62,14 +70,27 @@ export class GamePreviewComponent implements OnInit {
       if (this.storageService.currentToken) {
         this.isAuthorized=true;
         this.authorizedAccount = this.storageService.currentUser;
+      //  console.log("player"+this.authorizedAccount.id);
+        // console.log("gme"+this.game.id+"player"+this.authorizedAccount.id);
       } else {
         StorageService.clear();
       }
     } else {
+      this.isAuthorized=false;
+      this.authorizedAccount= undefined;
+    }
+ //   return this.authorizedAccount;
+  }
 
-
-
-
+  checkAccess() {
+    if (!StorageService.isEmpty()) {
+      if (this.storageService.currentToken) {
+        this.isAuthorized=true;
+        this.authorizedAccount = this.storageService.currentUser;
+      } else {
+        StorageService.clear();
+      }
+    } else {
       this.isAuthorized=false;
       this.authorizedAccount= undefined;
     }
@@ -93,6 +114,7 @@ export class GamePreviewComponent implements OnInit {
       }, 2000);
     });
   }
+
 
   async openDialog(game: Game) {
     this.game = game;
