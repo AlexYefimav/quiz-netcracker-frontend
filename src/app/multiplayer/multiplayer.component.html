@@ -18,9 +18,8 @@
         </ng-template>
       </div>
     </div>
-    <div class="image">
-      <img class="displayed" src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-           alt="Photo of a Shiba Inu">
+    <div class="image" *ngIf="question.photo">
+      <img src="{{question.photo}}" alt="Photo from Amazon S3" style="margin-left: 30px; margin-top: 20px; width: 750px; height: 400px;" >
     </div>
     <div class="body">
       <div>

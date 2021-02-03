@@ -4,22 +4,24 @@
 
 h1 {
   text-align: center;
-  margin-top: 20px;
   color: #5d6cd7;
   font-family: 'Roboto Slab', serif;
 }
 
 .mat-card {
   display: flex;
-  background: url(src/assets/images/img.png);
+  background: url("https://quiz-netcracker-basket.s3.eu-north-1.amazonaws.com/1612268276494-quiz.png");
+  width: 400px;
+  height: 400px;
+  margin-left: 500px;
+  margin-top: 80px;
   color: oldlace;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  margin: 5pc;
-  padding: 5pc;
 
+  padding: 5pc;
 }
 
 .mat-icon-button {
@@ -48,7 +50,7 @@ h1 {
   max-width: 500px;
   padding-bottom: 50px;
   margin:auto;
-  color : yellow;
+  color: yellow;
 }
 
 .card {
