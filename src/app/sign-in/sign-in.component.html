@@ -1,6 +1,6 @@
 <div class="login-dialog-container">
   <div mat-dialog-title>
-    <h1 class="text-center">Login</h1>
+    <h1 class="text-center"> {{ 'SIGN_IN.AUTHORIZATION' | translate }}</h1>
   </div>
   <div mat-dialog-content>
     <form [formGroup]="form" (ngSubmit)="submit()">
@@ -9,13 +9,13 @@
         <mat-form-field>
           <input type="text" matInput placeholder="Login" formControlName="login">
           <mat-error *ngIf="login.hasError('emailError') && !login.hasError('required')">
-            Please enter a valid email address
+            {{ 'SIGN_IN.VALID_EMAIL' | translate }}
           </mat-error>
           <mat-error *ngIf="login.hasError('nameError') && !login.hasError('required')">
-            Please enter a valid username
+            {{ 'SIGN_IN.VALID_LOGIN' | translate }}
           </mat-error>
           <mat-error *ngIf="login.hasError('required')">
-            Login is <strong>required</strong>
+            {{ 'SIGN_IN.REQUIRED_LOGIN' | translate }}
           </mat-error>
         </mat-form-field>
       </p>
@@ -24,10 +24,10 @@
         <mat-form-field>
           <input type="password" matInput placeholder="Password" formControlName="password">
           <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
-            Password should contain at least 6 characters
+            {{ 'SIGN_IN.PASSWORD_6_CHARACTERS' | translate }}
           </mat-error>
           <mat-error *ngIf="password.hasError('required')">
-            Password is <strong>required</strong>
+            {{ 'SIGN_IN.REQUIRED_PASSWORD' | translate }}
           </mat-error>
         </mat-form-field>
       </p>
@@ -36,16 +36,16 @@
         {{ error }}
       </p>
       <p *ngIf="!showErrorMessage" >
-         Ваш профиль заблокирован
+        {{ 'SIGN_IN.BLOCK' | translate }}
       </p>
       <div class="button">
-        <button mat-button (click)="onNoClick()">Exit</button>
-        <button type="submit" mat-button [disabled]="form.invalid"   [mat-dialog-close]="dialogAccount">Login</button>
+        <button mat-button (click)="onNoClick()">{{ 'SIGN_IN.EXIT' | translate }}</button>
+        <button type="submit" mat-button [disabled]="form.invalid"   [mat-dialog-close]="dialogAccount">{{ 'SIGN_IN.LOGIN' | translate }}</button>
       </div>
 
       <div class="text-left">
         <a class="text-small-ref" (click)="redirect('sign_up')">
-          Create your account
+          {{ 'SIGN_IN.CREATE_ACCOUNT' | translate }}
         </a>
       </div>
 

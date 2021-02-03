@@ -66,11 +66,7 @@ export class SignInOnceComponent implements OnInit {
   }
 
   sendData() {
-   // this.user.username
-   //  alert(this.user.username);
-   //  alert(this.user.name);
     this.signinService.registerOnce(this.user).subscribe(() => {
-      ///  this.redirect('/games')
       }
     );
   }

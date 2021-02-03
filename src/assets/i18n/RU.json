@@ -74,11 +74,43 @@
   },
   "ERROR_AUTHENTICATION_CONNECTION": "Страница не найдена",
   "SIGN_IN": {
+    "LOGIN": "Войти",
+    "EXIT": "Выйти",
+    "BLOCK": "Ваш профиль заблокирован",
+    "AUTHORIZATION": "Авторизация",
+    "CREATE_ACCOUNT": "Создать свой аккаунт",
+    "PASSWORD_6_CHARACTERS": "Пароль должен содержать более 6 символов",
+    "VALID_EMAIL": "Пожалуйста, введите адрес почты корректно",
+    "VALID_LOGIN": "Пожалуйста, введите логин корректно",
+    "REQUIRED_LOGIN": "Необходимо ввести логин",
+    "REQUIRED_PASSWORD": "Необходимо ввести пароль"
+  },
+
+  "SIGN_UP": {
+    "TITLE": "Зарегистрироваться",
+    "REQUIRED_LOGIN": "Необходимо ввести логин",
+    "REQUIRED_EMAIL": "Необходимо ввести почту",
+    "REQUIRED_PASSWORD": "Необходимо ввести пароль",
+    "DUPLICATE_LOGIN": " User with this login already exists",
+    "DUPLICATE_EMAIL": " User with this email already exists",
+    "VALID_EMAIL": "Пожалуйста, введите адрес почты корректно",
+    "VALID_LOGIN": "Пожалуйста, введите логин корректно",
+    "LOGIN_3_CHARACTERS": "Логин должен содержать более 3 символов",
+    "PASSWORD_6_CHARACTERS": "Пароль должен содержать более 6 символов",
+    "REPEAT_PASSWORD": "Повторить пароль",
+    "CONFIRM_PASSWORD": "Подтвердить пароль",
+    "PASSWORD_DO_NOT_MATCH": "Пароли не совпадают"
 
   },
-  "SIGN_UP": {
-    "TITLE": "Зарегистрироваться"
+
+  "USERS": {
+    "TITLE": "Пользователи",
+    "EDIT": "Редактировать",
+    "BLOCK": "Заблокировать",
+    "UNLOCK": "Разблокировать",
+    "DELETE": "Удалить"
   },
+
   "GAME": {
 
   },

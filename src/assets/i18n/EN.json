@@ -74,10 +74,39 @@
   },
   "ERROR_AUTHENTICATION_CONNECTION": "Page not found",
   "SIGN_IN": {
-
+    "LOGIN": "Login",
+    "EXIT": "Exit",
+    "BLOCK": "Your account is blocked",
+    "AUTHORIZATION": "Login",
+    "CREATE_ACCOUNT": "Create your account",
+    "PASSWORD_6_CHARACTERS": "Password should contain at least 6 characters ",
+    "VALID_EMAIL": "Please, enter your email correctly",
+    "VALID_LOGIN": "Please,enter your login correctly",
+    "REQUIRED_LOGIN": "Login is required",
+    "REQUIRED_PASSWORD": "Password is required"
   },
   "SIGN_UP": {
-    "TITLE": "Sign up"
+    "TITLE": "Sign up",
+    "REQUIRED_LOGIN": "Login is required",
+    "REQUIRED_EMAIL": "Email is required",
+    "REQUIRED_PASSWORD": "Password is required",
+    "DUPLICATE_LOGIN": " User with this login already exists",
+    "DUPLICATE_EMAIL": " User with this email already exists",
+    "VALID_EMAIL": "Please, enter your email correctly",
+    "VALID_LOGIN": "Please,enter your login correctly",
+    "LOGIN_3_CHARACTERS": " Username should contain at least 3 characters",
+    "PASSWORD_6_CHARACTERS": "Password should contain at least 6 characters ",
+    "REPEAT_PASSWORD": "Repeat password",
+    "CONFIRM_PASSWORD": "Confirm password",
+    "PASSWORD_DO_NOT_MATCH": " Passwords do not match"
+  },
+
+  "USERS": {
+    "TITLE": "Users",
+    "EDIT": "Edit",
+    "BLOCK": "Block",
+    "UNLOCK": "Unlock",
+    "DELETE": "Delete"
   },
 
   "PLAYROOM": {
@@ -124,4 +153,5 @@
     "DELETE": "Delete",
     "SHARE": "Share"
   }
+
 }
