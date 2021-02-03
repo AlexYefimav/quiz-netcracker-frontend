@@ -4,6 +4,7 @@ import {User} from '../model/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, delay} from "rxjs/operators";
 import {Router} from "@angular/router";
+import {Player} from "../model/player";
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,9 @@ export class SigninService {
       //     return throwError(error)
       //   })
       // );
+  }
+  registerOnce(player: Player): Observable<Player> {
+    return this.http.post<Player>(this.url +"player/register", player)
   }
 
 }

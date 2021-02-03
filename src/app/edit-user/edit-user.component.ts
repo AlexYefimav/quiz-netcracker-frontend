@@ -79,7 +79,6 @@ export class EditUserComponent implements OnInit {
   }
 
   getRole(): string {
-
     for (const role of this.roles) {
       if (this.roleControl.value === role) {
         this.user.role = role;

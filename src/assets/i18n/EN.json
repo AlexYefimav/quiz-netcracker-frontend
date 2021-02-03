@@ -70,7 +70,7 @@
   },
   "PHOTO": {
     "TITLE": "Photo",
-    "CHOOSE": "Choose photo"
+    "CHOOSE": "Add photo"
   },
   "ERROR_AUTHENTICATION_CONNECTION": "Page not found",
   "SIGN_IN": {
@@ -94,6 +94,17 @@
     "BUTTON_STATISTICS": "Statistics",
     "BUTTON_NEXT": "Next",
     "LIKE": "Like"
+  },
+
+  "INTERCEPTOR": {
+    "SNACKBAR": {
+      "ACTION": "Close",
+      "ERROR": {
+        "TITLE": "Title",
+        "CODE": "Code",
+        "MESSAGE": "Message"
+      }
+    }
   },
 
   "STATISTICS": {

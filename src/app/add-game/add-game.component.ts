@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Game} from '../model/game';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {GameService} from '../service/game.service';
 import {MatAccordion} from '@angular/material/expansion';
 import {StorageService} from "../service/storage/storage.service";
 import {UserService} from "../service/user.service";
 import {User} from "../model/user";
-import {FormGroup} from '@angular/forms';
+import {AbstractControl, FormGroup} from '@angular/forms';
 import {UpdateGameValidation} from '../service/validation/update-game-validation';
 import {AddGameValidation} from '../service/validation/add-game-validation';
 import {TranslateService} from '@ngx-translate/core';
@@ -24,6 +24,10 @@ export class AddGameComponent implements OnInit {
   gameForm: FormGroup;
   picture: any;
   fileUrl: string;
+  selectedAccess: string="PUBLIC";
+  accesses: string[] = ["PUBLIC", "PRIVATE"];
+  @Input() accessControl: AbstractControl;
+  @Output() accessControlChange = new EventEmitter<AbstractControl>();
 
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
@@ -32,7 +36,8 @@ export class AddGameComponent implements OnInit {
               private addGameValidation: AddGameValidation,
               private updateGameValidation: UpdateGameValidation,
               private translateService: TranslateService,
-              private localeSettingsService: LocalSettingsService) {
+              private localeSettingsService: LocalSettingsService,
+              private router: Router) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -62,6 +67,26 @@ export class AddGameComponent implements OnInit {
     return this.gameForm.get('description').value;
   }
 
+  setSelectedAccess(access){
+    this.selectedAccess=access;
+  }
+
+  // getAccess(): string {
+  // //  this.game.access=this.gameForm.get('access').value;
+  //   console.log("acceeeee "+this.gameForm.get('access').value);
+  //   return this.gameForm.get('access').value;//.get('access').value;
+  // }
+
+  getAccess(): string {
+    for (let access of this.accesses) {
+     // access="PRIVATE";
+      if (this.accessControl.value === access) {
+        this.game.access = access;
+        return access;
+      }
+    }
+  }
+
   getUser(id: string): Promise<User> {
     return this.userService.getUserById(id).toPromise();
   }
@@ -74,31 +99,49 @@ export class AddGameComponent implements OnInit {
     return this.gameService.updateGame(this.game).toPromise();
   }
 
+  redirectTo(uri: string): void {
+    this.router.navigateByUrl('/games', {skipLocationChange: true}).then(() =>
+      this.router.navigate([uri]));
+  }
+
   async updateGame(): Promise<void> {
     if (this.gameForm.valid) {
-      this.game = await this.updateAndGetGame();
+      try {
+        this.game = await this.updateAndGetGame();
+      }
+      catch (error) {
+        window.setTimeout(() => {}, 10000);
+      }
     }
+    this.redirectTo('games');
   }
 
   async createGame(game: Game): Promise<void> {
     if (this.gameForm.valid) {
-      if (game.id) {
-        this.game = await this.updateAndGetGame();
+      try {
+        if (game.id) {
+          this.game = await this.updateAndGetGame();
+        }
+        else {
+          this.game.player = this.storageService.currentUser.id;
+          this.game = await this.createAndGetGame(game);
+        }
       }
-      else {
-        this.game.player = this.storageService.currentUser.id;
-        this.game = await this.createAndGetGame(game);
+      catch (error) {
+        window.setTimeout(() => {}, 10000);
       }
     }
+    this.redirectTo('games');
   }
 
   checkForm(): void {
     if (this.gameForm.valid) {
       this.game.title = this.getTitle();
       this.game.description = this.getDescription();
+      this.game.access =  this.selectedAccess;
+       //  this.game.access = "PUBLIC";
     }
-  }
-
+ }
   selectFile(event) {
     this.picture = event.target.files[0];
     const formData = new FormData();

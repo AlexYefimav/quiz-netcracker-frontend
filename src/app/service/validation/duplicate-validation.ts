@@ -9,38 +9,43 @@ import {element} from 'protractor';
 })
 export class DuplicateValidator {
 
+  possibleDuplicateProperties = ['title', 'description', 'login', 'mail'];
+  comparingValue: string;
+  propertyName: string;
+
   duplicateValidation(array: any[], entity?: any): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control) {
-        let comparingValue;
-        let propertyName;
-        if (control.get('title')?.touched || control.get('title')?.dirty) {
-          comparingValue = control.get('title')?.value;
-          propertyName = 'title';
-        }
-        if (control.get('description')?.touched || control.get('description')?.dirty) {
-          comparingValue = control.get('description')?.value;
-          propertyName = 'description';
-        }
-        return this.validate(control, array, comparingValue, propertyName, entity);
+        this.setPropertyAndValue(control);
+        return this.validate(control, array, entity);
       }
       return null;
     };
   }
 
-  validate(control: AbstractControl, array: any[], comparingValue: string, propertyName: string, entity?: any):
+  setPropertyAndValue(control: AbstractControl): void {
+    this.possibleDuplicateProperties.forEach(property => {
+      if (control.get(property)?.dirty) {
+        this.comparingValue = control.get(property).value;
+        this.propertyName = property;
+        control.get(property).markAsPristine({onlySelf: true});
+      }
+    });
+  }
+
+  validate(control: AbstractControl, array: any[], entity?: any):
     ValidationErrors | null {
     if (array) {
       array.forEach(arrayElement => {
-        if (arrayElement[propertyName] === comparingValue) {
+        if (arrayElement[this.propertyName] === this.comparingValue) {
           if (entity) {
             if (entity.id !== arrayElement.id) {
-              control.get(propertyName)?.setErrors({duplicate: true});
+              control.get(this.propertyName)?.setErrors({duplicate: true});
               return {duplicate: true};
             }
           }
           else {
-            control.get(propertyName)?.setErrors({duplicate: true});
+            control.get(this.propertyName)?.setErrors({duplicate: true});
             return { duplicate: true };
           }
         }

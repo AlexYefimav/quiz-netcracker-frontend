@@ -9,6 +9,10 @@ import {GameRoom} from "../model/game-room";
 import {Player} from "../model/player";
 import {PlayerService} from "../service/player.service";
 import {WebSocketAPI} from "../webSocket/web-socket-api";
+import {User} from "../model/user";
+import {SignInComponent} from "../sign-in/sign-in.component";
+import {SignInOnceComponent} from "../sign-in-once/sign-in-once.component";
+import {GameAccessService} from "../service/game-access.service";
 
 @Component({
   selector: 'app-game-preview',
@@ -22,17 +26,23 @@ export class GamePreviewComponent implements OnInit {
   public id: string;
   public gameRoom: GameRoom;
   player: Player;
+  authorizedAccount: User;
+  isAuthorized: boolean;
+  isAccess: boolean;
 
   constructor(private gameService: GameService, private route: ActivatedRoute,
               private gameRoomService: GameRoomService, private storageService: StorageService,
+              private gameAccessService: GameAccessService,
               private playerService: PlayerService, public dialog: MatDialog) {
   }
 
   async ngOnInit() {
+    this.checkAuthorized();
     this.id = this.route.snapshot.params.id;
     this.game = await this.getGameById();
     let playerId = this.storageService.currentUser.id;
     this.player = await this.getPlayer(playerId);
+    this.isAccess= await this.getGameAccessByGameAndPlayer(this.game.id, this.player.id);
   }
 
   getPlayer(playerId: string): Promise<Player> {
@@ -43,6 +53,10 @@ export class GamePreviewComponent implements OnInit {
     return this.gameService.getGameById(this.id).toPromise()
   }
 
+  private getGameAccessByGameAndPlayer(gameId,playerId: string): Promise<boolean> {
+    return this.gameAccessService.getGameAccessByGameAndPlayer(gameId, playerId).toPromise()
+  }
+
   setGame(game: Game) {
     this.game = game;
   }
@@ -51,10 +65,57 @@ export class GamePreviewComponent implements OnInit {
     return this.gameRoomService.findGameRoom(game.id, this.player.id).toPromise();
   }
 
+  checkAuthorized() {
+    if (!StorageService.isEmpty()) {
+      if (this.storageService.currentToken) {
+        this.isAuthorized=true;
+        this.authorizedAccount = this.storageService.currentUser;
+      } else {
+        StorageService.clear();
+      }
+    } else {
+      this.isAuthorized=false;
+      this.authorizedAccount= undefined;
+    }
+  }
+
+  checkAccess() {
+    if (!StorageService.isEmpty()) {
+      if (this.storageService.currentToken) {
+        this.isAuthorized=true;
+        this.authorizedAccount = this.storageService.currentUser;
+      } else {
+        StorageService.clear();
+      }
+    } else {
+      this.isAuthorized=false;
+      this.authorizedAccount= undefined;
+    }
+  }
+
+  openLoginDialog(): void {
+    const dialogRef = this.dialog.open(SignInComponent, {
+      minWidth: '400px',
+      minHeight: '300px',
+      data: this.authorizedAccount
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.authorizedAccount = result;
+        this.isAuthorized = true;
+      }
+      setTimeout(() => {
+        this.checkAuthorized();
+        location.reload();
+      }, 2000);
+    });
+  }
+
+
   async openDialog(game: Game) {
     this.game = game;
     this.gameRoom = await this.getGameRoom(game);
-    console.log(this.gameRoom.players);
     this.webSocketAPI = new WebSocketAPI(this, this.player, this.gameRoom.id, this.gameRoomService);
     this.connect();
 
@@ -87,6 +148,7 @@ export class GamePreviewComponent implements OnInit {
   private deletePlayer(): Promise<GameRoom> {
     return this.gameRoomService.deletePlayer(this.gameRoom.id, this.player.id).toPromise()
   }
+
 }
 
 @Component({
@@ -107,5 +169,6 @@ export class DialogElementsExampleDialog {
     this.data.socket.sendGoGame(this.data.gameRoom);
     this.data.socket.disconnect();
   }
+
 }
 

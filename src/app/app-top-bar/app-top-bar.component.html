@@ -38,12 +38,10 @@
     <button mat-button (click)="openLoginDialog()">{{ 'NAV_BAR.SIGN_IN' | translate }}</button>
   </div>
   <div *ngIf="isAccount">
-    <button mat-button (click)="toAccount()"
-            *ngIf="authorizedAccount.role=='USER'">{{ 'NAV_BAR.OFFICE' | translate }}</button>
+    <button mat-button (click)="toAccount()">{{ 'NAV_BAR.OFFICE' | translate }}</button>
     <button mat-button (click)="redirect('users')"
             *ngIf="authorizedAccount.role=='ADMIN'">{{ 'NAV_BAR.USERS' | translate }}</button>
   </div>
-  <!--  <div *ngIf="isAccount"> <p>{{authorizedAccount.login}}</p></div>-->
   <div *ngIf="isAccount">
     <button mat-button (click)="logout()">{{ 'NAV_BAR.SIGN_OUT' | translate }}</button>
   </div>
