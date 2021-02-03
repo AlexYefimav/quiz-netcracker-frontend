@@ -5,9 +5,8 @@ import {LocalSettingsService} from '../service/localization/LocalSettingsService
 
 @Component({
   selector: 'app-error-authentication-connection',
-  template: `<h3>{{ 'ERROR_AUTHENTICATION_CONNECTION' | translate }}</h3>`
-//  templateUrl: './error-authentication-connection.component.html',
- // styleUrls: ['./error-authentication-connection.component.css']
+  templateUrl: './error-authentication-connection.component.html',
+  styleUrls: ['./error-authentication-connection.component.css']
 })
 export class ErrorAuthenticationConnectionComponent implements OnInit{
 

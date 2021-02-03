@@ -72,7 +72,12 @@
     "TITLE": "Photo",
     "CHOOSE": "Add photo"
   },
-  "ERROR_AUTHENTICATION_CONNECTION": "Page not found",
+  "403": {
+    "FORBIDDEN": "Access Forbidden.",
+    "NO_WAY": "There is no way Polly",
+    "POLLY": "let you pass through!"
+  },
+
   "SIGN_IN": {
     "LOGIN": "Login",
     "EXIT": "Exit",

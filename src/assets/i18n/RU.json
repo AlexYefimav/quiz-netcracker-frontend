@@ -72,7 +72,11 @@
     "TITLE": "Фото",
     "CHOOSE": "Добавить фото"
   },
-  "ERROR_AUTHENTICATION_CONNECTION": "Страница не найдена",
+  "403": {
+    "FORBIDDEN": "Доступ запрещен",
+    "NO_WAY": "Нет пути!",
+    "POLLY": "Поля не пропустит!"
+  },
   "SIGN_IN": {
     "LOGIN": "Войти",
     "EXIT": "Выйти",
