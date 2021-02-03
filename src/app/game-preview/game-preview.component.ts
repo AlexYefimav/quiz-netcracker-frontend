@@ -79,19 +79,19 @@ export class GamePreviewComponent implements OnInit {
     }
   }
 
-  checkAccess() {
-    if (!StorageService.isEmpty()) {
-      if (this.storageService.currentToken) {
-        this.isAuthorized=true;
-        this.authorizedAccount = this.storageService.currentUser;
-      } else {
-        StorageService.clear();
-      }
-    } else {
-      this.isAuthorized=false;
-      this.authorizedAccount= undefined;
-    }
-  }
+  // checkAccess() {
+  //   if (!StorageService.isEmpty()) {
+  //     if (this.storageService.currentToken) {
+  //       this.isAuthorized=true;
+  //       this.authorizedAccount = this.storageService.currentUser;
+  //     } else {
+  //       StorageService.clear();
+  //     }
+  //   } else {
+  //     this.isAuthorized=false;
+  //     this.authorizedAccount= undefined;
+  //   }
+  // }
 
   openLoginDialog(): void {
     const dialogRef = this.dialog.open(SignInComponent, {

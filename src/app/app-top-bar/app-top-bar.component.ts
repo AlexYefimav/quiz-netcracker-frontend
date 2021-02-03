@@ -88,12 +88,12 @@ export class AppTopBarComponent implements OnInit {
   }
 
   toAccount() {
-    if (this.authorizedAccount.role=='USER') {
+   // if (this.authorizedAccount.role=='USER') {
       this.redirectTo(`/player/${this.authorizedAccount.player}`);
-    }
-    if (this.authorizedAccount.role=='ADMIN') {
-      this.redirectTo(`/player/${this.authorizedAccount.id}`);
-    }
+    // }
+    // if (this.authorizedAccount.role=='ADMIN') {
+    //   this.redirectTo(`/player/${this.authorizedAccount.id}`);
+    // }
   }
 
   changeLanguage(lang: string): void {

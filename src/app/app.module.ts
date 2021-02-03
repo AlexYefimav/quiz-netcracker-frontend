@@ -57,7 +57,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {EditPlayerComponent} from "./edit-player/edit-player.component";
 import {SignInOnceComponent} from "./sign-in-once/sign-in-once.component";
-import { GameAccessComponent } from './game-access/game-access.component';
+import { PlayerCheckboxComponent } from './player-checkbox/player-checkbox.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -95,7 +95,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserGameComponent,
     EditPlayerComponent,
     SignInOnceComponent,
-    GameAccessComponent
+    PlayerCheckboxComponent
   ],
   imports: [
     MatProgressSpinnerModule,

@@ -58,9 +58,9 @@
     </ng-container>
 
     <ng-container matColumnDef="share">
-      <th mat-header-cell *matHeaderCellDef> {{ 'PLAYER_PAGE.SHARE' | translate }}</th>
-      <td mat-cell *matCellDef="let game">
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+      <th mat-header-cell *matHeaderCellDef > {{ 'PLAYER_PAGE.SHARE' | translate }}</th>
+      <td mat-cell *matCellDef="let game" >
+        <button mat-icon-button *ngIf="game.access=='PRIVATE'" (click)="shareGame(game.id)">
           <mat-icon class="icon-share">share</mat-icon>
         </button>
       </td>

@@ -6,6 +6,9 @@ import {Router} from '@angular/router';
 import {Player} from "../model/player";
 import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
+import {SignInComponent} from "../sign-in/sign-in.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {PlayerCheckboxComponent} from "../player-checkbox/player-checkbox.component";
 //import {Dialog} from '../../model/dialog';
 //import {DialogsService} from '../../service/dialogs/dialogs.service';
 //import {ScheduleEnum} from '../../model/schedule.enum';
@@ -23,7 +26,8 @@ export class PlayerPageComponent implements OnInit {
   constructor(private playerService: PlayerService,
               private storageService: StorageService,
               private gameService: GameService,
-              private router: Router) {
+              private router: Router,
+              public dialog: MatDialog) {
   }
 
   async ngOnInit() {
@@ -49,4 +53,12 @@ export class PlayerPageComponent implements OnInit {
   async deleteGame(id: string) {
     await this.gameService.deleteGame(id).toPromise()
   }
+
+  shareGame(gameId: string): void {
+    const dialogRef = this.dialog.open(PlayerCheckboxComponent, {
+      minWidth: '400px',
+      minHeight: '300px',
+      data: gameId
+    });
+}
 }
