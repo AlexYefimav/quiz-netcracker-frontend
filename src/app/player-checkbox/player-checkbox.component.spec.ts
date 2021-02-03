@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GameAccessComponent } from './game-access.component';
+import { PlayerCheckboxComponent } from './player-checkbox.component';
 
-describe('GameAccessComponent', () => {
-  let component: GameAccessComponent;
-  let fixture: ComponentFixture<GameAccessComponent>;
+describe('PlayerCheckboxComponent', () => {
+  let component: PlayerCheckboxComponent;
+  let fixture: ComponentFixture<PlayerCheckboxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GameAccessComponent ]
+      declarations: [ PlayerCheckboxComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameAccessComponent);
+    fixture = TestBed.createComponent(PlayerCheckboxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

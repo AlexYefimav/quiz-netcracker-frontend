@@ -7,6 +7,7 @@ export class Player {
   email: string;
   user: User;
   photo: string;
+  isCompleted: boolean = false;
 
   constructor() {
   }

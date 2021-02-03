@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {Player} from '../model/player';
 import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import {Photo} from "../photo";
 import {Game} from "../model/game";
 import {User} from "../model/user";
+import {catchError, delay} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +32,9 @@ export class PlayerService {
   updateFile(id: string, formData: FormData): Observable<Game>{
     return this.http.post<Game>(this.url + '/updateFile/' + id, formData);
   }
+
+  getPlayers(): Observable<Player[]> {
+    return this.http.get<Player[]>(this.url);
+  }
+
 }
