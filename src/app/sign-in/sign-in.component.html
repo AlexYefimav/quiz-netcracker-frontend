@@ -7,7 +7,7 @@
 
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Login" formControlName="login">
+          <input type="text" matInput placeholder="{{ 'SIGN_IN.LOGIN' | translate }}" formControlName="login">
           <mat-error *ngIf="login.hasError('emailError') && !login.hasError('required')">
             {{ 'SIGN_IN.VALID_EMAIL' | translate }}
           </mat-error>
@@ -22,7 +22,7 @@
 
       <p>
         <mat-form-field>
-          <input type="password" matInput placeholder="Password" formControlName="password">
+          <input type="password" matInput placeholder="{{ 'SIGN_IN.PASSWORD' | translate }}" formControlName="password">
           <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
             {{ 'SIGN_IN.PASSWORD_6_CHARACTERS' | translate }}
           </mat-error>

@@ -1,71 +1,35 @@
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
-}
-
-h1 {
-  text-align: center;
-  color: #5d6cd7;
-  font-family: 'Roboto Slab', serif;
-}
-
-.mat-card {
+.window {
   display: flex;
+  width: 100%;
+  height: 91%;
   background: url("https://quiz-netcracker-basket.s3.eu-north-1.amazonaws.com/1612268276494-quiz.png");
-  width: 400px;
-  height: 400px;
-  margin-left: 500px;
-  margin-top: 80px;
-  color: oldlace;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-
-  padding: 5pc;
 }
 
-.mat-icon-button {
-  color: #303030;
-  display: block;
-  margin-left: auto;
-  margin-right: 0;
-  justify-content: right;
-
-}
-
-.mat-icon-button {
-  color: #303030;
-  display: block;
-  margin-left: auto;
-}
-
-.mat-mini-fab {
-  margin-top: 20px;
-  display: block;
-  margin-left: auto;
+.container{
   margin-right: auto;
-}
-
-.app-widget-search-bar {
-  max-width: 500px;
-  padding-bottom: 50px;
-  margin:auto;
-  color: yellow;
+  margin-left: auto;
+  margin-top: 80px;
 }
 
 .card {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  margin-top: 1pc;
-  margin-left: auto;
-  margin-right: auto;
-  flex-wrap: wrap;
+  flex-direction: column;
+  width: 600px;
 }
 
+.title{
+  text-align: center;
+}
 
+.button {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 15px;
+}
 
-
+.back{
+  margin-left: 20px;
+}
 
 

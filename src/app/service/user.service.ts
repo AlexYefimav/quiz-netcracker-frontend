@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {User} from '../model/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpParams, HttpResponse} from '@angular/common/http';
 import {catchError, delay} from "rxjs/operators";
 import {Router} from '@angular/router';
 import {StorageService} from "./storage/storage.service";
+import {ActivateCode} from "../model/activate-code";
 
 @Injectable({
   providedIn: 'root',
@@ -18,16 +19,16 @@ export class UserService {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  constructor(private http: HttpClient, private router: Router,private storageService: StorageService) {
+  constructor(private http: HttpClient, private router: Router, private storageService: StorageService) {
   }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url + "users/findAllUsers")
- //  return this.http.get<User[]>(this.url + "users/findAllUsers", {observe: 'response', responseType: 'json'})
+      //  return this.http.get<User[]>(this.url + "users/findAllUsers", {observe: 'response', responseType: 'json'})
       .pipe(
         delay(403),
         catchError(error => {
-            this.router.navigate(['403']);
+          this.router.navigate(['403']);
           return throwError(error)
         })
       );
@@ -67,7 +68,10 @@ export class UserService {
   }
 
   signIn(account: User): Observable<HttpResponse<User>> {
-   return this.http.post<User>(this.url +"login", account, {observe: 'response', responseType: 'json'});
+    return this.http.post<User>(this.url + "login", account, {observe: 'response', responseType: 'json'});
   }
 
+  activate(mail: string, code: string): Observable<ActivateCode> {
+    return this.http.get<ActivateCode>(this.url + "users/activate/" + mail + "/" + code);
+  }
 }

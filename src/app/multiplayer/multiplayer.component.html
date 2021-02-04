@@ -6,20 +6,16 @@
   </div>
   <mat-card class="card">
     <div class="title">
-      <div>
+      <div class="question_name">
         <h2>{{question.title}}</h2>
       </div>
       <div class="time">
-        <span *ngIf="count<10;else timerAfterTen">
-          00:0{{count}}
-        </span>
-        <ng-template #timerAfterTen>
-          00:{{count}}
-        </ng-template>
+        <countdown #cd1 [config]="{leftTime: 20, format: 'mm:ss'}" (event)="timerEvent($event)"></countdown>
       </div>
     </div>
     <div class="image" *ngIf="question.photo">
-      <img src="{{question.photo}}" alt="Photo from Amazon S3" style="margin-left: 30px; margin-top: 20px; width: 750px; height: 400px;" >
+      <img src="{{question.photo}}" alt="Photo from Amazon S3"
+           style="margin-left: 30px; margin-top: 20px; width: 750px; height: 400px;">
     </div>
     <div class="body">
       <div>
@@ -48,35 +44,39 @@
       </ng-template>
       <ng-template #nextQuestionOrBlockButtonReply>
         <div *ngIf="player.id==game.player && timeIsOver; else timerIsOver">
-          <button mat-flat-button color="primary" (click)="setNextQuestion()">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>
+          <button mat-flat-button color="primary"
+                  (click)="setNextQuestion(); cd1.restart()">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>
         </div>
         <ng-template #timerIsOver>
-          <button mat-flat-button class="myButtons" color="warn" disabled>{{ 'MULTIPLAYER.BUTTON_REPLY' | translate }}</button>
+          <button mat-flat-button class="myButtons" color="warn"
+                  disabled>{{ 'MULTIPLAYER.BUTTON_REPLY' | translate }}</button>
         </ng-template>
       </ng-template>
     </div>
   </mat-card>
 
-  <div *ngFor="let player of players">
-    <mat-card class="players">
-      <div>
-        <div class="name-player">
-          <h4>{{player.player.name}}</h4>
-          <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon"
-                  (click)="sendMessage(player.player)">
-            <mat-icon>favorite</mat-icon>
-          </button>
-        </div>
+  <div class="player-board">
+    <div *ngFor="let player of players">
+      <mat-card class="players">
+        <div>
+          <div class="name-player">
+            <h4>{{player.player.name}}</h4>
+            <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon"
+                    (click)="sendMessage(player.player)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </div>
 
-        <div class="legs">
-          <div *ngFor="let i of index">
-            <mat-card class="index" style="background: {{player.answerColor[i]}};">
-              {{i + 1}}
-            </mat-card>
+          <div class="legs">
+            <div *ngFor="let i of index">
+              <mat-card class="index" style="background: {{player.answerColor[i]}}">
+                {{i + 1}}
+              </mat-card>
+            </div>
           </div>
         </div>
-      </div>
-    </mat-card>
+      </mat-card>
+    </div>
   </div>
 </div>
 

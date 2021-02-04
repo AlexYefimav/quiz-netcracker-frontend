@@ -18,80 +18,118 @@
 <!--      </form>-->
 <!--    </div>-->
 
-    <div *ngIf="userForm">
-      <form [formGroup]="userForm" (ngSubmit)="submitPlayer()">
-        <p>
-          <mat-form-field>
-            <input type="text" matInput placeholder="Username" formControlName="login" [errorStateMatcher]="errorMatcher">
-            <mat-error *ngIf="login.hasError('minlength')">
-              {{ 'SIGN_UP.LOGIN_3_CHARACTERS' | translate }}
-            </mat-error>
-            <mat-error *ngIf="login.hasError('required')">
-              {{ 'SIGN_UP.REQUIRED_LOGIN' | translate }}
-            </mat-error>
-            <mat-error *ngIf="login.hasError('duplicate')">
-              {{ 'SIGN_UP.DUPLICATE_LOGIN' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </p>
+    <div class="container">
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill out your name</ng-template>
+            <div *ngIf="userForm">
+              <form [formGroup]="userForm" (ngSubmit)="submitPlayer()">
+                <p>
+                  <mat-form-field>
+                    <input type="text" matInput placeholder="Username" formControlName="login"
+                           [errorStateMatcher]="errorMatcher">
+                    <mat-error *ngIf="login.hasError('minlength')">
+                      {{ 'SIGN_UP.LOGIN_3_CHARACTERS' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="login.hasError('required')">
+                      {{ 'SIGN_UP.REQUIRED_LOGIN' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="login.hasError('duplicate')">
+                      {{ 'SIGN_UP.DUPLICATE_LOGIN' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </p>
 
-        <p>
-          <mat-form-field>
-            <input type="email" matInput placeholder="Email" formControlName="mail" [errorStateMatcher]="errorMatcher">
-            <mat-error *ngIf="mail.hasError('email') && !mail.hasError('required')">
-              {{ 'SIGN_UP.VALID_EMAIL' | translate }}
-            </mat-error>
-            <mat-error *ngIf="mail.hasError('required')">
-              {{ 'SIGN_UP.REQUIRED_EMAIL' | translate }}
-            </mat-error>
-            <mat-error *ngIf="mail.hasError('duplicate')">
-              {{ 'SIGN_UP.DUPLICATE_EMAIL' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </p>
+                <p>
+                  <mat-form-field>
+                    <input type="email" matInput placeholder="Email" formControlName="mail"
+                           [errorStateMatcher]="errorMatcher">
+                    <mat-error *ngIf="mail.hasError('email') && !mail.hasError('required')">
+                      {{ 'SIGN_UP.VALID_EMAIL' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="mail.hasError('required')">
+                      {{ 'SIGN_UP.REQUIRED_EMAIL' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="mail.hasError('duplicate')">
+                      {{ 'SIGN_UP.DUPLICATE_EMAIL' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </p>
 
-        <p>
-          <mat-form-field>
-            <input type="password" matInput placeholder="Password" formControlName="password" [errorStateMatcher]="errorMatcher">
-            <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
-              {{ 'SIGN_UP.PASSWORD_6_CHARACTERS' | translate }}
-            </mat-error>
-            <mat-error *ngIf="password.hasError('required')">
-              {{ 'SIGN_UP.REQUIRED_PASSWORD' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </p>
+                <p>
+                  <mat-form-field>
+                    <input type="password" matInput placeholder="Password" formControlName="password"
+                           [errorStateMatcher]="errorMatcher">
+                    <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
+                      {{ 'SIGN_UP.PASSWORD_6_CHARACTERS' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="password.hasError('required')">
+                      {{ 'SIGN_UP.REQUIRED_PASSWORD' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </p>
 
-        <p>
-          <mat-form-field>
-            <mat-label> {{ 'SIGN_UP.REPEAT_PASSWORD' | translate }}</mat-label>
-            <input type="password" matInput placeholder="Repeat Password" formControlName="passwordRepeat" [errorStateMatcher]="errorMatcher">
-            <mat-error *ngIf="!checkPasswords()">
-              {{ 'SIGN_UP.PASSWORD_DO_NOT_MATCH' | translate }}
-            </mat-error>
-            <mat-error *ngIf="passwordRepeat.hasError('required')">
-              {{ 'SIGN_UP.CONFIRM_PASSWORD' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </p>
-        <p *ngIf="error && (passwordRepeat.dirty || passwordRepeat.touched)" class="error">
-          {{ error }}
-        </p>
+                <p>
+                  <mat-form-field>
+                    <mat-label>{{ 'SIGN_UP.REPEAT_PASSWORD' | translate }}</mat-label>
+                    <input type="password" matInput placeholder="Repeat Password" formControlName="passwordRepeat"
+                           [errorStateMatcher]="errorMatcher">
+                    <mat-error *ngIf="!checkPasswords()">
+                      {{ 'SIGN_UP.PASSWORD_DO_NOT_MATCH' | translate }}
+                    </mat-error>
+                    <mat-error *ngIf="passwordRepeat.hasError('required')">
+                      {{ 'SIGN_UP.CONFIRM_PASSWORD' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </p>
+                <p *ngIf="error && (passwordRepeat.dirty || passwordRepeat.touched)" class="error">
+                  {{ error }}
+                </p>
 
-        <div class="button">
-          <button type="submit" mat-button [disabled]="userForm.invalid || error">{{ 'SIGN_UP.TITLE' | translate }}</button>
-          <!--        <a mat-raised-button  color="primary" (click)="register(user)">Save</a>-->
-        </div>
-        <div class="text-left">
-          <!--        <a class="text-small-ref" (click)="redirect('login')">-->
-          <!--          Already have an account? Sign in-->
-          <!--        </a>-->
-          <!--        <a class="text-small-ref" (click)="redirect('login')">-->
-          <!--          Already have an account? Sign in-->
-          <!--        </a>-->
-        </div>
+                <div class="button">
+                  <button type="submit" mat-button [disabled]="userForm.invalid || error">{{ 'SIGN_UP.TITLE' | translate }}</button>
+                  <!--        <a mat-raised-button  color="primary" (click)="register(user)">Save</a>-->
+                </div>
+                <div class="text-left">
+                  <!--        <a class="text-small-ref" (click)="redirect('login')">-->
+                  <!--          Already have an account? Sign in-->
+                  <!--        </a>-->
+                  <!--        <a class="text-small-ref" (click)="redirect('login')">-->
+                  <!--          Already have an account? Sign in-->
+                  <!--        </a>-->
+                </div>
 
-      </form>
+              </form>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" label="Fill out your code">
+          <form [formGroup]="secondFormGroup">
+            <mat-form-field>
+              <mat-label>Your code</mat-label>
+              <input matInput type="text" #code formControlName="code" (keyup)="setActiveCode(code.value)" placeholder="123456">
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext (click)="activate()">Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <div *ngIf="answer;else timer">
+            <p>{{str.text}}</p>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Sing In</button>
+            </div>
+          </div>
+          <ng-template #timer>
+            <countdown #cd [config]="{leftTime: 3, format: 's'}" (event)="timerEvent($event, cd)"></countdown>
+          </ng-template>
+        </mat-step>
+      </mat-horizontal-stepper>
     </div>
   </mat-card-content>
 </mat-card>

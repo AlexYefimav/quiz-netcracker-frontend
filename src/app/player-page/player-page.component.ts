@@ -6,12 +6,9 @@ import {Router} from '@angular/router';
 import {Player} from "../model/player";
 import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
-import {SignInComponent} from "../sign-in/sign-in.component";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {PlayerCheckboxComponent} from "../player-checkbox/player-checkbox.component";
-//import {Dialog} from '../../model/dialog';
-//import {DialogsService} from '../../service/dialogs/dialogs.service';
-//import {ScheduleEnum} from '../../model/schedule.enum';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-client-page',
@@ -21,13 +18,14 @@ import {PlayerCheckboxComponent} from "../player-checkbox/player-checkbox.compon
 export class PlayerPageComponent implements OnInit {
   player: Player;
   games: Game[] = [];
-  displayedColumns: string[] = ['position', 'name', 'play', 'delete', 'share'];
+  displayedColumns: string[] = ['position', 'name', 'play', 'edit', 'delete', 'share'];
 
   constructor(private playerService: PlayerService,
               private storageService: StorageService,
               private gameService: GameService,
               private router: Router,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private _snackBar: MatSnackBar) {
   }
 
   async ngOnInit() {
@@ -60,5 +58,11 @@ export class PlayerPageComponent implements OnInit {
       minHeight: '300px',
       data: gameId
     });
-}
+  }
+
+  openSnackBar(game: string) {
+    this._snackBar.open('Link to the game "'+ game + '" copied','Copy', {
+      duration: 2000,
+    });
+  }
 }

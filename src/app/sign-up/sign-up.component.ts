@@ -5,10 +5,10 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {User} from "../model/user";
 import {MatAccordion} from "@angular/material/expansion";
 import {SigninService} from "../service/signin.service";
-import {AddAnswerValidation} from "../service/validation/add-answer-validation.service";
 import {SignUpValidation} from "../service/validation/sign-up-validator";
 import {UserService} from "../service/user.service";
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {CountdownComponent, CountdownEvent} from "ngx-countdown";
+import {ActivateCode} from "../model/activate-code";
 
 export class SignUpErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -24,6 +24,14 @@ export class SignUpErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class SignUpComponent implements OnInit {
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  enteredCode: string = "";
+  str: ActivateCode = {
+    text: "Пройдите предыдущие шаги регестрации"
+  };
+  answer: boolean = false;
 
   get login() {
     return this.userForm.get('login');
@@ -62,7 +70,8 @@ export class SignUpComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder,
               private signUpValidation: SignUpValidation,
-              private userService: UserService) {
+              private userService: UserService,
+              private _formBuilder: FormBuilder) {
 
     // this.form = formBuilder.group({
     //   username: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -82,6 +91,13 @@ export class SignUpComponent implements OnInit {
     this.errorMatcher = new SignUpErrorStateMatcher();
     // this.signUpValidation.setUser(this.user);
     // this.userForm = this.signUpValidation.createUserForm();
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+
   }
 
   async getUsers(): Promise<User[]> {
@@ -89,22 +105,22 @@ export class SignUpComponent implements OnInit {
   }
 
   submitPlayer() {
+    console.log("Вход")
     if (this.userForm.valid) {
+      console.log("Отлично")
       this.user.username = this.login.value;
       this.user.mail = this.mail.value;
       this.user.password = this.password.value;
       this.sendData();
+      console.log(this.user)
       // this.checkUsersFromDB();
       return "Успешно";
     }
     return "Успешно";
   }
 
-  sendData() {
-    this.signinService.register(this.user).subscribe(() => {
-          this.redirect('/games')
-      }
-    );
+  async sendData() {
+    this.user = await this.signinService.register(this.user).toPromise();
   }
 
   // checkUsersFromDB() {
@@ -141,4 +157,23 @@ export class SignUpComponent implements OnInit {
     this.router.navigate([url]);
   }
 
+  async activate(){
+    // this.cd.begin();
+    this.str = await this.userService.activate(this.user.mail, this.enteredCode).toPromise();
+    console.log(this.str);
+  }
+
+  setActiveCode(value: string) {
+    this.enteredCode = value;
+  }
+
+  cd: CountdownComponent;
+
+  timerEvent($event: CountdownEvent, cd: CountdownComponent) {
+    // this.cd = cd;
+    // this.cd.stop();
+    if($event.left ==0){
+      this.answer = true;
+    }
+  }
 }

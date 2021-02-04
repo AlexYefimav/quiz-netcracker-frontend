@@ -67,6 +67,7 @@ h2{
   justify-content: center;
   flex-direction: row;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .index{
@@ -78,12 +79,9 @@ h2{
 
 .players{
   display: flex;
-  align-items: stretch;
-  justify-content: center;
   flex-direction: column;
   padding: 0;
   margin: 20px 0 0;
-  width: 600px;
 }
 
 .name-player{
@@ -109,4 +107,12 @@ h4{
   font-size: xx-large;
   color: white;
   font-family: DejaVu Sans Mono, monospace;
+}
+
+.question_name{
+  flex-basis: 85%;
+}
+
+.player-board{
+  width: 600px;
 }
