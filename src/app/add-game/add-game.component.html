@@ -16,11 +16,8 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-form-field class="example-form">
-
-<!--              Вернуть required-->
-
               <label>
-                <input matInput placeholder="{{ 'ADD_GAME.GAME_TITLE' | translate }}" formControlName="title" (input)="checkForm()">
+                <input matInput placeholder="{{ 'ADD_GAME.GAME_TITLE' | translate }}" formControlName="title" (input)="checkForm()" required>
               </label>
               <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.required">
                 {{ 'ADD_GAME.ERROR.TITLE.REQUIRED' | translate }}
@@ -101,7 +98,7 @@
     <app-add-question [game]="game"></app-add-question>
 
     <div class="save-button">
-      <button mat-raised-button color="primary"
+      <button mat-raised-button color="primary" [disabled]="!gameForm.valid"
               (click)="this.isUpdateGame?updateGame():createGame(game)">{{ 'ADD_GAME.SAVE' | translate }}</button>
     </div>
   </div>

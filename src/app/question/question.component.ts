@@ -1,7 +1,8 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
 import {QuestionService} from "../service/question.service";
 import {Question} from "../model/question";
 import {Game} from '../model/game';
+import {MatAccordion} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-question',
@@ -9,6 +10,7 @@ import {Game} from '../model/game';
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   @Input() game: Game;
 
   public questions: Question[];

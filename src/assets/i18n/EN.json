@@ -18,16 +18,15 @@
     "GAME_TITLE": "Game title",
     "GAME_DESCRIPTION": "Game description",
     "QUESTIONS": {
-      "TITLE": "Questions",
-      "EDIT_QUESTION": "Edit",
-      "DELETE_QUESTION": "Delete"
+      "TITLE": "Questions"
     },
     "ADD_QUESTION": {
       "TITLE": "Question adding",
       "ADD": "Add"
     },
     "EDIT_QUESTION": {
-      "SAVE": "Save"
+      "SAVE": "Save",
+      "DELETE": "Delete"
     },
     "QUESTION_DETAIL": {
       "EXPAND_ALL": "Expand all",
@@ -38,7 +37,8 @@
       "LEVEL": "Complexity",
       "ERROR": {
         "REQUIRED": "Required field",
-        "DUPLICATE": "This question already exists",
+        "DUPLICATE_TITLE": "This question already exists",
+        "DUPLICATE_DESCRIPTION": "This description already exists",
         "MINLENGTH": "Question title should be at least 6 characters"
       }
     },

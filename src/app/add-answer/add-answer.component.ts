@@ -28,8 +28,10 @@ export class AddAnswerComponent implements OnInit {
       this.answer.title = this.getTitle();
       this.answer.right = this.isRight();
       this.answer.question = this.question.id;
+      this.answer.temporaryIndex = this.question.answersSet.length + 1;
       this.question.answersSet.push(this.answer);
 
+      this.answerValidation.setQuestion(this.question);
       this.answerForm = this.answerValidation.createAnswerForm();
     }
   }

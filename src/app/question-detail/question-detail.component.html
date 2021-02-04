@@ -23,7 +23,7 @@
             {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.REQUIRED' | translate }}
           </mat-error>
           <mat-error *ngIf="questionForm?.get('title').touched && questionForm.get('title').errors?.duplicate">
-            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.DUPLICATE' | translate }}
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.DUPLICATE_TITLE' | translate }}
           </mat-error>
           <mat-error *ngIf="questionForm?.get('title').touched && questionForm.get('title').errors?.minlength">
             {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.MINLENGTH' | translate }}
@@ -50,7 +50,7 @@
             {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.REQUIRED' | translate }}
           </mat-error>
           <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.duplicate">
-            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.DUPLICATE' | translate }}
+            {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.DUPLICATE_DESCRIPTION' | translate }}
           </mat-error>
           <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.minlength">
             {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.MINLENGTH' | translate }}
@@ -107,10 +107,10 @@
         </div>
         <div class="description">
           <button mat-button (click)="fileInput.click()">{{ 'PHOTO.CHOOSE' | translate }}</button>
-          <input hidden type="file" id="file" class="photo-input" (change)="selectFile($event)"
+          <input hidden type="file" id="file" class="photo-input" formControlName="photo" (change)="selectFile($event)"
                  #fileInput accept=".jpg, .jpeg, .png">
           <div *ngIf="picture">
-            {{ picture.name }}
+            {{ getPhoto() }}
           </div>
         </div>
         <div class="icon">
@@ -120,17 +120,6 @@
         </div>
 
       </mat-card>
-
-<!--          <app-category [categoryControl]="questionForm.get('category')"-->
-<!--                        [question]="question"-->
-<!--                        (categoryControlChange)="setCategoryControl($event)">-->
-<!--          </app-category>-->
-
-<!--          <app-level-->
-<!--            [levelControl]="questionForm.get('level')"-->
-<!--            [question]="question"-->
-<!--            (levelControlChange)="setLevelControl($event)">-->
-<!--          </app-level>-->
     </form>
   </div>
 

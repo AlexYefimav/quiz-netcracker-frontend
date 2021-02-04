@@ -77,7 +77,8 @@ export class UpdateQuestionValidation {
       title: [question.title, [Validators.required, Validators.minLength(6)]],
       description: [question.description, [Validators.required, Validators.minLength(6)]],
       category: [categoryState, [Validators.required]],
-      level: [levelState, [Validators.required]]
+      level: [levelState, [Validators.required]],
+      photo: ['']
     }, { validators: this.duplicateValidator.duplicateValidation(this.game.questions, question) });
   }
 }
