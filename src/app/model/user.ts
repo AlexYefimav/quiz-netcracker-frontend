@@ -10,6 +10,7 @@ export class User{
   usersSet: User[];
   active: boolean;
   activationCode: string;
+  index: number;
   constructor() {
   }
 

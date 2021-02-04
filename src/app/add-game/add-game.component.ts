@@ -26,6 +26,7 @@ export class AddGameComponent implements OnInit {
   fileUrl: string;
   selectedAccess: string="PUBLIC";
   accesses: string[] = ["PUBLIC", "PRIVATE"];
+  authorizedAccount: User;
   @Input() accessControl: AbstractControl;
   @Output() accessControlChange = new EventEmitter<AbstractControl>();
 
@@ -42,7 +43,8 @@ export class AddGameComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     const currentLanguage = this.localeSettingsService.getLanguage();
-    this.translateService.use(currentLanguage);
+    this.translateService.use(currentLanguage)
+    if(this.checkAuthorized()!=undefined) {
     if (this.route.snapshot.params.id != null){
       this.game = await this.getGame(this.route.snapshot.params.id);
       this.isUpdateGame = true;
@@ -53,6 +55,25 @@ export class AddGameComponent implements OnInit {
       this.game.questions = [];
       this.gameForm = this.addGameValidation.createGameForm();
     }
+    }
+    else this.redirect('403');
+  }
+
+  redirect(url: string) {
+    this.router.navigate([url]);
+  }
+
+  checkAuthorized() {
+    if (!StorageService.isEmpty()) {
+      if (this.storageService.currentToken) {
+        this.authorizedAccount = this.storageService.currentUser;
+      } else {
+        StorageService.clear();
+      }
+    } else {
+      this.authorizedAccount = undefined;
+    }
+    return this.authorizedAccount;
   }
 
   private getGame(gameId: string): Promise<Game> {
@@ -70,7 +91,7 @@ export class AddGameComponent implements OnInit {
   setSelectedAccess(access){
     this.selectedAccess=access;
   }
-  
+
   getAccess(): string {
     for (let access of this.accesses) {
      // access="PRIVATE";

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {User} from "../model/user";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../service/user.service";
 import {MatAccordion} from '@angular/material/expansion';
 import {StorageService} from "../service/storage/storage.service";
@@ -22,23 +22,30 @@ export class EditUserComponent implements OnInit {
   @Output() roleControlChange = new EventEmitter<AbstractControl>();
 
   constructor(private  userService: UserService,
+              private router: Router,
               private  storageService: StorageService,
               private route: ActivatedRoute) {
 
   }
 
   ngOnInit(){
-    this.checkAuthorized();
-    if(this.route.snapshot.params.id!=undefined){
-      this.isUpdateUser = true;
-      this.getUser(this.route.snapshot.params.id);
-    } else {
-      this.isUpdateUser = false;
-      this.user = new User();
+    if(this.checkAuthorized()!=undefined) {
+      if (this.route.snapshot.params.id != undefined) {
+        this.isUpdateUser = true;
+        this.getUser(this.route.snapshot.params.id);
+      } else {
+        this.isUpdateUser = false;
+        this.user = new User();
+      }
     }
+    else this.redirect('403');
 
   }
 
+  redirect(url: string) {
+   // this.onNoClick();
+    this.router.navigate([url]);
+  }
   checkAuthorized() {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
@@ -49,6 +56,7 @@ export class EditUserComponent implements OnInit {
     } else {
       this.authorizedAccount = undefined;
     }
+    return this.authorizedAccount;
   }
 
   isDisable(): string {
