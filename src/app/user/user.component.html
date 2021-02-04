@@ -15,11 +15,11 @@
             <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
             <span>{{ 'USERS.EDIT' | translate }}</span>
           </a>
-          <a mat-menu-item href="users" (click)="blockUser(user.id)" *ngIf="user.active==true">
+          <a mat-menu-item href="users" *ngIf="user.active==true"(click)="blockUser(user.id)" >
             <mat-icon aria-hidden="false" aria-label="Example home icon">block</mat-icon>
             <span>{{ 'USERS.BLOCK' | translate }}</span>
           </a>
-          <a mat-menu-item href="users" (click)="blockUser(user.id)" *ngIf="user.active==false">
+          <a mat-menu-item href="users"  *ngIf="user.active==false"(click)="blockUser(user.id)">
             <mat-icon aria-hidden="false" aria-label="Example home icon">block</mat-icon>
             <span>{{ 'USERS.UNLOCK' | translate }}</span>
           </a>

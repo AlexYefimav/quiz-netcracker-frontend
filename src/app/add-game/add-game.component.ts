@@ -70,13 +70,7 @@ export class AddGameComponent implements OnInit {
   setSelectedAccess(access){
     this.selectedAccess=access;
   }
-
-  // getAccess(): string {
-  // //  this.game.access=this.gameForm.get('access').value;
-  //   console.log("acceeeee "+this.gameForm.get('access').value);
-  //   return this.gameForm.get('access').value;//.get('access').value;
-  // }
-
+  
   getAccess(): string {
     for (let access of this.accesses) {
      // access="PRIVATE";

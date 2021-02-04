@@ -37,4 +37,8 @@ export class PlayerService {
     return this.http.get<Player[]>(this.url);
   }
 
+  getPlayersByAccess(): Observable<Player[]> {
+    return this.http.get<Player[]>(this.url);
+  }
+
 }

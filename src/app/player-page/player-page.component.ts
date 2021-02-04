@@ -8,10 +8,9 @@ import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
 import {SignInComponent} from "../sign-in/sign-in.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {PlayerCheckboxComponent} from "../player-checkbox/player-checkbox.component";
-//import {Dialog} from '../../model/dialog';
-//import {DialogsService} from '../../service/dialogs/dialogs.service';
-//import {ScheduleEnum} from '../../model/schedule.enum';
+
+import {PlayerGiveAccessComponent} from "../player-give-access/player-give-access.component";
+
 
 @Component({
   selector: 'app-client-page',
@@ -55,7 +54,7 @@ export class PlayerPageComponent implements OnInit {
   }
 
   shareGame(gameId: string): void {
-    const dialogRef = this.dialog.open(PlayerCheckboxComponent, {
+    const dialogRef = this.dialog.open(PlayerGiveAccessComponent, {
       minWidth: '400px',
       minHeight: '300px',
       data: gameId

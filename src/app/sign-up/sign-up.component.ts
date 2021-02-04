@@ -95,9 +95,7 @@ export class SignUpComponent implements OnInit {
       this.user.password = this.password.value;
       this.sendData();
       // this.checkUsersFromDB();
-      return "Успешно";
     }
-    return "Успешно";
   }
 
   sendData() {

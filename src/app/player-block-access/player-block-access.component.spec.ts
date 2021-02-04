@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayerCheckboxComponent } from './player-checkbox.component';
+import { PlayerBlockAccessComponent } from './player-block-access.component';
 
-describe('PlayerCheckboxComponent', () => {
-  let component: PlayerCheckboxComponent;
-  let fixture: ComponentFixture<PlayerCheckboxComponent>;
+describe('PlayerBlockAccessComponent', () => {
+  let component: PlayerBlockAccessComponent;
+  let fixture: ComponentFixture<PlayerBlockAccessComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlayerCheckboxComponent ]
+      declarations: [ PlayerBlockAccessComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayerCheckboxComponent);
+    fixture = TestBed.createComponent(PlayerBlockAccessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

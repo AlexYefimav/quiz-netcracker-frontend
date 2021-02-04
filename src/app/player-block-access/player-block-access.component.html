@@ -1,0 +1,26 @@
+<section class="example-section">
+  <span class="example-list-section">
+    <mat-checkbox class="example-margin"
+                  [checked]="allComplete"
+                  [color]="'primary'"
+                  [indeterminate]="someComplete()"
+                  (change)="setAll($event.checked)">
+        Выбрать всех пользователей
+    </mat-checkbox>
+  </span>
+  <span class="example-list-section">
+    <ul>
+      <li *ngFor="let player of players">
+        <mat-checkbox [(ngModel)]="player.isCompleted"
+                      (ngModelChange)="updateAllComplete()">
+          {{player.name}}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </span>
+</section>
+<div class="button">
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button (click)="blockAccess()">Ограничить доступ</button>
+  <button mat-button (click)="giveAccess(gameId)">Предоставить доступ для...</button>
+</div>

@@ -60,7 +60,7 @@ export class SignInComponent implements OnInit {
             this.showErrorMessage = true;
             this.storageService.currentToken = response.headers.get('Authorization');
           } else {
-           // window.alert('Ваш профиль заблокирован');
+            window.alert('Ваш профиль заблокирован');
             this.showErrorMessage = false;
           }
         },

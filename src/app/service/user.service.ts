@@ -23,11 +23,14 @@ export class UserService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.url + "users/findAllUsers")
- //  return this.http.get<User[]>(this.url + "users/findAllUsers", {observe: 'response', responseType: 'json'})
+  }
+
+  checkUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.url + "users/checkAllUsers")
       .pipe(
         delay(403),
         catchError(error => {
-            this.router.navigate(['403']);
+          this.router.navigate(['403']);
           return throwError(error)
         })
       );
@@ -55,15 +58,36 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(this.url + "users/update/" + user.id, user);
+    return this.http.put<User>(this.url + "users/update/" + user.id, user)
+      .pipe(
+        delay(403),
+        catchError(error => {
+          this.router.navigate(['403']);
+          return throwError(error)
+        })
+      );
   }
 
   deleteUser(userId: string): Observable<User> {
-    return this.http.delete<User>(this.url + "users/delete/" + userId);
+    return this.http.delete<User>(this.url + "users/delete/" + userId)
+      .pipe(
+        delay(403),
+        catchError(error => {
+          this.router.navigate(['403']);
+          return throwError(error)
+        })
+      );
   }
 
   blockUser(userId: string): Observable<User> {
-    return this.http.post<User>(this.url + "users/block/" + userId, userId);
+    return this.http.post<User>(this.url + "users/block/" + userId, userId)
+      .pipe(
+        delay(403),
+        catchError(error => {
+          this.router.navigate(['403']);
+          return throwError(error)
+        })
+      );
   }
 
   signIn(account: User): Observable<HttpResponse<User>> {

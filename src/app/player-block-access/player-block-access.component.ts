@@ -1,37 +1,18 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ThemePalette} from "@angular/material/core";
-import {User} from "../model/user";
-import {UserService} from "../service/user.service";
 import {Player} from "../model/player";
 import {PlayerService} from "../service/player.service";
 import {GameAccessService} from "../service/game-access.service";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {Game} from "../model/game";
-
-export interface Task {
-  name: string;
-  completed: boolean;
-  color: ThemePalette;
-  subtasks?: Task[];
-}
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {Router} from "@angular/router";
+import {PlayerGiveAccessComponent} from "../player-give-access/player-give-access.component";
 
 @Component({
-  selector: 'app-player-checkbox',
-  templateUrl: './player-checkbox.component.html',
-  styleUrls: ['./player-checkbox.component.css']
+  selector: 'app-player-block-access',
+  templateUrl: './player-block-access.component.html',
+  styleUrls: ['./player-block-access.component.css']
 })
-export class PlayerCheckboxComponent implements OnInit {
+export class PlayerBlockAccessComponent implements OnInit {
 
-  task: Task = {
-    name: 'Indeterminate',
-    completed: false,
-    color: 'primary',
-    subtasks: [
-      {name: 'Primary', completed: false, color: 'primary'},
-      {name: 'Accent', completed: false, color: 'accent'},
-      {name: 'Warn', completed: false, color: 'warn'}
-    ]
-  };
   public players: Player[];
   public player: Player;
 
@@ -39,7 +20,8 @@ export class PlayerCheckboxComponent implements OnInit {
 
   constructor(private playerService: PlayerService,
               private gameAceessService: GameAccessService,
-              public dialogRef: MatDialogRef<PlayerCheckboxComponent>,
+              public dialogRef: MatDialogRef<PlayerBlockAccessComponent>,
+              public dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public gameId: any) {
   }
 
@@ -48,7 +30,7 @@ export class PlayerCheckboxComponent implements OnInit {
   }
 
   private getUser(): Promise<Player[]> {
-    return this.playerService.getPlayers().toPromise();
+    return this.gameAceessService.getPlayersWithTrueAccess(this.gameId).toPromise();
   }
 
   updateAllComplete() {
@@ -74,18 +56,26 @@ export class PlayerCheckboxComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  getAccess(){
+  blockAccess(){
     if (this.players == null) {
       return;
     }
     this.players.forEach(player => {
         if (player.isCompleted) {
-            this.gameAceessService.activateGameForPlayers(this.gameId,player.id).toPromise()
+          this.gameAceessService.activateGameForPlayers(this.gameId,player.id).toPromise()
         }
       }
     )
     this.onNoClick();
   }
 
+  giveAccess(gameId: string): void {
+    this.onNoClick();
+    const dialogRef = this.dialog.open(PlayerGiveAccessComponent, {
+      minWidth: '400px',
+      minHeight: '300px',
+      data: gameId
+    });
+  }
 
 }

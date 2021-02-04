@@ -10,7 +10,7 @@ import {UserService} from '../service/user.service';
 export class UserComponent implements OnInit {
   public users: User[];
   public user: User;
-  roles: string[] = ["USER", "ADMIN", "hjjk"];
+  roles: string[] = ["USER", "ADMIN"];
 
 
   constructor(private userService: UserService) {
@@ -21,11 +21,11 @@ export class UserComponent implements OnInit {
   }
 
   private getUser(): Promise<User[]> {
-    return this.userService.getUsers().toPromise();
+    return this.userService.checkUsers().toPromise();
   }
 
   private blockUser(id: string) {
-    return this.userService.blockUser(id).toPromise();
+    return this.userService.blockUser(id).toPromise()
   }
 
   async deleteUser(id: string) {
