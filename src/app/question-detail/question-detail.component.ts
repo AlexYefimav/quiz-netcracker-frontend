@@ -22,8 +22,7 @@ export class QuestionDetailComponent implements OnInit {
   @Input() questionForm: FormGroup;
   picture: any;
 
-  constructor(private questionValidation: AddQuestionValidation,
-              private categoryService: CategoryService,
+  constructor(private categoryService: CategoryService,
               private levelService: LevelService,
               private photoService: PhotoService) { }
 
@@ -72,12 +71,17 @@ export class QuestionDetailComponent implements OnInit {
     }
   }
 
+  getPhoto(): string {
+    return this.questionForm.get('photo').value;
+  }
+
   checkForm(): void {
     if (this.questionForm.valid) {
       this.question.title = this.getTitle();
       this.question.description = this.getDescription();
       this.question.category = this.getCategoryId();
       this.question.level = this.getLevelId();
+      this.question.photo = this.getPhoto();
     }
   }
 
@@ -87,6 +91,7 @@ export class QuestionDetailComponent implements OnInit {
     formData.append('file', this.picture);
     this.photoService.uploadFile(formData).subscribe((result) => {
       this.question.photo = result.photo;
+      this.questionForm.get('photo').patchValue(this.picture.name);
     });
   }
 }

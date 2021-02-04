@@ -18,16 +18,15 @@
     "GAME_TITLE": "Название игры",
     "GAME_DESCRIPTION": "Описание игры",
     "QUESTIONS": {
-      "TITLE": "Вопросы",
-      "EDIT_QUESTION": "Редактировать",
-      "DELETE_QUESTION": "Удалить"
+      "TITLE": "Вопросы"
     },
     "ADD_QUESTION": {
       "TITLE": "Добавление вопроса",
       "ADD": "Добавить"
     },
     "EDIT_QUESTION": {
-      "SAVE": "Сохранить"
+      "SAVE": "Сохранить",
+      "DELETE": "Удалить"
     },
     "QUESTION_DETAIL": {
       "EXPAND_ALL": "Подробнее",
@@ -38,7 +37,8 @@
       "LEVEL": "Сложность",
       "ERROR": {
         "REQUIRED": "Необходимо заполнить поле",
-        "DUPLICATE": "Такой вопрос уже существует",
+        "DUPLICATE_TITLE": "Такой вопрос уже существует",
+        "DUPLICATE_DESCRIPTION": "Такое описание уже существует",
         "MINLENGTH": "Формулировка должна содержать минимум 6 символов"
       }
     },
@@ -49,7 +49,7 @@
         "ADD": "Добавить"
       },
       "ANSWER_DETAIL": {
-        "DELETE": "Delete"
+        "DELETE": "Удалить"
       },
       "ERROR": {
         "REQUIRED": "Необходимо заполнить поле",

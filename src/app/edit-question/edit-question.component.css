@@ -10,3 +10,10 @@
 .mat-raised-button {
   margin-top: 20px;
 }
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 40%;
+  margin-left: 40%;
+}

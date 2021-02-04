@@ -19,11 +19,8 @@ export class AnswerDetailComponent implements OnInit {
               private answerValidation: UpdateAnswerValidation) { }
 
   ngOnInit(): void {
-    //
     this.answerValidation.setQuestion(this.question);
-    //
-    this.answerValidation.setChosenAnswer(this.answer);
-    this.answerForm = this.answerValidation.createAnswerForm();
+    this.answerForm = this.answerValidation.createAnswerForm(this.answer);
   }
 
   deleteAnswer(): void {
@@ -43,10 +40,6 @@ export class AnswerDetailComponent implements OnInit {
       this.answerForm.get('title').patchValue(this.answer.title);
       this.answerForm.get('right').patchValue(this.answer.right);
     }
-  }
-
-  setAnswer(): void {
-    this.answerValidation.setChosenAnswer(this.answer);
   }
 
   getTitle(): any {

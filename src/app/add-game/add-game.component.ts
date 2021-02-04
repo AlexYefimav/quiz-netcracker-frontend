@@ -11,6 +11,10 @@ import {UpdateGameValidation} from '../service/validation/update-game-validation
 import {AddGameValidation} from '../service/validation/add-game-validation';
 import {TranslateService} from '@ngx-translate/core';
 import {LocalSettingsService} from '../service/localization/LocalSettingsService';
+import {CategoryService} from '../service/category.service';
+import {LevelService} from '../service/level.service';
+import {Category} from '../model/category';
+import {Level} from '../model/level';
 
 @Component({
   selector: 'app-add-game',
@@ -28,6 +32,8 @@ export class AddGameComponent implements OnInit {
   accesses: string[] = ["PUBLIC", "PRIVATE"];
   @Input() accessControl: AbstractControl;
   @Output() accessControlChange = new EventEmitter<AbstractControl>();
+  categories: Category[];
+  levels: Level[];
 
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
@@ -37,12 +43,16 @@ export class AddGameComponent implements OnInit {
               private updateGameValidation: UpdateGameValidation,
               private translateService: TranslateService,
               private localeSettingsService: LocalSettingsService,
-              private router: Router) {
+              private router: Router,
+              private categoryService: CategoryService,
+              private levelService: LevelService) {
   }
 
   async ngOnInit(): Promise<void> {
     const currentLanguage = this.localeSettingsService.getLanguage();
     this.translateService.use(currentLanguage);
+    this.categories = await this.getCategories();
+    this.levels = await this.getLevels();
     if (this.route.snapshot.params.id != null){
       this.game = await this.getGame(this.route.snapshot.params.id);
       this.isUpdateGame = true;
@@ -59,6 +69,14 @@ export class AddGameComponent implements OnInit {
     return this.gameService.getGameById(gameId).toPromise();
   }
 
+  getCategories(): Promise<Category[]> {
+    return this.categoryService.getCategories().toPromise();
+  }
+
+  getLevels(): Promise<Level[]> {
+    return this.levelService.getLevels().toPromise();
+  }
+
   getTitle(): string {
     return this.gameForm.get('title').value;
   }
@@ -70,7 +88,7 @@ export class AddGameComponent implements OnInit {
   setSelectedAccess(access){
     this.selectedAccess=access;
   }
-  
+
   getAccess(): string {
     for (let access of this.accesses) {
      // access="PRIVATE";
@@ -94,12 +112,35 @@ export class AddGameComponent implements OnInit {
   }
 
   redirectTo(uri: string): void {
-    this.router.navigateByUrl('/games', {skipLocationChange: true}).then(() =>
-      this.router.navigate([uri]));
+    this.router.navigate([uri]);
+  }
+
+  setCategoryIdByName(): void {
+    for (const question of this.game.questions) {
+      for (const category of this.categories) {
+        if (category.title === question.category) {
+          question.category = category.id;
+          break;
+        }
+      }
+    }
+  }
+
+  setLevelIdByName(): void {
+    for (const question of this.game.questions) {
+      for (const level of this.levels) {
+        if (level.title === question.level) {
+          question.level = level.id;
+          break;
+        }
+      }
+    }
   }
 
   async updateGame(): Promise<void> {
     if (this.gameForm.valid) {
+      this.setCategoryIdByName();
+      this.setLevelIdByName();
       try {
         this.game = await this.updateAndGetGame();
       }
@@ -112,6 +153,8 @@ export class AddGameComponent implements OnInit {
 
   async createGame(game: Game): Promise<void> {
     if (this.gameForm.valid) {
+      this.setCategoryIdByName();
+      this.setLevelIdByName();
       try {
         if (game.id) {
           this.game = await this.updateAndGetGame();

@@ -9,24 +9,8 @@ export class Question {
   answersSet: Answer[];
   game: string;
   photo: string;
+  temporaryIndex: number;
 
   constructor() {
-  }
-
-  equals(anotherQuestion: Question): boolean {
-    if (anotherQuestion.answersSet.length !== this.answersSet.length) {
-      return false;
-    }
-    for (let i = 0; i < this.answersSet.length; i++) {
-      if (!anotherQuestion.answersSet[i].equals(this.answersSet[i])) {
-        return false;
-      }
-    }
-    return anotherQuestion.id == this.id
-      && anotherQuestion.title == this.title
-      && anotherQuestion.description == this.description
-      && anotherQuestion.category == this.category
-      && anotherQuestion.level == this.level
-      && anotherQuestion.game == this.game;
   }
 }
