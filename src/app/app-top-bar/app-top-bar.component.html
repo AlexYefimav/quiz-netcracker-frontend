@@ -19,6 +19,7 @@
   <a mat-button href="">{{ 'NAV_BAR.HOME' | translate }}</a>
   <div class="navigation">
     <button mat-button (click)="redirect('games')">{{ 'NAV_BAR.QUIZ' | translate }}</button>
+    <button mat-button (click)="redirect('leaderboards')">Leaderboards</button>
   </div>
   <div *ngIf="languages.RU">
     <mat-form-field class="language-container">

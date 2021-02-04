@@ -7,6 +7,7 @@ import {GameService} from "../service/game.service";
 import {Game} from "../model/game";
 import {GameStatistics} from "../model/game-statistics";
 
+
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -19,6 +20,7 @@ export class StatisticsComponent implements OnInit {
   playerId: string;
   statistics: GameStatistics[];
   game: Game;
+
 
   constructor(private statisticsService: StatisticsService,
               private storageService: StorageService,

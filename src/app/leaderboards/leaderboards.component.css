@@ -1,0 +1,36 @@
+h1{
+  color: #c2185b;
+  text-align: center;
+  margin-top: 2%;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 800px;
+}
+
+.position{
+  margin-left: 10px;
+}
+
+.player{
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+

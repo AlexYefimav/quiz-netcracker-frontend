@@ -11,7 +11,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 import {PlayerGiveAccessComponent} from "../player-give-access/player-give-access.component";
 
-import {MatDialog} from "@angular/material/dialog";
+
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({

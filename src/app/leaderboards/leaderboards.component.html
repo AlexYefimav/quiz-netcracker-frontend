@@ -1,0 +1,15 @@
+<h1>Leaderboards</h1>
+<div class="container">
+  <mat-card class="title">
+    <div class="position">№</div>
+    <div class="player">Name</div>
+    <div class="rating">Rating</div>
+  </mat-card>
+  <div *ngFor="let entry of map.entries(); let i = index">
+    <mat-card class="title">
+      <div class="position">{{i + 1}}</div>
+      <div class="player">{{entry[0]}}</div>
+      <div class="rating">{{entry[1].toFixed(2)}}</div>
+    </mat-card>
+  </div>
+</div>
