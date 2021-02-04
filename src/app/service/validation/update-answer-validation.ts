@@ -10,7 +10,6 @@ import {DuplicateValidator} from './duplicate-validation';
 export class UpdateAnswerValidation {
   answerForm: FormGroup;
   question: Question;
-  chosenAnswer: Answer;
 
   constructor(private formBuilder: FormBuilder,
               private duplicateValidator: DuplicateValidator) {
@@ -20,14 +19,10 @@ export class UpdateAnswerValidation {
     this.question = question;
   }
 
-  setChosenAnswer(answer: Answer): void {
-    this.chosenAnswer = answer;
-  }
-
-  createAnswerForm(): FormGroup {
+  createAnswerForm(answer: Answer): FormGroup {
     return this.formBuilder.group({
-      title: [this.chosenAnswer.title, [Validators.required]],
-      right: [this.chosenAnswer.right, []]
-    }, { validators: this.duplicateValidator.duplicateValidation(this.question.answersSet, this.chosenAnswer) });
+      title: [answer.title, [Validators.required]],
+      right: [answer.right, []]
+    }, { validators: this.duplicateValidator.duplicateValidation(this.question.answersSet, answer) });
   }
 }

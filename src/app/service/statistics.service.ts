@@ -25,4 +25,8 @@ export class StatisticsService {
   deleteStatistics(id: string): Observable<Statistics>{
     return this.http.delete<Statistics>(this.url + "delete/" + id);
   }
+
+  getTotalPercentAllPlayers(): Observable<Map<string, number>>{
+    return this.http.get<Map<string, number>>(this.url + "top");
+  }
 }

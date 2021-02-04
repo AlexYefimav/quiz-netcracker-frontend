@@ -63,6 +63,7 @@ export class AddQuestionComponent implements OnInit {
       if (this.game.id == null) {
         this.game.player = this.storageService.currentUser.id;
       }
+      this.question.temporaryIndex = this.game.questions.length + 1;
       this.game.questions.push(this.question);
       await this.initializeProperties();
       this.answerForm = this.answerValidation.createAnswerForm();

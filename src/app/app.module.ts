@@ -59,6 +59,7 @@ import {EditPlayerComponent} from "./edit-player/edit-player.component";
 import {MatStepperModule} from '@angular/material/stepper';
 import {CountdownModule} from "ngx-countdown";
 import {SignInOnceComponent} from "./sign-in-once/sign-in-once.component";
+import { LeaderboardsComponent } from './leaderboards/leaderboards.component';
 import {ClipboardModule} from 'ngx-clipboard';
 import { PlayerBlockAccessComponent } from './player-block-access/player-block-access.component';
 import { PlayerGiveAccessComponent } from './player-give-access/player-give-access.component';
@@ -101,6 +102,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignInOnceComponent,
     PlayerBlockAccessComponent,
     PlayerGiveAccessComponent,
+    LeaderboardsComponent
   ],
   imports: [
     ClipboardModule,

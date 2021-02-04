@@ -39,24 +39,22 @@ export class DuplicateValidator {
       array.forEach(arrayElement => {
         if (arrayElement[this.propertyName] === this.comparingValue) {
           if (entity) {
-            if (entity.id !== arrayElement.id) {
+            if ((entity.id && entity.id !== arrayElement.id) || (entity.temporaryIndex && entity.temporaryIndex !== arrayElement.temporaryIndex)) {
               control.get(this.propertyName)?.setErrors({duplicate: true});
+              this.comparingValue = '';
+              this.propertyName = '';
               return {duplicate: true};
             }
           }
           else {
             control.get(this.propertyName)?.setErrors({duplicate: true});
-            return { duplicate: true };
+            this.comparingValue = '';
+            this.propertyName = '';
+            return {duplicate: true};
           }
         }
       });
     }
     return null;
   }
-
-  // areEntitiesEqual(entity: any, element: any): boolean {
-  //   if (entity instanceof Answer || entity instanceof Question) {
-  //     return entity.equals(element);
-  //   }
-  // }
 }
