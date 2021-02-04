@@ -56,7 +56,10 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {EditPlayerComponent} from "./edit-player/edit-player.component";
+import {MatStepperModule} from '@angular/material/stepper';
+import {CountdownModule} from "ngx-countdown";
 import {SignInOnceComponent} from "./sign-in-once/sign-in-once.component";
+import {ClipboardModule} from 'ngx-clipboard';
 import { PlayerBlockAccessComponent } from './player-block-access/player-block-access.component';
 import { PlayerGiveAccessComponent } from './player-give-access/player-give-access.component';
 
@@ -100,7 +103,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlayerGiveAccessComponent,
   ],
   imports: [
+    ClipboardModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
     MatTableModule,
     MatCheckboxModule,
     MatProgressBarModule,
@@ -133,7 +138,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       },
       defaultLanguage: 'RU'
-    })
+    }),
+    CountdownModule
   ],
   providers: [
     {

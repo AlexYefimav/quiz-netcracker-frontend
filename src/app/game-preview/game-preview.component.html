@@ -1,31 +1,35 @@
-<div class="container">
-  <mat-card>
-    <h1>
-      <mat-card-title class="title">
-        <div>
+<div class="window">
+  <div class="container">
+    <mat-card class="card">
+      <div class="title">
+        <h1>
           {{game.title}}
+        </h1>
+      </div>
+      <div class="description">
+        <h4>
+          {{ 'GAME_PREVIEW.DESCRIPTION' | translate }}: {{game.description}}<br>
+          {{ 'GAME_PREVIEW.RULES' | translate }}:<br>
+          {{ 'GAME_PREVIEW.RULES_1' | translate }}<br>
+          {{ 'GAME_PREVIEW.RULES_2' | translate }}<br>
+          {{ 'GAME_PREVIEW.RULES_3' | translate }}<br>
+          {{ 'GAME_PREVIEW.RULES_4' | translate }}<br>
+          {{ 'GAME_PREVIEW.RULES_5' | translate }}<br>
+          {{ 'GAME_PREVIEW.RULES_6' | translate }}<br>
+          {{ 'GAME_PREVIEW.RULES_7' | translate }}<br>
+          {{ 'GAME_PREVIEW.RULES_8' | translate }}<br>
+          {{ 'GAME_PREVIEW.RULES_9' | translate }}<br>
+        </h4>
+      </div>
+      <div class="button">
+        <div class="play">
+          <button mat-raised-button color="primary" (click)="openDialog(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
         </div>
-      </mat-card-title>
-      <mat-card-subtitle class="image" *ngIf="game.photo">
-        <a><img src="{{game.photo}}" alt="Photo from Amazon S3" style="width: 200px; height: 200px;"></a>
-      </mat-card-subtitle>
-      <mat-card-subtitle class="descr">
-        <div>
-          <h1>
-            {{game.description}}
-          </h1>
+        <div class="back">
+          <a mat-raised-button color="primary" href="games">{{ 'GAME_PREVIEW.BACK' | translate }}</a>
         </div>
-      </mat-card-subtitle>
-      <mat-card-subtitle class="playbutton">
-        <form>
-          <div>
-            <h1>
-              <button mat-raised-button (click)="openDialog(game)">Играть</button>
-            </h1>
-            <a mat-raised-button href="games">Вернуться</a>
-          </div>
-        </form>
-      </mat-card-subtitle>
-    </h1>
-  </mat-card>
+      </div>
+    </mat-card>
+  </div>
 </div>
+

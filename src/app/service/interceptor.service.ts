@@ -59,7 +59,7 @@ export class InterceptorService implements HttpInterceptor {
                   `${errorMessage}: ${errorResponse.error.message}`;
       }
       else {
-        message = errorResponse.error;
+        message = errorResponse.message;
       }
     }
     if (snackbarAction) {

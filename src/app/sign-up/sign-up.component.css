@@ -52,3 +52,9 @@ mat-card-content {
   align-content: center;
   align-items: center;
 }
+
+countdown{
+  font-size: xx-large;
+  color: white;
+  font-family: DejaVu Sans Mono, monospace;
+}

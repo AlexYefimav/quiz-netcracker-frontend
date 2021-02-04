@@ -1,5 +1,3 @@
-import {Answer} from "./answer";
-
 export class User{
   id: string;
   login: string;
@@ -11,6 +9,7 @@ export class User{
   isActive: boolean;
   usersSet: User[];
   active: boolean;
+  activationCode: string;
   constructor() {
   }
 

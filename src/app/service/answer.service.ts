@@ -23,8 +23,8 @@ export class AnswerService {
     return this.http.get<Answer[]>(this.answerUrl + '/all');
   }
 
-  getAnswerAndSaveStatistics(answerId: string, playerId: string, gameRoomId: string, numberAnswer: number): Observable<Answer> {
-    const resultUrl = `${this.answerUrl}/${answerId}/${playerId}/${gameRoomId}/${numberAnswer}`;
+  getAnswerAndSaveStatistics(questionId: string,answerId: string, playerId: string, gameRoomId: string, numberAnswer: number): Observable<Answer> {
+    const resultUrl = `${this.answerUrl}/${questionId}/${answerId}/${playerId}/${gameRoomId}/${numberAnswer}`;
     return this.http.get<Answer>(resultUrl);
   }
 

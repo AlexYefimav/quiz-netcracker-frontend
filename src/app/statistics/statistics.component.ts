@@ -48,7 +48,24 @@ export class StatisticsComponent implements OnInit {
     }
   }
 
-  getGame(): Promise<Game>{
-  return this.gameService.getGameById(this.gameId).toPromise();
+  getGame(): Promise<Game> {
+    return this.gameService.getGameById(this.gameId).toPromise();
+  }
+
+  getAnswer(answer: any) {
+    if (answer == null) {
+      return "-";
+    }
+    return answer.title;
+  }
+
+  getColor(answer: any) {
+    if (answer == null) {
+      return "white";
+    }
+    if (answer.right) {
+      return "green";
+    }
+    return "red";
   }
 }

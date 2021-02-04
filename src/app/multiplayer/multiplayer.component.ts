@@ -15,6 +15,7 @@ import {Playing} from "../model/playing";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
+import {CountdownComponent, CountdownEvent} from 'ngx-countdown';
 
 @Component({
   selector: 'app-multiplayer',
@@ -43,9 +44,8 @@ export class MultiplayerComponent implements OnInit {
   quantityQuestion: number; //количество вопросов
   isBlockAnswers: boolean; //для блокирования ответов
 
-  count: number = 30; //счетчик
-  timeIsOver: boolean = false;
-  private answerButtonNotPressed: boolean = false;
+  timeIsOver: boolean = false; //конец таймера(при true таймер в 0)
+  private answerButtonNotPressed: boolean = false; //когда кнопку ответить не была нажата
 
   constructor(private questionService: QuestionService,
               private answerService: AnswerService,
@@ -86,8 +86,7 @@ export class MultiplayerComponent implements OnInit {
     this.webSocketAPI = new WebSocketAPI(this, this.player, this.gameRoomId, this.gameRoomService);
     this.connect();
 
-    await this.delay();
-    this.timeIsOver = true;
+    this.timeIsOver = false;
   }
 
   private getGameById(): Promise<Game> {
@@ -107,7 +106,10 @@ export class MultiplayerComponent implements OnInit {
   }
 
   getAnswerById(): Promise<Answer> {
-    return this.answerService.getAnswerAndSaveStatistics(this.answer.id, this.player.id, this.gameRoomId, this.questionNumber).toPromise();
+    if (this.answer == null) {
+      return this.answerService.getAnswerAndSaveStatistics(this.question.id, "null", this.player.id, this.gameRoomId, this.questionNumber).toPromise();
+    }
+    return this.answerService.getAnswerAndSaveStatistics(this.question.id, this.answer.id, this.player.id, this.gameRoomId, this.questionNumber).toPromise();
   }
 
   setNextQuestion() {
@@ -152,9 +154,7 @@ export class MultiplayerComponent implements OnInit {
       this.questionNumber++;
       this.question = this.questions[this.questionNumber];
       this.answer = null;
-      this.count = 30;
-      await this.delay();
-      this.timeIsOver = true;
+      //возобновить таймер
     } else if (message.playerId == undefined) {
       this.openSnackBar(message, "Like");
     } else {
@@ -170,28 +170,6 @@ export class MultiplayerComponent implements OnInit {
     }
   }
 
-  async delay() {
-    for (let i = 0; i < 30; i++) {
-      await new Promise(resolve => setTimeout(() => resolve(), 1000));
-      this.count--;
-    }
-    this.answeredQuestion++;
-    if (this.answer == null || !this.answerButtonNotPressed) {
-      return;
-    }
-    this.answer = await this.getAnswerById();
-
-    for (let i = 0; i < this.players.length; i++) {
-      if (this.player.id == this.players[i].player.id) {
-        if (this.answer.right) {
-          this.players[i].answerColor[this.questionNumber] = "green";
-        } else {
-          this.players[i].answerColor[this.questionNumber] = "red";
-        }
-      }
-    }
-  }
-
   openSnackBar(message, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,
@@ -200,5 +178,30 @@ export class MultiplayerComponent implements OnInit {
 
   isDisabled() {
     return this.timeIsOver || this.isBlockAnswers;
+  }
+
+  async timerEvent($event: CountdownEvent) {
+    if ($event.left == 0) {
+      this.timeIsOver = true;
+      this.answeredQuestion++;
+      this.answer = await this.getAnswerById();
+      if (this.answer == null || !this.answerButtonNotPressed) {
+        return;
+      }
+
+      for (let i = 0; i < this.players.length; i++) {
+        if (this.player.id == this.players[i].player.id) {
+          if (this.answer.right) {
+            this.players[i].answerColor[this.questionNumber] = "green";
+          } else {
+            this.players[i].answerColor[this.questionNumber] = "red";
+          }
+        }
+      }
+    }
+  }
+
+  restart(cd1: CountdownComponent) {
+    cd1.restart();
   }
 }
