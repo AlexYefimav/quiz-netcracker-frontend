@@ -4,7 +4,7 @@ import {GameRoomService} from "../service/game-room.service";
 import {Player} from "../model/player";
 
 export class WebSocketAPI {
-  webSocketEndPoint: string = 'http://localhost:8085/ws';
+  webSocketEndPoint: string = 'http://localhost:8443/ws';
 
   topic: string;
   stompClient: any;
