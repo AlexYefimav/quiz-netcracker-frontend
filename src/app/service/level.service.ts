@@ -9,7 +9,7 @@ import {Level} from "../model/level";
 })
 export class LevelService {
 
-  url = 'http://127.0.0.1:8085/level/';
+  url = 'http://127.0.0.1:8443/level/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

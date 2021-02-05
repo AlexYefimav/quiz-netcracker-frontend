@@ -1,10 +1,10 @@
-<div class="editQuestion">
+<div class="editQuestion" *ngIf="authorizedAccount.id!=undefined" >
   <div class="example-action-buttons">
     <button mat-button (click)="accordion.openAll()">Expand All</button>
     <button mat-button (click)="accordion.closeAll()">Collapse All</button>
   </div>
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
+    <mat-expansion-panel >
       <mat-expansion-panel-header>
         <mat-panel-title>
           Login
@@ -59,6 +59,6 @@
       </mat-accordion>
 
 
-  <a mat-raised-button  color="primary" (click)="this.isUpdateUser?updateUser():createUser(user)">Save</a>
+  <a mat-raised-button  color="primary" href="users" (click)="this.isUpdateUser?updateUser():createUser(user)">Save</a>
 </div>
 

@@ -10,7 +10,7 @@ import {Game} from "../model/game";
 })
 export class PlayerService {
 
-  url = 'http://localhost:8085/player';
+  url = 'http://localhost:8443/player';
 
   constructor(private http: HttpClient) {
   }

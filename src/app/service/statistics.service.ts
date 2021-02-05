@@ -9,7 +9,7 @@ import {GameStatistics} from "../model/game-statistics";
 })
 export class StatisticsService {
 
-  url = 'http://127.0.0.1:8085/statistics/';
+  url = 'http://127.0.0.1:8443/statistics/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

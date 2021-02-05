@@ -1,25 +1,25 @@
 <div>
-  <h1> {{ 'USERS.TITLE' | translate }}</h1>
+  <h2>{{ 'USERS.TITLE' | translate }}</h2>
 </div>
 <form>
   <div *ngFor="let user of users">
-    <mat-card>
+    <mat-card *ngIf="user.id!=authorizedAccount.id">
       <mat-card-title>
 
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         {{user.login}}
-        <mat-menu #menu="matMenu">
-          <a mat-menu-item href="users/update/{{user.id}}">
+        <mat-menu  #menu="matMenu" >
+          <a mat-menu-item  href="users/update/{{user.id}}">
             <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
             <span>{{ 'USERS.EDIT' | translate }}</span>
           </a>
-          <a mat-menu-item href="users" *ngIf="user.active==true"(click)="blockUser(user.id)" >
+          <a mat-menu-item href="users" *ngIf="user.active==true&&user.role=='USER'" (click)="blockUser(user.id)" >
             <mat-icon aria-hidden="false" aria-label="Example home icon">block</mat-icon>
             <span>{{ 'USERS.BLOCK' | translate }}</span>
           </a>
-          <a mat-menu-item href="users"  *ngIf="user.active==false"(click)="blockUser(user.id)">
+          <a mat-menu-item href="users"  *ngIf="user.active==false&&user.role=='USER'" (click)="blockUser(user.id)">
             <mat-icon aria-hidden="false" aria-label="Example home icon">block</mat-icon>
             <span>{{ 'USERS.UNLOCK' | translate }}</span>
           </a>
@@ -34,10 +34,14 @@
       </mat-card-content>
     </mat-card>
   </div>
-<!--   <a mat-mini-fab color="primary" href="users/create">-->
-<!--    <mat-icon>add</mat-icon>-->
-<!--  </a>-->
 </form>
-
-
+<div>
+  <div class="footer">
+    <mat-paginator [length]="this.users?.length"
+                   [pageSize]="3"
+                   [pageSizeOptions]="[3,6, users?.length]"
+                   (page)="OnPageChange($event)">
+    </mat-paginator>
+  </div>
+</div>
 

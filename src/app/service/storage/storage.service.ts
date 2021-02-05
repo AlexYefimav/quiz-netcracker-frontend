@@ -10,6 +10,7 @@ export class StorageService {
   private readonly PASSPHRASE: string;
   private readonly USER: string;
   private readonly TOKEN: string;
+  private authorizedAccount: User;
 
   constructor() {
     this.PASSPHRASE = 'secret';
@@ -45,4 +46,18 @@ export class StorageService {
     localStorage.removeItem('currentUser');
     // localStorage.clear();
   }
+
+  checkAuthorized() {
+    if (!StorageService.isEmpty()) {
+      if (this.currentToken) {
+        this.authorizedAccount = this.currentUser;
+      } else {
+        StorageService.clear();
+      }
+    } else {
+      this.authorizedAccount = undefined;
+    }
+    return this.authorizedAccount;
+  }
+
 }

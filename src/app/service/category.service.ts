@@ -8,7 +8,7 @@ import {Category} from "../model/category";
 })
 export class CategoryService {
 
-  url = 'http://127.0.0.1:8085/category/';
+  url = 'http://127.0.0.1:8443/category/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

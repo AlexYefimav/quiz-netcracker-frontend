@@ -14,7 +14,7 @@ import {PlayerGiveAccessComponent} from "../player-give-access/player-give-acces
 
 import {MatSnackBar} from "@angular/material/snack-bar";
 
-@Component({
+  @Component({
   selector: 'app-client-page',
   templateUrl: './player-page.component.html',
   styleUrls: ['./player-page.component.css']

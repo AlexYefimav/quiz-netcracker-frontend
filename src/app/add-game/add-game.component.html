@@ -78,10 +78,14 @@
               <mat-panel-title>
                 Access
               </mat-panel-title>
+              <mat-panel-description>
+                {{game.access}}
+                <mat-icon>block</mat-icon>
+              </mat-panel-description>
             </mat-expansion-panel-header>
 
             <mat-form-field class="example-form" appearance="fill">
-              <mat-select [value]="selectedAccess" >
+              <mat-select  [value]="getSelectedAccess(game.access)">
                 <mat-option *ngFor="let access of accesses" [value]="access" (click)="setSelectedAccess(access)" >
                   {{access}}
                 </mat-option>

@@ -7,13 +7,14 @@ import {catchError, delay} from "rxjs/operators";
 import {Router} from '@angular/router';
 import {StorageService} from "./storage/storage.service";
 import {ActivateCode} from "../model/activate-code";
+import {Message} from "../model/message";
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
 
-  url = 'http://localhost:8085/';
+  url = 'http://localhost:8443/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -98,4 +99,16 @@ export class UserService {
   activate(mail: string, code: string): Observable<ActivateCode> {
     return this.http.get<ActivateCode>(this.url + "users/activate/" + mail + "/" + code);
   }
+
+  getPageableUsers(pageNumber: number,
+                   pageSize: number): Observable<Message> {
+    // Initialize Params Object
+    let params = new HttpParams();
+
+    // Begin assigning parameters
+    params = params.append('page', pageNumber.toString());
+    params = params.append('size', pageSize.toString());
+
+    return this.http.get<Message>(this.url + `pageable`, { params: params });}
+
 }
