@@ -96,16 +96,19 @@
     "REQUIRED_LOGIN": "Необходимо ввести логин",
     "REQUIRED_EMAIL": "Необходимо ввести почту",
     "REQUIRED_PASSWORD": "Необходимо ввести пароль",
-    "DUPLICATE_LOGIN": " User with this login already exists",
-    "DUPLICATE_EMAIL": " User with this email already exists",
+    "DUPLICATE_LOGIN": "Пользователь с таким логином уже существует",
+    "DUPLICATE_EMAIL": "Пользователь с такой почтой уже существует",
     "VALID_EMAIL": "Пожалуйста, введите адрес почты корректно",
     "VALID_LOGIN": "Пожалуйста, введите логин корректно",
     "LOGIN_3_CHARACTERS": "Логин должен содержать более 3 символов",
     "PASSWORD_6_CHARACTERS": "Пароль должен содержать более 6 символов",
     "REPEAT_PASSWORD": "Повторить пароль",
     "CONFIRM_PASSWORD": "Подтвердить пароль",
-    "PASSWORD_DO_NOT_MATCH": "Пароли не совпадают"
-
+    "PASSWORD_DO_NOT_MATCH": "Пароли не совпадают",
+    "ACTIVATION_CODE": {
+      "TITLE": "Почта или активационный код невалидные",
+      "ACTION": "Закрыть"
+    }
   },
 
   "USERS": {

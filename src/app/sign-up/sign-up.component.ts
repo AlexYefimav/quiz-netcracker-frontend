@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -9,6 +9,8 @@ import {SignUpValidation} from "../service/validation/sign-up-validator";
 import {UserService} from "../service/user.service";
 import {CountdownComponent, CountdownEvent} from "ngx-countdown";
 import {ActivateCode} from "../model/activate-code";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {TranslateService} from '@ngx-translate/core';
 
 export class SignUpErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -29,7 +31,7 @@ export class SignUpComponent implements OnInit {
   secondFormGroup: FormGroup;
   enteredCode: string = "";
   str: ActivateCode = {
-    text: "Пройдите предыдущие шаги регестрации"
+    text: "Пройдите предыдущие шаги регистрации"
   };
   answer: boolean = false;
 
@@ -71,7 +73,9 @@ export class SignUpComponent implements OnInit {
               private formBuilder: FormBuilder,
               private signUpValidation: SignUpValidation,
               private userService: UserService,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: FormBuilder,
+              private snackBar: MatSnackBar,
+              private injector: Injector) {
 
     // this.form = formBuilder.group({
     //   username: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -97,7 +101,6 @@ export class SignUpComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-
   }
 
   async getUsers(): Promise<User[]> {
@@ -157,6 +160,19 @@ export class SignUpComponent implements OnInit {
 
   async activate(){
     // this.cd.begin();
+    const translateService = this.injector.get(TranslateService);
+    let message;
+    let snackbarAction;
+    translateService.stream('SIGN_UP.ACTIVATION_CODE').subscribe(value => {
+      message = value.TITLE;
+      snackbarAction = value.ACTION;
+    });
+    if (this.user.mail == null || this.enteredCode.length === 0) {
+      this.snackBar.open(message, snackbarAction, {
+        panelClass: ['snackbar']
+      });
+      return;
+    }
     this.str = await this.userService.activate(this.user.mail, this.enteredCode).toPromise();
     console.log(this.str);
   }
