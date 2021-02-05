@@ -10,7 +10,7 @@
         <h2>{{question.title}}</h2>
       </div>
       <div class="time">
-        <countdown #cd1 [config]="{leftTime: 20, format: 'mm:ss'}" (event)="timerEvent($event)"></countdown>
+        <countdown [(ngModel)]="timer" [config]="{leftTime: 3, format: 'mm:ss'}" (event)="timerEvent($event)"></countdown> <!-- ебанная хуйня -->
       </div>
     </div>
     <div class="image" *ngIf="question.photo">
@@ -45,7 +45,7 @@
       <ng-template #nextQuestionOrBlockButtonReply>
         <div *ngIf="player.id==game.player && timeIsOver; else timerIsOver">
           <button mat-flat-button color="primary"
-                  (click)="setNextQuestion(); cd1.restart()">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>
+                  (click)="setNextQuestion()">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>
         </div>
         <ng-template #timerIsOver>
           <button mat-flat-button class="myButtons" color="warn"
@@ -62,7 +62,7 @@
           <div class="name-player">
             <h4>{{player.player.name}}</h4>
             <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon"
-                    (click)="sendMessage(player.player)">
+                    (click)="sendLikePlayer(player.player)">
               <mat-icon>favorite</mat-icon>
             </button>
           </div>

@@ -175,5 +175,17 @@
     "RULES_9" : "9. Удачи!",
     "PLAY": "Play",
     "BACK": "Back"
+  },
+
+  "CREATE_GUEST": {
+    "TITLE": "State your name please!",
+    "LABEL": "Your name",
+    "BACK": "Back",
+    "NEXT": "Next"
+  },
+
+  "SNACKBAR_DELETE": {
+    "MESSAGE": "You were removed from the playroom!",
+    "ACTION": "DELETE"
   }
 }

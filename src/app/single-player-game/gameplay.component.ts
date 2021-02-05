@@ -42,9 +42,9 @@ export class GameplayComponent implements OnInit {
 
   async ngOnInit() {
     this.gameId = this.route.snapshot.params.gameId;
-    this.playerId = this.storageService.currentUser.id;
+    // this.playerId = this.storageService.currentUser.id;
 
-    this.player = await this.getPlayer(this.playerId);
+    // this.player = await this.getPlayer(this.playerId);
     this.questions = await this.getQuestionList(this.gameId);
 
     this.question = this.questions[this.questionNumber];

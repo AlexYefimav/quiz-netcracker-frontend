@@ -22,9 +22,20 @@
         </h4>
       </div>
       <div class="button">
-        <div class="play">
-          <button mat-raised-button color="primary" (click)="openDialog(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+        <div class="play" *ngIf="isAuthorized;else noAuthorized">
+          <div *ngIf="game.access=='PUBLIC'; else private">
+            <button mat-raised-button color="primary"
+                    (click)="openDialog(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+          </div>
+          <ng-template #private>
+            <button mat-raised-button color="primary"
+                    (click)="openDialogEntryCode(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+          </ng-template>
         </div>
+        <ng-template #noAuthorized class="play">
+          <button mat-raised-button color="primary"
+                  (click)="openDialogCreateGuest(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+        </ng-template>
         <div class="back">
           <a mat-raised-button color="primary" href="games">{{ 'GAME_PREVIEW.BACK' | translate }}</a>
         </div>

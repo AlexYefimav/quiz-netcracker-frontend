@@ -67,6 +67,10 @@ export class GameService {
   getGameByPlayerId(playerId: string): Observable<Game[]> {
     return this.http.get<Game[]>(this.url + 'player/' + playerId);
   }
+
+  getPublicGame(): Observable<Game[]> {
+    return this.http.get<Game[]>(this.url + "public-game");
+  }
 }
 
 

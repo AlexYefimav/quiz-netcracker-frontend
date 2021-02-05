@@ -88,7 +88,7 @@
                 </p>
 
                 <div class="button">
-                  <button type="submit" mat-button [disabled]="userForm.invalid || error">{{ 'SIGN_UP.TITLE' | translate }}</button>
+                  <button type="submit" mat-button matStepperNext [disabled]="userForm.invalid || error">{{ 'SIGN_UP.TITLE' | translate }}</button>
                   <!--        <a mat-raised-button  color="primary" (click)="register(user)">Save</a>-->
                 </div>
                 <div class="text-left">
@@ -122,7 +122,7 @@
             <p>{{str.text}}</p>
             <div>
               <button mat-button matStepperPrevious>Back</button>
-              <button mat-button (click)="stepper.reset()">Sing In</button>
+              <button mat-button (click)="redirect('sign_in')">Sign In</button>
             </div>
           </div>
           <ng-template #timer>
