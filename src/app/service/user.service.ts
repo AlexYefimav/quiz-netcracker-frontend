@@ -14,7 +14,7 @@ import {Message} from "../model/message";
 })
 export class UserService {
 
-  url = 'http://localhost:8085/';
+  url = 'http://localhost:8443/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

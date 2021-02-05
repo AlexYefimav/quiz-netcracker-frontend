@@ -62,7 +62,7 @@ export class PlayerBlockAccessComponent implements OnInit {
     }
     this.players.forEach(player => {
         if (player.isCompleted) {
-          this.gameAceessService.activateGameForPlayers(this.gameId,player.id).toPromise()
+          this.gameAceessService.deactivateGameForPlayers(this.gameId,player.id).toPromise()
         }
       }
     )

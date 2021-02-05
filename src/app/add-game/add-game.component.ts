@@ -108,16 +108,17 @@ export class AddGameComponent implements OnInit {
   }
 
   setSelectedAccess(access){
-    this.selectedAccess=access;
+      this.selectedAccess = access;
   }
 
-  getAccess(): string {
-    for (let access of this.accesses) {
-     // access="PRIVATE";
-      if (this.accessControl.value === access) {
-        this.game.access = access;
-        return access;
-      }
+  getSelectedAccess(access): string {
+    if(access) {
+      this.selectedAccess = access;
+      return access;
+    }
+    else {
+      this.selectedAccess = "PUBLIC";
+      return "PUBLIC";
     }
   }
 
@@ -126,10 +127,12 @@ export class AddGameComponent implements OnInit {
   }
 
   createAndGetGame(game: Game): Promise<Game> {
+    this.game.access=this.selectedAccess;
     return this.gameService.createGame(game).toPromise();
   }
 
   updateAndGetGame(): Promise<Game> {
+    this.game.access=this.selectedAccess;
     return this.gameService.updateGame(this.game).toPromise();
   }
 
@@ -170,7 +173,7 @@ export class AddGameComponent implements OnInit {
         window.setTimeout(() => {}, 10000);
       }
     }
-    this.redirectTo('games');
+    this.redirectTo('player/'+this.authorizedAccount.player);
   }
 
   async createGame(game: Game): Promise<void> {
@@ -190,7 +193,7 @@ export class AddGameComponent implements OnInit {
         window.setTimeout(() => {}, 10000);
       }
     }
-    this.redirectTo('games');
+    this.redirectTo('player/'+this.authorizedAccount.player);
   }
 
   checkForm(): void {
@@ -198,7 +201,6 @@ export class AddGameComponent implements OnInit {
       this.game.title = this.getTitle();
       this.game.description = this.getDescription();
       this.game.access =  this.selectedAccess;
-       //  this.game.access = "PUBLIC";
     }
  }
   selectFile(event) {

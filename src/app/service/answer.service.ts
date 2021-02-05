@@ -8,7 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class AnswerService {
 
-  private answerUrl = 'http://localhost:8085/answer';
+  private answerUrl = 'http://localhost:8443/answer';
   private httpOptions = {
     headers: new HttpHeaders({
       Accept: 'application/json',

@@ -11,7 +11,7 @@ import {Photo} from "../photo";
 })
 export class GameService {
 
-  url = 'http://localhost:8085/game/';
+  url = 'http://localhost:8443/game/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

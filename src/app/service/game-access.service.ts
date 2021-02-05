@@ -8,7 +8,7 @@ import {Player} from "../model/player";
 })
 export class GameAccessService {
 
-  url = 'http://localhost:8085/game-access';
+  url = 'http://localhost:8443/game-access';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -21,8 +21,16 @@ export class GameAccessService {
        return this.http.get<boolean>(this.url+'/check/' + gameId+'/'+playerId);
   }
 
+  sendActivateCode(gameId,playerId: string): Observable<boolean> {
+    return this.http.get<boolean>(this.url+'/sendActivateCode/' + gameId+'/'+playerId);
+  }
+
   activateGameForPlayers(gameId,playerId: string): Observable<boolean> {
     return this.http.get<boolean>(this.url+'/activate/' + gameId+'/'+playerId);
+  }
+
+  deactivateGameForPlayers(gameId,playerId: string): Observable<boolean> {
+    return this.http.get<boolean>(this.url+'/deactivate/' + gameId+'/'+playerId);
   }
 
   getPlayersWithTrueAccess(gameId: string): Observable<Player[]> {

@@ -8,7 +8,7 @@ import {GameRoom} from "../model/game-room";
 })
 export class GameRoomService {
 
-  url = 'http://127.0.0.1:8085/game-room/';
+  url = 'http://127.0.0.1:8443/game-room/';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

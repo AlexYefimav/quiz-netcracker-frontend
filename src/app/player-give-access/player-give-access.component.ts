@@ -74,7 +74,7 @@ export class PlayerGiveAccessComponent implements OnInit {
     }
     this.players.forEach(player => {
         if (player.isCompleted) {
-          this.gameAceessService.activateGameForPlayers(this.gameId,player.id).toPromise()
+          this.gameAceessService.sendActivateCode(this.gameId,player.id).toPromise()
         }
       }
     )

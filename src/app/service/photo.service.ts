@@ -8,7 +8,7 @@ import {Photo} from '../photo';
 })
 export class PhotoService {
 
-  private photoUrl = 'http://localhost:8085/photo/';
+  private photoUrl = 'http://localhost:8443/photo/';
 
   constructor(private http: HttpClient) {
   }
