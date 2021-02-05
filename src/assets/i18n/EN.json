@@ -104,7 +104,11 @@
     "PASSWORD_6_CHARACTERS": "Password should contain at least 6 characters ",
     "REPEAT_PASSWORD": "Repeat password",
     "CONFIRM_PASSWORD": "Confirm password",
-    "PASSWORD_DO_NOT_MATCH": " Passwords do not match"
+    "PASSWORD_DO_NOT_MATCH": " Passwords do not match",
+    "ACTIVATION_CODE": {
+      "TITLE": "Email or activation code is invalid",
+      "ACTION": "Close"
+    },
   },
 
   "USERS": {
