@@ -108,7 +108,7 @@
     "ACTIVATION_CODE": {
       "TITLE": "Email or activation code is invalid",
       "ACTION": "Close"
-    },
+    }
   },
 
   "USERS": {
