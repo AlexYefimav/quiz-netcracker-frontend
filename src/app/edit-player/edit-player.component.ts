@@ -52,9 +52,8 @@ export class EditPlayerComponent implements OnInit {
   }
 
   private getPlayer( playerId: string): void {
-    this.playerService.getOnePlayer(playerId).subscribe( player =>
-    {  console.log(player);
-      this.player = player });
+    this.playerService.getPlayerByUserId(playerId).subscribe( player =>
+    {   this.player = player });
   }
 
   updatePlayer(): void {

@@ -19,10 +19,6 @@ export class PlayerService {
     return this.http.get<Player>(`${this.url}/id/${id}`);
   }
 
-  public getOnePlayerByUserId(id: string): Observable<Player> {
-    return this.http.get<Player>(`${this.url}/userId/${id}`);
-  }
-
   public getPlayerByUserId(id: string): Observable<Player> {
     return this.http.get<Player>(`${this.url}/userId/${id}`);
   }
