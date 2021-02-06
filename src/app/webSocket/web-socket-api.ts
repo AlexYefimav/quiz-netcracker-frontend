@@ -4,7 +4,7 @@ import {GameRoomService} from "../service/game-room.service";
 import {Player} from "../model/player";
 
 export class WebSocketAPI {
-  webSocketEndPoint: string = 'http://localhost:8085/ws';
+  webSocketEndPoint: string = 'http://localhost:8443/ws';
 
   topic: string;
   stompClient: any;
@@ -51,8 +51,8 @@ export class WebSocketAPI {
     }, 5000);
   }
 
-  sendGameMessage(message) {
-    this.stompClient.send("/app/gameplay", {}, JSON.stringify(message));
+  sendLikePlayer(message) {
+    this.stompClient.send("/app/like-player", {}, JSON.stringify(message));
   }
 
   sendPlayerExited(message) {
@@ -69,5 +69,9 @@ export class WebSocketAPI {
 
   sendNextQuestion(message) {
     this.stompClient.send("/app/next-question", {}, JSON.stringify(message));
+  }
+
+  sendDeletePlayer(message){
+    this.stompClient.send("/app/delete-player", {}, JSON.stringify(message));
   }
 }

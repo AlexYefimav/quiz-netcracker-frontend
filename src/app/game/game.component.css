@@ -62,6 +62,16 @@ h1 {
   flex-wrap: wrap;
 }
 
+.photo{
+  margin-top: 40px;
+  flex-grow: 1;
+}
+
 .outer-container {
   margin-bottom: 100px;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
 }

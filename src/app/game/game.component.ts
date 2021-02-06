@@ -40,7 +40,7 @@ export class GameComponent implements OnInit {
   }
 
   private getGameList(): Promise<Game[]> {
-    return this.gameService.getGame().toPromise();
+    return this.gameService.getPublicGame().toPromise();
   }
 
   async deleteGame(id: string) {
@@ -55,12 +55,11 @@ export class GameComponent implements OnInit {
     this.gameService.getPageableGames(page, pageSize)
       .subscribe(
         (message: Message) => {
-          console.log(message);
           this.games = message.games;
           this.totalPages = message.totalPages;
           this.pageIndexes = Array(this.totalPages).fill(0).map((x, i) => i);
           this.currentSelectedPage = message.pageNumber;
-          }
+        }
       );
   }
 

@@ -1,8 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
 import {ActivatedRoute} from "@angular/router";
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {GameRoomService} from "../service/game-room.service";
 import {StorageService} from "../service/storage/storage.service";
 import {GameRoom} from "../model/game-room";
@@ -10,9 +10,12 @@ import {Player} from "../model/player";
 import {PlayerService} from "../service/player.service";
 import {WebSocketAPI} from "../webSocket/web-socket-api";
 import {User} from "../model/user";
-import {SignInComponent} from "../sign-in/sign-in.component";
-import {SignInOnceComponent} from "../sign-in-once/sign-in-once.component";
 import {GameAccessService} from "../service/game-access.service";
+import {DialogElementsPlayroom} from "./dialog-element/playroom/dialog-elements-playroom";
+import {DialogElementsCreateGuest} from "./dialog-element/create-guest/dialog-elements-create-guest";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {DialogElementsEntryCode} from "./dialog-element/entry-code/dialog-elements-entry-code";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-game-preview',
@@ -23,39 +26,38 @@ import {GameAccessService} from "../service/game-access.service";
 export class GamePreviewComponent implements OnInit {
   webSocketAPI: WebSocketAPI;
   public game: Game;
-  public id: string;
   public gameRoom: GameRoom;
   player: Player;
   authorizedAccount: User;
   isAuthorized: boolean;
   isAccess: boolean;
+  private guest: string;
 
   constructor(private gameService: GameService, private route: ActivatedRoute,
               private gameRoomService: GameRoomService, private storageService: StorageService,
               private gameAccessService: GameAccessService,
-              private playerService: PlayerService, public dialog: MatDialog) {
+              private playerService: PlayerService, public dialog: MatDialog,
+              private _snackBar: MatSnackBar,
+              private injector: Injector) {
   }
 
   async ngOnInit() {
-    this.checkAuthorized();
-    this.id = this.route.snapshot.params.id;
-    this.game = await this.getGameById();
-    let playerId = this.storageService.currentUser.id;
-    this.player = await this.getPlayer(playerId);
-    this.isAccess= await this.getGameAccessByGameAndPlayer(this.game.id, this.player.id);
+    await this.checkAuthorized();
+    this.game = await this.getGameById(this.route.snapshot.params.id);
+    // this.isAccess = await this.getGameAccessByGameAndPlayer(this.game.id, this.player.id);
   }
 
-  getPlayer(playerId: string): Promise<Player> {
-    return this.playerService.getOnePlayer(playerId).toPromise();
+  getPlayer(userId: string): Promise<Player> {
+    return this.playerService.getPlayerByUserId(userId).toPromise();
   }
 
-  private getGameById(): Promise<Game> {
-    return this.gameService.getGameById(this.id).toPromise()
+  private getGameById(gameId: string): Promise<Game> {
+    return this.gameService.getGameById(gameId).toPromise()
   }
 
-  private getGameAccessByGameAndPlayer(gameId,playerId: string): Promise<boolean> {
-    return this.gameAccessService.getGameAccessByGameAndPlayer(gameId, playerId).toPromise()
-  }
+  // private getGameAccessByGameAndPlayer(gameId, playerId: string): Promise<boolean> {
+  //   return this.gameAccessService.getGameAccessByGameAndPlayer(gameId, playerId).toPromise()
+  // }
 
   setGame(game: Game) {
     this.game = game;
@@ -65,61 +67,31 @@ export class GamePreviewComponent implements OnInit {
     return this.gameRoomService.findGameRoom(game.id, this.player.id).toPromise();
   }
 
-  checkAuthorized() {
+  async checkAuthorized() {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
-        this.isAuthorized=true;
+        this.isAuthorized = true;
         this.authorizedAccount = this.storageService.currentUser;
+        this.player = await this.getPlayer(this.storageService.currentUser.id);
       } else {
         StorageService.clear();
       }
     } else {
-      this.isAuthorized=false;
-      this.authorizedAccount= undefined;
+      this.isAuthorized = false;
+      this.authorizedAccount = undefined;
     }
   }
 
-  // checkAccess() {
-  //   if (!StorageService.isEmpty()) {
-  //     if (this.storageService.currentToken) {
-  //       this.isAuthorized=true;
-  //       this.authorizedAccount = this.storageService.currentUser;
-  //     } else {
-  //       StorageService.clear();
-  //     }
-  //   } else {
-  //     this.isAuthorized=false;
-  //     this.authorizedAccount= undefined;
-  //   }
-  // }
-
-  openLoginDialog(): void {
-    const dialogRef = this.dialog.open(SignInComponent, {
-      minWidth: '400px',
-      minHeight: '300px',
-      data: this.authorizedAccount
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.authorizedAccount = result;
-        this.isAuthorized = true;
-      }
-      setTimeout(() => {
-        this.checkAuthorized();
-        location.reload();
-      }, 2000);
-    });
-  }
-
-
   async openDialog(game: Game) {
     this.game = game;
+    if (!this.isAuthorized) {
+      this.player = await this.playerService.getGuest(this.guest).toPromise();
+    }
     this.gameRoom = await this.getGameRoom(game);
     this.webSocketAPI = new WebSocketAPI(this, this.player, this.gameRoom.id, this.gameRoomService);
     this.connect();
 
-    const dialog = this.dialog.open(DialogElementsExampleDialog, {
+    const dialog = this.dialog.open(DialogElementsPlayroom, {
       data: {game: game, gameRoom: this.gameRoom, player: this.player, socket: this.webSocketAPI}
     });
     dialog.afterClosed().subscribe(() => {
@@ -135,11 +107,24 @@ export class GamePreviewComponent implements OnInit {
     this.gameRoom = await this.deletePlayer();
     this.webSocketAPI.sendPlayerExited(this.gameRoom);
     this.webSocketAPI._disconnect();
+    if (!this.isAuthorized) {
+      await this.playerService.delete(this.player.id).toPromise();
+    }
   }
 
   async handleMessage(message) {
     if (message == "go") {
-      window.location.href = "http://localhost:4200/multiplayer/" + this.game.id + "/" + this.gameRoom.id;
+      window.location.href = "http://localhost:4200/multiplayer/" + this.game.id + "/"
+        + this.gameRoom.id + "/" + this.player.id;
+    } else if (message == "delete") {
+      this.dialog.closeAll();
+      const translateService = this.injector.get(TranslateService);
+      let message, action;
+      translateService.stream('SNACKBAR_DELETE').subscribe(value => {
+        message = value.MESSAGE;
+        action = value.ACTION;
+      })
+      this.openSnackBar(message, action);
     } else {
       this.gameRoom.players = message;
     }
@@ -149,26 +134,32 @@ export class GamePreviewComponent implements OnInit {
     return this.gameRoomService.deletePlayer(this.gameRoom.id, this.player.id).toPromise()
   }
 
-}
-
-@Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-element/dialog-elements-example-dialog.html',
-  styleUrls: ['dialog-element/dialog-elements-example-dialog.css']
-})
-export class DialogElementsExampleDialog {
-  isCreator: boolean = false;
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { game, gameRoom, player, socket }) {
-    if (this.data.player.id == this.data.game.player) {
-      this.isCreator = true;
-    }
+  async openDialogCreateGuest(game: Game) {
+    const dialog = this.dialog.open(DialogElementsCreateGuest, {
+      data: {guest: this.guest}
+    });
+    dialog.afterClosed().subscribe(result => {
+      if (result == undefined) {
+        return;
+      }
+      this.guest = result;
+      this.openDialog(game);
+    });
   }
 
-  startGame() {
-    this.data.socket.sendGoGame(this.data.gameRoom);
-    this.data.socket.disconnect();
+  openSnackBar(message, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
+  openDialogEntryCode(game: Game) {
+    const dialog = this.dialog.open(DialogElementsEntryCode, {
+      data: {game: game}
+    });
+    dialog.afterClosed().subscribe(result => {
+
+    });
+  }
 }
 

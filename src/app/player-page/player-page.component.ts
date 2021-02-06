@@ -45,7 +45,7 @@ export class PlayerPageComponent implements OnInit {
   }
 
   getPlayer(): Promise<Player> {
-    return this.playerService.getOnePlayerByUserId(this.storageService.currentUser.id).toPromise()
+    return this.playerService.getPlayerByUserId(this.storageService.currentUser.id).toPromise()
   }
 
   getGames(): Promise<Game[]> {

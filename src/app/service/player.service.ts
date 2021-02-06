@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Player} from '../model/player';
-import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Photo} from "../photo";
 import {Game} from "../model/game";
-import {User} from "../model/user";
-import {catchError, delay} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +23,10 @@ export class PlayerService {
     return this.http.get<Player>(`${this.url}/userId/${id}`);
   }
 
+  public getPlayerByUserId(id: string): Observable<Player> {
+    return this.http.get<Player>(`${this.url}/userId/${id}`);
+  }
+
   updatePlayer(player: Player): Observable<Player> {
     return this.http.put<Player>(this.url + "/update/" + player.id, player);
   }
@@ -33,7 +35,7 @@ export class PlayerService {
     return this.http.post<Photo>(this.url + '/uploadFile', formData);
   }
 
-  updateFile(id: string, formData: FormData): Observable<Game>{
+  updateFile(id: string, formData: FormData): Observable<Game> {
     return this.http.post<Game>(this.url + '/updateFile/' + id, formData);
   }
 
@@ -45,4 +47,15 @@ export class PlayerService {
     return this.http.get<Player[]>(this.url);
   }
 
+  saveGuest(login: string): Observable<Player> {
+    return this.http.post<Player>(this.url + "/register-guest", login);
+  }
+
+  getGuest(name: string): Observable<Player> {
+    return this.http.get<Player>(this.url + "/guest/" + name);
+  }
+
+  delete(id: string): Observable<Player> {
+    return this.http.delete<Player>(this.url + '/delete/' + id);
+  }
 }

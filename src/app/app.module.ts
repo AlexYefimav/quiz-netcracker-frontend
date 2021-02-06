@@ -44,7 +44,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {SearchModule} from "./search/search.module";
 import {WidgetSearchBarButtonComponent} from "./search/widget-search-bar-button/widget-search-bar-button.component";
 import {WidgetSearchBarComponent} from "./search/widget-search-bar/widget-search-bar.component";
-import {DialogElementsExampleDialog, GamePreviewComponent} from './game-preview/game-preview.component';
+import {GamePreviewComponent} from './game-preview/game-preview.component';
 import {ErrorAuthenticationConnectionComponent} from './error-authentication-connection/error-authentication-connection.component';
 import {InterceptorService} from './service/interceptor.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -59,10 +59,13 @@ import {EditPlayerComponent} from "./edit-player/edit-player.component";
 import {MatStepperModule} from '@angular/material/stepper';
 import {CountdownModule} from "ngx-countdown";
 import {SignInOnceComponent} from "./sign-in-once/sign-in-once.component";
-import { LeaderboardsComponent } from './leaderboards/leaderboards.component';
+import {LeaderboardsComponent} from './leaderboards/leaderboards.component';
 import {ClipboardModule} from 'ngx-clipboard';
-import { PlayerBlockAccessComponent } from './player-block-access/player-block-access.component';
-import { PlayerGiveAccessComponent } from './player-give-access/player-give-access.component';
+import {PlayerBlockAccessComponent} from './player-block-access/player-block-access.component';
+import {PlayerGiveAccessComponent} from './player-give-access/player-give-access.component';
+import {DialogElementsPlayroom} from "./game-preview/dialog-element/playroom/dialog-elements-playroom";
+import {DialogElementsCreateGuest} from "./game-preview/dialog-element/create-guest/dialog-elements-create-guest";
+import {DialogElementsEntryCode} from "./game-preview/dialog-element/entry-code/dialog-elements-entry-code";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -92,7 +95,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddQuestionComponent,
     PlayerPageComponent,
     GamePreviewComponent,
-    DialogElementsExampleDialog,
+    DialogElementsPlayroom,
+    DialogElementsCreateGuest,
     ErrorAuthenticationConnectionComponent,
     MultiplayerComponent,
     UserGameComponent,
@@ -102,7 +106,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignInOnceComponent,
     PlayerBlockAccessComponent,
     PlayerGiveAccessComponent,
-    LeaderboardsComponent
+    LeaderboardsComponent,
+    DialogElementsEntryCode
   ],
   imports: [
     ClipboardModule,

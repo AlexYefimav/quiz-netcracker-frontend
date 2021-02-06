@@ -6,7 +6,8 @@
     "SIGN_IN": "Sign in",
     "OFFICE": "My account",
     "USERS": "Users",
-    "SIGN_OUT": "Sign out"
+    "SIGN_OUT": "Sign out",
+    "LEADERBOARDS": "Leaderboards"
   },
   "BUTTON": {
     "LANG": {
@@ -104,7 +105,11 @@
     "PASSWORD_6_CHARACTERS": "Password should contain at least 6 characters ",
     "REPEAT_PASSWORD": "Repeat password",
     "CONFIRM_PASSWORD": "Confirm password",
-    "PASSWORD_DO_NOT_MATCH": " Passwords do not match"
+    "PASSWORD_DO_NOT_MATCH": " Passwords do not match",
+    "ACTIVATION_CODE": {
+      "TITLE": "Email or activation code is invalid",
+      "ACTION": "Close"
+    }
   },
 
   "USERS": {
@@ -175,5 +180,17 @@
     "RULES_9" : "9. Удачи!",
     "PLAY": "Play",
     "BACK": "Back"
+  },
+
+  "CREATE_GUEST": {
+    "TITLE": "State your name please!",
+    "LABEL": "Your name",
+    "BACK": "Back",
+    "NEXT": "Next"
+  },
+
+  "SNACKBAR_DELETE": {
+    "MESSAGE": "You were removed from the playroom!",
+    "ACTION": "DELETE"
   }
 }

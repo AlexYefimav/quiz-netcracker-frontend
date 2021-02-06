@@ -1,0 +1,12 @@
+<div mat-dialog-content>
+  <p>{{ 'CREATE_GUEST.TITLE' | translate }}</p>
+  <mat-form-field>
+    <mat-label>{{ 'CREATE_GUEST.LABEL' | translate }}</mat-label>
+    <input matInput [(ngModel)]="data.game">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">{{ 'CREATE_GUEST.BACK' | translate }}</button>
+  <button mat-button [mat-dialog-close]="data.game" cdkFocusInitial
+          (click)="checkCode()">{{ 'CREATE_GUEST.NEXT' | translate }}</button>
+</div>

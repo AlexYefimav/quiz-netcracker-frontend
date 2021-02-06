@@ -26,12 +26,12 @@ export class MultiplayerComponent implements OnInit {
   private webSocketAPI: WebSocketAPI; //веб сокет для передачи инфы
 
   player: Player; // игрок
-  players: Playing[] = []; //игроки играющие против player-а
+  players: Playing[] = []; // все игроки
   private gameRoomId: string; // id игровой комнаты
   private gameRoom: GameRoom; // игровая комната
 
   gameId: string; //id игры
-  game: Game;
+  game: Game; // игра
   private playerId: string; //id играющего
   private questions: Question[] = []; //вопросы данной игры
   question: Question; //текущий вопрос
@@ -44,8 +44,10 @@ export class MultiplayerComponent implements OnInit {
   quantityQuestion: number; //количество вопросов
   isBlockAnswers: boolean; //для блокирования ответов
 
-  timeIsOver: boolean = false; //конец таймера(при true таймер в 0)
-  private answerButtonNotPressed: boolean = false; //когда кнопку ответить не была нажата
+  timeIsOver: boolean = false; //конец таймера(при true таймер 0)
+  private answerButtonNotPressed: boolean = false; // когда кнопка "ответить" не была нажата
+  isRestart: boolean = false;
+  timer: CountdownComponent;
 
   constructor(private questionService: QuestionService,
               private answerService: AnswerService,
@@ -61,8 +63,7 @@ export class MultiplayerComponent implements OnInit {
   async ngOnInit() {
     this.gameId = this.route.snapshot.params.gameId;
     this.gameRoomId = this.route.snapshot.params.gameRoomId;
-    this.playerId = this.storageService.currentUser.id;
-
+    this.playerId = this.route.snapshot.params.playerId;
     this.player = await this.getPlayer(this.playerId);
     this.gameRoom = await this.getGameRoom();
     this.questions = await this.getQuestionList(this.gameId);
@@ -137,13 +138,13 @@ export class MultiplayerComponent implements OnInit {
     this.webSocketAPI._disconnect();
   }
 
-  sendMessage(player: Player) {
+  sendLikePlayer(player: Player) {
     let message = {
       name: this.player.name,
       recipientId: player.id,
       gameRoomId: this.gameRoomId
     }
-    this.webSocketAPI.sendGameMessage(message);
+    this.webSocketAPI.sendLikePlayer(message);
   }
 
   async handleMessage(message) {
@@ -155,6 +156,8 @@ export class MultiplayerComponent implements OnInit {
       this.question = this.questions[this.questionNumber];
       this.answer = null;
       //возобновить таймер
+      this.isRestart = true;
+      this.timer.restart();
     } else if (message.playerId == undefined) {
       this.openSnackBar(message, "Like");
     } else {
