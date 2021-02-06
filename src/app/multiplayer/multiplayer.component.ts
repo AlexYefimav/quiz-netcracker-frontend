@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 import {Question} from "../model/question";
 import {QuestionService} from "../service/question.service";
 import {AnswerService} from "../service/answer.service";
@@ -16,6 +16,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
 import {CountdownComponent, CountdownEvent} from 'ngx-countdown';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-multiplayer',
@@ -46,8 +47,6 @@ export class MultiplayerComponent implements OnInit {
 
   timeIsOver: boolean = false; //конец таймера(при true таймер 0)
   private answerButtonNotPressed: boolean = false; // когда кнопка "ответить" не была нажата
-  isRestart: boolean = false;
-  timer: CountdownComponent;
 
   constructor(private questionService: QuestionService,
               private answerService: AnswerService,
@@ -57,7 +56,8 @@ export class MultiplayerComponent implements OnInit {
               private route: ActivatedRoute,
               private gameRoomService: GameRoomService,
               private _snackBar: MatSnackBar,
-              private gameService: GameService) {
+              private gameService: GameService,
+              private injector: Injector) {
   }
 
   async ngOnInit() {
@@ -114,7 +114,13 @@ export class MultiplayerComponent implements OnInit {
   }
 
   setNextQuestion() {
-    this.webSocketAPI.sendNextQuestion(this.gameRoom);
+    // this.webSocketAPI.sendNextQuestion(this.gameRoom);
+    this.isBlockAnswers = false;
+    this.timeIsOver = false;
+    this.answerButtonNotPressed = false;
+    this.questionNumber++;
+    this.question = this.questions[this.questionNumber];
+    this.answer = null;
   }
 
   private setColor(): string[] {
@@ -157,18 +163,25 @@ export class MultiplayerComponent implements OnInit {
   }
 
   async handleMessage(message) {
-    if (message == "next") {
-      this.isBlockAnswers = false;
-      this.timeIsOver = false;
-      this.answerButtonNotPressed = false;
-      this.questionNumber++;
-      this.question = this.questions[this.questionNumber];
-      this.answer = null;
-      //возобновить таймер
-      this.isRestart = true;
-      this.timer.restart();
-    } else if (message.playerId == undefined) {
-      this.openSnackBar(message, "Like");
+    // if (message == "next") {
+    //   this.isBlockAnswers = false;
+    //   this.timeIsOver = false;
+    //   this.answerButtonNotPressed = false;
+    //   this.questionNumber++;
+    //   this.question = this.questions[this.questionNumber];
+    //   this.answer = null;
+    //   //возобновить таймер
+    //   this.isRestart = true;
+    //   this.timer.restart();
+    // } else
+    if (message.playerId == undefined) {
+      const translateService = this.injector.get(TranslateService);
+      let mes, action;
+      translateService.stream('SNACKBAR_LIKE').subscribe(value => {
+        mes = value.MESSAGE + message;
+        action = value.ACTION;
+      })
+      this.openSnackBar(mes, action);
     } else {
       for (let i = 0; i < this.players.length; i++) {
         if (message.playerId == this.players[i].player.id) {

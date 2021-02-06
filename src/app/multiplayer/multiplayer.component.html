@@ -10,7 +10,7 @@
         <h2>{{question.title}}</h2>
       </div>
       <div class="time">
-        <countdown [(ngModel)]="timer" [config]="{leftTime: 3, format: 'mm:ss'}" (event)="timerEvent($event)"></countdown> <!-- ебанная хуйня -->
+        <countdown #timer [config]="{leftTime: 15, format: 'mm:ss'}" (event)="timerEvent($event)"></countdown>
       </div>
     </div>
     <div class="image" *ngIf="question.photo">
@@ -43,9 +43,13 @@
         </div>
       </ng-template>
       <ng-template #nextQuestionOrBlockButtonReply>
-        <div *ngIf="player.id==game.player && timeIsOver; else timerIsOver">
+<!--        <div *ngIf="player.id==game.player && timeIsOver; else timerIsOver">-->
+<!--          <button mat-flat-button color="primary"-->
+<!--                  (click)="setNextQuestion();timer.restart();">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>-->
+<!--        </div>-->
+        <div *ngIf="timeIsOver; else timerIsOver">
           <button mat-flat-button color="primary"
-                  (click)="setNextQuestion()">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>
+                  (click)="setNextQuestion();timer.restart();">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>
         </div>
         <ng-template #timerIsOver>
           <button mat-flat-button class="myButtons" color="warn"

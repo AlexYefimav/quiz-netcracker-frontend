@@ -22,7 +22,7 @@
         <div class="column-name">
           {{player.name}}
         </div>
-        <div class="column-delete" *ngIf="isCreator">
+        <div class="column-delete" *ngIf="firstPlayer">
           <button mat-icon-button (click)="deletePlayer(player.id)" >
             <mat-icon>clear</mat-icon>
           </button>
@@ -35,7 +35,7 @@
       <div class="close">
         <button mat-button mat-dialog-close>{{ 'PLAYROOM.BUTTON_LEAVE' | translate }}</button>
       </div>
-      <div *ngIf="isCreator; else notCreator">
+      <div *ngIf="firstPlayer; else notCreator">
         <div class="play">
           <a mat-button (click)="startGame()" style="right: 0">{{ 'PLAYROOM.BUTTON_PLAY' | translate }}</a>
         </div>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 
 import {PlayerService} from '../service/player.service';
 import {StorageService} from '../service/storage/storage.service';
@@ -13,6 +13,7 @@ import {PlayerGiveAccessComponent} from "../player-give-access/player-give-acces
 
 
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {TranslateService} from "@ngx-translate/core";
 
   @Component({
   selector: 'app-client-page',
@@ -29,7 +30,8 @@ export class PlayerPageComponent implements OnInit {
               private gameService: GameService,
               private router: Router,
               public dialog: MatDialog,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              private injector: Injector) {
   }
 
   async ngOnInit() {
@@ -65,7 +67,13 @@ export class PlayerPageComponent implements OnInit {
   }
 
   openSnackBar(game: string) {
-    this._snackBar.open('Link to the game "'+ game + '" copied','Copy', {
+    const translateService = this.injector.get(TranslateService);
+    let message, action;
+    translateService.stream('SNACKBAR_COPY').subscribe(value => {
+      message = value.MESSAGE_FIRST + game + value.MESSAGE_SECOND;
+      action = value.ACTION;
+    })
+    this._snackBar.open(message,action, {
       duration: 2000,
     });
   }
