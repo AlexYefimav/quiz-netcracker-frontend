@@ -91,7 +91,7 @@ export class MultiplayerComponent implements OnInit {
   }
 
   private getGameById(): Promise<Game> {
-    return this.gameService.getGameById(this.gameId).toPromise()
+    return this.gameService.getShortGameById(this.gameId).toPromise()
   }
 
   private getGameRoom(): Promise<GameRoom> {
