@@ -66,6 +66,7 @@ import {PlayerGiveAccessComponent} from './player-give-access/player-give-access
 import {DialogElementsPlayroom} from "./game-preview/dialog-element/playroom/dialog-elements-playroom";
 import {DialogElementsCreateGuest} from "./game-preview/dialog-element/create-guest/dialog-elements-create-guest";
 import {DialogElementsEntryCode} from "./game-preview/dialog-element/entry-code/dialog-elements-entry-code";
+import { ActivateAccountComponent } from './activate-account/activate-account.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -107,7 +108,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlayerBlockAccessComponent,
     PlayerGiveAccessComponent,
     LeaderboardsComponent,
-    DialogElementsEntryCode
+    DialogElementsEntryCode,
+    ActivateAccountComponent
   ],
   imports: [
     ClipboardModule,

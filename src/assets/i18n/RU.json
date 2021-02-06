@@ -197,5 +197,16 @@
   "SNACKBAR_DELETE": {
     "MESSAGE": "Вас удалили из игровой комнаты!",
     "ACTION": "Удален"
+  },
+
+  "SNACKBAR_LIKE": {
+    "MESSAGE": "Вас лайкнул ",
+    "ACTION": "Нравится"
+  },
+
+  "SNACKBAR_COPY": {
+    "MESSAGE_FIRST": "Ссылка игры \"",
+    "MESSAGE_SECOND": "\" скопирована!",
+    "ACTION": "Копирование"
   }
 }

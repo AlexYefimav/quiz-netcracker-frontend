@@ -15,6 +15,7 @@ import {ErrorAuthenticationConnectionComponent} from "./error-authentication-con
 import {MultiplayerComponent} from "./multiplayer/multiplayer.component";
 import {EditPlayerComponent} from "./edit-player/edit-player.component";
 import {LeaderboardsComponent} from "./leaderboards/leaderboards.component";
+import {ActivateAccountComponent} from "./activate-account/activate-account.component";
 
 const routes: Routes = [
 
@@ -35,8 +36,8 @@ const routes: Routes = [
   {path: 'game/:id', component: GamePreviewComponent},
   {path: 'player/:id', component: PlayerPageComponent},
   {path: '403', component: ErrorAuthenticationConnectionComponent},
-  {path: 'leaderboards', component: LeaderboardsComponent}
-
+  {path: 'leaderboards', component: LeaderboardsComponent},
+  {path: 'activate/:code', component: ActivateAccountComponent}
 ];
 
 @NgModule({

@@ -40,6 +40,10 @@ export class GameService {
     return this.http.get<Game>(this.url + id);
   }
 
+  getShortGameById(id: string): Observable<Game> {
+    return this.http.get<Game>(this.url + "short/" + id);
+  }
+
   getGameByTitle(name: string): Observable<Game> {
     return this.http.get<Game>(this.url + name);
   }

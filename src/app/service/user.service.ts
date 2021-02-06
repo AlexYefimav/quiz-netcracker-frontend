@@ -109,6 +109,10 @@ export class UserService {
     params = params.append('page', pageNumber.toString());
     params = params.append('size', pageSize.toString());
 
-    return this.http.get<Message>(this.url + `pageable`, { params: params });}
+    return this.http.get<Message>(this.url + `pageable`, { params: params });
+  }
 
+  activateAccount(code: string): Observable<ActivateCode>{
+    return this.http.get<ActivateCode>(this.url + "users/activate/" + code);
+  }
 }

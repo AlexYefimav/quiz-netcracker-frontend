@@ -192,5 +192,16 @@
   "SNACKBAR_DELETE": {
     "MESSAGE": "You were removed from the playroom!",
     "ACTION": "DELETE"
+  },
+
+  "SNACKBAR_LIKE": {
+    "MESSAGE": "Liked you ",
+    "ACTION": "Like"
+  },
+
+  "SNACKBAR_COPY": {
+    "MESSAGE_FIRST": "Link to the game \"",
+    "MESSAGE_SECOND": "\" copied!",
+    "ACTION": "COPY"
   }
 }

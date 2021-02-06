@@ -2,21 +2,21 @@
   <mat-card-title>{{ 'SIGN_UP.TITLE' | translate }}</mat-card-title>
   <mat-card-content>
 
-<!--    <div *ngIf="userForm">-->
-<!--      <form [formGroup]="userForm">-->
-<!--        <mat-form-field>-->
-<!--          <input matInput placeholder="Новый ответ" name="title" formControlName="title" required>-->
-<!--          <mat-error *ngIf="userForm?.get('login').touched && userForm?.get('login').errors?.required">-->
-<!--            Необходимо заполнить поле-->
-<!--          </mat-error>-->
-<!--          <mat-error *ngIf="userForm?.get('login').touched && userForm?.get('login').errors?.duplicate">-->
-<!--            Такой ответ уже существует-->
-<!--          </mat-error>-->
-<!--        </mat-form-field>-->
-<!--        <mat-slide-toggle name="mail" formControlName="mail"></mat-slide-toggle>-->
-<!--        <button mat-flat-button color="primary">Добавить</button>-->
-<!--      </form>-->
-<!--    </div>-->
+    <!--    <div *ngIf="userForm">-->
+    <!--      <form [formGroup]="userForm">-->
+    <!--        <mat-form-field>-->
+    <!--          <input matInput placeholder="Новый ответ" name="title" formControlName="title" required>-->
+    <!--          <mat-error *ngIf="userForm?.get('login').touched && userForm?.get('login').errors?.required">-->
+    <!--            Необходимо заполнить поле-->
+    <!--          </mat-error>-->
+    <!--          <mat-error *ngIf="userForm?.get('login').touched && userForm?.get('login').errors?.duplicate">-->
+    <!--            Такой ответ уже существует-->
+    <!--          </mat-error>-->
+    <!--        </mat-form-field>-->
+    <!--        <mat-slide-toggle name="mail" formControlName="mail"></mat-slide-toggle>-->
+    <!--        <button mat-flat-button color="primary">Добавить</button>-->
+    <!--      </form>-->
+    <!--    </div>-->
 
     <div class="container">
       <mat-horizontal-stepper [linear]="isLinear" #stepper>
@@ -88,7 +88,8 @@
                 </p>
 
                 <div class="button">
-                  <button type="submit" mat-button matStepperNext [disabled]="userForm.invalid || error">{{ 'SIGN_UP.TITLE' | translate }}</button>
+                  <button type="submit" mat-button matStepperNext (click)="setText()"
+                          [disabled]="userForm.invalid || error">{{ 'SIGN_UP.TITLE' | translate }}</button>
                   <!--        <a mat-raised-button  color="primary" (click)="register(user)">Save</a>-->
                 </div>
                 <div class="text-left">
@@ -104,30 +105,15 @@
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup" label="Fill out your code">
-          <form [formGroup]="secondFormGroup">
-            <mat-form-field>
-              <mat-label>Your code</mat-label>
-              <input matInput type="text" #code formControlName="code" (keyup)="setActiveCode(code.value)" placeholder="123456">
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext (click)="activate()">Next</button>
-            </div>
-          </form>
-        </mat-step>
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
-          <div *ngIf="answer;else timer">
-            <p>{{str.text}}</p>
+          <div>
+            <p>{{text}}</p>
             <div>
               <button mat-button matStepperPrevious>Back</button>
-              <button mat-button (click)="redirect('sign_in')">Sign In</button>
+              <button mat-button (click)="redirect('/')">Done</button>
             </div>
           </div>
-          <ng-template #timer>
-            <countdown #cd [config]="{leftTime: 3, format: 's'}" (event)="timerEvent($event, cd)"></countdown>
-          </ng-template>
         </mat-step>
       </mat-horizontal-stepper>
     </div>
