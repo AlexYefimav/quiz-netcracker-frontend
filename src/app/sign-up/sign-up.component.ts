@@ -28,12 +28,13 @@ export class SignUpErrorStateMatcher implements ErrorStateMatcher {
 export class SignUpComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  enteredCode: string = "";
-  str: ActivateCode = {
-    text: "Пройдите предыдущие шаги регистрации"
-  };
-  answer: boolean = false;
+  text: string = "Пройдите предыдущие шаги регистрации!";
+  // secondFormGroup: FormGroup;
+  // enteredCode: string = "";
+  // str: ActivateCode = {
+  //   text: "Пройдите предыдущие шаги регистрации"
+  // };
+  // answer: boolean = false;
 
   get login() {
     return this.userForm.get('login');
@@ -98,9 +99,9 @@ export class SignUpComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
+    // this.secondFormGroup = this._formBuilder.group({
+    //   secondCtrl: ['', Validators.required]
+    // });
   }
 
   async getUsers(): Promise<User[]> {
@@ -158,36 +159,40 @@ export class SignUpComponent implements OnInit {
     this.router.navigate([url]);
   }
 
-  async activate(){
-    // this.cd.begin();
-    const translateService = this.injector.get(TranslateService);
-    let message;
-    let snackbarAction;
-    translateService.stream('SIGN_UP.ACTIVATION_CODE').subscribe(value => {
-      message = value.TITLE;
-      snackbarAction = value.ACTION;
-    });
-    if (this.user.mail == null || this.enteredCode.length === 0) {
-      this.snackBar.open(message, snackbarAction, {
-        panelClass: ['snackbar']
-      });
-      return;
-    }
-    this.str = await this.userService.activate(this.user.mail, this.enteredCode).toPromise();
-    console.log(this.str);
+  setText(){
+    this.text = "На ваш email было отправлено сообщение!"
   }
 
-  setActiveCode(value: string) {
-    this.enteredCode = value;
-  }
+  // async activate(){
+  //   // this.cd.begin();
+  //   const translateService = this.injector.get(TranslateService);
+  //   let message;
+  //   let snackbarAction;
+  //   translateService.stream('SIGN_UP.ACTIVATION_CODE').subscribe(value => {
+  //     message = value.TITLE;
+  //     snackbarAction = value.ACTION;
+  //   });
+  //   if (this.user.mail == null || this.enteredCode.length === 0) {
+  //     this.snackBar.open(message, snackbarAction, {
+  //       panelClass: ['snackbar']
+  //     });
+  //     return;
+  //   }
+  //   this.str = await this.userService.activate(this.user.mail, this.enteredCode).toPromise();
+  //   console.log(this.str);
+  // }
 
-  cd: CountdownComponent;
+  // setActiveCode(value: string) {
+  //   this.enteredCode = value;
+  // }
 
-  timerEvent($event: CountdownEvent, cd: CountdownComponent) {
-    // this.cd = cd;
-    // this.cd.stop();
-    if($event.left ==0){
-      this.answer = true;
-    }
-  }
+  // cd: CountdownComponent;
+  //
+  // timerEvent($event: CountdownEvent, cd: CountdownComponent) {
+  //   // this.cd = cd;
+  //   // this.cd.stop();
+  //   if($event.left ==0){
+  //     this.answer = true;
+  //   }
+  // }
 }
