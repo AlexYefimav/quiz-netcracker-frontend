@@ -33,7 +33,7 @@ export class GameComponent implements OnInit {
   async ngOnInit() {
     const currentLanguage = this.localSettingsService.getLanguage();
     this.translateService.use(currentLanguage);
-
+    this.games = await this.getGameList();
     await this.getPage(0);
   }
 
@@ -53,7 +53,6 @@ export class GameComponent implements OnInit {
     this.gameService.getPageableGames(page, pageSize)
       .subscribe(
         (message: Message) => {
-          this.games = message.games;
           this.pageSlice = this.games.slice(0, pageSize);
           this.totalPages = message.totalPages;
           this.pageIndexes = Array(this.totalPages).fill(0).map((x, i) => i);

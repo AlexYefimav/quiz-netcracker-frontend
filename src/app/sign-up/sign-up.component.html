@@ -115,42 +115,6 @@
             </div>
           </div>
         </mat-step>
-<!--        <mat-step [stepControl]="secondFormGroup" label="Done">-->
-<!--          <form [formGroup]="secondFormGroup">-->
-<!--            <mat-form-field>-->
-<!--              На ваш email было отправлено сообщение!-->
-<!--            </mat-form-field>-->
-<!--            <div>-->
-<!--              <button mat-button (click)="redirect('/')">Done</button>-->
-<!--            </div>-->
-
-<!--          </form>-->
-<!--        </mat-step>-->
-        <!--        <mat-step [stepControl]="secondFormGroup" label="Fill out your code">-->
-        <!--          <form [formGroup]="secondFormGroup">-->
-        <!--            <mat-form-field>-->
-        <!--              <mat-label>Your code</mat-label>-->
-        <!--              <input matInput type="text" #code formControlName="code" (keyup)="setActiveCode(code.value)" placeholder="123456">-->
-        <!--            </mat-form-field>-->
-        <!--            <div>-->
-        <!--              <button mat-button matStepperPrevious>Back</button>-->
-        <!--              <button mat-button matStepperNext (click)="activate()">Next</button>-->
-        <!--            </div>-->
-        <!--          </form>-->
-        <!--        </mat-step>-->
-        <!--        <mat-step>-->
-        <!--          <ng-template matStepLabel>Done</ng-template>-->
-        <!--          <div *ngIf="answer;else timer">-->
-        <!--            <p>{{str.text}}</p>-->
-        <!--            <div>-->
-        <!--              <button mat-button matStepperPrevious>Back</button>-->
-        <!--              <button mat-button (click)="redirect('sign_in')">Sign In</button>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--          <ng-template #timer>-->
-        <!--            <countdown #cd [config]="{leftTime: 3, format: 's'}" (event)="timerEvent($event, cd)"></countdown>-->
-        <!--          </ng-template>-->
-        <!--        </mat-step>-->
       </mat-horizontal-stepper>
     </div>
   </mat-card-content>
