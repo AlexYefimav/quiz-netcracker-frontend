@@ -3,12 +3,12 @@
     <mat-card class="card">
       <div class="title">
         <h1>
-          {{game.title}}
+          {{game?.title}}
         </h1>
       </div>
       <div class="description">
         <h4>
-          {{ 'GAME_PREVIEW.DESCRIPTION' | translate }}: {{game.description}}<br>
+          {{ 'GAME_PREVIEW.DESCRIPTION' | translate }}: {{game?.description}}<br>
           {{ 'GAME_PREVIEW.RULES' | translate }}:<br>
           {{ 'GAME_PREVIEW.RULES_1' | translate }}<br>
           {{ 'GAME_PREVIEW.RULES_2' | translate }}<br>
@@ -23,11 +23,11 @@
       </div>
       <div class="button">
         <div class="play" *ngIf="isAuthorized;else noAuthorized">
-          <div *ngIf="game.access=='PUBLIC'; else private">
+          <div *ngIf="game?.access=='PUBLIC'; else private_game">
             <button mat-raised-button color="primary"
                     (click)="openDialog(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
           </div>
-          <ng-template #private>
+          <ng-template #private_game>
             <button mat-raised-button color="primary"
                     (click)="openDialogEntryCode(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
           </ng-template>

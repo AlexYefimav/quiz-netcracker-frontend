@@ -35,8 +35,6 @@ export class GameComponent implements OnInit {
     this.translateService.use(currentLanguage);
 
     await this.getPage(0);
-    this.games = await this.getGameList();
-    this.pageSlice = this.games.slice(0, pageSize);
   }
 
   private getGameList(): Promise<Game[]> {
@@ -56,6 +54,7 @@ export class GameComponent implements OnInit {
       .subscribe(
         (message: Message) => {
           this.games = message.games;
+          this.pageSlice = this.games.slice(0, pageSize);
           this.totalPages = message.totalPages;
           this.pageIndexes = Array(this.totalPages).fill(0).map((x, i) => i);
           this.currentSelectedPage = message.pageNumber;

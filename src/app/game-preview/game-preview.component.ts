@@ -52,7 +52,7 @@ export class GamePreviewComponent implements OnInit {
   }
 
   private getGameById(gameId: string): Promise<Game> {
-    return this.gameService.getGameById(gameId).toPromise()
+    return this.gameService.getShortGameById(gameId).toPromise()
   }
 
   // private getGameAccessByGameAndPlayer(gameId, playerId: string): Promise<boolean> {

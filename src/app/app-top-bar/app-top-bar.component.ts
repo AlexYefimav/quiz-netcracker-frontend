@@ -7,6 +7,8 @@ import {SignInComponent} from "../sign-in/sign-in.component";
 // @ts-ignore
 import {TranslateService} from '@ngx-translate/core';
 import {LocalSettingsService} from '../service/localization/LocalSettingsService';
+import {PlayerService} from "../service/player.service";
+import {Player} from "../model/player";
 
 @Component({
   selector: 'app-top-bar',
@@ -18,17 +20,19 @@ export class AppTopBarComponent implements OnInit {
   isAccount: boolean;
   @Input() languages;
   currentLanguage: string;
+  private player: Player;
 
   constructor(private router: Router,
               public storageService: StorageService,
               public dialog: MatDialog,
               private translateService: TranslateService,
-              private localSettingsService: LocalSettingsService) {
+              private localSettingsService: LocalSettingsService,
+              private playerService: PlayerService) {
     this.isAccount = false;
   }
 
   openLoginDialog(): void {
-    console.log("authorization acc"+this.authorizedAccount);
+    console.log("authorization acc" + this.authorizedAccount);
     const dialogRef = this.dialog.open(SignInComponent, {
       minWidth: '400px',
       minHeight: '300px',
@@ -56,11 +60,12 @@ export class AppTopBarComponent implements OnInit {
     this.checkAuthorized();
   }
 
-  checkAuthorized() {
+  async checkAuthorized() {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
         this.isAccount = true;
+        this.player = await this.playerService.getPlayerByUserId(this.authorizedAccount.id).toPromise();
       } else {
         StorageService.clear();
       }
@@ -88,8 +93,9 @@ export class AppTopBarComponent implements OnInit {
   }
 
   toAccount() {
-   // if (this.authorizedAccount.role=='USER') {
-      this.redirectTo(`/player/${this.authorizedAccount.player}`);
+    // if (this.authorizedAccount.role=='USER') {
+
+    this.redirectTo(`/player/${this.player.id}`);
     // }
     // if (this.authorizedAccount.role=='ADMIN') {
     //   this.redirectTo(`/player/${this.authorizedAccount.id}`);

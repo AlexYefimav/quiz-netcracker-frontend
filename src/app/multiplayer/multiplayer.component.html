@@ -38,7 +38,7 @@
       </div>
       <ng-template #blockButtonReply>
         <div *ngIf="answeredQuestion == quantityQuestion; else nextQuestionOrBlockButtonReply">
-          <a mat-flat-button class="statistics" color="accent" href="statistics/{{gameId}}"
+          <a mat-flat-button class="statistics" color="accent" href="statistics/{{gameId}}/{{playerId}}"
              (click)="disconnect()">{{ 'MULTIPLAYER.BUTTON_STATISTICS' | translate }}</a>
         </div>
       </ng-template>

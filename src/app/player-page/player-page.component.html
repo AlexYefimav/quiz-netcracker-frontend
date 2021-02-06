@@ -1,7 +1,7 @@
 <div class="container">
   <mat-card class="card">
     <div class="left">
-      <div class="image" *ngIf="player.photo; else default_image">
+      <div class="image" *ngIf="player?.photo; else default_image">
         <img src="{{player.photo}}" width="175" height="200" alt="Photo from Amazon S3">
       </div>
       <ng-template #default_image>
@@ -23,8 +23,8 @@
         <h1>{{ 'PLAYER_PAGE.PERSONAL_DATA' | translate }}</h1>
       </div>
       <div class="data">
-        <h3 *ngIf="player">{{ 'PLAYER_PAGE.NAME_PLAYER' | translate }}: {{player.name}}</h3>
-        <h3>{{ 'PLAYER_PAGE.EMAIL' | translate }}: {{player.email}}</h3>
+        <h3 *ngIf="player">{{ 'PLAYER_PAGE.NAME_PLAYER' | translate }}: {{player?.name}}</h3>
+        <h3>{{ 'PLAYER_PAGE.EMAIL' | translate }}: {{player?.email}}</h3>
       </div>
     </div>
   </mat-card>

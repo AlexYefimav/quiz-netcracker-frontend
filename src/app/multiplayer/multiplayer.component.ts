@@ -134,8 +134,17 @@ export class MultiplayerComponent implements OnInit {
     this.webSocketAPI._connect();
   }
 
-  disconnect() {
+  async disconnect() {
+    this.gameRoom = await this.deletePlayer();
+    this.webSocketAPI.sendPlayerExited(this.gameRoom);
     this.webSocketAPI._disconnect();
+    // if (StorageService.isEmpty()) {
+    //   await this.playerService.delete(this.player.id).toPromise();
+    // }
+  }
+
+  private deletePlayer(): Promise<GameRoom> {
+    return this.gameRoomService.deletePlayer(this.gameRoom.id, this.player.id).toPromise()
   }
 
   sendLikePlayer(player: Player) {

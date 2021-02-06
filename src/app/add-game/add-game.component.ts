@@ -28,7 +28,7 @@ export class AddGameComponent implements OnInit {
   gameForm: FormGroup;
   picture: any;
   fileUrl: string;
-  selectedAccess: string="PUBLIC";
+  selectedAccess: string = "PUBLIC";
   accesses: string[] = ["PUBLIC", "PRIVATE"];
   authorizedAccount: User;
   @Input() accessControl: AbstractControl;
@@ -55,19 +55,18 @@ export class AddGameComponent implements OnInit {
     this.categories = await this.getCategories();
     this.levels = await this.getLevels();
     this.translateService.use(currentLanguage)
-    if(this.checkAuthorized()!=undefined) {
-    if (this.route.snapshot.params.id != null){
-      this.game = await this.getGame(this.route.snapshot.params.id);
-      this.isUpdateGame = true;
-      this.gameForm = this.updateGameValidation.createGameForm(this.game);
-    } else {
-      this.isUpdateGame = false;
-      this.game = new Game();
-      this.game.questions = [];
-      this.gameForm = this.addGameValidation.createGameForm();
-    }
-    }
-    else this.redirect('403');
+    if (this.checkAuthorized() != undefined) {
+      if (this.route.snapshot.params.id != null) {
+        this.game = await this.getGame(this.route.snapshot.params.id);
+        this.isUpdateGame = true;
+        this.gameForm = this.updateGameValidation.createGameForm(this.game);
+      } else {
+        this.isUpdateGame = false;
+        this.game = new Game();
+        this.game.questions = [];
+        this.gameForm = this.addGameValidation.createGameForm();
+      }
+    } else this.redirect('403');
   }
 
   redirect(url: string) {
@@ -107,16 +106,15 @@ export class AddGameComponent implements OnInit {
     return this.gameForm.get('description').value;
   }
 
-  setSelectedAccess(access){
-      this.selectedAccess = access;
+  setSelectedAccess(access) {
+    this.selectedAccess = access;
   }
 
   getSelectedAccess(access): string {
-    if(access) {
+    if (access) {
       this.selectedAccess = access;
       return access;
-    }
-    else {
+    } else {
       this.selectedAccess = "PUBLIC";
       return "PUBLIC";
     }
@@ -127,12 +125,12 @@ export class AddGameComponent implements OnInit {
   }
 
   createAndGetGame(game: Game): Promise<Game> {
-    this.game.access=this.selectedAccess;
+    this.game.access = this.selectedAccess;
     return this.gameService.createGame(game).toPromise();
   }
 
   updateAndGetGame(): Promise<Game> {
-    this.game.access=this.selectedAccess;
+    this.game.access = this.selectedAccess;
     return this.gameService.updateGame(this.game).toPromise();
   }
 
@@ -168,12 +166,12 @@ export class AddGameComponent implements OnInit {
       this.setLevelIdByName();
       try {
         this.game = await this.updateAndGetGame();
-      }
-      catch (error) {
-        window.setTimeout(() => {}, 10000);
+      } catch (error) {
+        window.setTimeout(() => {
+        }, 10000);
       }
     }
-    this.redirectTo('player/'+this.authorizedAccount.player);
+    this.redirectTo('player/' + this.authorizedAccount.player);
   }
 
   async createGame(game: Game): Promise<void> {
@@ -183,38 +181,36 @@ export class AddGameComponent implements OnInit {
       try {
         if (game.id) {
           this.game = await this.updateAndGetGame();
-        }
-        else {
+        } else {
           this.game.player = this.storageService.currentUser.id;
           this.game = await this.createAndGetGame(game);
         }
-      }
-      catch (error) {
-        window.setTimeout(() => {}, 10000);
+      } catch (error) {
+        window.setTimeout(() => {
+        }, 10000);
       }
     }
-    this.redirectTo('player/'+this.authorizedAccount.player);
+    this.redirectTo('player/' + this.authorizedAccount.player);
   }
 
   checkForm(): void {
     if (this.gameForm.valid) {
       this.game.title = this.getTitle();
       this.game.description = this.getDescription();
-      this.game.access =  this.selectedAccess;
+      this.game.access = this.selectedAccess;
     }
- }
+  }
+
   selectFile(event) {
     this.picture = event.target.files[0];
     const formData = new FormData();
     const formData2 = new FormData();
     formData.append('file', this.picture);
-    this.gameService.uploadFile(formData).subscribe((result) =>
-      {
+    this.gameService.uploadFile(formData).subscribe((result) => {
         this.fileUrl = result.photo;
         formData2.append('url', this.fileUrl);
         formData2.append('gameId', this.game.id);
-        this.gameService.updateFile(this.game.id, formData2).subscribe((res: Game) =>
-          {
+        this.gameService.updateFile(this.game.id, formData2).subscribe((res: Game) => {
             this.game.photo = res.photo;
           },
           err => console.error('Observer got an error: ' + err)
