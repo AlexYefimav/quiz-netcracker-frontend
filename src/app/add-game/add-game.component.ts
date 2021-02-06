@@ -108,7 +108,9 @@ export class AddGameComponent implements OnInit {
   }
 
   setSelectedAccess(access){
+    this.game.access=access
       this.selectedAccess = access;
+    window.alert(access);
   }
 
   getSelectedAccess(access): string {
@@ -133,6 +135,7 @@ export class AddGameComponent implements OnInit {
 
   updateAndGetGame(): Promise<Game> {
     this.game.access=this.selectedAccess;
+   // window.alert(this.selectedAccess)
     return this.gameService.updateGame(this.game).toPromise();
   }
 

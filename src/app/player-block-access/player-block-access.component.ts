@@ -22,7 +22,7 @@ export class PlayerBlockAccessComponent implements OnInit {
               private gameAceessService: GameAccessService,
               public dialogRef: MatDialogRef<PlayerBlockAccessComponent>,
               public dialog: MatDialog,
-              @Inject(MAT_DIALOG_DATA) public gameId: any) {
+              @Inject(MAT_DIALOG_DATA) public data: { gameId, playerId }) {
   }
 
   async ngOnInit() {
@@ -30,7 +30,7 @@ export class PlayerBlockAccessComponent implements OnInit {
   }
 
   private getUser(): Promise<Player[]> {
-    return this.gameAceessService.getPlayersWithTrueAccess(this.gameId).toPromise();
+    return this.gameAceessService.getPlayersWithTrueAccess(this.data.gameId).toPromise();
   }
 
   updateAllComplete() {
@@ -62,19 +62,19 @@ export class PlayerBlockAccessComponent implements OnInit {
     }
     this.players.forEach(player => {
         if (player.isCompleted) {
-          this.gameAceessService.deactivateGameForPlayers(this.gameId,player.id).toPromise()
+          this.gameAceessService.deactivateGameForPlayers(this.data.gameId,player.id).toPromise()
         }
       }
     )
     this.onNoClick();
   }
 
-  giveAccess(gameId: string): void {
+  giveAccess(gameId, playerId: string): void {
     this.onNoClick();
     const dialogRef = this.dialog.open(PlayerGiveAccessComponent, {
       minWidth: '400px',
       minHeight: '300px',
-      data: gameId
+      data: {gameId: gameId, playerId: playerId}
     });
   }
 

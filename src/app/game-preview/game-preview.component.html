@@ -23,15 +23,21 @@
       </div>
       <div class="button">
         <div class="play" *ngIf="isAuthorized;else noAuthorized">
-          <div *ngIf="game.access=='PUBLIC'; else private">
+          <div *ngIf="game.access=='PUBLIC'||isAccess">
             <button mat-raised-button color="primary"
                     (click)="openDialog(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
           </div>
-          <ng-template #private>
+          <ng-template *ngIf="game.access=='PRIVATE'" >
             <button mat-raised-button color="primary"
                     (click)="openDialogEntryCode(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
           </ng-template>
         </div>
+      <div *ngIf="game.access=='PRIVATE'&&!isAccess">
+<!--      <ng-template *ngIf="game.access=='PRIVATE'" >-->
+        <button mat-raised-button color="primary"
+                (click)="openDialogEntryCode(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+<!--      </ng-template>-->
+    </div>
         <ng-template #noAuthorized class="play">
           <button mat-raised-button color="primary"
                   (click)="openDialogCreateGuest(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>

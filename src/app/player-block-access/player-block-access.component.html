@@ -11,7 +11,7 @@
   <span class="example-list-section">
     <ul>
       <li *ngFor="let player of players">
-        <mat-checkbox [(ngModel)]="player.isCompleted"
+        <mat-checkbox *ngIf="data.playerId!=player.id" [(ngModel)]="player.isCompleted"
                       (ngModelChange)="updateAllComplete()">
           {{player.name}}
         </mat-checkbox>
@@ -22,5 +22,5 @@
 <div class="button">
   <button mat-button (click)="onNoClick()">Exit</button>
   <button mat-button (click)="blockAccess()">Ограничить доступ</button>
-  <button mat-button (click)="giveAccess(gameId)">Предоставить доступ для...</button>
+  <button mat-button (click)="giveAccess(data.gameId, data.playerId)">Предоставить доступ для...</button>
 </div>

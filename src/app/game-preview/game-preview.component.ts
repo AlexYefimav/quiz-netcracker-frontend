@@ -16,6 +16,8 @@ import {DialogElementsCreateGuest} from "./dialog-element/create-guest/dialog-el
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DialogElementsEntryCode} from "./dialog-element/entry-code/dialog-elements-entry-code";
 import {TranslateService} from "@ngx-translate/core";
+import {GameAccess} from "../model/game-access";
+import {Observable} from "rxjs/internal/Observable";
 
 @Component({
   selector: 'app-game-preview',
@@ -27,6 +29,7 @@ export class GamePreviewComponent implements OnInit {
   webSocketAPI: WebSocketAPI;
   public game: Game;
   public gameRoom: GameRoom;
+  public gameAccess: GameAccess;
   player: Player;
   authorizedAccount: User;
   isAuthorized: boolean;
@@ -44,7 +47,8 @@ export class GamePreviewComponent implements OnInit {
   async ngOnInit() {
     await this.checkAuthorized();
     this.game = await this.getGameById(this.route.snapshot.params.id);
-    // this.isAccess = await this.getGameAccessByGameAndPlayer(this.game.id, this.player.id);
+    //this.gameAccess= await this.getGameAccessByGameAndPlayer(this.game.id, this.authorizedAccount.id);
+     this.isAccess = await this.checkGameAccessByGameAndPlayer(this.game.id, this.player.id);
   }
 
   getPlayer(userId: string): Promise<Player> {
@@ -55,9 +59,13 @@ export class GamePreviewComponent implements OnInit {
     return this.gameService.getGameById(gameId).toPromise()
   }
 
-  // private getGameAccessByGameAndPlayer(gameId, playerId: string): Promise<boolean> {
-  //   return this.gameAccessService.getGameAccessByGameAndPlayer(gameId, playerId).toPromise()
-  // }
+  async getGameAccessByGameAndPlayer(gameId, playerId: string): Promise<GameAccess> {
+    return this.gameAccessService.getGameAccessByGameAndPlayer(gameId, playerId).toPromise();
+  }
+
+  async checkGameAccessByGameAndPlayer(gameId, playerId: string): Promise<boolean> {
+    return this.gameAccessService.checkGameAccessByGameAndPlayer(gameId, playerId).toPromise();
+  }
 
   setGame(game: Game) {
     this.game = game;

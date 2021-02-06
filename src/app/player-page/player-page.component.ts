@@ -56,11 +56,11 @@ export class PlayerPageComponent implements OnInit {
     await this.gameService.deleteGame(id).toPromise()
   }
 
-  shareGame(gameId: string): void {
+  shareGame(gameId, playerId: string): void {
     const dialogRef = this.dialog.open(PlayerGiveAccessComponent, {
       minWidth: '400px',
       minHeight: '300px',
-      data: gameId
+      data: {gameId: gameId, playerId: playerId}
     });
   }
 
