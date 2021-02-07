@@ -18,6 +18,9 @@
   "ADD_GAME": {
     "GAME_TITLE": "Game title",
     "GAME_DESCRIPTION": "Game description",
+    "ACCESS": {
+      "TITLE": "Access"
+    },
     "QUESTIONS": {
       "TITLE": "Questions"
     },
@@ -142,7 +145,8 @@
       "ERROR": {
         "TITLE": "Title",
         "CODE": "Code",
-        "MESSAGE": "Message"
+        "MESSAGE": "Message",
+        "AUTHORIZATION": "Wrong username or password"
       }
     }
   },

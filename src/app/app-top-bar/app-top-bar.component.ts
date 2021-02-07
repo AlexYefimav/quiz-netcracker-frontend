@@ -55,6 +55,7 @@ export class AppTopBarComponent implements OnInit {
     this.currentLanguage = this.localSettingsService.getLanguage();
     if (!this.currentLanguage) {
       this.currentLanguage = 'RU';
+      this.localSettingsService.setLanguage('RU');
     }
     this.translateService.use(this.currentLanguage);
     this.checkAuthorized();

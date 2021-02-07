@@ -18,6 +18,9 @@
   "ADD_GAME": {
     "GAME_TITLE": "Название игры",
     "GAME_DESCRIPTION": "Описание игры",
+    "ACCESS": {
+      "TITLE": "Доступ"
+    },
     "QUESTIONS": {
       "TITLE": "Вопросы"
     },
@@ -152,7 +155,8 @@
       "ERROR": {
         "TITLE": "Заголовок",
         "CODE": "Код ошибки",
-        "MESSAGE": "Содержание"
+        "MESSAGE": "Содержание",
+        "AUTHORIZATION": "Неправильный логин или пароль"
       }
     }
   },
