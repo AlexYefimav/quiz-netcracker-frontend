@@ -228,5 +228,12 @@
     "RATING": "Rating",
     "FILTERS": "Filters",
     "APPLY": "Apply filters"
+  },
+
+  "CHECK_CODE": {
+    "CODE": "Code",
+    "BACK": "Back",
+    "CHECK": "Check code",
+    "ENTER": "Enter code"
   }
 }

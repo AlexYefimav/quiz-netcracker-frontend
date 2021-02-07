@@ -59,6 +59,9 @@ export class PlayerPageComponent implements OnInit {
   async deleteGame(id: string) {
     await this.gameService.deleteGame(id).toPromise();
     this.games = this.games.filter(g => g.id != id);
+    // setTimeout(function(){
+    //   window.location.reload();
+    // }, 300);
   }
 
   shareGame(gameId, playerId: string): void {

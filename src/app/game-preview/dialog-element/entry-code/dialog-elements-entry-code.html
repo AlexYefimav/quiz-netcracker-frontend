@@ -1,12 +1,12 @@
 <div mat-dialog-content>
-  <p>Введите код доступа, пожалуйста</p>
+  <p>{{ 'CHECK_CODE.ENTER' | translate }}</p>
   <mat-form-field>
-    <mat-label>Код доступа</mat-label>
+    <mat-label>{{ 'CHECK_CODE.CODE' | translate }}</mat-label>
     <input matInput [(ngModel)]="code">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Назад</button>
+  <button mat-button (click)="onNoClick()">{{ 'CHECK_CODE.BACK' | translate }}</button>
   <button mat-button [mat-dialog-close]="code" cdkFocusInitial
-          (click)="checkCode(code)">Проверить код</button>
+          (click)="checkCode(code)">{{ 'CHECK_CODE.CHECK' | translate }}</button>
 </div>
