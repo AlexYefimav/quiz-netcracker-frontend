@@ -1,5 +1,5 @@
-<div *ngIf="!isLoading;else loading">
-  <div class="window">
+<div class="window">
+  <div *ngIf="!isLoading;else loading">
     <div class="container">
       <mat-card class="card">
         <div class="title">
@@ -48,7 +48,7 @@
       </mat-card>
     </div>
   </div>
-</div>
   <ng-template #loading>
     <div class="spinner"></div>
   </ng-template>
+</div>

@@ -3,12 +3,13 @@
   width: 100%;
   height: 91%;
   background: url("https://quiz-netcracker-basket.s3.eu-north-1.amazonaws.com/1612268276494-quiz.png");
+  align-items: center;
+  justify-content: center;
 }
 
 .container{
   margin-right: auto;
   margin-left: auto;
-  margin-top: 80px;
 }
 
 .card {

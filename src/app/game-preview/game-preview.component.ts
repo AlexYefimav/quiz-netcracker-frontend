@@ -18,6 +18,7 @@ import {DialogElementsEntryCode} from "./dialog-element/entry-code/dialog-elemen
 import {TranslateService} from "@ngx-translate/core";
 import {GameAccess} from "../model/game-access";
 import {Observable} from "rxjs/internal/Observable";
+import {StatisticsService} from "../service/statistics.service";
 
 @Component({
   selector: 'app-game-preview',
@@ -42,14 +43,15 @@ export class GamePreviewComponent implements OnInit {
               private gameAccessService: GameAccessService,
               private playerService: PlayerService, public dialog: MatDialog,
               private _snackBar: MatSnackBar,
-              private injector: Injector) {
+              private injector: Injector,
+              private statisticsService: StatisticsService) {
   }
 
   async ngOnInit() {
     await this.checkAuthorized();
     this.game = await this.getGameById(this.route.snapshot.params.id);
     //this.gameAccess= await this.getGameAccessByGameAndPlayer(this.game.id, this.authorizedAccount.id);
-     this.isAccess = await this.checkGameAccessByGameAndPlayer(this.game.id, this.player.id);
+    this.isAccess = await this.checkGameAccessByGameAndPlayer(this.game.id, this.player.id);
     this.isLoading = false;
   }
 
@@ -124,6 +126,8 @@ export class GamePreviewComponent implements OnInit {
 
   async handleMessage(message) {
     if (message == "go") {
+      let st;
+      this.statisticsService.deleteStatistics(this.player.id).subscribe(s => st = s);
       window.location.href = "http://localhost:4200/multiplayer/" + this.game.id + "/"
         + this.gameRoom.id + "/" + this.player.id;
     } else if (message == "delete") {
