@@ -91,7 +91,7 @@ export class QuestionDetailComponent implements OnInit {
     formData.append('file', this.picture);
     this.photoService.uploadFile(formData).subscribe((result) => {
       this.question.photo = result.photo;
-      this.questionForm.get('photo').patchValue(this.picture.name);
+      this.questionForm.get('photo').patchValue(this.question.photo);
     });
   }
 }

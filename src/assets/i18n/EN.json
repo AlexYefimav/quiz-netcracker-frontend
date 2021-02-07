@@ -167,7 +167,8 @@
     "PLAY": "Play",
     "EDIT": "Edit",
     "DELETE": "Delete",
-    "SHARE": "Share"
+    "SHARE": "Share",
+    "NO_GAMES": "You have no games."
   },
 
   "GAME_PREVIEW": {

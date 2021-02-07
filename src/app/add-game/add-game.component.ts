@@ -211,7 +211,7 @@ export class AddGameComponent implements OnInit {
     }
   }
 
-  selectFile(event) {
+  selectFile(event): void {
     this.picture = event.target.files[0];
     const formData = new FormData();
     formData.append('file', this.picture);
