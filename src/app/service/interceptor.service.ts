@@ -45,12 +45,14 @@ export class InterceptorService implements HttpInterceptor {
     let errorTitle;
     let errorCode;
     let errorMessage;
+    let unauthorized;
     const translateService = this.injector.get(TranslateService);
     translateService.stream('INTERCEPTOR.SNACKBAR').subscribe(value => {
       snackbarAction = value.ACTION;
       errorTitle = value.ERROR.TITLE;
       errorCode = value.ERROR.CODE;
       errorMessage = value.ERROR.MESSAGE;
+      unauthorized = value.ERROR.AUTHORIZATION;
     });
     if (errorResponse.error) {
       if (errorResponse.error.errorTitle && errorResponse.error.errorCode && errorResponse.error.message) {
@@ -59,7 +61,12 @@ export class InterceptorService implements HttpInterceptor {
                   `${errorMessage}: ${errorResponse.error.message}`;
       }
       else {
-        message = errorResponse.message;
+        if (errorResponse.status == 401) {
+          message = unauthorized;
+        }
+        else {
+          message = errorResponse.message;
+        }
       }
     }
     if (snackbarAction) {

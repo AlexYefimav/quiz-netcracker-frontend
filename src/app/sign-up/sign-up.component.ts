@@ -76,7 +76,7 @@ export class SignUpComponent implements OnInit {
               private userService: UserService,
               private _formBuilder: FormBuilder,
               private snackBar: MatSnackBar,
-              private injector: Injector) {
+              private translateService: TranslateService) {
 
     // this.form = formBuilder.group({
     //   username: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -159,7 +159,7 @@ export class SignUpComponent implements OnInit {
     this.router.navigate([url]);
   }
 
-  setText(){
+  setText() {
     this.text = "На ваш email было отправлено сообщение!"
   }
 

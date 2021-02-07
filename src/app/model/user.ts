@@ -7,6 +7,7 @@ export class User{
   role: string;
   player: string;
   isActive: boolean;
+  isAuthenticated: boolean;
   usersSet: User[];
   active: boolean;
   activationCode: string;
