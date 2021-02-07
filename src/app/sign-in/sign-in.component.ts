@@ -56,34 +56,31 @@ export class SignInComponent implements OnInit {
 
       this.userService.signIn(this.user).subscribe(
         response => {
-          if (this.user.active == true) {
-            this.showErrorMessage = true;
-            this.storageService.currentToken = response.headers.get('Authorization');
-          } else {
-            window.alert('Ваш профиль заблокирован');
-            this.showErrorMessage = false;
+          if (response.headers.get('Authorization') != null) {
+            this.user.isAuthenticated = true;
           }
-        },
-        error => {
-          console.log(error);
+          if (this.user.isAuthenticated == true) {
+            this.storageService.currentToken = response.headers.get('Authorization');
+          }
+          if (!this.user.active) {
+            localStorage.removeItem('currentToken');
+          }
         }
       );
       this.user.password = undefined;
       this.userService.getUserByLoginOrEmail(this.user.username).subscribe(
         user => {
           this.user = user;
-          // alert(this.user.active);
           if (this.user.active) {
-            this.showErrorMessage = true;
             setTimeout(() => {
               if (this.storageService.currentToken) {
                 this.storageService.currentUser = this.user;
               }
             }, 2000);
             this.dialogAccount = this.user;
-            this.router.navigate(['/games/']);
+            // this.router.navigate(['/games/']);
           } else {
-            this.showErrorMessage = false;
+            window.alert('Ваш профиль заблокирован');
           }
         }
       );

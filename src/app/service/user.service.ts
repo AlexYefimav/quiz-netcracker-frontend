@@ -33,7 +33,7 @@ export class UserService {
         delay(403),
         catchError(error => {
           this.router.navigate(['403']);
-          return throwError(error)
+          return throwError(error);
         })
       );
   }
@@ -76,7 +76,7 @@ export class UserService {
         delay(403),
         catchError(error => {
           this.router.navigate(['403']);
-          return throwError(error)
+          return throwError(error);
         })
       );
   }
@@ -87,7 +87,7 @@ export class UserService {
         delay(403),
         catchError(error => {
           this.router.navigate(['403']);
-          return throwError(error)
+          return throwError(error);
         })
       );
   }
