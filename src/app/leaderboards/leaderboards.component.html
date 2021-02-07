@@ -1,15 +1,20 @@
-<h1>{{'LEADERS.LEADERBOARDS' | translate}}</h1>
-<div class="container">
-  <mat-card class="title">
-    <div class="position">№</div>
-    <div class="player">{{'LEADERS.NAME' | translate}}</div>
-    <div class="rating">{{'LEADERS.RATING' | translate}}</div>
-  </mat-card>
-  <div *ngFor="let entry of map.entries(); let i = index">
+<div *ngIf="!isLoading;else loading">
+  <h1>{{'LEADERS.LEADERBOARDS' | translate}}</h1>
+  <div class="container">
     <mat-card class="title">
-      <div class="position">{{i + 1}}</div>
-      <div class="player">{{entry[0]}}</div>
-      <div class="rating">{{entry[1].toFixed(2)}}</div>
+      <div class="position">№</div>
+      <div class="player">{{'LEADERS.NAME' | translate}}</div>
+      <div class="rating">{{'LEADERS.RATING' | translate}}</div>
     </mat-card>
+    <div *ngFor="let entry of map.entries(); let i = index">
+      <mat-card class="title">
+        <div class="position">{{i + 1}}</div>
+        <div class="player">{{entry[0]}}</div>
+        <div class="rating">{{entry[1].toFixed(2)}}</div>
+      </mat-card>
+    </div>
   </div>
 </div>
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

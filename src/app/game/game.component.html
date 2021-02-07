@@ -1,39 +1,41 @@
-<div class="container">
-  <h1>{{ 'GAME.TITLE' | translate }}</h1>
-  <app-widget-search-bar-button></app-widget-search-bar-button>
-</div>
-<div class="outer-container">
-  <form>
-    <div class="inner-container">
-      <div *ngFor="let game of pageSlice" style="margin-left: 100px;">
-        <mat-card class="card">
-          <mat-card-title>
-            {{game.title}}
-          </mat-card-title>
-          <div class="photo" *ngIf="game.photo">
-            <a><img src="{{game.photo}}" width="200" height="200" alt="Photo from Amazon S3"></a>
-          </div>
-          <mat-card-subtitle style="margin-top: 20px;">
-            <a mat-raised-button href="/game/{{game.id}}">{{ 'GAME.VIEW' | translate }}</a>
-          </mat-card-subtitle>
-        </mat-card>
+<div *ngIf="!isLoading;else loading">
+  <div class="container">
+    <h1>{{ 'GAME.TITLE' | translate }}</h1>
+    <app-widget-search-bar-button></app-widget-search-bar-button>
+  </div>
+  <div class="outer-container">
+    <form>
+      <div class="inner-container">
+        <div *ngFor="let game of pageSlice" style="margin-left: 100px;">
+          <mat-card class="card">
+            <mat-card-title>
+              {{game.title}}
+            </mat-card-title>
+            <div class="photo" *ngIf="game.photo">
+              <a><img src="{{game.photo}}" width="200" height="200" alt="Photo from Amazon S3"></a>
+            </div>
+            <mat-card-subtitle style="margin-top: 20px;">
+              <a mat-raised-button href="/game/{{game.id}}">{{ 'GAME.VIEW' | translate }}</a>
+            </mat-card-subtitle>
+          </mat-card>
+        </div>
       </div>
+      <a mat-mini-fab color="primary" href="game/create" style="margin-top: 20px;">
+        <mat-icon>add</mat-icon>
+      </a>
+    </form>
+  </div>
+  <div class="place"></div>
+  <div>
+    <div class="footer">
+      <mat-paginator [length]="this.games?.length"
+                     [pageSize]="3"
+                     [pageSizeOptions]="[3,6, games?.length]"
+                     (page)="OnPageChange($event)">
+      </mat-paginator>
     </div>
-    <a mat-mini-fab color="primary" href="game/create" style="margin-top: 20px;">
-      <mat-icon>add</mat-icon>
-    </a>
-  </form>
-</div>
-<div class="place"></div>
-<div>
-  <div class="footer">
-    <mat-paginator [length]="this.games?.length"
-                   [pageSize]="3"
-                   [pageSizeOptions]="[3,6, games?.length]"
-                   (page)="OnPageChange($event)">
-    </mat-paginator>
   </div>
 </div>
-
-
-
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

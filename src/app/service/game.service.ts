@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Game} from '../model/game';
 import {Message} from "../model/message";
-import {Photo} from "../photo";
+import {Photo} from "../model/photo";
 
 
 @Injectable({

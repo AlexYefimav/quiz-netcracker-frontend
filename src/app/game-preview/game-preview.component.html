@@ -1,50 +1,54 @@
-<div class="window">
-  <div class="container">
-    <mat-card class="card">
-      <div class="title">
-        <h1>
-          {{game?.title}}
-        </h1>
-      </div>
-      <div class="description">
-        <h4>
-          {{ 'GAME_PREVIEW.DESCRIPTION' | translate }}: {{game?.description}}<br>
-          {{ 'GAME_PREVIEW.RULES' | translate }}:<br>
-          {{ 'GAME_PREVIEW.RULES_1' | translate }}<br>
-          {{ 'GAME_PREVIEW.RULES_2' | translate }}<br>
-          {{ 'GAME_PREVIEW.RULES_3' | translate }}<br>
-          {{ 'GAME_PREVIEW.RULES_4' | translate }}<br>
-          {{ 'GAME_PREVIEW.RULES_5' | translate }}<br>
-          {{ 'GAME_PREVIEW.RULES_6' | translate }}<br>
-          {{ 'GAME_PREVIEW.RULES_7' | translate }}<br>
-          {{ 'GAME_PREVIEW.RULES_8' | translate }}<br>
-          {{ 'GAME_PREVIEW.RULES_9' | translate }}<br>
-        </h4>
-      </div>
-      <div class="button">
-        <div class="play" *ngIf="isAuthorized;else noAuthorized">
-          <div *ngIf="game.access=='PUBLIC'||isAccess">
-            <button mat-raised-button color="primary"
-                    (click)="openDialog(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+<div *ngIf="!isLoading;else loading">
+  <div class="window">
+    <div class="container">
+      <mat-card class="card">
+        <div class="title">
+          <h1>
+            {{game?.title}}
+          </h1>
+        </div>
+        <div class="description">
+          <h4>
+            {{ 'GAME_PREVIEW.DESCRIPTION' | translate }}: {{game?.description}}<br>
+            {{ 'GAME_PREVIEW.RULES' | translate }}:<br>
+            {{ 'GAME_PREVIEW.RULES_1' | translate }}<br>
+            {{ 'GAME_PREVIEW.RULES_2' | translate }}<br>
+            {{ 'GAME_PREVIEW.RULES_3' | translate }}<br>
+            {{ 'GAME_PREVIEW.RULES_4' | translate }}<br>
+            {{ 'GAME_PREVIEW.RULES_5' | translate }}<br>
+            {{ 'GAME_PREVIEW.RULES_6' | translate }}<br>
+            {{ 'GAME_PREVIEW.RULES_7' | translate }}<br>
+            {{ 'GAME_PREVIEW.RULES_8' | translate }}<br>
+            {{ 'GAME_PREVIEW.RULES_9' | translate }}<br>
+          </h4>
+        </div>
+        <div class="button">
+          <div class="play" *ngIf="isAuthorized;else noAuthorized">
+            <div *ngIf="game.access=='PUBLIC'||isAccess">
+              <button mat-raised-button color="primary"
+                      (click)="openDialog(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+            </div>
+            <ng-template *ngIf="game.access=='PRIVATE'">
+              <button mat-raised-button color="primary"
+                      (click)="openDialogEntryCode(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+            </ng-template>
           </div>
-          <ng-template *ngIf="game.access=='PRIVATE'" >
+          <div *ngIf="game.access=='PRIVATE'&&!isAccess">
             <button mat-raised-button color="primary"
                     (click)="openDialogEntryCode(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+          </div>
+          <ng-template #noAuthorized class="play">
+            <button mat-raised-button color="primary"
+                    (click)="openDialogCreateGuest(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
           </ng-template>
+          <div class="back">
+            <a mat-raised-button color="primary" href="games">{{ 'GAME_PREVIEW.BACK' | translate }}</a>
+          </div>
         </div>
-      <div *ngIf="game.access=='PRIVATE'&&!isAccess">
-        <button mat-raised-button color="primary"
-                (click)="openDialogEntryCode(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
+      </mat-card>
     </div>
-        <ng-template #noAuthorized class="play">
-          <button mat-raised-button color="primary"
-                  (click)="openDialogCreateGuest(game)">{{ 'GAME_PREVIEW.PLAY' | translate }}</button>
-        </ng-template>
-        <div class="back">
-          <a mat-raised-button color="primary" href="games">{{ 'GAME_PREVIEW.BACK' | translate }}</a>
-        </div>
-      </div>
-    </mat-card>
   </div>
 </div>
-
+  <ng-template #loading>
+    <div class="spinner"></div>
+  </ng-template>

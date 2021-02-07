@@ -11,7 +11,7 @@ const pageSize: number = 3;
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css']
+  styleUrls: ['./game.component.css', '../app.component.css']
 })
 
 export class GameComponent implements OnInit {
@@ -24,6 +24,7 @@ export class GameComponent implements OnInit {
   totalPages: number = 0;
   games: Array<Game> = [];
   pageIndexes: Array<number> = [];
+  isLoading = true;
 
   constructor(private gameService: GameService,
               private translateService: TranslateService,
@@ -34,7 +35,7 @@ export class GameComponent implements OnInit {
     const currentLanguage = this.localSettingsService.getLanguage();
     this.translateService.use(currentLanguage);
     this.games = await this.getGameList();
-    await this.getPage(0);
+    this.getPage(0);
   }
 
   private getGameList(): Promise<Game[]> {
@@ -57,6 +58,7 @@ export class GameComponent implements OnInit {
           this.totalPages = message.totalPages;
           this.pageIndexes = Array(this.totalPages).fill(0).map((x, i) => i);
           this.currentSelectedPage = message.pageNumber;
+          this.isLoading = false;
         }
       );
   }

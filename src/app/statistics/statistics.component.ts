@@ -13,7 +13,7 @@ import {PlayerService} from "../service/player.service";
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.css']
+  styleUrls: ['./statistics.component.css', '../app.component.css']
 })
 
 export class StatisticsComponent implements OnInit, OnDestroy {
@@ -22,6 +22,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   private playerId: string;
   statistics: GameStatistics[];
   game: Game;
+  isLoading = true;
 
 
   constructor(private statisticsService: StatisticsService,
@@ -39,17 +40,18 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       this.statistics[i].index = i + 1;
     }
     this.game = await this.getGame();
+    this.isLoading = false;
   }
 
 
   async ngOnDestroy() {
     let player = await this.getPlayer();
-    if(player.user==null){
+    if (player.user == null) {
       this.playerService.delete(this.playerId);
     }
   }
 
-  getPlayer(): Promise<Player>{
+  getPlayer(): Promise<Player> {
     return this.playerService.getOnePlayer(this.playerId).toPromise();
   }
 

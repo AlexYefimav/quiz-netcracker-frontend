@@ -16,19 +16,21 @@ import {MultiplayerComponent} from "./multiplayer/multiplayer.component";
 import {EditPlayerComponent} from "./edit-player/edit-player.component";
 import {LeaderboardsComponent} from "./leaderboards/leaderboards.component";
 import {ActivateAccountComponent} from "./activate-account/activate-account.component";
+import {Sign_up_and_sing_in} from "./service/can-activate/sign_up_and_sing_in";
+import {CanActivatePlayer} from "./service/can-activate/can-activate-player";
+import {UpdateGame} from "./service/can-activate/update-game";
 
 const routes: Routes = [
 
-  {path: 'game/:gameId/question/update/:id', component: EditQuestionComponent},
   {path: 'users', component: UserComponent},
   {path: 'games', component: GameComponent},
   {path: 'game/create', component: AddGameComponent},
-  {path: 'game/update/:id', component: AddGameComponent},
+  {path: 'game/update/:gameId', component: AddGameComponent, canActivate: [UpdateGame]},
   {path: 'users/create', component: EditUserComponent},
   {path: 'users/update/:id', component: EditUserComponent},
-  {path: 'player/update/:id', component: EditPlayerComponent},
-  {path: 'sign_in', component: SignInComponent},
-  {path: 'sign_up', component: SignUpComponent},
+  {path: 'player/update/:id', component: EditPlayerComponent, canActivate: [CanActivatePlayer]},
+  {path: 'sign_in', component: SignInComponent, canActivate: [Sign_up_and_sing_in]},
+  {path: 'sign_up', component: SignUpComponent, canActivate: [Sign_up_and_sing_in]},
   {path: 'multiplayer/:gameId/:gameRoomId/:playerId', component: MultiplayerComponent},
   {path: 'single-player-game/:gameId', component: GameplayComponent},
   {path: 'statistics/:gameId/:playerId', component: StatisticsComponent},

@@ -21,7 +21,7 @@ import {TranslateService} from "@ngx-translate/core";
 @Component({
   selector: 'app-multiplayer',
   templateUrl: './multiplayer.component.html',
-  styleUrls: ['./multiplayer.component.css']
+  styleUrls: ['./multiplayer.component.css', '../app.component.css']
 })
 export class MultiplayerComponent implements OnInit {
   private webSocketAPI: WebSocketAPI; //веб сокет для передачи инфы
@@ -33,7 +33,7 @@ export class MultiplayerComponent implements OnInit {
 
   gameId: string; //id игры
   game: Game; // игра
-  private playerId: string; //id играющего
+  playerId: string; //id играющего
   private questions: Question[] = []; //вопросы данной игры
   question: Question; //текущий вопрос
   answer: Answer = null; //ответ который дал игрок
@@ -47,6 +47,8 @@ export class MultiplayerComponent implements OnInit {
 
   timeIsOver: boolean = false; //конец таймера(при true таймер 0)
   private answerButtonNotPressed: boolean = false; // когда кнопка "ответить" не была нажата
+
+  isLoading = true;
 
   constructor(private questionService: QuestionService,
               private answerService: AnswerService,
@@ -88,6 +90,7 @@ export class MultiplayerComponent implements OnInit {
     this.connect();
 
     this.timeIsOver = false;
+    this.isLoading = false;
   }
 
   private getGameById(): Promise<Game> {
@@ -163,17 +166,6 @@ export class MultiplayerComponent implements OnInit {
   }
 
   async handleMessage(message) {
-    // if (message == "next") {
-    //   this.isBlockAnswers = false;
-    //   this.timeIsOver = false;
-    //   this.answerButtonNotPressed = false;
-    //   this.questionNumber++;
-    //   this.question = this.questions[this.questionNumber];
-    //   this.answer = null;
-    //   //возобновить таймер
-    //   this.isRestart = true;
-    //   this.timer.restart();
-    // } else
     if (message.playerId == undefined) {
       const translateService = this.injector.get(TranslateService);
       let mes, action;
@@ -183,14 +175,11 @@ export class MultiplayerComponent implements OnInit {
       })
       this.openSnackBar(mes, action);
     } else {
-      for (let i = 0; i < this.players.length; i++) {
-        if (message.playerId == this.players[i].player.id) {
-          if (message.right) {
-            this.players[i].answerColor[message.numberAnswer] = "green";
-          } else {
-            this.players[i].answerColor[message.numberAnswer] = "red";
-          }
-        }
+      const idx = this.players.findIndex(p => p.player.id == message.playerId);
+      if (message.right) {
+        this.players[idx].answerColor[message.numberAnswer] = "green";
+      } else {
+        this.players[idx].answerColor[message.numberAnswer] = "red";
       }
     }
   }
@@ -214,19 +203,12 @@ export class MultiplayerComponent implements OnInit {
         return;
       }
 
-      for (let i = 0; i < this.players.length; i++) {
-        if (this.player.id == this.players[i].player.id) {
-          if (this.answer.right) {
-            this.players[i].answerColor[this.questionNumber] = "green";
-          } else {
-            this.players[i].answerColor[this.questionNumber] = "red";
-          }
-        }
+      const idx = this.players.findIndex(p => p.player.id == this.player.id);
+      if (this.answer.right) {
+        this.players[idx].answerColor[this.questionNumber] = "green";
+      } else {
+        this.players[idx].answerColor[this.questionNumber] = "red";
       }
     }
-  }
-
-  restart(cd1: CountdownComponent) {
-    cd1.restart();
   }
 }

@@ -1,109 +1,116 @@
-<link rel="stylesheet" href="add-game.component.css">
-<div class="container">
-  <div *ngIf="gameForm">
+<div *ngIf="!isLoading;else loading">
+  <link rel="stylesheet" href="add-game.component.css">
+  <div class="container">
+    <div *ngIf="gameForm">
 
-    <div class="addGame">
-      <mat-accordion class="example-headers-align" multi>
-        <form [formGroup]="gameForm">
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{ 'ADD_GAME.GAME_TITLE' | translate }}
-              </mat-panel-title>
-              <mat-panel-description>
-                {{getTitle()}}
-                <mat-icon>title</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <mat-form-field class="example-form">
-              <label>
-                <input matInput placeholder="{{ 'ADD_GAME.GAME_TITLE' | translate }}" formControlName="title" (input)="checkForm()" required>
-              </label>
-              <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.required">
-                {{ 'ADD_GAME.ERROR.TITLE.REQUIRED' | translate }}
-              </mat-error>
-              <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.minlength">
-                {{ 'ADD_GAME.ERROR.TITLE.MINLENGTH' | translate }}
-              </mat-error>
-            </mat-form-field>
-          </mat-expansion-panel>
+      <div class="addGame">
+        <mat-accordion class="example-headers-align" multi>
+          <form [formGroup]="gameForm">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ 'ADD_GAME.GAME_TITLE' | translate }}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{getTitle()}}
+                  <mat-icon>title</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field class="example-form">
+                <label>
+                  <input matInput placeholder="{{ 'ADD_GAME.GAME_TITLE' | translate }}" formControlName="title"
+                         (input)="checkForm()" required>
+                </label>
+                <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.required">
+                  {{ 'ADD_GAME.ERROR.TITLE.REQUIRED' | translate }}
+                </mat-error>
+                <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.minlength">
+                  {{ 'ADD_GAME.ERROR.TITLE.MINLENGTH' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </mat-expansion-panel>
 
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{ 'ADD_GAME.GAME_DESCRIPTION' | translate }}
-              </mat-panel-title>
-              <mat-panel-description>
-                {{getDescription()}}
-                <mat-icon>description</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ 'ADD_GAME.GAME_DESCRIPTION' | translate }}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{getDescription()}}
+                  <mat-icon>description</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
 
-            <mat-form-field class="example-form">
-              <label>
-                <input matInput placeholder="{{ 'ADD_GAME.GAME_DESCRIPTION' | translate }}" formControlName="description" (input)="checkForm()"
-                       required>
-              </label>
-              <mat-error *ngIf="gameForm.get('description').touched && gameForm.get('description').errors?.required">
-                {{ 'ADD_GAME.ERROR.DESCRIPTION.REQUIRED' | translate }}
-              </mat-error>
-              <mat-error *ngIf="gameForm.get('description').touched && gameForm.get('description').errors?.minlength">
-                {{ 'ADD_GAME.ERROR.DESCRIPTION.MINLENGTH' | translate }}
-              </mat-error>
-            </mat-form-field>
-          </mat-expansion-panel>
+              <mat-form-field class="example-form">
+                <label>
+                  <input matInput placeholder="{{ 'ADD_GAME.GAME_DESCRIPTION' | translate }}"
+                         formControlName="description" (input)="checkForm()"
+                         required>
+                </label>
+                <mat-error *ngIf="gameForm.get('description').touched && gameForm.get('description').errors?.required">
+                  {{ 'ADD_GAME.ERROR.DESCRIPTION.REQUIRED' | translate }}
+                </mat-error>
+                <mat-error *ngIf="gameForm.get('description').touched && gameForm.get('description').errors?.minlength">
+                  {{ 'ADD_GAME.ERROR.DESCRIPTION.MINLENGTH' | translate }}
+                </mat-error>
+              </mat-form-field>
+            </mat-expansion-panel>
 
-          <mat-card class="photo">
-            <div class="title">
-              {{ 'PHOTO.TITLE' | translate }}
-            </div>
-            <div class="description">
-              <button mat-button (click)="fileInput.click()">{{ 'PHOTO.CHOOSE' | translate }}</button>
-              <input hidden type="file" id="file" class="photo-input" (change)="selectFile($event)"
-                     #fileInput accept=".jpg, .jpeg, .png">
-              <div *ngIf="picture">
-                {{ picture.name }}
+            <mat-card class="photo">
+              <div class="title">
+                {{ 'PHOTO.TITLE' | translate }}
               </div>
-            </div>
-            <div class="icon">
-              <mat-icon>
-                party_mode
-              </mat-icon>
-            </div>
+              <div class="description">
+                <button mat-button (click)="fileInput.click()">{{ 'PHOTO.CHOOSE' | translate }}</button>
+                <input hidden type="file" id="file" class="photo-input" (change)="selectFile($event)"
+                       #fileInput accept=".jpg, .jpeg, .png">
+                <div *ngIf="picture">
+                  {{ picture.name }}
+                </div>
+              </div>
+              <div class="icon">
+                <mat-icon>
+                  party_mode
+                </mat-icon>
+              </div>
 
-          </mat-card>
+            </mat-card>
 
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{ 'ADD_GAME.ACCESS.TITLE' | translate }}
-              </mat-panel-title>
-              <mat-panel-description>
-                {{game.access}}
-                <mat-icon>block</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{ 'ADD_GAME.ACCESS.TITLE' | translate }}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{game.access}}
+                  <mat-icon>block</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
 
-            <mat-form-field class="example-form" appearance="fill">
-              <mat-select  [value]="getSelectedAccess(game.access)">
-                <mat-option *ngFor="let access of accesses" [value]="access" (click)="setSelectedAccess(access)" >
-                  {{access}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+              <mat-form-field class="example-form" appearance="fill">
+                <mat-select [value]="getSelectedAccess(game.access)">
+                  <mat-option *ngFor="let access of accesses" [value]="access" (click)="setSelectedAccess(access)">
+                    {{access}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
 
-          </mat-expansion-panel>
+            </mat-expansion-panel>
 
-        </form>
-      </mat-accordion>
-    </div>
+          </form>
+        </mat-accordion>
+      </div>
 
-    <app-question [game]="game"></app-question>
-    <app-add-question [game]="game"></app-add-question>
+      <app-question [game]="game"></app-question>
+      <app-add-question [game]="game"></app-add-question>
 
-    <div class="save-button">
-      <button mat-raised-button color="primary" [disabled]="!gameForm.valid"
-              (click)="this.isUpdateGame?updateGame():createGame(game)">{{ 'ADD_GAME.SAVE' | translate }}</button>
+      <div class="save-button">
+        <button mat-raised-button color="primary" [disabled]="!gameForm.valid"
+                (click)="this.isUpdateGame?updateGame():createGame(game)">{{ 'ADD_GAME.SAVE' | translate }}</button>
+      </div>
     </div>
   </div>
 </div>
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

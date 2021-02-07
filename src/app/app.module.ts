@@ -67,6 +67,9 @@ import {DialogElementsPlayroom} from "./game-preview/dialog-element/playroom/dia
 import {DialogElementsCreateGuest} from "./game-preview/dialog-element/create-guest/dialog-elements-create-guest";
 import {DialogElementsEntryCode} from "./game-preview/dialog-element/entry-code/dialog-elements-entry-code";
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
+import {Sign_up_and_sing_in} from "./service/can-activate/sign_up_and_sing_in";
+import {CanActivatePlayer} from "./service/can-activate/can-activate-player";
+import {UpdateGame} from "./service/can-activate/update-game";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -155,7 +158,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    }
+    },
+    Sign_up_and_sing_in, CanActivatePlayer, UpdateGame
   ],
   bootstrap: [AppComponent],
   exports: [WidgetSearchBarButtonComponent, WidgetSearchBarComponent],

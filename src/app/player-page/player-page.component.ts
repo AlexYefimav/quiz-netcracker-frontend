@@ -15,15 +15,16 @@ import {PlayerGiveAccessComponent} from "../player-give-access/player-give-acces
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 
-  @Component({
+@Component({
   selector: 'app-client-page',
   templateUrl: './player-page.component.html',
-  styleUrls: ['./player-page.component.css']
+  styleUrls: ['./player-page.component.css', '../app.component.css']
 })
 export class PlayerPageComponent implements OnInit {
   player: Player;
   games: Game[] = [];
   displayedColumns: string[] = ['position', 'name', 'play', 'edit', 'delete', 'share'];
+  isLoading = true;
 
   constructor(private playerService: PlayerService,
               private storageService: StorageService,
@@ -40,6 +41,7 @@ export class PlayerPageComponent implements OnInit {
     for (let i = 0; i < this.games.length; i++) {
       this.games[i].index = i + 1;
     }
+    this.isLoading = false
   }
 
   redirect(url: string) {
@@ -55,7 +57,8 @@ export class PlayerPageComponent implements OnInit {
   }
 
   async deleteGame(id: string) {
-    await this.gameService.deleteGame(id).toPromise()
+    await this.gameService.deleteGame(id).toPromise();
+    this.games = this.games.filter(g => g.id != id);
   }
 
   shareGame(gameId, playerId: string): void {
@@ -73,7 +76,7 @@ export class PlayerPageComponent implements OnInit {
       message = value.MESSAGE_FIRST + game + value.MESSAGE_SECOND;
       action = value.ACTION;
     })
-    this._snackBar.open(message,action, {
+    this._snackBar.open(message, action, {
       duration: 2000,
     });
   }

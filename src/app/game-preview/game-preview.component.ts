@@ -1,8 +1,8 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
 import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
 import {ActivatedRoute} from "@angular/router";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {GameRoomService} from "../service/game-room.service";
 import {StorageService} from "../service/storage/storage.service";
 import {GameRoom} from "../model/game-room";
@@ -22,7 +22,7 @@ import {Observable} from "rxjs/internal/Observable";
 @Component({
   selector: 'app-game-preview',
   templateUrl: './game-preview.component.html',
-  styleUrls: ['./game-preview.component.css']
+  styleUrls: ['./game-preview.component.css', '../app.component.css']
 })
 
 export class GamePreviewComponent implements OnInit {
@@ -35,6 +35,7 @@ export class GamePreviewComponent implements OnInit {
   isAuthorized: boolean;
   isAccess: boolean;
   private guest: string;
+  isLoading = true;
 
   constructor(private gameService: GameService, private route: ActivatedRoute,
               private gameRoomService: GameRoomService, private storageService: StorageService,
@@ -49,6 +50,7 @@ export class GamePreviewComponent implements OnInit {
     this.game = await this.getGameById(this.route.snapshot.params.id);
     //this.gameAccess= await this.getGameAccessByGameAndPlayer(this.game.id, this.authorizedAccount.id);
      this.isAccess = await this.checkGameAccessByGameAndPlayer(this.game.id, this.player.id);
+    this.isLoading = false;
   }
 
   getPlayer(userId: string): Promise<Player> {

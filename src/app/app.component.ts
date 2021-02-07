@@ -18,14 +18,5 @@ export class AppComponent {
     this.translateService.stream('BUTTON.LANG').subscribe(value => {
       this.languages = value;
     });
-    // this._route.events.subscribe((routerEvent: Event)=>{
-    //   if(routerEvent instanceof NavigationStart){
-    //     this.showLoadingIndicator = true;
-    //   }
-    //
-    //   if(routerEvent instanceof NavigationEnd){
-    //     this.showLoadingIndicator = false;
-    //   }
-    // })
   }
 }

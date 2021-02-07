@@ -20,7 +20,7 @@ import {PhotoService} from '../service/photo.service';
 @Component({
   selector: 'app-add-game',
   templateUrl: './add-game.component.html',
-  styleUrls: ['./add-game.component.css']
+  styleUrls: ['./add-game.component.css','../app.component.css']
 })
 
 export class AddGameComponent implements OnInit {
@@ -36,6 +36,7 @@ export class AddGameComponent implements OnInit {
   @Output() accessControlChange = new EventEmitter<AbstractControl>();
   categories: Category[];
   levels: Level[];
+  isLoading = true;
 
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
@@ -58,8 +59,8 @@ export class AddGameComponent implements OnInit {
     this.levels = await this.getLevels();
     this.translateService.use(currentLanguage)
     if (this.checkAuthorized() != undefined) {
-      if (this.route.snapshot.params.id != null) {
-        this.game = await this.getGame(this.route.snapshot.params.id);
+      if (this.route.snapshot.params.gameId != null) {
+        this.game = await this.getGame(this.route.snapshot.params.gameId);
         this.isUpdateGame = true;
         this.gameForm = this.updateGameValidation.createGameForm(this.game);
       } else {
@@ -69,6 +70,7 @@ export class AddGameComponent implements OnInit {
         this.gameForm = this.addGameValidation.createGameForm();
       }
     } else this.redirect('403');
+    this.isLoading = false;
   }
 
   redirect(url: string) {
