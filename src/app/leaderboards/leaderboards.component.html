@@ -1,9 +1,9 @@
-<h1>Leaderboards</h1>
+<h1>{{'LEADERS.LEADERBOARDS' | translate}}</h1>
 <div class="container">
   <mat-card class="title">
     <div class="position">№</div>
-    <div class="player">Name</div>
-    <div class="rating">Rating</div>
+    <div class="player">{{'LEADERS.NAME' | translate}}</div>
+    <div class="rating">{{'LEADERS.RATING' | translate}}</div>
   </mat-card>
   <div *ngFor="let entry of map.entries(); let i = index">
     <mat-card class="title">

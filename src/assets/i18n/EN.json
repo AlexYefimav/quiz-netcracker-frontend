@@ -173,15 +173,15 @@
   "GAME_PREVIEW": {
     "DESCRIPTION": "Description",
     "RULES": "Rules of the game",
-    "RULES_1": "1. Игру может начать только создатель игры.",
-    "RULES_2": "2. Вопросы идут поочередно и на каждый из них выделено ровно 30 секунд.",
-    "RULES_3": "3. Чтобы ответить на вопрос, нужно выбрать один из представленных ответов, нажать на него и нажать на кнопку\"Ответить\".",
-    "RULES_4": "4. В случае, если вы не успели выбрать ни один ответ или нажать на кнопку \"Ответить\", то ваш ответ не будет засчитан.",
-    "RULES_5": "5. Переключить вопрос может только создатель игры.",
-    "RULES_6": "6. Правильность вашего ответа будет определена после окончания времени и отобразиться красным/зеленым на доске с вашим именем, которая находится ниже.",
-    "RULES_7": "7. Во время игры можно лайкнуть другого игрока, если вам нравиться, как он отвечает на вопросы или просто так.",
-    "RULES_8": "8. В конце будет отображена статистика о прохождении данной викторины.",
-    "RULES_9" : "9. Удачи!",
+    "RULES_1": "1. Only the creator of the game can start the game.",
+    "RULES_2": "2. The questions go one after the other and you have 30 seconds for each of them.",
+    "RULES_3": "3. You need to select one of the answers provided, click on it and click on the \"Answer\" button.",
+    "RULES_4": "4. If you don't manage to select any answer or click on the \"Answer\" button, then your answer won't be counted.",
+    "RULES_5": "5. Only the creator of the game can switch the question.",
+    "RULES_6": "6. The correctness of your answer will be determined after the end of the time and will be displayed in red/green on the board with your name below.",
+    "RULES_7": "7. You can like another player during the game if you like how he answers questions or just like that.",
+    "RULES_8": "8. At the end of the game, statistics of this quiz will be displayed.",
+    "RULES_9" : "9. Good luck!",
     "PLAY": "Play",
     "BACK": "Back"
   },
@@ -207,5 +207,11 @@
     "MESSAGE_FIRST": "Link to the game \"",
     "MESSAGE_SECOND": "\" copied!",
     "ACTION": "COPY"
+  },
+
+  "LEADERS": {
+    "LEADERBOARDS": "Leaderboards",
+    "NAME": "Name",
+    "RATING": "Rating"
   }
 }

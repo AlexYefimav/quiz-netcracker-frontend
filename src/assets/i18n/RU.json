@@ -212,5 +212,11 @@
     "MESSAGE_FIRST": "Ссылка игры \"",
     "MESSAGE_SECOND": "\" скопирована!",
     "ACTION": "Копирование"
+  },
+
+  "LEADERS": {
+    "LEADERBOARDS": "Лучшие игроки",
+    "NAME": "Имя пользователя",
+    "RATING": "Рейтинг"
   }
 }
