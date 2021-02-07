@@ -34,9 +34,9 @@ export class UserComponent implements OnInit {
 
   async ngOnInit() {
     if(this.checkAuthorized()!=undefined) {
-    this.users = await this.getUsers();
+  //  this.users = await this.getUsers();
       await this.getPage(0);
-      this.users = await this.getUsers();
+      this.users =  await this.getUsers();
       this.pageSlice = this.users.slice(0, pageSize);
     }
     else this.redirect('403');
