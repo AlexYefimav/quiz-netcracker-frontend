@@ -110,7 +110,7 @@
           <input hidden type="file" id="file" class="photo-input" formControlName="photo" (change)="selectFile($event)"
                  #fileInput accept=".jpg, .jpeg, .png">
           <div *ngIf="picture">
-            {{ getPhoto() }}
+            {{ picture.name }}
           </div>
         </div>
         <div class="icon">
