@@ -15,19 +15,20 @@ import {CategoryService} from '../service/category.service';
 import {LevelService} from '../service/level.service';
 import {Category} from '../model/category';
 import {Level} from '../model/level';
+import {PhotoService} from '../service/photo.service';
 
 @Component({
   selector: 'app-add-game',
   templateUrl: './add-game.component.html',
   styleUrls: ['./add-game.component.css']
 })
+
 export class AddGameComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   game: Game;
   isUpdateGame: boolean;
-  gameForm: FormGroup;
+  @Input() gameForm: FormGroup;
   picture: any;
-  fileUrl: string;
   selectedAccess: string = "PUBLIC";
   accesses: string[] = ["PUBLIC", "PRIVATE"];
   authorizedAccount: User;
@@ -46,7 +47,8 @@ export class AddGameComponent implements OnInit {
               private localeSettingsService: LocalSettingsService,
               private router: Router,
               private categoryService: CategoryService,
-              private levelService: LevelService) {
+              private levelService: LevelService,
+              private photoService: PhotoService) {
   }
 
   async ngOnInit(): Promise<void> {
@@ -119,6 +121,10 @@ export class AddGameComponent implements OnInit {
       this.selectedAccess = "PUBLIC";
       return "PUBLIC";
     }
+  }
+
+  getPhoto(): string {
+    return this.gameForm.get('photo').value;
   }
 
   getUser(id: string): Promise<User> {
@@ -199,26 +205,18 @@ export class AddGameComponent implements OnInit {
       this.game.title = this.getTitle();
       this.game.description = this.getDescription();
       this.game.access = this.selectedAccess;
+      this.game.photo = this.getPhoto();
     }
   }
 
   selectFile(event) {
     this.picture = event.target.files[0];
     const formData = new FormData();
-    const formData2 = new FormData();
     formData.append('file', this.picture);
-    this.gameService.uploadFile(formData).subscribe((result) => {
-        this.fileUrl = result.photo;
-        formData2.append('url', this.fileUrl);
-        formData2.append('gameId', this.game.id);
-        this.gameService.updateFile(this.game.id, formData2).subscribe((res: Game) => {
-            this.game.photo = res.photo;
-          },
-          err => console.error('Observer got an error: ' + err)
-        );
-      },
-      err => console.error('Observer got an error: ' + err)
-    );
+    this.photoService.uploadFile(formData).subscribe((result) => {
+      this.game.photo = result.photo;
+      this.gameForm.get('photo').patchValue(this.picture.name);
+    });
   }
 }
 
