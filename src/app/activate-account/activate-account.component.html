@@ -1,11 +1,11 @@
 <mat-card class="container">
   <div class="header">
-    Activate Account
+    {{ 'ACTIVATE.ACCOUNT' | translate }}
   </div>
   <div class="body">
     {{activationMessage.text}}
   </div>
   <div class="action">
-    <button mat-button (click)="redirect('/')">Done</button>
+    <button mat-button (click)="redirect('/')">{{ 'ACTIVATE.DONE' | translate }}</button>
   </div>
 </mat-card>
