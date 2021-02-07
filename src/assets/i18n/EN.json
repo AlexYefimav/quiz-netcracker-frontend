@@ -213,5 +213,20 @@
     "LEADERBOARDS": "Leaderboards",
     "NAME": "Name",
     "RATING": "Rating"
+  },
+
+  "GAME": {
+    "TITLE": "Available Games to play",
+    "VIEW": "View",
+    "SEARCH": "Search",
+    "SEARCH_NAME": "Search by name"
+  },
+
+  "FILTERS": {
+    "NAME": "Name",
+    "VIEWS": "Views",
+    "RATING": "Rating",
+    "FILTERS": "Filters",
+    "APPLY": "Apply filters"
   }
 }

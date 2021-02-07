@@ -15,6 +15,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonModule} from "@angular/material/button";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import {MatButtonModule} from "@angular/material/button";
     SearchResultListComponent,
     SearchResultItemComponent,
   ],
-    imports: [CommonModule, SearchRoutingModule, HttpClientModule, FormsModule, MatCardModule, MatIconModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatExpansionModule, MatButtonModule],
+    imports: [CommonModule, SearchRoutingModule, HttpClientModule, FormsModule, MatCardModule, MatIconModule, MatMenuModule, MatInputModule, MatCheckboxModule, MatExpansionModule, MatButtonModule, TranslateModule],
   exports: [WidgetSearchBarComponent, WidgetSearchBarButtonComponent],
 })
 export class SearchModule {}
