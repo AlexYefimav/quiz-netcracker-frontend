@@ -52,7 +52,7 @@ export class EditPlayerComponent implements OnInit {
   }
 
   private getPlayer( playerId: string): void {
-    this.playerService.getPlayerByUserId(playerId).subscribe( player =>
+    this.playerService.getOnePlayer(playerId).subscribe( player =>
     {   this.player = player });
   }
 

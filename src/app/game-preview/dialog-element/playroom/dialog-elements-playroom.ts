@@ -7,12 +7,8 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
   styleUrls: ['./dialog-elements-playroom.css']
 })
 export class DialogElementsPlayroom {
-  firstPlayer: boolean = false;
   constructor(@Inject(MAT_DIALOG_DATA) public data: { game, gameRoom, player, socket }) {
     console.log(this.data.gameRoom);
-    if(this.data.gameRoom.players[0].id==this.data.player.id){
-      this.firstPlayer = true;
-    }
   }
 
   startGame() {

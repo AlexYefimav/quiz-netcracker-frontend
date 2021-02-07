@@ -22,7 +22,7 @@
         <div class="column-name">
           {{player.name}}
         </div>
-        <div class="column-delete" *ngIf="firstPlayer">
+        <div class="column-delete" *ngIf="this.data.gameRoom.players[0].id==this.data.player.id">
           <button mat-icon-button (click)="deletePlayer(player.id)" >
             <mat-icon>clear</mat-icon>
           </button>
@@ -35,12 +35,12 @@
       <div class="close">
         <button mat-button mat-dialog-close>{{ 'PLAYROOM.BUTTON_LEAVE' | translate }}</button>
       </div>
-      <div *ngIf="firstPlayer; else notCreator">
+      <div *ngIf="this.data.gameRoom.players[0].id==this.data.player.id; else notFirstPlayer">
         <div class="play">
           <a mat-button (click)="startGame()" style="right: 0">{{ 'PLAYROOM.BUTTON_PLAY' | translate }}</a>
         </div>
       </div>
-      <ng-template #notCreator>
+      <ng-template #notFirstPlayer>
         <div class="spinner">
           <mat-spinner [diameter]="30"></mat-spinner>
         </div>
