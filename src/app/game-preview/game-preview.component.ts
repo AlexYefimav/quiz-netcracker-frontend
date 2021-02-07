@@ -127,7 +127,7 @@ export class GamePreviewComponent implements OnInit {
   async handleMessage(message) {
     if (message == "go") {
       let st;
-      this.statisticsService.deleteStatistics(this.player.id).subscribe(s => st = s);
+      this.statisticsService.deleteStatistics(this.player.id, this.game.id).subscribe(s => st = s);
       window.location.href = "http://localhost:4200/multiplayer/" + this.game.id + "/"
         + this.gameRoom.id + "/" + this.player.id;
     } else if (message == "delete") {

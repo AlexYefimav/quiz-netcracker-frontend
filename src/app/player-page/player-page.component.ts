@@ -6,14 +6,14 @@ import {Router} from '@angular/router';
 import {Player} from "../model/player";
 import {Game} from "../model/game";
 import {GameService} from "../service/game.service";
-import {SignInComponent} from "../sign-in/sign-in.component";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 
 import {PlayerGiveAccessComponent} from "../player-give-access/player-give-access.component";
 
 
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
+import {StatisticsService} from "../service/statistics.service";
 
 @Component({
   selector: 'app-client-page',
@@ -22,9 +22,11 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class PlayerPageComponent implements OnInit {
   player: Player;
-  games: Game[] = [];
+  createdGames: Game[] = [];
+  passedGame: Game[] = [];
   displayedColumns: string[] = ['position', 'name', 'play', 'edit', 'delete', 'share'];
   isLoading = true;
+  displayedColumnsStatistics: string[] = ['position', 'name', 'play', 'delete'];
 
   constructor(private playerService: PlayerService,
               private storageService: StorageService,
@@ -32,14 +34,19 @@ export class PlayerPageComponent implements OnInit {
               private router: Router,
               public dialog: MatDialog,
               private _snackBar: MatSnackBar,
-              private injector: Injector) {
+              private injector: Injector,
+              private statisticsService: StatisticsService) {
   }
 
   async ngOnInit() {
     this.player = await this.getPlayer();
-    this.games = await this.getGames();
-    for (let i = 0; i < this.games.length; i++) {
-      this.games[i].index = i + 1;
+    this.createdGames = await this.getGames();
+    for (let i = 0; i < this.createdGames.length; i++) {
+      this.createdGames[i].index = i + 1;
+    }
+    this.passedGame = await this.getStatisticsPlayerIdAndByGameId(this.player.id);
+    for (let i = 0; i < this.passedGame.length; i++) {
+      this.passedGame[i].index = i + 1;
     }
     this.isLoading = false
   }
@@ -58,14 +65,14 @@ export class PlayerPageComponent implements OnInit {
 
   async deleteGame(id: string) {
     await this.gameService.deleteGame(id).toPromise();
-    this.games = this.games.filter(g => g.id != id);
+    this.createdGames = this.createdGames.filter(g => g.id != id);
     // setTimeout(function(){
     //   window.location.reload();
     // }, 300);
   }
 
   shareGame(gameId, playerId: string): void {
-    const dialogRef = this.dialog.open(PlayerGiveAccessComponent, {
+    this.dialog.open(PlayerGiveAccessComponent, {
       minWidth: '400px',
       minHeight: '300px',
       data: {gameId: gameId, playerId: playerId}
@@ -82,5 +89,14 @@ export class PlayerPageComponent implements OnInit {
     this._snackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  private getStatisticsPlayerIdAndByGameId(id: string): Promise<Game[]> {
+    return this.statisticsService.getGameWithStatistics(id).toPromise();
+  }
+
+  async deleteStatistics(gameId: string) {
+    this.passedGame = this.passedGame.filter(g => g.id != gameId);
+    await this.statisticsService.deleteStatistics(this.player.id, gameId).toPromise();
   }
 }
