@@ -1,0 +1,17 @@
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-raised-button {
+  margin-top: 20px;
+}
+
+.mat-form-field {
+  display: flex;
+}

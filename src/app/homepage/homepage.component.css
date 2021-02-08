@@ -53,6 +53,11 @@ h1 {
 }
 
 .back {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 3pc;
+  padding: 3pc;
   background: #3c629b;
 }
 
