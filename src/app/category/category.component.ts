@@ -45,4 +45,7 @@ export class CategoryComponent implements OnInit {
     }
     this.categoryControlChange.emit(this.categoryControl);
   }
+
+
+
 }

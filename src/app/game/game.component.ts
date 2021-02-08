@@ -5,6 +5,8 @@ import {PageEvent} from '@angular/material/paginator';
 import {Message} from '../model/message';
 import {TranslateService} from '@ngx-translate/core';
 import {LocalSettingsService} from '../service/localization/LocalSettingsService';
+import {GameCategory} from "../model/game-category";
+import {GameCategoryService} from "../service/game-category.service";
 
 const pageSize: number = 3;
 
@@ -17,6 +19,7 @@ const pageSize: number = 3;
 export class GameComponent implements OnInit {
 
   public game: Game;
+  gameCategories: GameCategory[];
   public pageSlice: Game[];
   page: number;
   pageSize: number;
@@ -25,25 +28,72 @@ export class GameComponent implements OnInit {
   games: Array<Game> = [];
   pageIndexes: Array<number> = [];
   isLoading = true;
+  filter: string;
 
   constructor(private gameService: GameService,
               private translateService: TranslateService,
-              private localSettingsService: LocalSettingsService) {
+              private localSettingsService: LocalSettingsService,
+              private gameCategoryService: GameCategoryService) {
   }
 
   async ngOnInit() {
+
+      this.gameCategories = await this.getGameCategoryList();
+
     const currentLanguage = this.localSettingsService.getLanguage();
     this.translateService.use(currentLanguage);
     this.games = await this.getGameList();
     this.getPage(0);
   }
 
+  private getGameCategoryList(): Promise<GameCategory[]> {
+    return this.gameCategoryService.getGameCategories().toPromise();
+  }
+
+  private getGameFilteredByCategory(id : string ): Promise<Game[]> {
+    return this.gameService.getGamesByCategory(id).toPromise();
+  }
+
   private getGameList(): Promise<Game[]> {
     return this.gameService.getPublicGame().toPromise();
   }
 
+  plusView(game: Game) {
+    this.game.views = this.game.views + 1;
+    this.gameService.updateGame(game);
+  }
+
   async deleteGame(id: string) {
     this.game = await this.gameService.deleteGame(id).toPromise()
+  }
+
+  private getGamesSortedbyViews(): Promise<Game[]> {
+    return this.gameService.getGamesSortedByViews().toPromise();
+  }
+
+  private getGamesSortedbyTitle(): Promise<Game[]> {
+    return this.gameService.getGamesSortedByTitle().toPromise();
+  }
+
+  async sortByViews() {
+    this.games = await this.getGamesSortedbyViews();
+    this.pageSlice = this.games.slice(0, 3);
+   //location.reload();
+    //alert(this.getGamesSortedbyViews());
+  }
+
+  async sortByTitle() {
+    this.games = await this.getGamesSortedbyTitle();
+    this.pageSlice = this.games.slice(0, 3);
+    //location.reload();
+    //alert(this.getGamesSortedbyTitle());
+  }
+
+  async sortByCategory(id : string)  {
+    this.games = await this.getGameFilteredByCategory(id);
+    this.pageSlice = this.games.slice(0, 3);
+    //location.reload();
+    //alert(this.getGameFilteredByCategory(id));
   }
 
   setGame(game: Game) {
@@ -62,6 +112,8 @@ export class GameComponent implements OnInit {
         }
       );
   }
+
+
 
   OnPageChange(event: PageEvent) {
     this.pageSlice = this.games.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize)

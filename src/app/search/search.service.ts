@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { SearchOption } from './searchOption';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {Game} from "../model/game";
+import {GameSearch} from "../model/game-search";
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  private SERVER_URL = 'http://localhost:8085/';
+  private SERVER_URL = 'http://localhost:8443/';
 
   constructor(private http: HttpClient) {}
 
@@ -33,6 +34,22 @@ export class SearchService {
   search(q: string): Observable<SearchOption[]> {
     return this.http.get<SearchOption[]>(this.SERVER_URL + 'game/searchByTitle/' +q );
   }
+
+
+
+  SearchUsingFilters(request : GameSearch): Observable<Game[]> {
+
+    return this.http.post<Game[]>(this.SERVER_URL + 'game/findByFilter', request);
+  }
+
+  getGamesSortedByViews(): Observable<Game[]> {
+    return this.http.get<Game[]>(this.SERVER_URL + "game/filterByViews")
+  }
+
+  getGamesSortedByTitle(): Observable<Game[]> {
+    return this.http.get<Game[]>(this.SERVER_URL + "game/filterByTitle")
+  }
+
 
   updateSelectedOption(option: SearchOption) {
     this.selectedOption.next(option);
