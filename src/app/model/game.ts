@@ -1,4 +1,5 @@
 import {Question} from './question';
+import {GameCategory} from "./game-category";
 
 export class Game{
   id: string;
@@ -10,6 +11,8 @@ export class Game{
   player: string;
   index: number;
   access: string;
+  gameCategory: string;
+  views: string;
 
   constructor() {
   }

@@ -36,6 +36,10 @@ export class GameService {
     return this.http.get<Game[]>(this.url);
   }
 
+  getGamesByCategory(id: string): Observable<Game[]> {
+    return this.http.get<Game[]>(this.url + "searchByCategory/" + id);
+  }
+
   getGameById(id: string): Observable<Game> {
     return this.http.get<Game>(this.url + id);
   }
@@ -46,6 +50,14 @@ export class GameService {
 
   getGameByTitle(name: string): Observable<Game> {
     return this.http.get<Game>(this.url + name);
+  }
+
+  getGamesSortedByViews(): Observable<Game[]> {
+    return this.http.get<Game[]>(this.url + "filterByViews")
+  }
+
+  getGamesSortedByTitle(): Observable<Game[]> {
+    return this.http.get<Game[]>(this.url + "filterByName")
   }
 
   createGame(game: Game): Observable<Game> {
@@ -75,6 +87,11 @@ export class GameService {
   getPublicGame(): Observable<Game[]> {
     return this.http.get<Game[]>(this.url + "public-game");
   }
+
+  getTopViewedGames(): Observable<Game[]> {
+    return this.http.get<Game[]>(this.url + "topViewed");
+  }
+
 }
 
 

@@ -1,0 +1,62 @@
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: oldlace;
+}
+.mat-card {
+  /*background: #e91e63 url(src/assets/images/meme.png);*/
+  display: flex;
+  background: #e91e63;
+  color: oldlace;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  /*margin-top: 15px;*/
+  /*max-width: 500px;*/
+  /*max-height: 300px;*/
+  text-align: center;
+  margin: 5pc;
+  padding: 5pc;
+
+}
+
+
+.mat-radio-button {
+  color: #303030;
+  display: block;
+  margin-left: auto;
+}
+
+.mat-icon-button {
+  color: #303030;
+  display: block;
+  margin-left: auto;
+}
+
+.mat-mini-fab {
+  margin-top: 0px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.back {
+  background: #3c629b;
+}
+
+.viewes {
+  display: flex;
+  justify-content: center;
+}

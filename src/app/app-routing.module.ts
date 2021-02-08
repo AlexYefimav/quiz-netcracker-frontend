@@ -13,6 +13,7 @@ import {PlayerPageComponent} from "./player-page/player-page.component";
 import {GamePreviewComponent} from "./game-preview/game-preview.component";
 import {ErrorAuthenticationConnectionComponent} from "./error-authentication-connection/error-authentication-connection.component";
 import {MultiplayerComponent} from "./multiplayer/multiplayer.component";
+import {HomepageComponent} from "./homepage/homepage.component";
 import {EditPlayerComponent} from "./edit-player/edit-player.component";
 import {LeaderboardsComponent} from "./leaderboards/leaderboards.component";
 import {ActivateAccountComponent} from "./activate-account/activate-account.component";
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path: 'player/:id', component: PlayerPageComponent},
   {path: '403', component: ErrorAuthenticationConnectionComponent},
   {path: 'leaderboards', component: LeaderboardsComponent},
-  {path: 'activate/:code', component: ActivateAccountComponent}
+  {path: 'activate/:code', component: ActivateAccountComponent},
+  {path: '', component: HomepageComponent}
 ];
 
 @NgModule({

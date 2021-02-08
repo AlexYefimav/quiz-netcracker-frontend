@@ -1,0 +1,30 @@
+<div class="container">
+ <mat-card class="back">
+  <mat-card>
+    <mat-card-title>
+      <a href="/games">К списку Игр</a>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <a href="/games">Играть</a>
+    </mat-card-subtitle>
+  </mat-card>
+
+  <mat-card>
+    <mat-panel-title>
+     Популярные игры
+    </mat-panel-title>
+    <mat-card-subtitle  class="viewes" *ngFor="let game of games" style="margin-left: 100px;">
+      {{game.title}} ---- {{game.views}} Просмотров
+    </mat-card-subtitle>
+  </mat-card>
+
+  <mat-card>
+    <mat-panel-title>
+     Здесь могла быть ваша реклама!
+    </mat-panel-title>
+      Но не случилось...
+    <mat-card-subtitle>
+    </mat-card-subtitle>
+  </mat-card>
+ </mat-card>
+</div>

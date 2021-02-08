@@ -52,6 +52,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MultiplayerComponent} from './multiplayer/multiplayer.component';
 import {UserGameComponent} from "./user-game/user-game.component";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HomepageComponent } from './homepage/homepage.component';
+import {GameCategoryComponent} from "./game-category/game-category.component";
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -106,6 +108,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserGameComponent,
     ErrorAuthenticationConnectionComponent,
     UserGameComponent,
+    HomepageComponent,
+    GameCategoryComponent,
     EditPlayerComponent,
     SignInOnceComponent,
     PlayerBlockAccessComponent,
