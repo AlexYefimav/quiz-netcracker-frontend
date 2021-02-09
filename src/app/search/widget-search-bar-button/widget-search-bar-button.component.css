@@ -1,11 +1,10 @@
 .form-inline {
-    size: 100px;
-
+  size: 100px;
 }
 
 .form-control {
   max-width: 500px;
-  margin:auto;
+  margin: auto;
   color: white;
 }
 
@@ -15,14 +14,9 @@
   color: #405065;
 }
 
-.waves-lighr {
-
-}
-
 :host {
   display: flex;
   justify-content: center;
-  margin: 100px 0px;
 }
 
 .mat-form-field {
@@ -78,12 +72,11 @@ mat-card-content {
 
 .search {
   min-width: 80%;
-  left: 10px;
+  width: 100%;
 }
 
-.btnSearch{
+.btnSearch {
   right: 0;
-
 }
 
 .mat-form-field .example-form {
@@ -91,7 +84,7 @@ mat-card-content {
   color: white;
 }
 
-.mat-expansion-panel-header-title{
+.mat-expansion-panel-header-title {
   display: flex;
   flex-direction: column;
   margin-top: 15px;
