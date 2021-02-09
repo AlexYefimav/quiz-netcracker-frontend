@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Answer} from '../../model/answer';
 import {Question} from '../../model/question';
 import {element} from 'protractor';
+import {EMPTY} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class DuplicateValidator {
         this.setPropertyAndValue(control);
         return this.validate(control, array, entity);
       }
-      return null;
+      return EMPTY;
     };
   }
 
@@ -55,6 +56,6 @@ export class DuplicateValidator {
         }
       });
     }
-    return null;
+    return EMPTY;
   }
 }
