@@ -20,7 +20,7 @@ export class DuplicateValidator {
         this.setPropertyAndValue(control);
         return this.validate(control, array, entity);
       }
-      return EMPTY;
+      return null;
     };
   }
 
@@ -56,6 +56,6 @@ export class DuplicateValidator {
         }
       });
     }
-    return EMPTY;
+    return null;
   }
 }

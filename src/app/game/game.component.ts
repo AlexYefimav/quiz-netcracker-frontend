@@ -5,8 +5,8 @@ import {PageEvent} from '@angular/material/paginator';
 import {Message} from '../model/message';
 import {TranslateService} from '@ngx-translate/core';
 import {LocalSettingsService} from '../service/localization/LocalSettingsService';
-import {GameCategory} from "../model/game-category";
-import {GameCategoryService} from "../service/game-category.service";
+import {GameCategory} from '../model/game-category';
+import {GameCategoryService} from '../service/game-category.service';
 
 const pageSize: number = 3;
 
@@ -38,7 +38,7 @@ export class GameComponent implements OnInit {
 
   async ngOnInit() {
 
-      this.gameCategories = await this.getGameCategoryList();
+    this.gameCategories = await this.getGameCategoryList();
 
     const currentLanguage = this.localSettingsService.getLanguage();
     this.translateService.use(currentLanguage);
@@ -50,7 +50,7 @@ export class GameComponent implements OnInit {
     return this.gameCategoryService.getGameCategories().toPromise();
   }
 
-  private getGameFilteredByCategory(id : string ): Promise<Game[]> {
+  private getGameFilteredByCategory(id: string): Promise<Game[]> {
     return this.gameService.getGamesByCategory(id).toPromise();
   }
 
@@ -64,7 +64,7 @@ export class GameComponent implements OnInit {
   }
 
   async deleteGame(id: string) {
-    this.game = await this.gameService.deleteGame(id).toPromise()
+    this.game = await this.gameService.deleteGame(id).toPromise();
   }
 
   private getGamesSortedbyViews(): Promise<Game[]> {
@@ -78,7 +78,7 @@ export class GameComponent implements OnInit {
   async sortByViews() {
     this.games = await this.getGamesSortedbyViews();
     this.pageSlice = this.games.slice(0, 3);
-   //location.reload();
+    //location.reload();
     //alert(this.getGamesSortedbyViews());
   }
 
@@ -89,7 +89,7 @@ export class GameComponent implements OnInit {
     //alert(this.getGamesSortedbyTitle());
   }
 
-  async sortByCategory(id : string)  {
+  async sortByCategory(id: string) {
     this.games = await this.getGameFilteredByCategory(id);
     this.pageSlice = this.games.slice(0, 3);
     //location.reload();
@@ -114,9 +114,8 @@ export class GameComponent implements OnInit {
   }
 
 
-
   OnPageChange(event: PageEvent) {
-    this.pageSlice = this.games.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize)
+    this.pageSlice = this.games.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize);
   }
 
   // Don't use now

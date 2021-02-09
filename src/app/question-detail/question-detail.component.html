@@ -1,6 +1,8 @@
 <div class="example-action-buttons">
-  <button mat-button (click)="accordion.openAll()">{{ 'ADD_GAME.QUESTION_DETAIL.EXPAND_ALL' | translate }}</button>
-  <button mat-button (click)="accordion.closeAll()">{{ 'ADD_GAME.QUESTION_DETAIL.COLLAPSE_ALL' | translate }}</button>
+  <button mat-raised-button class="button"
+          (click)="accordion.openAll()">{{ 'ADD_GAME.QUESTION_DETAIL.EXPAND_ALL' | translate }}</button>
+  <button mat-raised-button class="button"
+          (click)="accordion.closeAll()">{{ 'ADD_GAME.QUESTION_DETAIL.COLLAPSE_ALL' | translate }}</button>
 </div>
 <mat-accordion class="example-headers-align" multi>
   <div *ngIf="questionForm">

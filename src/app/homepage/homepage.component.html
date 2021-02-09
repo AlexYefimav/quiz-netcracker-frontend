@@ -2,27 +2,27 @@
  <mat-card class="back">
   <mat-card>
     <mat-card-title>
-      <a href="/games">К списку Игр</a>
+      <a href="/games">{{ 'HOMEPAGE.GAME_LIST' | translate }}</a>
     </mat-card-title>
     <mat-card-subtitle>
-      <a href="/games">Играть</a>
+      <a href="/games">{{ 'HOMEPAGE.PLAY_GAMES' | translate }}</a>
     </mat-card-subtitle>
   </mat-card>
 
   <mat-card>
     <mat-panel-title>
-     Популярные игры
+      {{ 'HOMEPAGE.POPULAR_GAMES' | translate }}
     </mat-panel-title>
     <mat-card-subtitle  class="viewes" *ngFor="let game of games" style="margin-left: 100px;">
-      {{game.title}} ---- {{game.views}} Просмотров
+      {{game.title}} ---- {{game.views}} {{ 'HOMEPAGE.VIEWS' | translate }}
     </mat-card-subtitle>
   </mat-card>
 
   <mat-card>
     <mat-panel-title>
-     Здесь могла быть ваша реклама!
+      {{ 'HOMEPAGE.ADVERTISING' | translate }}
     </mat-panel-title>
-      Но не случилось...
+    {{ 'HOMEPAGE.FAILURE_ADVERTISING' | translate }}
     <mat-card-subtitle>
     </mat-card-subtitle>
   </mat-card>

@@ -42,11 +42,11 @@ export class AnswerDetailComponent implements OnInit {
     }
   }
 
-  getTitle(): any {
+  getTitle(): string {
     return this.answerForm.get('title').value;
   }
 
-  isRight(): any {
+  isRight(): boolean {
     return this.answerForm.get('right').value;
   }
 }

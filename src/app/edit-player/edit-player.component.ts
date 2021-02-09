@@ -1,13 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {MatAccordion} from "@angular/material/expansion";
-import {User} from "../model/user";
-import {AbstractControl} from "@angular/forms";
-import {UserService} from "../service/user.service";
-import {StorageService} from "../service/storage/storage.service";
-import {ActivatedRoute} from "@angular/router";
-import {PlayerService} from "../service/player.service";
-import {Player} from "../model/player";
-import {Game} from "../model/game";
+import {MatAccordion} from '@angular/material/expansion';
+import {AbstractControl} from '@angular/forms';
+import {StorageService} from '../service/storage/storage.service';
+import {ActivatedRoute} from '@angular/router';
+import {PlayerService} from '../service/player.service';
+import {Player} from '../model/player';
+import {Game} from '../model/game';
 
 @Component({
   selector: 'app-edit-player',
@@ -17,7 +15,7 @@ import {Game} from "../model/game";
 export class EditPlayerComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   player: Player;
-  isUpdatePlayer:boolean;
+  isUpdatePlayer: boolean;
   disable: string;
   picture: any;
   fileUrl: string;
@@ -31,7 +29,7 @@ export class EditPlayerComponent implements OnInit {
   }
 
   ngOnInit(){
-    if(this.route.snapshot.params.id!=undefined){
+    if (this.route.snapshot.params.id != undefined){
       this.isUpdatePlayer = true;
       this.getPlayer(this.route.snapshot.params.id);
     } else {
@@ -42,18 +40,18 @@ export class EditPlayerComponent implements OnInit {
   }
 
   isDisable(): string {
-    if (this.player.name != null && this.player.name != "" &&
-      this.player.email != null && this.player.email != "" ) {
-      this.disable = "false";
+    if (this.player.name != null && this.player.name != '' &&
+      this.player.email != null && this.player.email != '' ) {
+      this.disable = 'false';
     } else {
-      this.disable = "disable"
+      this.disable = 'disable';
     }
     return this.disable;
   }
 
   private getPlayer( playerId: string): void {
     this.playerService.getOnePlayer(playerId).subscribe( player =>
-    {   this.player = player });
+    {   this.player = player; });
   }
 
   updatePlayer(): void {

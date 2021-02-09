@@ -1,21 +1,5 @@
-<!--<mat-toolbar color="primary">-->
-<!--  <a mat-button href="">Home</a>-->
-<!--  <button mat-button [matMenuTriggerFor]="belowMenu">Game</button>-->
-<!--  <mat-menu #belowMenu="matMenu" yPosition="below">-->
-<!--&lt;!&ndash;    <a mat-menu-item href="quiz">Quiz</a>&ndash;&gt;-->
-<!--    <a mat-menu-item href="users">User</a>-->
-<!--    <a mat-menu-item href="games"> Games</a>-->
-<!--  </mat-menu>-->
-<!--  <a mat-button href="" disabled="true">About</a>-->
-<!--  <a mat-button>My Games</a>-->
-<!--</mat-toolbar>-->
-
 <mat-toolbar color="primary" role="heading">
   <div *ngIf="isAccount"><p>{{authorizedAccount.login}}</p></div>
-  <!--  <span class="nav-fill-remaining-space"></span>-->
-  <!--  <div class="navigation">-->
-  <!--    <a mat-button href="">Home</a>-->
-  <!--    <button  mat-button (click)="redirect('games')">Викторины</button>-->
   <a mat-button href="">{{ 'NAV_BAR.HOME' | translate }}</a>
   <div class="navigation">
     <button mat-button (click)="redirect('games')">{{ 'NAV_BAR.QUIZ' | translate }}</button>

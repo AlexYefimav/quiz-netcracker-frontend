@@ -20,10 +20,13 @@ export class AddAnswerComponent implements OnInit {
   ngOnInit(): void {
     this.answerValidation.setQuestion(this.question);
     this.answerForm = this.answerValidation.createAnswerForm();
+    console.log(this.answerForm);
   }
 
   addAnswer(): void {
+    console.log(this.answerForm);
     if (this.answerForm.valid) {
+      // console.log(this.answerForm);
       this.answer = new Answer();
       this.answer.title = this.getTitle();
       this.answer.right = this.isRight();
@@ -36,11 +39,11 @@ export class AddAnswerComponent implements OnInit {
     }
   }
 
-  getTitle(): any {
+  getTitle(): string {
     return this.answerForm.get('title').value;
   }
 
-  isRight(): any {
+  isRight(): boolean {
     return this.answerForm.get('right').value;
   }
 }

@@ -1,13 +1,15 @@
 <div class="editQuestion">
   <div class="example-action-buttons">
-    <button mat-button (click)="accordion.openAll()">Expand All</button>
-    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+    <button mat-raised-button class="button"
+            (click)="accordion.openAll()">{{ 'EDIT_PLAYER.EXPAND_ALL' | translate }}</button>
+    <button mat-raised-button class="button"
+            (click)="accordion.closeAll()">{{ 'EDIT_PLAYER.COLLAPSE_ALL' | translate }}</button>
   </div>
   <mat-accordion class="example-headers-align" multi>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Login
+          {{ 'EDIT_PLAYER.LOGIN' | translate }}
         </mat-panel-title>
         <mat-panel-description>
           {{player.name}}
@@ -23,24 +25,24 @@
 
     <mat-card class="photo">
       <div class="title">
-        Фото
+        {{ 'EDIT_PLAYER.PHOTO' | translate }}
       </div>
       <div class="description">
-        <input type="file" id="file" (change)="selectFile($event)" accept=".jpg, .jpeg, .png"
-               class="photo-input">
+        <button mat-button (change)="selectFile($event)">{{ 'PHOTO.CHOOSE' | translate }}</button>
+        <input hidden type="file" id="file" class="photo-input" (change)="selectFile($event)"
+               accept=".jpg, .jpeg, .png">
       </div>
       <div class="icon">
         <mat-icon>
           party_mode
         </mat-icon>
       </div>
-
     </mat-card>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Email
+          {{ 'EDIT_PLAYER.EMAIL' | translate }}
         </mat-panel-title>
         <mat-panel-description>
           {{player.email}}
@@ -55,7 +57,7 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-
-  <a mat-raised-button href="player/{{player?.id}}"  color="primary" (click)="updatePlayer() ">Save</a>
+  <a mat-raised-button href="player/{{player?.id}}" color="primary"
+     (click)="updatePlayer() ">{{ 'EDIT_PLAYER.SAVE' | translate }}</a>
 </div>
 

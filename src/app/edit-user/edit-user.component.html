@@ -1,13 +1,15 @@
 <div class="editQuestion" *ngIf="authorizedAccount.id!=undefined" >
   <div class="example-action-buttons">
-    <button mat-button (click)="accordion.openAll()">Expand All</button>
-    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+    <button mat-raised-button class="button"
+            (click)="accordion.openAll()">{{ 'EDIT_USER.EXPAND_ALL' | translate }}</button>
+    <button mat-raised-button class="button"
+            (click)="accordion.closeAll()">{{ 'EDIT_USER.COLLAPSE_ALL' | translate }}</button>
   </div>
   <mat-accordion class="example-headers-align" multi>
     <mat-expansion-panel >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Login
+          {{ 'EDIT_USER.LOGIN' | translate }}
         </mat-panel-title>
         <mat-panel-description>
           {{user.login}}
@@ -24,7 +26,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Email
+          {{ 'EDIT_USER.EMAIL' | translate }}
         </mat-panel-title>
         <mat-panel-description>
           {{user.mail}}
@@ -41,7 +43,7 @@
     <mat-expansion-panel *ngIf="authorizedAccount.role=='ADMIN'">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Role
+          {{ 'EDIT_USER.ROLE' | translate }}
         </mat-panel-title>
         <mat-panel-description>
           {{user.role}}
@@ -59,6 +61,6 @@
       </mat-accordion>
 
 
-  <a mat-raised-button  color="primary" href="users" (click)="this.isUpdateUser?updateUser():createUser(user)">Save</a>
+  <a mat-raised-button  color="primary" href="users" (click)="this.isUpdateUser?updateUser():createUser(user)">{{ 'EDIT_USER.SAVE' | translate }}</a>
 </div>
 

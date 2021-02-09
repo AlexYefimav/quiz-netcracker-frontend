@@ -1,6 +1,19 @@
 .example-action-buttons {
   padding-bottom: 10px;
-  color: oldlace;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 39.5%;
+  margin-right: 39.5%;
+}
+
+.button {
+  color: #091324;
+  border-radius: 7px;
+  background: rgba(158, 158, 158, 0.5);
+}
+
+.button:hover {
+  background: #80b6bd;
 }
 
 .example-headers-align .mat-expansion-panel-header-title,
@@ -41,14 +54,15 @@
 }
 .photo{
   display: flex;
-  /*justify-content: center;*/
-  /*align-items: center;*/
   flex-direction: row;
+  justify-content: space-between;
   height: 17px;
 }
 
 .description{
-  flex-basis: 84%;
+  display: flex;
+  align-items: center;
+  flex-basis: 30%;
 }
 
 .title{

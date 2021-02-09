@@ -1,14 +1,13 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {User} from "../model/user";
-import {Router} from "@angular/router";
-import {StorageService} from "../service/storage/storage.service";
-import {MatDialog} from "@angular/material/dialog";
-import {SignInComponent} from "../sign-in/sign-in.component";
-// @ts-ignore
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from '../model/user';
+import {Router} from '@angular/router';
+import {StorageService} from '../service/storage/storage.service';
+import {MatDialog} from '@angular/material/dialog';
+import {SignInComponent} from '../sign-in/sign-in.component';
 import {TranslateService} from '@ngx-translate/core';
 import {LocalSettingsService} from '../service/localization/LocalSettingsService';
-import {PlayerService} from "../service/player.service";
-import {Player} from "../model/player";
+import {PlayerService} from '../service/player.service';
+import {Player} from '../model/player';
 
 @Component({
   selector: 'app-top-bar',
@@ -32,7 +31,7 @@ export class AppTopBarComponent implements OnInit {
   }
 
   openLoginDialog(): void {
-    console.log("authorization acc" + this.authorizedAccount);
+    console.log('authorization acc' + this.authorizedAccount);
     const dialogRef = this.dialog.open(SignInComponent, {
       minWidth: '400px',
       minHeight: '300px',
@@ -61,7 +60,7 @@ export class AppTopBarComponent implements OnInit {
     this.checkAuthorized();
   }
 
-  async checkAuthorized() {
+  async checkAuthorized(): Promise<void> {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
@@ -77,30 +76,24 @@ export class AppTopBarComponent implements OnInit {
   }
 
 
-  redirectTo(uri: string) {
+  redirectTo(uri: string): void {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
       this.router.navigate([uri]));
   }
 
-  redirect(url: string) {
+  redirect(url: string): void {
     this.router.navigate([url]);
   }
 
-  logout() {
+  logout(): void {
     StorageService.clear();
     this.authorizedAccount = undefined;
     this.isAccount = false;
     this.redirect('/games');
   }
 
-  toAccount() {
-    // if (this.authorizedAccount.role=='USER') {
-
+  toAccount(): void {
     this.redirectTo(`/player/${this.player.id}`);
-    // }
-    // if (this.authorizedAccount.role=='ADMIN') {
-    //   this.redirectTo(`/player/${this.authorizedAccount.id}`);
-    // }
   }
 
   changeLanguage(lang: string): void {

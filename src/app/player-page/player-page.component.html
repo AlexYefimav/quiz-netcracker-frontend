@@ -95,7 +95,7 @@
       <h1>{{ 'PLAYER_PAGE.NO_GAMES' | translate }}</h1>
     </ng-template>
     <div class="statistics" *ngIf="passedGame.length; else noPassedGame">
-      <h2>Пройденные игры</h2>
+      <h2>{{ 'PLAYER_PAGE.PLAYED_GAMES' | translate }}</h2>
       <div class="your_game" *ngIf="createdGames.length > 0; else no_game">
         <table mat-table [dataSource]="passedGame">
 
@@ -110,7 +110,7 @@
           </ng-container>
 
           <ng-container matColumnDef="play">
-            <th mat-header-cell *matHeaderCellDef>Посмотреть статистику</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'PLAYER_PAGE.CHECK_STATISTICS' | translate }}</th>
             <td mat-cell *matCellDef="let game">
               <a mat-icon-button href="/statistics/{{game.id}}/{{player.id}}">
                 <mat-icon class="icon-play">play_arrow</mat-icon>
@@ -119,7 +119,7 @@
           </ng-container>
 
           <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef>Удалить статистику</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'PLAYER_PAGE.DELETE_STATISTICS' | translate }}</th>
             <td mat-cell *matCellDef="let game">
               <button mat-icon-button (click)="deleteStatistics(game.id)">
                 <mat-icon class="icon-clear">clear</mat-icon>
@@ -133,7 +133,7 @@
       </div>
     </div>
     <ng-template #noPassedGame>
-      <h1 class="no-passed-game">Вы не играли ни в одну викторину</h1>
+      <h1 class="no-passed-game">{{ 'PLAYER_PAGE.NO_QUIZ' | translate }}</h1>
     </ng-template>
   </div>
 </div>
