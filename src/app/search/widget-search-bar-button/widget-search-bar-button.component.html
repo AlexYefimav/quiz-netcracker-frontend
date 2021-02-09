@@ -8,12 +8,14 @@
         <mat-form-field class="example-form">
           <span><input matInput class="form-control" type="search" name="search"
                        ngModel placeholder="{{ 'GAME.SEARCH_NAME' | translate }}"
-                 aria-label="Search"></span>
+                       aria-label="Search"></span>
           <span class="btnSearch">
-
+            <button mat-button>
+    <mat-icon>loupe</mat-icon>
+</button>
           </span>
         </mat-form-field>
-        <button class="btn btn-outline-success" type="submit">{{ 'GAME.SEARCH' | translate }}</button>
+
       </form>
     </div>
   </mat-card-content>
