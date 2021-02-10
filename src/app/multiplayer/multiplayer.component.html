@@ -11,7 +11,7 @@
           <h2>{{question.title}}</h2>
         </div>
         <div class="time">
-          <countdown #timer [config]="{leftTime: 1, format: 'mm:ss'}" (event)="timerEvent($event)"></countdown>
+          <countdown #timer [config]="{leftTime: 15, format: 'mm:ss'}" (event)="timerEvent($event)"></countdown>
         </div>
       </div>
       <div class="image" *ngIf="question.photo">

@@ -45,7 +45,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
   isBlockAnswers: boolean; //для блокирования ответов
 
   timeIsOver: boolean = false; //конец таймера(при true таймер 0)
-  private answerButtonNotPressed: boolean = false; // когда кнопка "ответить" не была нажата
+  private answerButtonNotPressed: boolean = true; // когда кнопка "ответить" не была нажата
 
   isLoading = true;
   isDestroy = true;
@@ -96,7 +96,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
   }
 
   getAnswerById(): Observable<Answer> {
-    if (this.answer == null) {
+    if (this.answerButtonNotPressed) {
       return this.answerService.getAnswerAndSaveStatistics(this.question.id, "null", this.player.id, this.gameRoomId, this.questionNumber);
     }
     return this.answerService.getAnswerAndSaveStatistics(this.question.id, this.answer.id, this.player.id, this.gameRoomId, this.questionNumber);
@@ -105,7 +105,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
   setNextQuestion(): void {
     this.isBlockAnswers = false;
     this.timeIsOver = false;
-    this.answerButtonNotPressed = false;
+    this.answerButtonNotPressed = true;
     this.questionNumber++;
     this.question = this.questions[this.questionNumber];
     this.answer = null;
@@ -121,7 +121,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
 
   addAnswer(): void {
     this.isBlockAnswers = true;
-    this.answerButtonNotPressed = true;
+    this.answerButtonNotPressed = false;
   }
 
   connect(): void {
@@ -180,7 +180,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
       this.answeredQuestion++;
       this.getAnswerById().subscribe(answer => {
         this.answer = answer;
-        if (answer == null || !this.answerButtonNotPressed) {
+        if (answer == null || this.answerButtonNotPressed) {
           return;
         }
         const idx = this.players.findIndex(p => p.player.id == this.player.id);
