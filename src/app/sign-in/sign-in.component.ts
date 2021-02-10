@@ -92,11 +92,11 @@ export class SignInComponent implements OnInit {
   }
 
   get login() {
-    return this.form.get('login');
+    return this.form.get('login').value;
   }
 
   get password() {
-    return this.form.get('password');
+    return this.form.get('password').value;
   }
 
 }

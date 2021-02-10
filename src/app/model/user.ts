@@ -1,7 +1,6 @@
 export class User {
   id: string;
   login: string;
-  username: string;
   password: string;
   email: string;
   role: string;
@@ -10,7 +9,7 @@ export class User {
   usersSet: User[];
   active: boolean;
 
-  constructor() {
+   constructor() {
   }
 
 }

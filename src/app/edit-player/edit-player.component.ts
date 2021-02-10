@@ -53,12 +53,6 @@ export class EditPlayerComponent implements OnInit {
     return this.disable;
   }
 
-  private getPlayer(playerId: string): void {
-    this.playerService.getOnePlayer(playerId).subscribe(player => {
-      this.player = player;
-    });
-  }
-
   updatePlayer(): void {
     this.playerService.updatePlayer(this.player).subscribe(player => this.player = player);
   }

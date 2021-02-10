@@ -46,7 +46,8 @@ export class SignUpComponent implements OnInit {
               private formBuilder: FormBuilder,
               private signUpValidation: SignUpValidation,
               private userService: UserService,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: FormBuilder
+  ) {
   }
 
   ngOnInit(): void {
@@ -82,14 +83,11 @@ export class SignUpComponent implements OnInit {
   }
 
   submitPlayer() {
-    console.log("Вход")
     if (this.userForm.valid) {
-      console.log("Отлично")
       this.user.username = this.login.value;
       this.user.email = this.mail.value;
       this.user.password = this.password.value;
       this.sendData();
-      console.log(this.user)
     }
   }
 

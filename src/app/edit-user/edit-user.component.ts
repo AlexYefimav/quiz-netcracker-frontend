@@ -101,5 +101,4 @@ export class EditUserComponent implements OnInit {
     }
     this.roleControlChange.emit(this.roleControl);
   }
-
 }
