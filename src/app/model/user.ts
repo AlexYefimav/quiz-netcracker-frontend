@@ -12,6 +12,7 @@ export class User {
   active: boolean;
   activationCode: string;
   index: number;
+  temporaryIndex: number;
 
   constructor() {
   }
