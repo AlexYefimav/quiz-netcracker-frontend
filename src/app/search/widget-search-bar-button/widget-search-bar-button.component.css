@@ -3,9 +3,9 @@
 }
 
 .form-control {
-  max-width: 500px;
+  max-width: 85pc;
   margin: auto;
-  color: white;
+  color: #000000;
 }
 
 .container {
@@ -14,13 +14,12 @@
 
 :host {
   display: flex;
-  justify-content: center;
+  min-width: 100%;
 }
 
 .mat-form-field {
   width: 100%;
-  min-width: 60pc;
-  /*min-width: 80%;*/
+  min-width: 90pc;
 }
 
 mat-card-title,
@@ -69,7 +68,7 @@ mat-card-content {
 }
 
 .search {
-  min-width: 80%;
+  min-width: 100%;
   width: 100%;
 }
 
