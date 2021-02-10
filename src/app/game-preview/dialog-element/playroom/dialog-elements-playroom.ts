@@ -4,11 +4,13 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 @Component({
   selector: 'dialog-elements-example-dialog',
   templateUrl: './dialog-elements-playroom.html',
-  styleUrls: ['./dialog-elements-playroom.css']
+  styleUrls: ['./dialog-elements-playroom.css', '../../game-preview.component.css']
 })
 export class DialogElementsPlayroom {
+  isLoading = true;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: { game, gameRoom, player, socket }) {
-    console.log(this.data.gameRoom);
+    this.isLoading = false;
   }
 
   startGame() {
@@ -16,7 +18,7 @@ export class DialogElementsPlayroom {
     this.data.socket.disconnect();
   }
 
-  async deletePlayer(id: string) {
+  deletePlayer(id: string) {
     let message = {
       name: this.data.player.name,
       recipientId: id,

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../model/game';
 import {Question} from '../model/question';
 import {MatAccordion} from '@angular/material/expansion';
@@ -8,11 +8,8 @@ import {FormGroup} from '@angular/forms';
 import {AddQuestionValidation} from '../service/validation/add-question-validation';
 import {AddAnswerValidation} from '../service/validation/add-answer-validation.service';
 import {StorageService} from '../service/storage/storage.service';
-import {ActivatedRoute, Router} from "@angular/router";
-import {UpdateQuestionValidation} from "../service/validation/update-question-validation";
-import {TranslateService} from "@ngx-translate/core";
-import {LocalSettingsService} from "../service/localization/LocalSettingsService";
-import {User} from "../model/user";
+import {Router} from '@angular/router';
+import {User} from '../model/user';
 
 @Component({
   selector: 'app-add-question',
@@ -32,20 +29,22 @@ export class AddQuestionComponent implements OnInit {
               private questionValidation: AddQuestionValidation,
               private answerValidation: AddAnswerValidation,
               private storageService: StorageService,
-              private router: Router) { }
-
-  async ngOnInit(): Promise<void> {
-    if(this.checkAuthorized()!=undefined) {
-    await this.initializeProperties();
-    }
-    else this.redirect('403');
+              private router: Router) {
   }
 
-  redirect(url: string) {
+  ngOnInit(): void {
+    if (this.checkAuthorized() != undefined) {
+      this.initializeProperties();
+    } else {
+      this.redirect('403');
+    }
+  }
+
+  redirect(url: string): void {
     this.router.navigate([url]);
   }
 
-  checkAuthorized() {
+  checkAuthorized(): User {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
@@ -58,21 +57,21 @@ export class AddQuestionComponent implements OnInit {
     return this.authorizedAccount;
   }
 
-  async addQuestion(): Promise<void> {
+  addQuestion(): void {
     if (this.questionForm.valid) {
       if (this.game.id == null) {
         this.game.player = this.storageService.currentUser.id;
       }
       this.question.temporaryIndex = this.game.questions.length + 1;
       this.game.questions.push(this.question);
-      await this.initializeProperties();
+      this.initializeProperties();
       this.answerForm = this.answerValidation.createAnswerForm();
     }
   }
 
-  async initializeProperties(): Promise<void> {
+  initializeProperties(): void {
     this.questionValidation.setGame(this.game);
-    this.questionForm = await this.questionValidation.createQuestionForm();
+    this.questionForm = this.questionValidation.createQuestionForm();
     this.question = new Question();
     this.question.answersSet = [];
     this.question.game = this.game.id;

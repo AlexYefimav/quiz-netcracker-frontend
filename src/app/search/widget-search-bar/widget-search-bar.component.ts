@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
-import { SearchService } from '../search.service';
-import { SearchOption } from '../searchOption';
-import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import {
-  map,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-} from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {Observable, of, Subject} from 'rxjs';
+import {SearchService} from '../search.service';
+import {SearchOption} from '../searchOption';
+import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
+import {debounceTime, distinctUntilChanged, map, switchMap,} from 'rxjs/operators';
 
 @Component({
   selector: 'app-widget-search-bar',
@@ -38,7 +33,6 @@ export class WidgetSearchBarComponent implements OnInit {
   }
 
   searchOption(option: SearchOption) {
-    console.log(option);
     let emptyArray: SearchOption[] = [];
     this.searchService.updateSelectedOptions(emptyArray);
     this.searchService.updateSelectedOption(option);

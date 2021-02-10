@@ -1,7 +1,6 @@
 import {Question} from './question';
-import {GameCategory} from "./game-category";
 
-export class Game{
+export class Game {
   id: string;
   title: string;
   description: string;

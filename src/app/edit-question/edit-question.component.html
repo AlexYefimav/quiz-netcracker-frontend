@@ -3,7 +3,8 @@
   <app-answer [question]="question" [answerForm]="answerForm"></app-answer>
   <div class="buttons" *ngIf="questionForm">
     <button mat-raised-button color="primary" [disabled]="!questionForm.valid"
-       (click)="updateQuestion()">{{ 'ADD_GAME.EDIT_QUESTION.SAVE' | translate }}</button>
-    <button mat-raised-button color="warn" (click)="deleteQuestion()">{{ 'ADD_GAME.EDIT_QUESTION.DELETE' | translate}}</button>
+            (click)="updateQuestion()">{{ 'ADD_GAME.EDIT_QUESTION.SAVE' | translate }}</button>
+    <button mat-raised-button color="warn"
+            (click)="deleteQuestion()">{{ 'ADD_GAME.EDIT_QUESTION.DELETE' | translate}}</button>
   </div>
 </div>

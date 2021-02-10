@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {Question} from "../model/question";
+import {Observable} from 'rxjs';
+import {Question} from '../model/question';
 
 @Injectable({
   providedIn: 'root',
@@ -21,16 +21,8 @@ export class QuestionService {
     return this.http.get<Question[]>(this.url);
   }
 
-  getQuestionById(id: string): Observable<Question> {
-    return this.http.get<Question>(this.url + id);
-  }
-
   getQuestionByGameId(id: string): Observable<Question[]> {
     return this.http.get<Question[]>(this.url + "game/" + id);
-  }
-
-  createQuestion(question: Question): Observable<Question> {
-    return this.http.post<Question>(this.url + "save", question)
   }
 
   updateQuestion(question: Question): Observable<Question> {

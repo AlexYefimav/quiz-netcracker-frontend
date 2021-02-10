@@ -16,7 +16,8 @@ export class AnswerDetailComponent implements OnInit {
   answerForm: FormGroup;
 
   constructor(private answerService: AnswerService,
-              private answerValidation: UpdateAnswerValidation) { }
+              private answerValidation: UpdateAnswerValidation) {
+  }
 
   ngOnInit(): void {
     this.answerValidation.setQuestion(this.question);
@@ -35,18 +36,17 @@ export class AnswerDetailComponent implements OnInit {
     if (this.answerForm.valid) {
       this.answer.title = this.getTitle();
       this.answer.right = this.isRight();
-    }
-    else {
+    } else {
       this.answerForm.get('title').patchValue(this.answer.title);
       this.answerForm.get('right').patchValue(this.answer.right);
     }
   }
 
-  getTitle(): any {
+  getTitle(): string {
     return this.answerForm.get('title').value;
   }
 
-  isRight(): any {
+  isRight(): boolean {
     return this.answerForm.get('right').value;
   }
 }

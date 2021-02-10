@@ -1,6 +1,23 @@
 .example-action-buttons {
-  padding-bottom: 10px;
-  color: oldlace;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 39.5%;
+  margin-right: 39.5%;
+}
+
+.button {
+  color: #091324;
+  background: rgba(158, 158, 158, 0.5);
+  border-radius: 7px;
+}
+
+.button:hover {
+  background: #80b6bd;
+}
+
+.mat-expansion-panel {
+  border: 5px;
 }
 
 .example-headers-align .mat-expansion-panel-header-title,
@@ -31,23 +48,23 @@
   display: flex;
 }
 
-.photo{
+.photo {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 17px;
 }
 
-.description{
+.description {
   display: flex;
   align-items: center;
   flex-basis: 30%;
 }
 
-.title{
+.title {
   margin-left: 10px;
 }
 
-.icon{
+.icon {
   margin-left: 70px;
 }

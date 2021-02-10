@@ -1,14 +1,15 @@
-<section class="example-section">
+<div *ngIf="!isLoading;else loading">
+  <section class="example-section">
   <span class="example-list-section">
     <mat-checkbox class="example-margin"
                   [checked]="allComplete"
                   [color]="'primary'"
                   [indeterminate]="someComplete()"
                   (change)="setAll($event.checked)">
-        Выбрать всех пользователей
+        {{ 'BLOCK_PLAYER_ACCESS.CHOOSE_ALL_USERS' | translate }}
     </mat-checkbox>
   </span>
-  <span class="example-list-section">
+    <span class="example-list-section">
     <ul>
       <li *ngFor="let player of players">
         <mat-checkbox *ngIf="data.playerId!=player.id" [(ngModel)]="player.isCompleted"
@@ -18,9 +19,14 @@
       </li>
     </ul>
   </span>
-</section>
-<div class="button">
-  <button mat-button (click)="onNoClick()">Exit</button>
-  <button mat-button (click)="giveAccess()">Предоставить доступ</button>
-  <button mat-button (click)="blockAccess(data.gameId,data.playerId)">Ограничить доступ для...</button>
+  </section>
+  <div class="button">
+    <button mat-button (click)="onNoClick()">{{ 'BLOCK_PLAYER_ACCESS.CHOOSE_ALL_USERS' | translate }}</button>
+    <button mat-button (click)="giveAccess()">{{ 'BLOCK_PLAYER_ACCESS.RESTRICT_ACCESS' | translate }}</button>
+    <button mat-button
+            (click)="blockAccess(data.gameId,data.playerId)">{{ 'BLOCK_PLAYER_ACCESS.PROVIDE_ACCESS' | translate }}</button>
+  </div>
 </div>
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

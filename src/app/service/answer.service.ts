@@ -23,7 +23,7 @@ export class AnswerService {
     return this.http.get<Answer[]>(this.answerUrl + '/all');
   }
 
-  getAnswerAndSaveStatistics(questionId: string,answerId: string, playerId: string, gameRoomId: string, numberAnswer: number): Observable<Answer> {
+  getAnswerAndSaveStatistics(questionId: string, answerId: string, playerId: string, gameRoomId: string, numberAnswer: number): Observable<Answer> {
     const resultUrl = `${this.answerUrl}/${questionId}/${answerId}/${playerId}/${gameRoomId}/${numberAnswer}`;
     return this.http.get<Answer>(resultUrl);
   }
@@ -32,19 +32,8 @@ export class AnswerService {
     return this.http.get<Answer>(this.answerUrl + "/" + id);
   }
 
-  addAnswer(answer: Answer): Observable<Answer> {
-    const resultUrl = this.answerUrl + '/answer';
-    return this.http.post<Answer>(resultUrl, answer, this.httpOptions);
-  }
-
   updateAnswer(answer: Answer): Observable<Answer> {
     const resultUrl = this.answerUrl + `/${answer.id}`;
     return this.http.put<Answer>(resultUrl, answer, this.httpOptions);
-  }
-
-  deleteAnswer(answer: Answer): Observable<any> {
-    const resultUrl = `${this.answerUrl}/${answer.id}`;
-
-    return this.http.delete(resultUrl, this.httpOptions);
   }
 }

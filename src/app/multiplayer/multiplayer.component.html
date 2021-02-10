@@ -11,7 +11,7 @@
           <h2>{{question.title}}</h2>
         </div>
         <div class="time">
-          <countdown #timer [config]="{leftTime: 15, format: 'mm:ss'}" (event)="timerEvent($event)"></countdown>
+          <countdown #timer [config]="{leftTime: 1, format: 'mm:ss'}" (event)="timerEvent($event)"></countdown>
         </div>
       </div>
       <div class="image" *ngIf="question.photo">
@@ -39,15 +39,11 @@
         </div>
         <ng-template #blockButtonReply>
           <div *ngIf="answeredQuestion == quantityQuestion; else nextQuestionOrBlockButtonReply">
-            <a mat-flat-button class="statistics" color="accent" href="statistics/{{gameId}}/{{playerId}}"
-               (click)="disconnect()">{{ 'MULTIPLAYER.BUTTON_STATISTICS' | translate }}</a>
+            <button mat-flat-button class="statistics" color="accent" (click)="disconnect(); redirect('statistics/')">
+              {{ 'MULTIPLAYER.BUTTON_STATISTICS' | translate }}</button>
           </div>
         </ng-template>
         <ng-template #nextQuestionOrBlockButtonReply>
-          <!--        <div *ngIf="player.id==game.player && timeIsOver; else timerIsOver">-->
-          <!--          <button mat-flat-button color="primary"-->
-          <!--                  (click)="setNextQuestion();timer.restart();">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>-->
-          <!--        </div>-->
           <div *ngIf="timeIsOver; else timerIsOver">
             <button mat-flat-button color="primary"
                     (click)="setNextQuestion();timer.restart();">{{ 'MULTIPLAYER.BUTTON_NEXT' | translate }}</button>

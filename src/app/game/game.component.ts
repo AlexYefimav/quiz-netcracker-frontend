@@ -3,10 +3,8 @@ import {GameService} from '../service/game.service';
 import {Game} from '../model/game';
 import {PageEvent} from '@angular/material/paginator';
 import {Message} from '../model/message';
-import {TranslateService} from '@ngx-translate/core';
-import {LocalSettingsService} from '../service/localization/LocalSettingsService';
-import {GameCategory} from "../model/game-category";
-import {GameCategoryService} from "../service/game-category.service";
+import {GameCategory} from '../model/game-category';
+import {GameCategoryService} from '../service/game-category.service';
 
 const pageSize: number = 3;
 
@@ -28,34 +26,20 @@ export class GameComponent implements OnInit {
   games: Array<Game> = [];
   pageIndexes: Array<number> = [];
   isLoading = true;
-  filter: string;
 
   constructor(private gameService: GameService,
-              private translateService: TranslateService,
-              private localSettingsService: LocalSettingsService,
               private gameCategoryService: GameCategoryService) {
   }
 
-  async ngOnInit() {
+  ngOnInit(): void {
+    this.gameCategoryService.getGameCategories().subscribe(gameCategories => {
+      this.gameCategories = gameCategories;
+    })
 
-      this.gameCategories = await this.getGameCategoryList();
-
-    const currentLanguage = this.localSettingsService.getLanguage();
-    this.translateService.use(currentLanguage);
-    this.games = await this.getGameList();
-    this.getPage(0);
-  }
-
-  private getGameCategoryList(): Promise<GameCategory[]> {
-    return this.gameCategoryService.getGameCategories().toPromise();
-  }
-
-  private getGameFilteredByCategory(id : string ): Promise<Game[]> {
-    return this.gameService.getGamesByCategory(id).toPromise();
-  }
-
-  private getGameList(): Promise<Game[]> {
-    return this.gameService.getPublicGame().toPromise();
+    this.gameService.getPublicGame().subscribe(games => {
+      this.games = games;
+      this.getPage(0);
+    })
   }
 
   plusView(game: Game) {
@@ -63,37 +47,27 @@ export class GameComponent implements OnInit {
     this.gameService.updateGame(game);
   }
 
-  async deleteGame(id: string) {
-    this.game = await this.gameService.deleteGame(id).toPromise()
-  }
-
-  private getGamesSortedbyViews(): Promise<Game[]> {
-    return this.gameService.getGamesSortedByViews().toPromise();
-  }
-
-  private getGamesSortedbyTitle(): Promise<Game[]> {
-    return this.gameService.getGamesSortedByTitle().toPromise();
-  }
-
-  async sortByViews() {
-    this.games = await this.getGamesSortedbyViews();
+  sortByViews() {
+    this.gameService.getGamesSortedByViews().subscribe(games => {
+      this.games = games;
+    });
     this.pageSlice = this.games.slice(0, 3);
-   //location.reload();
+    //location.reload();
     //alert(this.getGamesSortedbyViews());
   }
 
-  async sortByTitle() {
-    this.games = await this.getGamesSortedbyTitle();
+  sortByTitle() {
+    this.gameService.getGamesSortedByTitle().subscribe(games => {
+      this.games = games;
+    })
     this.pageSlice = this.games.slice(0, 3);
-    //location.reload();
-    //alert(this.getGamesSortedbyTitle());
   }
 
-  async sortByCategory(id : string)  {
-    this.games = await this.getGameFilteredByCategory(id);
+  sortByCategory(id: string) {
+    this.gameService.getGamesByCategory(id).subscribe(games => {
+      this.games = games;
+    })
     this.pageSlice = this.games.slice(0, 3);
-    //location.reload();
-    //alert(this.getGameFilteredByCategory(id));
   }
 
   setGame(game: Game) {
@@ -113,19 +87,9 @@ export class GameComponent implements OnInit {
       );
   }
 
-
-
   OnPageChange(event: PageEvent) {
-    this.pageSlice = this.games.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize)
+    this.pageSlice = this.games.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize);
   }
-
-  // Don't use now
-  // selectFile(event) {
-  //   this.picture = event.target.files[0];
-  //   const formData = new FormData();
-  //   formData.append('file', this.picture);
-  //   this.gameService.uploadFile(formData).subscribe(result => this.game.photo = result.photo);
-  // }
 }
 
 

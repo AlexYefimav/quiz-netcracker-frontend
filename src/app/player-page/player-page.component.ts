@@ -3,17 +3,17 @@ import {Component, Injector, OnInit} from '@angular/core';
 import {PlayerService} from '../service/player.service';
 import {StorageService} from '../service/storage/storage.service';
 import {Router} from '@angular/router';
-import {Player} from "../model/player";
-import {Game} from "../model/game";
-import {GameService} from "../service/game.service";
-import {MatDialog} from "@angular/material/dialog";
+import {Player} from '../model/player';
+import {Game} from '../model/game';
+import {GameService} from '../service/game.service';
+import {MatDialog} from '@angular/material/dialog';
 
-import {PlayerGiveAccessComponent} from "../player-give-access/player-give-access.component";
+import {PlayerGiveAccessComponent} from '../player-give-access/player-give-access.component';
 
 
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {TranslateService} from "@ngx-translate/core";
-import {StatisticsService} from "../service/statistics.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {TranslateService} from '@ngx-translate/core';
+import {StatisticsService} from '../service/statistics.service';
 
 @Component({
   selector: 'app-client-page',
@@ -38,37 +38,33 @@ export class PlayerPageComponent implements OnInit {
               private statisticsService: StatisticsService) {
   }
 
-  async ngOnInit() {
-    this.player = await this.getPlayer();
-    this.createdGames = await this.getGames();
-    for (let i = 0; i < this.createdGames.length; i++) {
-      this.createdGames[i].index = i + 1;
-    }
-    this.passedGame = await this.getStatisticsPlayerIdAndByGameId(this.player.id);
-    for (let i = 0; i < this.passedGame.length; i++) {
-      this.passedGame[i].index = i + 1;
-    }
-    this.isLoading = false
+  ngOnInit(): void {
+    this.playerService.getPlayerByUserId(this.storageService.currentUser.id).subscribe(player=>{
+      this.player = player;
+      this.gameService.getGameByPlayerId(this.player.id).subscribe(createdGames=>{
+        this.createdGames = createdGames;
+        for (let i = 0; i < this.createdGames.length; i++) {
+          this.createdGames[i].index = i + 1;
+        }
+        this.statisticsService.getGameWithStatistics(this.player.id).subscribe(passedGame=>{
+          this.passedGame = passedGame;
+          for (let i = 0; i < this.passedGame.length; i++) {
+            this.passedGame[i].index = i + 1;
+          }
+          this.isLoading = false;
+        });
+      });
+    });
   }
 
   redirect(url: string) {
     this.router.navigate([url]);
   }
 
-  getPlayer(): Promise<Player> {
-    return this.playerService.getPlayerByUserId(this.storageService.currentUser.id).toPromise()
-  }
-
-  getGames(): Promise<Game[]> {
-    return this.gameService.getGameByPlayerId(this.player.id).toPromise();
-  }
-
-  async deleteGame(id: string) {
-    await this.gameService.deleteGame(id).toPromise();
-    this.createdGames = this.createdGames.filter(g => g.id != id);
-    // setTimeout(function(){
-    //   window.location.reload();
-    // }, 300);
+  deleteGame(id: string): void {
+    this.gameService.deleteGame(id, this.player.id).subscribe(()=>{
+      this.createdGames = this.createdGames.filter(g => g.id != id);
+    });
   }
 
   shareGame(gameId, playerId: string): void {
@@ -85,18 +81,15 @@ export class PlayerPageComponent implements OnInit {
     translateService.stream('SNACKBAR_COPY').subscribe(value => {
       message = value.MESSAGE_FIRST + game + value.MESSAGE_SECOND;
       action = value.ACTION;
+      this._snackBar.open(message, action, {
+        duration: 2000,
+      });
     })
-    this._snackBar.open(message, action, {
-      duration: 2000,
+  }
+
+  deleteStatistics(gameId: string): void {
+    this.statisticsService.deleteStatistics(this.player.id, gameId).subscribe(()=>{
+      this.passedGame = this.passedGame.filter(g => g.id != gameId);
     });
-  }
-
-  private getStatisticsPlayerIdAndByGameId(id: string): Promise<Game[]> {
-    return this.statisticsService.getGameWithStatistics(id).toPromise();
-  }
-
-  async deleteStatistics(gameId: string) {
-    this.passedGame = this.passedGame.filter(g => g.id != gameId);
-    await this.statisticsService.deleteStatistics(this.player.id, gameId).toPromise();
   }
 }

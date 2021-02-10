@@ -1,7 +1,7 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      Категория
+      {{ 'GAME_CATEGORY.TITLE' | translate }}
     </mat-panel-title>
     <mat-panel-description>
       {{gameCategoryName}}
@@ -14,6 +14,6 @@
         {{gameCategory.title}}
       </mat-option>
     </mat-select>
-    <mat-error *ngIf="gameCategoryControl.errors?.required">Пожалуйста, выберите категорию</mat-error>
+    <mat-error *ngIf="gameCategoryControl.errors?.required">{{ 'GAME_CATEGORY.ERROR' | translate }}</mat-error>
   </mat-form-field>
 </mat-expansion-panel>

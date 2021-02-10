@@ -16,15 +16,13 @@ export class LeaderboardsComponent implements OnInit {
   constructor(private statisticsService: StatisticsService) {
   }
 
-  async ngOnInit() {
-    this.jsonMap = await this.getTotalPercentAllPlayers();
-    for (let value in this.jsonMap) {
-      this.map.set(value, this.jsonMap[value])
-    }
-    this.isLoading = false;
-  }
-
-  getTotalPercentAllPlayers(): Promise<Map<string, number>> {
-    return this.statisticsService.getTotalPercentAllPlayers().toPromise();
+  ngOnInit():void {
+    this.statisticsService.getTotalPercentAllPlayers().subscribe(jsonMap=>{
+      this.jsonMap = jsonMap;
+      for (let value in this.jsonMap) {
+        this.map.set(value, this.jsonMap[value])
+      }
+      this.isLoading = false;
+    });
   }
 }

@@ -1,57 +1,57 @@
 <ng-template [ngIf]="searchService.isOptionsEmpty$ | async" [ngIfElse]="show">
-	<p>
+  <p>
     <mat-card>
       <mat-card-title>
-      No games found
+        {{ 'SEARCH.NOT_FOUND' | translate }}
       </mat-card-title>
     </mat-card>
     <mat-card>
-    <mat-card-title>
-      <h1> <a href="games"> Back to Games</a></h1>
-    </mat-card-title>
+      <mat-card-title>
+        <h1><a href="games">{{ 'SEARCH.TO_QUIZ' | translate }}</a></h1>
+      </mat-card-title>
     </mat-card>
-	</p>
+  </p>
 </ng-template>
 
 <ng-template #show>
   <div class="container">
-<div class="mt-4 mb-4" *ngIf="searchService.options$ | async as selectedOptions">
-<form>
-  <mat-card>
-    <mat-card-title>
-      <h1>Result of the Search</h1>
-      <h1> <a href="games"> Back to Games</a></h1>
-    </mat-card-title>
-  </mat-card>
-  <div class="layout">
-  <div  *ngFor="let item of selectedOptions">
-    <mat-card>
-      <mat-card-title>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        {{item.title}}
-        <mat-menu #menu="matMenu">
-          <a mat-menu-item href="game/update/{{item.id}}">
-            <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
-            <span>Edit</span>
-          </a>
-          <a mat-menu-item href="games" (click)="deleteGame(item.id)">
-            <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
-            <span>Delete</span>
-          </a>
-        </mat-menu>
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{item.description}}
-      </mat-card-subtitle>
-      <mat-card-subtitle>
-        <h1> <a href="/game/{{item.id}}">Просмотреть</a> </h1>
-      </mat-card-subtitle>
-    </mat-card>
+    <div class="mt-4 mb-4" *ngIf="searchService.options$ | async as selectedOptions">
+      <form>
+        <mat-card>
+          <mat-card-title>
+            <h1>{{ 'SEARCH.RESULTS' | translate }}</h1>
+            <h1><a href="games">{{ 'SEARCH.TO_QUIZ' | translate }}</a></h1>
+          </mat-card-title>
+        </mat-card>
+        <div class="layout">
+          <div *ngFor="let item of selectedOptions">
+            <mat-card>
+              <mat-card-title>
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                {{item.title}}
+                <mat-menu #menu="matMenu">
+                  <a mat-menu-item href="game/update/{{item.id}}">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+                    <span>Edit</span>
+                  </a>
+                  <a mat-menu-item href="games" (click)="deleteGame(item.id)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+                    <span>Delete</span>
+                  </a>
+                </mat-menu>
+              </mat-card-title>
+              <mat-card-subtitle>
+                {{item.description}}
+              </mat-card-subtitle>
+              <mat-card-subtitle>
+                <h1><a href="/game/{{item.id}}">{{ 'SEARCH.LOOK_AT' | translate }}</a></h1>
+              </mat-card-subtitle>
+            </mat-card>
+          </div>
+        </div>
+      </form>
     </div>
-  </div>
-</form>
-</div>
   </div>
 </ng-template>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchService } from '../search.service';
+import {Component, OnInit} from '@angular/core';
+import {SearchService} from '../search.service';
 
 @Component({
   selector: 'app-search-result-item',
@@ -7,7 +7,9 @@ import { SearchService } from '../search.service';
   styleUrls: ['./search-result-item.component.css'],
 })
 export class SearchResultItemComponent implements OnInit {
-  constructor(public searchService: SearchService) {}
+  constructor(public searchService: SearchService) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

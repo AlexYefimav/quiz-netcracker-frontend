@@ -3,9 +3,9 @@ import {Game} from '../model/game';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GameService} from '../service/game.service';
 import {MatAccordion} from '@angular/material/expansion';
-import {StorageService} from "../service/storage/storage.service";
-import {UserService} from "../service/user.service";
-import {User} from "../model/user";
+import {StorageService} from '../service/storage/storage.service';
+import {UserService} from '../service/user.service';
+import {User} from '../model/user';
 import {AbstractControl, FormGroup} from '@angular/forms';
 import {UpdateGameValidation} from '../service/validation/update-game-validation';
 import {AddGameValidation} from '../service/validation/add-game-validation';
@@ -20,7 +20,7 @@ import {PhotoService} from '../service/photo.service';
 @Component({
   selector: 'app-add-game',
   templateUrl: './add-game.component.html',
-  styleUrls: ['./add-game.component.css','../app.component.css']
+  styleUrls: ['./add-game.component.css', '../app.component.css']
 })
 
 export class AddGameComponent implements OnInit {
@@ -29,8 +29,8 @@ export class AddGameComponent implements OnInit {
   isUpdateGame: boolean;
   @Input() gameForm: FormGroup;
   picture: any;
-  selectedAccess: string = "PUBLIC";
-  accesses: string[] = ["PUBLIC", "PRIVATE"];
+  selectedAccess = 'PUBLIC';
+  accesses: string[] = ['PUBLIC', 'PRIVATE'];
   authorizedAccount: User;
   @Input() accessControl: AbstractControl;
   @Output() accessControlChange = new EventEmitter<AbstractControl>();
@@ -52,32 +52,42 @@ export class AddGameComponent implements OnInit {
               private photoService: PhotoService) {
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     const currentLanguage = this.localeSettingsService.getLanguage();
     this.translateService.use(currentLanguage);
-    this.categories = await this.getCategories();
-    this.levels = await this.getLevels();
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
+    })
+    this.levelService.getLevels().subscribe(levels => {
+      this.levels = levels;
+    })
     this.translateService.use(currentLanguage)
+
     if (this.checkAuthorized() != undefined) {
       if (this.route.snapshot.params.gameId != null) {
-        this.game = await this.getGame(this.route.snapshot.params.gameId);
-        this.isUpdateGame = true;
-        this.gameForm = this.updateGameValidation.createGameForm(this.game);
+        this.gameService.getGameById(this.route.snapshot.params.gameId).subscribe(game => {
+          this.game = game;
+          this.isUpdateGame = true;
+          this.gameForm = this.updateGameValidation.createGameForm(this.game);
+          this.isLoading = false;
+        });
       } else {
         this.isUpdateGame = false;
         this.game = new Game();
         this.game.questions = [];
         this.gameForm = this.addGameValidation.createGameForm();
+        this.isLoading = false;
       }
-    } else this.redirect('403');
-    this.isLoading = false;
+    } else {
+      this.redirect('403');
+    }
   }
 
-  redirect(url: string) {
+  redirect(url: string): void {
     this.router.navigate([url]);
   }
 
-  checkAuthorized() {
+  checkAuthorized(): User {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
@@ -90,18 +100,6 @@ export class AddGameComponent implements OnInit {
     return this.authorizedAccount;
   }
 
-  private getGame(gameId: string): Promise<Game> {
-    return this.gameService.getGameById(gameId).toPromise();
-  }
-
-  getCategories(): Promise<Category[]> {
-    return this.categoryService.getCategories().toPromise();
-  }
-
-  getLevels(): Promise<Level[]> {
-    return this.levelService.getLevels().toPromise();
-  }
-
   getTitle(): string {
     return this.gameForm.get('title').value;
   }
@@ -110,9 +108,9 @@ export class AddGameComponent implements OnInit {
     return this.gameForm.get('description').value;
   }
 
-  setSelectedAccess(access){
-    this.game.access=access
-      this.selectedAccess = access;
+  setSelectedAccess(access): void {
+    this.game.access = access;
+    this.selectedAccess = access;
   }
 
   getSelectedAccess(access): string {
@@ -120,27 +118,13 @@ export class AddGameComponent implements OnInit {
       this.selectedAccess = access;
       return access;
     } else {
-      this.selectedAccess = "PUBLIC";
-      return "PUBLIC";
+      this.selectedAccess = 'PUBLIC';
+      return 'PUBLIC';
     }
   }
 
   getPhoto(): string {
     return this.gameForm.get('photo').value;
-  }
-
-  getUser(id: string): Promise<User> {
-    return this.userService.getUserById(id).toPromise();
-  }
-
-  createAndGetGame(game: Game): Promise<Game> {
-    this.game.access = this.selectedAccess;
-    return this.gameService.createGame(game).toPromise();
-  }
-
-  updateAndGetGame(): Promise<Game> {
-    this.game.access = this.selectedAccess;
-    return this.gameService.updateGame(this.game).toPromise();
   }
 
   redirectTo(uri: string): void {
@@ -169,12 +153,15 @@ export class AddGameComponent implements OnInit {
     }
   }
 
-  async updateGame(): Promise<void> {
+  updateGame(): void {
     if (this.gameForm.valid) {
       this.setCategoryIdByName();
       this.setLevelIdByName();
       try {
-        this.game = await this.updateAndGetGame();
+        this.game.access = this.selectedAccess;
+        this.gameService.updateGame(this.game).subscribe(game => {
+          this.game = game;
+        });
       } catch (error) {
         window.setTimeout(() => {
         }, 10000);
@@ -183,16 +170,22 @@ export class AddGameComponent implements OnInit {
     this.redirectTo('player/' + this.authorizedAccount.player);
   }
 
-  async createGame(game: Game): Promise<void> {
+  createGame(game: Game): void {
     if (this.gameForm.valid) {
       this.setCategoryIdByName();
       this.setLevelIdByName();
       try {
         if (game.id) {
-          this.game = await this.updateAndGetGame();
+          this.game.access = this.selectedAccess;
+          this.gameService.updateGame(this.game).subscribe(game => {
+            this.game = game;
+          });
         } else {
           this.game.player = this.storageService.currentUser.id;
-          this.game = await this.createAndGetGame(game);
+          this.game.access = this.selectedAccess;
+          this.gameService.createGame(game).subscribe(game => {
+            this.game = game;
+          });
         }
       } catch (error) {
         window.setTimeout(() => {

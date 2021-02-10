@@ -7,7 +7,8 @@
   <div *ngIf="answerForm">
     <form [formGroup]="answerForm">
       <mat-form-field>
-        <input matInput placeholder="{{ 'ADD_GAME.ANSWER.ADD_ANSWER.PLACEHOLDER' | translate }}" name="title" formControlName="title" required>
+        <input matInput placeholder="{{ 'ADD_GAME.ANSWER.ADD_ANSWER.PLACEHOLDER' | translate }}" name="title"
+               formControlName="title" required>
         <mat-error *ngIf="answerForm?.get('title').touched && answerForm?.get('title').errors?.required">
           {{ 'ADD_GAME.ANSWER.ERROR.REQUIRED' | translate }}
         </mat-error>
@@ -16,7 +17,8 @@
         </mat-error>
       </mat-form-field>
       <mat-slide-toggle name="right" formControlName="right"></mat-slide-toggle>
-      <button mat-flat-button color="primary" (click)="addAnswer()">{{ 'ADD_GAME.ANSWER.ADD_ANSWER.ADD' | translate }}</button>
+      <button mat-flat-button color="primary"
+              (click)="addAnswer()">{{ 'ADD_GAME.ANSWER.ADD_ANSWER.ADD' | translate }}</button>
     </form>
   </div>
 </mat-expansion-panel>

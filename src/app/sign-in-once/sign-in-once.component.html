@@ -1,44 +1,3 @@
-<!--<div class="login-dialog-container">-->
-<!--  <div mat-dialog-title>-->
-<!--    <h1 class="text-center">Login</h1>-->
-<!--  </div>-->
-<!--  <div mat-dialog-content>-->
-<!--    <form [formGroup]="form" (ngSubmit)="submitPlayer()">-->
-
-<!--      <p>-->
-<!--        <mat-form-field>-->
-<!--          <input type="text" matInput placeholder="Login" formControlName="login">-->
-<!--          <mat-error *ngIf="username.hasError('emailError') && !username.hasError('required')">-->
-<!--            Please enter a valid email address-->
-<!--          </mat-error>-->
-<!--          <mat-error *ngIf="username.hasError('nameError') && !username.hasError('required')">-->
-<!--            Please enter a valid username-->
-<!--          </mat-error>-->
-<!--          <mat-error *ngIf="username.hasError('required')">-->
-<!--            Login is <strong>required</strong>-->
-<!--          </mat-error>-->
-<!--        </mat-form-field>-->
-<!--      </p>-->
-<!--      -->
-
-<!--      <div class="button">-->
-<!--        <button mat-button (click)="onNoClick()">Exit</button>-->
-<!--        <button type="submit" mat-button [disabled]="form.invalid"   [mat-dialog-close]="dialogAccount">Login</button>-->
-<!--      </div>-->
-
-<!--      <div class="text-left">-->
-<!--        <a class="text-small-ref" (click)="redirect('sign_up')">-->
-<!--          Create your account-->
-<!--        </a>-->
-<!--      </div>-->
-<!--      <div class="text-left">-->
-<!--        <a class="text-small-ref" (click)="redirect('sign_up')">-->
-<!--          Create your account-->
-<!--        </a>-->
-<!--      </div>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</div>-->
 <mat-card>
   <mat-card-title>{{ 'SIGN_UP.TITLE' | translate }}</mat-card-title>
   <mat-card-content>
@@ -46,12 +5,13 @@
     <form [formGroup]="form" (ngSubmit)="submitPlayer()">
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Username" formControlName="username" [errorStateMatcher]="errorMatcher">
+          <input type="text" matInput placeholder="Username" formControlName="username"
+                 [errorStateMatcher]="errorMatcher">
           <mat-error *ngIf="username.hasError('minlength')">
-            Username should contain at least 3 characters
+            {{ 'SIGN_IN.SIGN_UP_ONCE.MINLENGTH' | translate }}
           </mat-error>
           <mat-error *ngIf="username.hasError('required')">
-            Username is <strong>required</strong>
+            {{ 'SIGN_IN.SIGN_UP_ONCE.REQUIRED' | translate }}
           </mat-error>
         </mat-form-field>
       </p>
@@ -60,11 +20,11 @@
         <button type="submit" mat-button [disabled]="form.invalid || error">Login</button>
         <!--        <a mat-raised-button  color="primary" (click)="register(user)">Save</a>-->
       </div>
-            <div class="text-left">
-              <a class="text-small-ref" (click)="redirect('sign_up')">
-                Create your account
-              </a>
-            </div>
+      <div class="text-left">
+        <a class="text-small-ref" (click)="redirect('sign_up')">
+          {{ 'SIGN_IN.SIGN_UP_ONCE.CREATE_ACC' | translate }}
+        </a>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

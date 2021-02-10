@@ -93,7 +93,8 @@
     "VALID_EMAIL": "Please, enter your email correctly",
     "VALID_LOGIN": "Please,enter your login correctly",
     "REQUIRED_LOGIN": "Login is required",
-    "REQUIRED_PASSWORD": "Password is required"
+    "REQUIRED_PASSWORD": "Password is required",
+    "BLOCKED": "Your account is blocked"
   },
   "SIGN_UP": {
     "TITLE": "Sign up",
@@ -112,6 +113,11 @@
     "ACTIVATION_CODE": {
       "TITLE": "Email or activation code is invalid",
       "ACTION": "Close"
+    },
+    "SIGN_UP_ONCE": {
+      "CREATE_ACC": "Create your account",
+      "REQUIRED": "Required field",
+      "MINLENGTH": "Username should contain at least 3 characters"
     }
   },
 
@@ -162,13 +168,17 @@
     "PERSONAL_DATA": "Title",
     "NAME_PLAYER": "Name",
     "EMAIL": "Email",
-    "YOUR_GAME": "Your game",
+    "YOUR_GAME": "Your games",
     "NAME_GAME": "Name of the game",
     "PLAY": "Play",
     "EDIT": "Edit",
     "DELETE": "Delete",
     "SHARE": "Share",
-    "NO_GAMES": "You have no games."
+    "NO_GAMES": "You have no games.",
+    "PLAYED_GAMES": "Played games",
+    "CHECK_STATISTICS": "Check statistics",
+    "DELETE_STATISTICS": "Delete statistics",
+    "NO_QUIZ": "You didn't play any quiz"
   },
 
   "GAME_PREVIEW": {
@@ -178,11 +188,10 @@
     "RULES_2": "2. The questions go one after the other and you have 30 seconds for each of them.",
     "RULES_3": "3. You need to select one of the answers provided, click on it and click on the \"Answer\" button.",
     "RULES_4": "4. If you don't manage to select any answer or click on the \"Answer\" button, then your answer won't be counted.",
-    "RULES_5": "5. Only the creator of the game can switch the question.",
-    "RULES_6": "6. The correctness of your answer will be determined after the end of the time and will be displayed in red/green on the board with your name below.",
-    "RULES_7": "7. You can like another player during the game if you like how he answers questions or just like that.",
-    "RULES_8": "8. At the end of the game, statistics of this quiz will be displayed.",
-    "RULES_9" : "9. Good luck!",
+    "RULES_5": "5. The correctness of your answer will be determined after the end of the time and will be displayed in red/green on the board with your name below.",
+    "RULES_6": "6. You can like another player during the game if you like how he answers questions or just like that.",
+    "RULES_7": "7. At the end of the game, statistics of this quiz will be displayed.",
+    "RULES_8" : "8. Good luck!",
     "PLAY": "Play",
     "BACK": "Back"
   },
@@ -220,7 +229,13 @@
     "TITLE": "Available Games to play",
     "VIEW": "View",
     "SEARCH": "Search",
-    "SEARCH_NAME": "Search by name"
+    "SEARCH_NAME": "Search by name",
+    "FILTERS": "Filters"
+  },
+
+  "GAME_CATEGORY": {
+    "TITLE": "Category",
+    "ERROR": "Required field"
   },
 
   "FILTERS": {
@@ -228,7 +243,8 @@
     "VIEWS": "Views",
     "RATING": "Rating",
     "FILTERS": "Filters",
-    "APPLY": "Apply filters"
+    "APPLY": "Apply filters",
+    "CATEGORIES": "Categories"
   },
 
   "CHECK_CODE": {
@@ -241,5 +257,56 @@
   "ACTIVATE": {
     "ACCOUNT": "Activate account",
     "DONE": "Done"
+  },
+
+  "EDIT_PLAYER": {
+    "EXPAND_ALL": "Expand all",
+    "COLLAPSE_ALL": "Collapse all",
+    "LOGIN": "Login",
+    "PHOTO": "Photo",
+    "EMAIL": "Email",
+    "SAVE": "Save"
+  },
+
+  "EDIT_USER": {
+    "EXPAND_ALL": "Expand all",
+    "COLLAPSE_ALL": "Collapse all",
+    "LOGIN": "Login",
+    "ROLE": "Role",
+    "EMAIL": "Email",
+    "SAVE": "Save"
+  },
+
+  "HOMEPAGE": {
+    "GAME_LIST": "Game list",
+    "PLAY_GAMES": "Play games",
+    "POPULAR_GAMES": "Popular games",
+    "VIEWS": "Views",
+    "ADVERTISING": "Here could be your advertising!",
+    "FAILURE_ADVERTISING": "But it not happened..."
+  },
+
+  "BLOCK_PLAYER_ACCESS": {
+    "CHOOSE_ALL_USERS": "Choose all users",
+    "EXIT": "Exit",
+    "RESTRICT_ACCESS": "Restrict access",
+    "PROVIDE_ACCESS": "Provide access for..."
+  },
+
+  "SEARCH": {
+    "SELECTED_PRODUCT": "Selected product",
+    "NOT_FOUND": "No games found",
+    "TO_QUIZ": "Back to Games",
+    "RESULTS": "Results of search",
+    "LOOK_AT": "Look at"
+  },
+
+  "GAMEPLAY": {
+    "QUESTION": "Question",
+    "ANSWER": "Answer",
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
+    "STATISTICS": "Statistics",
+    "OF": "of"
   }
 }

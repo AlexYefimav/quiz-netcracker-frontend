@@ -1,17 +1,15 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {StorageService} from '../service/storage/storage.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {UserService} from '../service/user.service';
 import {Player} from '../model/player';
-import {User} from '../model/user';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {MatAccordion} from "@angular/material/expansion";
-import {ErrorStateMatcher} from "@angular/material/core";
-import {SigninService} from "../service/signin.service";
-import {SignUpValidation} from "../service/validation/sign-up-validator";
-import {SignUpErrorStateMatcher} from "../sign-up/sign-up.component";
-import {PlayerService} from "../service/player.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatAccordion} from '@angular/material/expansion';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {SigninService} from '../service/signin.service';
+import {SignUpValidation} from '../service/validation/sign-up-validator';
+import {SignUpErrorStateMatcher} from '../sign-up/sign-up.component';
+import {PlayerService} from '../service/player.service';
 
 @Component({
   selector: 'app-login-dialog',
@@ -50,17 +48,17 @@ export class SignInOnceComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.user = new Player();
     this.errorMatcher = new SignUpErrorStateMatcher();
-   // this.signUpValidation.setUser(this.user);
+    // this.signUpValidation.setUser(this.user);
     this.userForm = this.signUpValidation.createUserForm();
   }
 
   submitPlayer() {
     if (this.form.valid) {
-     this.user.username = this.username.value;
-    //  this.user.name = this.username.value;
+      this.user.username = this.username.value;
+      //  this.user.name = this.username.value;
       this.sendData();
     }
   }
@@ -74,5 +72,4 @@ export class SignInOnceComponent implements OnInit {
   redirect(url: string) {
     this.router.navigate([url]);
   }
-
 }

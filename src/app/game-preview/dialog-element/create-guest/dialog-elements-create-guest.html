@@ -2,11 +2,14 @@
   <p>{{ 'CREATE_GUEST.TITLE' | translate }}</p>
   <mat-form-field>
     <mat-label>{{ 'CREATE_GUEST.LABEL' | translate }}</mat-label>
-    <input matInput [(ngModel)]="data.guest">
+    <label>
+      <input matInput #message maxlength="10" [(ngModel)]="data.guest">
+    </label>
+    <mat-hint align="end">{{message.value.length}} / 10</mat-hint>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">{{ 'CREATE_GUEST.BACK' | translate }}</button>
-  <button mat-button [mat-dialog-close]="data.guest" cdkFocusInitial
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()" class="color-my-button">{{ 'CREATE_GUEST.BACK' | translate }}</button>
+  <button mat-button [mat-dialog-close]="data.guest" class="color-my-button" style="right: 0;"
           (click)="saveGuest()">{{ 'CREATE_GUEST.NEXT' | translate }}</button>
 </div>

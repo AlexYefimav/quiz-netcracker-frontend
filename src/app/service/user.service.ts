@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {User} from '../model/user';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {HttpParams, HttpResponse} from '@angular/common/http';
-import {catchError, delay} from "rxjs/operators";
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {catchError, delay} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {StorageService} from "./storage/storage.service";
-import {ActivateCode} from "../model/activate-code";
-import {Message} from "../model/message";
+import {StorageService} from './storage/storage.service';
+import {ActivateCode} from '../model/activate-code';
+import {Message} from '../model/message';
 
 @Injectable({
   providedIn: 'root',
@@ -100,10 +99,10 @@ export class UserService {
     params = params.append('page', pageNumber.toString());
     params = params.append('size', pageSize.toString());
 
-    return this.http.get<Message>(this.url + `users/pageable`, { params: params });
+    return this.http.get<Message>(this.url + `users/pageable`, {params: params});
   }
 
-  activateAccount(code: string): Observable<ActivateCode>{
+  activateAccount(code: string): Observable<ActivateCode> {
     return this.http.get<ActivateCode>(this.url + "users/activate/" + code);
   }
 }

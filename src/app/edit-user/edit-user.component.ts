@@ -1,52 +1,58 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {User} from "../model/user";
-import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../service/user.service";
+import {User} from '../model/user';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../service/user.service';
 import {MatAccordion} from '@angular/material/expansion';
-import {StorageService} from "../service/storage/storage.service";
-import {AbstractControl} from "@angular/forms";
+import {StorageService} from '../service/storage/storage.service';
+import {AbstractControl} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  styleUrls: ['./edit-user.component.css', '../app.component.css']
 })
 export class EditUserComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   user: User;
-  roles: string[] = ["USER", "ADMIN"];
-  isUpdateUser:boolean;
+  roles: string[] = ['USER', 'ADMIN'];
+  isUpdateUser: boolean;
   disable: string;
   authorizedAccount: User;
   @Input() roleControl: AbstractControl;
   @Output() roleControlChange = new EventEmitter<AbstractControl>();
+  isLoading = true;
 
   constructor(private  userService: UserService,
               private router: Router,
               private  storageService: StorageService,
               private route: ActivatedRoute) {
-
   }
 
-  ngOnInit(){
-    if(this.checkAuthorized()!=undefined) {
+  ngOnInit(): void {
+    if (this.checkAuthorized() != undefined) {
       if (this.route.snapshot.params.id != undefined) {
         this.isUpdateUser = true;
-        this.getUser(this.route.snapshot.params.id);
+        this.userService.getUserById(this.route.snapshot.params.id).subscribe(user => {
+            this.user = user;
+            this.isLoading = false;
+          }
+        );
       } else {
         this.isUpdateUser = false;
         this.user = new User();
+        this.isLoading = false;
       }
+    } else {
+      this.redirect('403');
     }
-    else this.redirect('403');
 
   }
 
-  redirect(url: string) {
-   // this.onNoClick();
+  redirect(url: string): void {
     this.router.navigate([url]);
   }
-  checkAuthorized() {
+
+  checkAuthorized(): User {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
@@ -60,22 +66,14 @@ export class EditUserComponent implements OnInit {
   }
 
   isDisable(): string {
-    if (this.user.login != null && this.user.login != "" &&
-      this.user.mail != null && this.user.mail != "" &&
+    if (this.user.login != null && this.user.login != '' &&
+      this.user.mail != null && this.user.mail != '' &&
       this.user.role != null) {
-      this.disable = "false";
+      this.disable = 'false';
     } else {
-      this.disable = "disable"
+      this.disable = 'disable';
     }
     return this.disable;
-  }
-
-  private getUser( userId: string): void {
-    this.userService.getUserById(userId).subscribe( user =>
-    {
-      this.user = user
-    }
-    );
   }
 
   updateUser(): void {
@@ -98,8 +96,7 @@ export class EditUserComponent implements OnInit {
   checkForm(): void {
     if (this.roleControl.valid) {
       this.user.role = this.getRole();
-    }
-    else {
+    } else {
       this.user.role = null;
     }
     this.roleControlChange.emit(this.roleControl);

@@ -1,61 +1,67 @@
-<div class="editQuestion">
-  <div class="example-action-buttons">
-    <button mat-button (click)="accordion.openAll()">Expand All</button>
-    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+<div *ngIf="!isLoading;else loading">
+  <div class="editQuestion">
+    <div class="example-action-buttons">
+      <button mat-raised-button class="button"
+              (click)="accordion.openAll()">{{ 'EDIT_PLAYER.EXPAND_ALL' | translate }}</button>
+      <button mat-raised-button class="button"
+              (click)="accordion.closeAll()">{{ 'EDIT_PLAYER.COLLAPSE_ALL' | translate }}</button>
+    </div>
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ 'EDIT_PLAYER.LOGIN' | translate }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{player.name}}
+            <mat-icon>login</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field class="example-form">
+          <label>
+            <input matInput [(ngModel)]="player.name">
+          </label>
+        </mat-form-field>
+      </mat-expansion-panel>
+
+      <mat-card class="photo">
+        <div class="title">
+          {{ 'EDIT_PLAYER.PHOTO' | translate }}
+        </div>
+        <div class="description">
+          <button mat-button (change)="selectFile($event)">{{ 'PHOTO.CHOOSE' | translate }}</button>
+          <input hidden type="file" id="file" class="photo-input" (change)="selectFile($event)"
+                 accept=".jpg, .jpeg, .png">
+        </div>
+        <div class="icon">
+          <mat-icon>
+            party_mode
+          </mat-icon>
+        </div>
+      </mat-card>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ 'EDIT_PLAYER.EMAIL' | translate }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{player.email}}
+            <mat-icon>email</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field class="example-form">
+          <label>
+            <input matInput [(ngModel)]="player.email">
+          </label>
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <a mat-raised-button href="player/{{player?.id}}" color="primary"
+       (click)="updatePlayer() ">{{ 'EDIT_PLAYER.SAVE' | translate }}</a>
   </div>
-  <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Login
-        </mat-panel-title>
-        <mat-panel-description>
-          {{player.name}}
-          <mat-icon>login</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-form-field class="example-form">
-        <label>
-          <input matInput [(ngModel)]="player.name">
-        </label>
-      </mat-form-field>
-    </mat-expansion-panel>
-
-    <mat-card class="photo">
-      <div class="title">
-        Фото
-      </div>
-      <div class="description">
-        <input type="file" id="file" (change)="selectFile($event)" accept=".jpg, .jpeg, .png"
-               class="photo-input">
-      </div>
-      <div class="icon">
-        <mat-icon>
-          party_mode
-        </mat-icon>
-      </div>
-
-    </mat-card>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Email
-        </mat-panel-title>
-        <mat-panel-description>
-          {{player.email}}
-          <mat-icon>email</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-form-field class="example-form">
-        <label>
-          <input matInput [(ngModel)]="player.email">
-        </label>
-      </mat-form-field>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-
-  <a mat-raised-button href="player/{{player?.id}}"  color="primary" (click)="updatePlayer() ">Save</a>
 </div>
-
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

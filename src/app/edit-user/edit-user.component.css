@@ -1,6 +1,19 @@
 .example-action-buttons {
   padding-bottom: 10px;
-  color: oldlace;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 39.5%;
+  margin-right: 39.5%;
+}
+
+.button {
+  color: #091324;
+  border-radius: 7px;
+  background: rgba(158, 158, 158, 0.5);
+}
+
+.button:hover {
+  background: #80b6bd;
 }
 
 .example-headers-align .mat-expansion-panel-header-title,
