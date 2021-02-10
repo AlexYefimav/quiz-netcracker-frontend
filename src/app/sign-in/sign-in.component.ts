@@ -51,6 +51,7 @@ export class SignInComponent implements OnInit {
 
       this.login.value.toString().indexOf('@') === -1 ? this.player.login = this.login.value : this.player.email = this.login.value;
       this.user.login = this.login.value;
+      this.user.username = this.user.login;
       this.user.password = this.password.value;
 
       this.userService.signIn(this.user).subscribe(

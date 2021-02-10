@@ -67,25 +67,25 @@ export class SignUpComponent implements OnInit {
   }
 
   get login() {
-    return this.userForm.get('login');
+    return this.userForm?.get('login').value;
   }
 
-  get mail() {
-    return this.userForm.get('mail');
+  get email() {
+    return this.userForm?.get('email').value;
   }
 
   get password() {
-    return this.userForm.get('password');
+    return this.userForm?.get('password').value;
   }
 
   get passwordRepeat() {
-    return this.userForm.get('passwordRepeat');
+    return this.userForm?.get('passwordRepeat').value;
   }
 
   submitPlayer() {
     if (this.userForm.valid) {
       this.user.login = this.login.value;
-      this.user.email = this.mail.value;
+      this.user.email = this.email.value;
       this.user.password = this.password.value;
       this.sendData();
     }
