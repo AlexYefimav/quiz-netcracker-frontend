@@ -27,15 +27,15 @@
 
                   <p>
                     <mat-form-field>
-                      <input type="email" matInput placeholder="Email" formControlName="mail"
+                      <input type="email" matInput placeholder="Email" formControlName="email"
                              [errorStateMatcher]="errorMatcher">
-                      <mat-error *ngIf="mail.hasError('email') && !mail.hasError('required')">
-                        {{ 'SIGN_UP.VALID_EMAIL' | translate }}
+                      <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+                        {{ 'SIGN_UP.VALID_Email' | translate }}
                       </mat-error>
-                      <mat-error *ngIf="mail.hasError('required')">
-                        {{ 'SIGN_UP.REQUIRED_EMAIL' | translate }}
+                      <mat-error *ngIf="email.hasError('required')">
+                        {{ 'SIGN_UP.REQUIRED_Email' | translate }}
                       </mat-error>
-                      <mat-error *ngIf="mail.hasError('duplicate')">
+                      <mat-error *ngIf="email.hasError('duplicate')">
                         {{ 'SIGN_UP.DUPLICATE_EMAIL' | translate }}
                       </mat-error>
                     </mat-form-field>

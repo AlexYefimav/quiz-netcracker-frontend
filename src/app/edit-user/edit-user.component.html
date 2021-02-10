@@ -29,13 +29,13 @@
           {{ 'EDIT_USER.EMAIL' | translate }}
         </mat-panel-title>
         <mat-panel-description>
-          {{user.mail}}
+          {{user.email}}
           <mat-icon>email</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-form-field class="example-form">
         <label>
-          <input matInput [(ngModel)]="user.mail">
+          <input matInput [(ngModel)]="user.email">
         </label>
       </mat-form-field>
     </mat-expansion-panel>

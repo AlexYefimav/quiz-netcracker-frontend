@@ -49,7 +49,7 @@ export class SignInComponent implements OnInit {
   submit() {
     if (this.form.valid) {
 
-      this.login.value.toString().indexOf('@') === -1 ? this.player.name = this.login.value : this.player.email = this.login.value;
+      this.login.value.toString().indexOf('@') === -1 ? this.player.login = this.login.value : this.player.email = this.login.value;
       this.user.login = this.login.value;
       this.user.password = this.password.value;
       this.user.username = this.login.value;
@@ -78,7 +78,6 @@ export class SignInComponent implements OnInit {
               }
             }, 2000);
             this.dialogAccount = this.user;
-            // this.router.navigate(['/games/']);
           } else {
             window.alert('Ваш профиль заблокирован');
           }
@@ -93,11 +92,11 @@ export class SignInComponent implements OnInit {
   }
 
   get login() {
-    return this.form.get('login');
+    return this.form.get('login').value;
   }
 
   get password() {
-    return this.form.get('password');
+    return this.form.get('password').value;
   }
 
 }

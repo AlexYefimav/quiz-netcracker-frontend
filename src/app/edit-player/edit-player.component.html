@@ -13,13 +13,13 @@
             {{ 'EDIT_PLAYER.LOGIN' | translate }}
           </mat-panel-title>
           <mat-panel-description>
-            {{player.name}}
+            {{player.login}}
             <mat-icon>login</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-form-field class="example-form">
           <label>
-            <input matInput [(ngModel)]="player.name">
+            <input matInput [(ngModel)]="player.login">
           </label>
         </mat-form-field>
       </mat-expansion-panel>

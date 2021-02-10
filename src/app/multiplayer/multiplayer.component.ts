@@ -138,7 +138,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
 
   sendLikePlayer(player: Player) {
     let message = {
-      name: this.player.name,
+      name: this.player.login,
       recipientId: player.id,
       gameRoomId: this.gameRoomId
     }
