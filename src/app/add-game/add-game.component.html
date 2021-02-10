@@ -27,6 +27,9 @@
                 <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.minlength">
                   {{ 'ADD_GAME.ERROR.TITLE.MINLENGTH' | translate }}
                 </mat-error>
+                <mat-error *ngIf="gameForm.get('title').touched && gameForm.get('title').errors?.maxlength">
+                  {{ 'ADD_GAME.ERROR.TITLE.MAXLENGTH' | translate }}
+                </mat-error>
               </mat-form-field>
             </mat-expansion-panel>
 

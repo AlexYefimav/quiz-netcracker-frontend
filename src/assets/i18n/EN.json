@@ -64,7 +64,8 @@
     "ERROR": {
       "TITLE": {
         "REQUIRED": "Required field",
-        "MINLENGTH": "Game title should be at least 3 characters"
+        "MINLENGTH": "Game title should be at least 3 characters",
+        "MAXLENGTH": "Game title shouldn't be more than 30 characters"
       },
       "DESCRIPTION": {
         "REQUIRED": "Required field",

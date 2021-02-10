@@ -10,7 +10,7 @@ export class AddGameValidation {
 
   createGameForm(): FormGroup {
     return this.formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(3)]],
+      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       description: ['', [Validators.required, Validators.minLength(3)]],
       photo: ['']
     });

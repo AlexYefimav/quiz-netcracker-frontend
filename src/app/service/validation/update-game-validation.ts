@@ -11,7 +11,7 @@ export class UpdateGameValidation {
 
   createGameForm(game: Game): FormGroup {
     return this.formBuilder.group({
-      title: [game.title, [Validators.required, Validators.minLength(3)]],
+      title: [game.title, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       description: [game.description, [Validators.required, Validators.minLength(3)]],
       photo: ['']
     });
