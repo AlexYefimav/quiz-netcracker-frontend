@@ -25,13 +25,11 @@ export class SignUpComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
   user: User;
-  // userCheck: User;
   form: FormGroup;
   userForm: FormGroup;
 
   errorMatcher: ErrorStateMatcher;
   isPasswordsEqual: boolean;
-  // isUserFromDB: boolean;
 
   existingUsers: User[];
   isLinear = false;
@@ -49,13 +47,6 @@ export class SignUpComponent implements OnInit {
               private signUpValidation: SignUpValidation,
               private userService: UserService,
               private _formBuilder: FormBuilder) {
-
-    // this.form = formBuilder.group({
-    //   username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    //   mail: new FormControl('', [Validators.required, Validators.email]),
-    //   password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    //   passwordRepeat: new FormControl('', Validators.required),
-    // });
   }
 
   ngOnInit(): void {
@@ -67,14 +58,9 @@ export class SignUpComponent implements OnInit {
       }
       this.user = new User();
       this.errorMatcher = new SignUpErrorStateMatcher();
-      // this.signUpValidation.setUser(this.user);
-      // this.userForm = this.signUpValidation.createUserForm();
       this.firstFormGroup = this._formBuilder.group({
         firstCtrl: ['', Validators.required]
       });
-      // this.secondFormGroup = this._formBuilder.group({
-      //   secondCtrl: ['', Validators.required]
-      // });
       this.isLoading = false;
     });
   }
@@ -100,37 +86,16 @@ export class SignUpComponent implements OnInit {
     if (this.userForm.valid) {
       console.log("Отлично")
       this.user.username = this.login.value;
-      this.user.mail = this.mail.value;
+      this.user.email = this.mail.value;
       this.user.password = this.password.value;
       this.sendData();
       console.log(this.user)
-      // this.checkUsersFromDB();
     }
   }
 
   async sendData() {
     this.user = await this.signinService.register(this.user).toPromise();
   }
-
-  // checkUsersFromDB() {
-  //   this.userService.checkUserByLoginOrEmail(this.user.username).subscribe(
-  //     user => {
-  //       this.userCheck = user;
-  //       this.isUserFromDB = this.userCheck== null;
-  //       const snackbarAction = 'Закрыть';
-  //       if (!this.isUserFromDB) {
-  //         this.snackBar.open('Пользователь с таким именем/почтой уже существует', snackbarAction, {
-  //           panelClass: ['snackbar']
-  //         });
-  //       } else {
-  //         this.sendData();
-  //         this.snackBar.open('Регистрация прошла успешно', snackbarAction, {
-  //           panelClass: ['snackbar']
-  //         });
-  //       }
-  //     }
-  //    );
-  // }
 
   checkPasswords() {
     this.isPasswordsEqual = this.password.value === this.passwordRepeat.value;
@@ -149,37 +114,4 @@ export class SignUpComponent implements OnInit {
   setText() {
     this.text = "На ваш email было отправлено сообщение!"
   }
-
-  // async activate(){
-  //   // this.cd.begin();
-  //   const translateService = this.injector.get(TranslateService);
-  //   let message;
-  //   let snackbarAction;
-  //   translateService.stream('SIGN_UP.ACTIVATION_CODE').subscribe(value => {
-  //     message = value.TITLE;
-  //     snackbarAction = value.ACTION;
-  //   });
-  //   if (this.user.mail == null || this.enteredCode.length === 0) {
-  //     this.snackBar.open(message, snackbarAction, {
-  //       panelClass: ['snackbar']
-  //     });
-  //     return;
-  //   }
-  //   this.str = await this.userService.activate(this.user.mail, this.enteredCode).toPromise();
-  //   console.log(this.str);
-  // }
-
-  // setActiveCode(value: string) {
-  //   this.enteredCode = value;
-  // }
-
-  // cd: CountdownComponent;
-  //
-  // timerEvent($event: CountdownEvent, cd: CountdownComponent) {
-  //   // this.cd = cd;
-  //   // this.cd.stop();
-  //   if($event.left ==0){
-  //     this.answer = true;
-  //   }
-  // }
 }

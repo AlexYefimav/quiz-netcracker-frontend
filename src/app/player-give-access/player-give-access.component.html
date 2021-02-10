@@ -14,7 +14,7 @@
       <li *ngFor="let player of players">
         <mat-checkbox *ngIf="data.playerId!=player.id" [(ngModel)]="player.isCompleted"
                       (ngModelChange)="updateAllComplete()">
-          {{player.name}}
+          {{player.login}}
         </mat-checkbox>
       </li>
     </ul>
