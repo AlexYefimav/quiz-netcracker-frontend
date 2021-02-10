@@ -1,3 +1,4 @@
+<div *ngIf="!isLoading;else loading">
 <div class="container">
  <mat-card class="back">
   <mat-card>
@@ -28,3 +29,7 @@
   </mat-card>
  </mat-card>
 </div>
+</div>
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

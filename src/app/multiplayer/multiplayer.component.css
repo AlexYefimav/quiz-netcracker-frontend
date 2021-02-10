@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@
   margin-right: auto;
 }
 
-.header{
+.header {
   color: white;
 }
 
@@ -27,7 +27,7 @@
   flex-direction: row;
 }
 
-h2{
+h2 {
   margin-left: 20px;
   margin-top: 15px;
 }
@@ -44,7 +44,7 @@ h2{
 }
 
 
-.displayed{
+.displayed {
   width: 40%;
   display: block;
   margin-left: auto;
@@ -57,11 +57,11 @@ h2{
   margin-right: 20px;
 }
 
-.mat-flat-button{
+.mat-flat-button {
   margin-bottom: 20px;
 }
 
-.legs{
+.legs {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,36 +70,36 @@ h2{
   flex-wrap: wrap;
 }
 
-.index{
+.index {
   margin-right: 5px;
   margin-left: 5px;
   padding: 10px;
   margin-bottom: 5px;
 }
 
-.players{
+.players {
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 20px 0 0;
 }
 
-.name-player{
+.name-player {
   text-align: center;
   background-color: #3c629b;
 }
 
-h4{
+h4 {
   height: 40px;
 }
 
-.mat-icon-button{
+.mat-icon-button {
   position: absolute;
   right: 0;
   top: 0;
 }
 
-.time{
+.time {
   margin-left: 20px;
   margin-top: 20px;
   position: absolute;
@@ -109,10 +109,10 @@ h4{
   font-family: DejaVu Sans Mono, monospace;
 }
 
-.question_name{
+.question_name {
   flex-basis: 85%;
 }
 
-.player-board{
+.player-board {
   width: 600px;
 }

@@ -1,21 +1,21 @@
-<mat-card class="search">
-
-
-  <mat-card-content>
-    <div class="container">
-      <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit(f)">
-
-        <mat-form-field class="example-form">
+<div *ngIf="!isLoading;else loading">
+  <mat-card class="search">
+    <mat-card-content>
+      <div class="container">
+        <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <mat-form-field class="example-form">
           <span><input matInput class="form-control" type="search" name="search"
                        ngModel placeholder="{{ 'GAME.SEARCH_NAME' | translate }}"
-                 aria-label="Search"></span>
-          <span class="btnSearch">
-
-          </span>
-        </mat-form-field>
-        <button class="btn btn-outline-success" type="submit">{{ 'GAME.SEARCH' | translate }}</button>
-      </form>
-    </div>
-  </mat-card-content>
-
-</mat-card>
+                       aria-label="Search"></span>
+            <button mat-button>
+              <mat-icon>loupe</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

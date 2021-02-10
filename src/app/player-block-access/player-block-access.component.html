@@ -1,3 +1,4 @@
+<div *ngIf="!isLoading; else loading">
 <section class="example-section">
   <span class="example-list-section">
     <mat-checkbox class="example-margin"
@@ -22,5 +23,10 @@
 <div class="button">
   <button mat-button (click)="onNoClick()">{{ 'BLOCK_PLAYER_ACCESS.CHOOSE_ALL_USERS' | translate }}</button>
   <button mat-button (click)="blockAccess()">{{ 'BLOCK_PLAYER_ACCESS.RESTRICT_ACCESS' | translate }}</button>
-  <button mat-button (click)="giveAccess(data.gameId, data.playerId)">{{ 'BLOCK_PLAYER_ACCESS.PROVIDE_ACCESS' | translate }}</button>
+  <button mat-button
+          (click)="giveAccess(data.gameId, data.playerId)">{{ 'BLOCK_PLAYER_ACCESS.PROVIDE_ACCESS' | translate }}</button>
 </div>
+</div>
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

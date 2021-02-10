@@ -1,63 +1,32 @@
-.mat-dialog-container{
-  padding: 0;
+.header {
+  text-align: center;
 }
 
-.container{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0;
-  width: 250px;
-}
-
-.header{
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.body{
-
-}
-
-.title{
-  display: flex;
-  flex-direction: row;
-}
-
-.column-number{
-  margin-left: 20px;
-  flex-basis: 30%;
-}
-
-.column-name{
-  display: flex;
-  flex-direction: row;
-  /*flex-basis: 30%;*/
-}
-
-.column-delete{
-  margin-left: 5px;
+.column-delete {
   color: red;
 }
 
-.players{
+.actions {
   display: flex;
   flex-direction: row;
 }
 
-.actions{
-  display: flex;
-  flex-direction: row;
-}
-
-.close{
-  margin-left: 10px;
-}
-
-.play{
+.play {
   margin-left: 80px;
 }
 
-.spinner{
+.spinner {
   margin-left: 100px;
+}
+
+.mat-icon-button {
+  transform: scale(0.7);
+}
+
+TABLE {
+  width: 300px; /* Ширина таблицы */
+}
+
+TH {
+  text-align: left; /* Выравнивание по левому краю */
 }

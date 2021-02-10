@@ -1,18 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../model/user';
 import {UserService} from '../service/user.service';
-import {StorageService} from "../service/storage/storage.service";
-import {Router} from "@angular/router";
-import {Message} from "../model/message";
-import {Game} from "../model/game";
-import {PageEvent} from "@angular/material/paginator";
+import {StorageService} from '../service/storage/storage.service';
+import {Router} from '@angular/router';
+import {Message} from '../model/message';
+import {PageEvent} from '@angular/material/paginator';
 
 const pageSize: number = 3;
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css', '../app.component.css']
 })
 export class UserComponent implements OnInit {
   public users: User[];
@@ -25,6 +24,7 @@ export class UserComponent implements OnInit {
   currentSelectedPage: number = 0;
   totalPages: number = 0;
   pageIndexes: Array<number> = [];
+  isLoading = true;
 
 
   constructor(private userService: UserService,
@@ -32,14 +32,11 @@ export class UserComponent implements OnInit {
               private router: Router) {
   }
 
-  async ngOnInit() {
-    if(this.checkAuthorized()!=undefined) {
-  //  this.users = await this.getUsers();
-      await this.getPage(0);
-      this.users =  await this.getUsers();
-      this.pageSlice = this.users.slice(0, pageSize);
-    }
-    else this.redirect('403');
+  ngOnInit(): void {
+    if (this.checkAuthorized() != undefined) {
+      //  this.users = await this.getUsers();
+      this.getPage(0);
+    } else this.redirect('403');
   }
 
   redirect(url: string) {
@@ -58,16 +55,15 @@ export class UserComponent implements OnInit {
     }
     return this.authorizedAccount;
   }
-  private getUsers(): Promise<User[]> {
-    return this.userService.checkUsers().toPromise();
-  }
 
-  private blockUser(id: string) {
+  blockUser(id: string) {
     return this.userService.blockUser(id).toPromise()
   }
 
-  async deleteUser(id: string) {
-    this.user = await this.userService.deleteUser(id).toPromise();
+  deleteUser(id: string) {
+    this.userService.deleteUser(id).subscribe(user => {
+      this.user = user;
+    });
   }
 
   private getPage(page: number) {
@@ -78,6 +74,11 @@ export class UserComponent implements OnInit {
           this.totalPages = message.totalPages;
           this.pageIndexes = Array(this.totalPages).fill(0).map((x, i) => i);
           this.currentSelectedPage = message.pageNumber;
+          this.userService.checkUsers().subscribe(users => {
+            this.users = users;
+            this.pageSlice = this.users.slice(0, pageSize);
+            this.isLoading = false;
+          });
         }
       );
   }
@@ -85,6 +86,5 @@ export class UserComponent implements OnInit {
   OnPageChange(event: PageEvent) {
     this.pageSlice = this.users.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize)
   }
-
 }
 

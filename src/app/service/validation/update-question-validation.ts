@@ -34,12 +34,14 @@ export class UpdateQuestionValidation {
     this.game = game;
   }
 
-  async getCategoryById(categoryId: string): Promise<string> {
+  getCategoryById(categoryId: string): string {
     if (categoryId === '') {
       return '';
     }
     if (this.categories == null) {
-      this.categories = await this.getCategoryList();
+      this.categoryService.getCategories().subscribe(categories => {
+        this.categories = categories;
+      })
     }
     for (const category of this.categories) {
       if (category.id === categoryId) {
@@ -48,12 +50,14 @@ export class UpdateQuestionValidation {
     }
   }
 
-  async getLevelById(levelId: string): Promise<string> {
+  getLevelById(levelId: string): string {
     if (levelId == null) {
       return '';
     }
     if (this.levels == null) {
-      this.levels = await this.getLevelList();
+      this.levelService.getLevels().subscribe(levels => {
+        this.levels = levels;
+      })
     }
     for (const level of this.levels) {
       if (level.id === levelId) {
@@ -62,23 +66,15 @@ export class UpdateQuestionValidation {
     }
   }
 
-  getCategoryList(): Promise<Category[]> {
-    return this.categoryService.getCategories().toPromise();
-  }
-
-  getLevelList(): Promise<Level[]> {
-    return this.levelService.getLevels().toPromise();
-  }
-
-  async createQuestionForm(question: Question): Promise<FormGroup> {
-    const categoryState = await this.getCategoryById(question.category);
-    const levelState = await this.getLevelById(question.level);
+  createQuestionForm(question: Question): FormGroup {
+    const categoryState = this.getCategoryById(question.category);
+    const levelState = this.getLevelById(question.level);
     return this.formBuilder.group({
       title: [question.title, [Validators.required, Validators.minLength(6)]],
       description: [question.description, [Validators.required, Validators.minLength(6)]],
       category: [categoryState, [Validators.required]],
       level: [levelState, [Validators.required]],
       photo: ['']
-    }, { validators: this.duplicateValidator.duplicateValidation(this.game.questions, question) });
+    }, {validators: this.duplicateValidator.duplicateValidation(this.game.questions, question)});
   }
 }

@@ -2,11 +2,14 @@
   <p>{{ 'CHECK_CODE.ENTER' | translate }}</p>
   <mat-form-field>
     <mat-label>{{ 'CHECK_CODE.CODE' | translate }}</mat-label>
-    <input matInput [(ngModel)]="code">
+    <label>
+      <input matInput #message maxlength="6" minlength="6" [(ngModel)]="code">
+    </label>
+    <mat-hint align="end">{{message.value.length}} / 6</mat-hint>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">{{ 'CHECK_CODE.BACK' | translate }}</button>
-  <button mat-button [mat-dialog-close]="code" cdkFocusInitial
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="onNoClick()" class="color-my-button">{{ 'CHECK_CODE.BACK' | translate }}</button>
+  <button mat-button [mat-dialog-close]="code" class="color-my-button"
           (click)="checkCode(code)">{{ 'CHECK_CODE.CHECK' | translate }}</button>
 </div>

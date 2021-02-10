@@ -1,26 +1,18 @@
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import {GameRoomService} from "../service/game-room.service";
-import {Player} from "../model/player";
+import {Player} from '../model/player';
 
 export class WebSocketAPI {
   webSocketEndPoint: string = 'http://localhost:8443/ws';
 
   topic: string;
   stompClient: any;
-
   component: any;
-
   player: Player;
 
-  gameRoomService: GameRoomService;
-  gameRoomId: string
-
-  constructor(component: any, player: Player, gameRoomId: string, gameRoomService: GameRoomService) {
+  constructor(component: any, player: Player) {
     this.component = component;
     this.player = player;
-    this.gameRoomId = gameRoomId;
-    this.gameRoomService = gameRoomService;
   }
 
   _connect() {
@@ -33,7 +25,7 @@ export class WebSocketAPI {
       _this.stompClient.subscribe(_this.topic, function (sdkEvent) {
         _this.onMessageReceived(sdkEvent);
       });
-      //_this.stompClient.reconnect_delay = 2000;
+      _this.stompClient.reconnect_delay = 2000;
     }, this.errorCallBack);
   }
 
@@ -67,11 +59,7 @@ export class WebSocketAPI {
     this.stompClient.send("/app/go-game", {}, JSON.stringify(message));
   }
 
-  sendNextQuestion(message) {
-    this.stompClient.send("/app/next-question", {}, JSON.stringify(message));
-  }
-
-  sendDeletePlayer(message){
+  sendDeletePlayer(message) {
     this.stompClient.send("/app/delete-player", {}, JSON.stringify(message));
   }
 }

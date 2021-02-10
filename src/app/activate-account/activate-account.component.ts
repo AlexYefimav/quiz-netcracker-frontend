@@ -6,25 +6,25 @@ import {ActivateCode} from "../model/activate-code";
 @Component({
   selector: 'app-activate-account',
   templateUrl: './activate-account.component.html',
-  styleUrls: ['./activate-account.component.css']
+  styleUrls: ['./activate-account.component.css', '../app.component.css']
 })
 export class ActivateAccountComponent implements OnInit {
 
   activationMessage: ActivateCode = {
     text: "No"
   };
+  isLoading = true;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
               private router: Router) {
   }
 
-  async ngOnInit() {
-    this.activationMessage = await this.activate();
-  }
-
-  activate(): Promise<ActivateCode> {
-    return this.userService.activateAccount(this.route.snapshot.params.code).toPromise();
+  ngOnInit(): void {
+    this.userService.activateAccount(this.route.snapshot.params.code).subscribe(message => {
+      this.activationMessage = message;
+      this.isLoading = false;
+    });
   }
 
   redirect(url: string) {

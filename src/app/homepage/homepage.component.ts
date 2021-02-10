@@ -1,31 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GameService} from "../service/game.service";
 import {Game} from "../model/game";
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrls: ['./homepage.component.css', '../app.component.css']
 })
 export class HomepageComponent implements OnInit {
 
   public game: Game;
   games: Array<Game> = [];
+  isLoading = true;
 
-  constructor(private gameService: GameService) { }
-
-  async ngOnInit() {
-    this.games = await this.getTopViewedGames();
+  constructor(private gameService: GameService) {
   }
 
-  private getGameList(): Promise<Game[]> {
-    return this.gameService.getPublicGame().toPromise();
+  ngOnInit(): void {
+    this.gameService.getTopViewedGames().subscribe(games => {
+      this.games = games;
+      this.isLoading = false;
+    })
   }
-
-  private getTopViewedGames(): Promise<Game[]> {
-    return this.gameService.getTopViewedGames().toPromise();
-  }
-
-
-
 }

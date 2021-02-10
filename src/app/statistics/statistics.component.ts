@@ -1,13 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {StatisticsService} from "../service/statistics.service";
-import {ActivatedRoute} from "@angular/router";
-import {StorageService} from "../service/storage/storage.service";
-import {Question} from "../model/question";
-import {GameService} from "../service/game.service";
-import {Game} from "../model/game";
-import {GameStatistics} from "../model/game-statistics";
-import {Player} from "../model/player";
-import {PlayerService} from "../service/player.service";
+import {StatisticsService} from '../service/statistics.service';
+import {ActivatedRoute} from '@angular/router';
+import {StorageService} from '../service/storage/storage.service';
+import {Question} from '../model/question';
+import {GameService} from '../service/game.service';
+import {Game} from '../model/game';
+import {GameStatistics} from '../model/game-statistics';
+import {PlayerService} from '../service/player.service';
 
 
 @Component({
@@ -32,31 +31,19 @@ export class StatisticsComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) {
   }
 
-  async ngOnInit() {
+  ngOnInit(): void {
     this.gameId = this.route.snapshot.params.gameId;
     this.playerId = this.route.snapshot.params.playerId;
-    this.statistics = await this.getStatistics();
-    for (let i = 0; i < this.statistics.length; i++) {
-      this.statistics[i].index = i + 1;
-    }
-    this.game = await this.getGame();
-    this.isLoading = false;
-  }
-
-
-  async ngOnDestroy() {
-    let player = await this.getPlayer();
-    if (player.user == null) {
-      this.playerService.delete(this.playerId);
-    }
-  }
-
-  getPlayer(): Promise<Player> {
-    return this.playerService.getOnePlayer(this.playerId).toPromise();
-  }
-
-  getStatistics(): Promise<GameStatistics[]> {
-    return this.statisticsService.getStatisticsPlayerIdAndByGameId(this.playerId, this.gameId).toPromise();
+    this.statisticsService.getStatisticsPlayerIdAndByGameId(this.playerId, this.gameId).subscribe(statistics => {
+      this.statistics = statistics;
+      for (let i = 0; i < this.statistics.length; i++) {
+        this.statistics[i].index = i + 1;
+      }
+      this.gameService.getGameById(this.gameId).subscribe(game => {
+        this.game = game;
+        this.isLoading = false;
+      });
+    });
   }
 
   rightAnswer(question: Question) {
@@ -65,10 +52,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
         return question.answersSet[i].title;
       }
     }
-  }
-
-  getGame(): Promise<Game> {
-    return this.gameService.getGameById(this.gameId).toPromise();
   }
 
   getAnswer(answer: any) {
@@ -80,11 +63,21 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   getColor(answer: any) {
     if (answer == null) {
-      return "white";
+      return "black";
     }
     if (answer.right) {
       return "green";
     }
     return "red";
+  }
+
+  ngOnDestroy(): void {
+    this.playerService.getOnePlayer(this.playerId).subscribe(player => {
+      if (player.user == null) {
+        this.statisticsService.deleteStatistics(this.playerId, this.gameId).subscribe(()=>{
+          this.playerService.delete(player.id).subscribe();
+        });
+      }
+    })
   }
 }

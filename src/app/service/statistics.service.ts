@@ -19,7 +19,7 @@ export class StatisticsService {
   constructor(private http: HttpClient) {
   }
 
-  getStatisticsPlayerIdAndByGameId(playerId: string, gameId: string): Observable<GameStatistics[]>{
+  getStatisticsPlayerIdAndByGameId(playerId: string, gameId: string): Observable<GameStatistics[]> {
     return this.http.get<GameStatistics[]>(this.url + playerId + "/" + gameId);
   }
 

@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
-import {QuestionService} from "../service/question.service";
-import {Question} from "../model/question";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {QuestionService} from '../service/question.service';
+import {Question} from '../model/question';
 import {Game} from '../model/game';
 import {MatAccordion} from '@angular/material/expansion';
 
@@ -16,16 +16,13 @@ export class QuestionComponent implements OnInit {
   public questions: Question[];
   public question: Question;
 
-
   constructor(private questionService: QuestionService) {
   }
 
-  async ngOnInit() {
-    this.questions = await this.getQuestionList();
-  }
-
-  private getQuestionList(): Promise<Question[]> {
-    return this.questionService.getQuestion().toPromise();
+  ngOnInit(): void {
+    this.questionService.getQuestion().subscribe(questions => {
+      this.questions = questions;
+    });
   }
 
   deleteQuestion(question: Question): void {

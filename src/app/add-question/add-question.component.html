@@ -8,7 +8,8 @@
       </mat-expansion-panel-header>
       <app-question-detail [question]="question" [questionForm]="questionForm"></app-question-detail>
       <app-answer [question]="question" [answerForm]="answerForm"></app-answer>
-      <button mat-raised-button color="primary" [disabled]="!questionForm.valid" (click)="addQuestion()">{{ 'ADD_GAME.ADD_QUESTION.ADD' | translate }}</button>
+      <button mat-raised-button color="primary" [disabled]="!questionForm.valid"
+              (click)="addQuestion()">{{ 'ADD_GAME.ADD_QUESTION.ADD' | translate }}</button>
     </mat-expansion-panel>
   </div>
 </div>

@@ -1,4 +1,4 @@
-export class User{
+export class User {
   id: string;
   login: string;
   username: string;
@@ -12,12 +12,13 @@ export class User{
   active: boolean;
   activationCode: string;
   index: number;
+
   constructor() {
   }
 
   equals(anotherAnswer: User): boolean {
     return anotherAnswer.id == this.id
-      && anotherAnswer.login== this.login
+      && anotherAnswer.login == this.login
       && anotherAnswer.mail == this.mail;
   }
 }

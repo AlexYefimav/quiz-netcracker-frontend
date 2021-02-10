@@ -2,16 +2,11 @@
   flex: 1 1 auto;
 }
 
-/*.navigation {*/
-/*  margin-right: 100px;*/
-/*}*/
-
-.navigation button
-{
+.navigation button {
   display: inline-flex;
 }
 
-.username div{
+.username div {
   size: 100px;
   margin-left: auto;
   margin-right: auto;
@@ -19,6 +14,7 @@
   max-width: 1080px;
   text-align: center;
 }
+
 p {
   font-family: 'Times New Roman', Times, serif; /* Шрифт с засечками */
   font-style: italic; /* Курсивное начертание */

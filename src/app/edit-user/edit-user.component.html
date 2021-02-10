@@ -1,4 +1,4 @@
-<div class="editQuestion" *ngIf="authorizedAccount.id!=undefined" >
+<div class="editQuestion" *ngIf="authorizedAccount.id!=undefined">
   <div class="example-action-buttons">
     <button mat-raised-button class="button"
             (click)="accordion.openAll()">{{ 'EDIT_USER.EXPAND_ALL' | translate }}</button>
@@ -6,7 +6,7 @@
             (click)="accordion.closeAll()">{{ 'EDIT_USER.COLLAPSE_ALL' | translate }}</button>
   </div>
   <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel >
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ 'EDIT_USER.LOGIN' | translate }}
@@ -33,7 +33,7 @@
           <mat-icon>email</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-            <mat-form-field class="example-form">
+      <mat-form-field class="example-form">
         <label>
           <input matInput [(ngModel)]="user.mail">
         </label>
@@ -52,15 +52,16 @@
       </mat-expansion-panel-header>
       <mat-form-field class="example-form" appearance="fill">
         <mat-select [(ngModel)]="user.role">
-                    <mat-option *ngFor="let role of roles" [value]="role">
-                      {{role}}
-                    </mat-option>
-                  </mat-select>
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{role}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </mat-expansion-panel>
-      </mat-accordion>
+  </mat-accordion>
 
 
-  <a mat-raised-button  color="primary" href="users" (click)="this.isUpdateUser?updateUser():createUser(user)">{{ 'EDIT_USER.SAVE' | translate }}</a>
+  <a mat-raised-button color="primary" href="users"
+     (click)="this.isUpdateUser?updateUser():createUser(user)">{{ 'EDIT_USER.SAVE' | translate }}</a>
 </div>
 

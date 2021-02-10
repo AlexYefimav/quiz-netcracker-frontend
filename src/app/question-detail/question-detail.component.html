@@ -19,7 +19,8 @@
         </mat-expansion-panel-header>
         <mat-form-field class="example-form">
           <label>
-            <input matInput placeholder="{{ 'ADD_GAME.QUESTION_DETAIL.TITLE' | translate }}" formControlName="title" (input)="checkForm()" required>
+            <input matInput placeholder="{{ 'ADD_GAME.QUESTION_DETAIL.TITLE' | translate }}" formControlName="title"
+                   (input)="checkForm()" required>
           </label>
           <mat-error *ngIf="questionForm?.get('title').touched && questionForm.get('title').errors?.required">
             {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.REQUIRED' | translate }}
@@ -46,15 +47,19 @@
 
         <mat-form-field class="example-form">
           <label>
-            <input matInput placeholder="{{ 'ADD_GAME.QUESTION_DETAIL.DESCRIPTION' | translate }}" formControlName="description" (input)="checkForm()" required>
+            <input matInput placeholder="{{ 'ADD_GAME.QUESTION_DETAIL.DESCRIPTION' | translate }}"
+                   formControlName="description" (input)="checkForm()" required>
           </label>
-          <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.required">
+          <mat-error
+            *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.required">
             {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.REQUIRED' | translate }}
           </mat-error>
-          <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.duplicate">
+          <mat-error
+            *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.duplicate">
             {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.DUPLICATE_DESCRIPTION' | translate }}
           </mat-error>
-          <mat-error *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.minlength">
+          <mat-error
+            *ngIf="questionForm?.get('description').touched && questionForm.get('description').errors?.minlength">
             {{ 'ADD_GAME.QUESTION_DETAIL.ERROR.MINLENGTH' | translate }}
           </mat-error>
         </mat-form-field>

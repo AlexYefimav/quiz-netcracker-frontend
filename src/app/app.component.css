@@ -1,7 +1,7 @@
 .spinner {
+  position: absolute;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 300px;
   border: 16px solid silver;
   border-top: 16px solid #337AB7;
   border-radius: 50%;
@@ -11,6 +11,7 @@
   top: 50%;
   left: 50%;
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg)
@@ -24,17 +25,19 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 300px;
-  color: white;
+  color: blue;
   width: 4em;
   height: 5em;
   border: 0.5em currentcolor solid;
   border-radius: 0 0 1em 1em;
   position: relative;
 }
+
 .loader-24:after, .loader-24:before {
   position: absolute;
   content: "";
 }
+
 .loader-24:after {
   width: 1em;
   height: 50%;
@@ -44,6 +47,7 @@
   left: calc(100% + 0.5em);
   top: 0.5em;
 }
+
 .loader-24:before {
   width: 0.5em;
   height: 1.5em;
@@ -86,6 +90,7 @@
   -webkit-animation: loader-39-1 30s infinite linear;
   animation: loader-39-1 30s infinite linear;
 }
+
 .loader-39:before, .loader-39:after {
   content: "";
   border-radius: 100%;
@@ -94,12 +99,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .loader-39:before {
   width: 3em;
   height: 10em;
   -webkit-animation: loader-39-2 0.8s linear infinite;
   animation: loader-39-2 0.8s linear infinite;
 }
+
 .loader-39:after {
   width: 10em;
   height: 3em;
@@ -124,6 +131,7 @@
     transform: rotate(360deg);
   }
 }
+
 @-webkit-keyframes loader-39-2 {
   0% {
     box-shadow: 0.4em -0.4em 0 0.2em currentcolor;
@@ -141,6 +149,7 @@
     box-shadow: 0.4em -0.4em 0 0.2em currentcolor;
   }
 }
+
 @keyframes loader-39-2 {
   0% {
     box-shadow: 0.4em -0.4em 0 0.2em currentcolor;

@@ -1,11 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {StorageService} from './storage/storage.service';
 import {catchError} from 'rxjs/operators';
@@ -32,7 +26,8 @@ export class InterceptorService implements HttpInterceptor {
           },
           url: req.url + `?lang=${lang}`
         });
-      }}
+      }
+    }
 
     return next.handle(req).pipe(
       catchError((res) => this.handleError(res))
@@ -57,14 +52,12 @@ export class InterceptorService implements HttpInterceptor {
     if (errorResponse.error) {
       if (errorResponse.error.errorTitle && errorResponse.error.errorCode && errorResponse.error.message) {
         message = `${errorTitle}: ${errorResponse.error.errorTitle}\n` +
-                  `${errorCode}: ${errorResponse.error.errorCode}\n` +
-                  `${errorMessage}: ${errorResponse.error.message}`;
-      }
-      else {
+          `${errorCode}: ${errorResponse.error.errorCode}\n` +
+          `${errorMessage}: ${errorResponse.error.message}`;
+      } else {
         if (errorResponse.status == 401) {
           message = unauthorized;
-        }
-        else {
+        } else {
           message = errorResponse.message;
         }
       }

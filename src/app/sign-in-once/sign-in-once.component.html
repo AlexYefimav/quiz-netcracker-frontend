@@ -5,7 +5,8 @@
     <form [formGroup]="form" (ngSubmit)="submitPlayer()">
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="Username" formControlName="username" [errorStateMatcher]="errorMatcher">
+          <input type="text" matInput placeholder="Username" formControlName="username"
+                 [errorStateMatcher]="errorMatcher">
           <mat-error *ngIf="username.hasError('minlength')">
             {{ 'SIGN_IN.SIGN_UP_ONCE.MINLENGTH' | translate }}
           </mat-error>
@@ -19,11 +20,11 @@
         <button type="submit" mat-button [disabled]="form.invalid || error">Login</button>
         <!--        <a mat-raised-button  color="primary" (click)="register(user)">Save</a>-->
       </div>
-            <div class="text-left">
-              <a class="text-small-ref" (click)="redirect('sign_up')">
-                {{ 'SIGN_IN.SIGN_UP_ONCE.CREATE_ACC' | translate }}
-              </a>
-            </div>
+      <div class="text-left">
+        <a class="text-small-ref" (click)="redirect('sign_up')">
+          {{ 'SIGN_IN.SIGN_UP_ONCE.CREATE_ACC' | translate }}
+        </a>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

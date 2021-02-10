@@ -1,15 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Player} from "../model/player";
-import {PlayerService} from "../service/player.service";
-import {GameAccessService} from "../service/game-access.service";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {Router} from "@angular/router";
-import {PlayerGiveAccessComponent} from "../player-give-access/player-give-access.component";
+import {Player} from '../model/player';
+import {PlayerService} from '../service/player.service';
+import {GameAccessService} from '../service/game-access.service';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {PlayerGiveAccessComponent} from '../player-give-access/player-give-access.component';
 
 @Component({
   selector: 'app-player-block-access',
   templateUrl: './player-block-access.component.html',
-  styleUrls: ['./player-block-access.component.css']
+  styleUrls: ['./player-block-access.component.css', '../app.component.css']
 })
 export class PlayerBlockAccessComponent implements OnInit {
 
@@ -17,23 +16,23 @@ export class PlayerBlockAccessComponent implements OnInit {
   public player: Player;
 
   allComplete: boolean = false;
+  isLoading = true;
 
   constructor(private playerService: PlayerService,
-              private gameAceessService: GameAccessService,
+              private gameAccessService: GameAccessService,
               public dialogRef: MatDialogRef<PlayerBlockAccessComponent>,
               public dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: { gameId, playerId }) {
   }
 
-  async ngOnInit() {
-    this.players = await this.getUser();
+  ngOnInit(): void {
+    this.gameAccessService.getPlayersWithTrueAccess(this.data.gameId).subscribe(players => {
+      this.players = players;
+      this.isLoading = false;
+    });
   }
 
-  private getUser(): Promise<Player[]> {
-    return this.gameAceessService.getPlayersWithTrueAccess(this.data.gameId).toPromise();
-  }
-
-  updateAllComplete() {
+  updateAllComplete(): void {
     this.allComplete = this.players != null && this.players.every(player => player.isCompleted);
   }
 
@@ -44,7 +43,7 @@ export class PlayerBlockAccessComponent implements OnInit {
     return this.players.filter(player => player.isCompleted).length > 0 && !this.allComplete;
   }
 
-  setAll(completed: boolean) {
+  setAll(completed: boolean): void {
     this.allComplete = completed;
     if (this.players == null) {
       return;
@@ -56,13 +55,13 @@ export class PlayerBlockAccessComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  blockAccess(){
+  blockAccess(): void {
     if (this.players == null) {
       return;
     }
     this.players.forEach(player => {
         if (player.isCompleted) {
-          this.gameAceessService.deactivateGameForPlayers(this.data.gameId,player.id).toPromise()
+          this.gameAccessService.deactivateGameForPlayers(this.data.gameId, player.id).subscribe();
         }
       }
     )
@@ -71,7 +70,7 @@ export class PlayerBlockAccessComponent implements OnInit {
 
   giveAccess(gameId, playerId: string): void {
     this.onNoClick();
-    const dialogRef = this.dialog.open(PlayerGiveAccessComponent, {
+    this.dialog.open(PlayerGiveAccessComponent, {
       minWidth: '400px',
       minHeight: '300px',
       data: {gameId: gameId, playerId: playerId}

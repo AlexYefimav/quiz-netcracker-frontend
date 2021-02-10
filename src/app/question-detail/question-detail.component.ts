@@ -1,7 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Question} from '../model/question';
 import {MatAccordion} from '@angular/material/expansion';
-import {AddQuestionValidation} from '../service/validation/add-question-validation';
 import {FormGroup} from '@angular/forms';
 import {CategoryService} from '../service/category.service';
 import {LevelService} from '../service/level.service';
@@ -24,11 +23,16 @@ export class QuestionDetailComponent implements OnInit {
 
   constructor(private categoryService: CategoryService,
               private levelService: LevelService,
-              private photoService: PhotoService) { }
+              private photoService: PhotoService) {
+  }
 
-  async ngOnInit(): Promise<void> {
-    this.categories = await this.getCategoryList();
-    this.levels = await this.getLevelList();
+  ngOnInit(): void {
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
+    });
+    this.levelService.getLevels().subscribe(levels => {
+      this.levels = levels;
+    });
   }
 
   getTitle(): string {
@@ -47,20 +51,12 @@ export class QuestionDetailComponent implements OnInit {
     return this.questionForm?.get('level').value;
   }
 
-  getCategoryList(): Promise<Category[]> {
-    return this.categoryService.getCategories().toPromise();
-  }
-
   getCategoryId(): string {
     for (const category of this.categories) {
       if (this.questionForm.get('category').value === category.title) {
         return category.id;
       }
     }
-  }
-
-  getLevelList(): Promise<Level[]> {
-    return this.levelService.getLevels().toPromise();
   }
 
   getLevelId(): string {

@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchService } from '../search.service';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {SearchService} from '../search.service';
 
 @Component({
   selector: 'app-search-result-list',
@@ -11,9 +9,12 @@ import { map } from 'rxjs/operators';
 export class SearchResultListComponent implements OnInit {
 
   public searchOption;
-  constructor(public searchService: SearchService) {}
 
-  ngOnInit(): void {}
+  constructor(public searchService: SearchService) {
+  }
+
+  ngOnInit(): void {
+  }
 
   deleteGame(gameId: string) {
     this.searchService.deleteGame(gameId).subscribe(searchOption => this.searchOption = searchOption);
