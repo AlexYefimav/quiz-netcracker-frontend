@@ -52,27 +52,35 @@ export class AddGameComponent implements OnInit {
               private photoService: PhotoService) {
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     const currentLanguage = this.localeSettingsService.getLanguage();
     this.translateService.use(currentLanguage);
-    this.categories = await this.getCategories();
-    this.levels = await this.getLevels();
-    this.translateService.use(currentLanguage);
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
+    })
+    this.levelService.getLevels().subscribe(levels => {
+      this.levels = levels;
+    })
+    this.translateService.use(currentLanguage)
+
     if (this.checkAuthorized() != undefined) {
       if (this.route.snapshot.params.gameId != null) {
-        this.game = await this.getGame(this.route.snapshot.params.gameId);
-        this.isUpdateGame = true;
-        this.gameForm = this.updateGameValidation.createGameForm(this.game);
+        this.gameService.getGameById(this.route.snapshot.params.gameId).subscribe(game => {
+          this.game = game;
+          this.isUpdateGame = true;
+          this.gameForm = this.updateGameValidation.createGameForm(this.game);
+          this.isLoading = false;
+        });
       } else {
         this.isUpdateGame = false;
         this.game = new Game();
         this.game.questions = [];
         this.gameForm = this.addGameValidation.createGameForm();
+        this.isLoading = false;
       }
     } else {
       this.redirect('403');
     }
-    this.isLoading = false;
   }
 
   redirect(url: string): void {
@@ -90,18 +98,6 @@ export class AddGameComponent implements OnInit {
       this.authorizedAccount = undefined;
     }
     return this.authorizedAccount;
-  }
-
-  private getGame(gameId: string): Promise<Game> {
-    return this.gameService.getGameById(gameId).toPromise();
-  }
-
-  getCategories(): Promise<Category[]> {
-    return this.categoryService.getCategories().toPromise();
-  }
-
-  getLevels(): Promise<Level[]> {
-    return this.levelService.getLevels().toPromise();
   }
 
   getTitle(): string {
@@ -131,16 +127,6 @@ export class AddGameComponent implements OnInit {
     return this.gameForm.get('photo').value;
   }
 
-  createAndGetGame(game: Game): Promise<Game> {
-    this.game.access = this.selectedAccess;
-    return this.gameService.createGame(game).toPromise();
-  }
-
-  updateAndGetGame(): Promise<Game> {
-    this.game.access = this.selectedAccess;
-    return this.gameService.updateGame(this.game).toPromise();
-  }
-
   redirectTo(uri: string): void {
     this.router.navigate([uri]);
   }
@@ -167,12 +153,15 @@ export class AddGameComponent implements OnInit {
     }
   }
 
-  async updateGame(): Promise<void> {
+  updateGame(): void {
     if (this.gameForm.valid) {
       this.setCategoryIdByName();
       this.setLevelIdByName();
       try {
-        this.game = await this.updateAndGetGame();
+        this.game.access = this.selectedAccess;
+        this.gameService.updateGame(this.game).subscribe(game => {
+          this.game = game;
+        });
       } catch (error) {
         window.setTimeout(() => {
         }, 10000);
@@ -181,16 +170,22 @@ export class AddGameComponent implements OnInit {
     this.redirectTo('player/' + this.authorizedAccount.player);
   }
 
-  async createGame(game: Game): Promise<void> {
+  createGame(game: Game): void {
     if (this.gameForm.valid) {
       this.setCategoryIdByName();
       this.setLevelIdByName();
       try {
         if (game.id) {
-          this.game = await this.updateAndGetGame();
+          this.game.access = this.selectedAccess;
+          this.gameService.updateGame(this.game).subscribe(game => {
+            this.game = game;
+          });
         } else {
           this.game.player = this.storageService.currentUser.id;
-          this.game = await this.createAndGetGame(game);
+          this.game.access = this.selectedAccess;
+          this.gameService.createGame(game).subscribe(game => {
+            this.game = game;
+          });
         }
       } catch (error) {
         window.setTimeout(() => {

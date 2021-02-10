@@ -40,11 +40,11 @@ h1 {
   width: 100%;
 }
 
-.games{
+.games {
   margin-bottom: 100px;
 }
 
-.place{
+.place {
   height: 20px;
 }
 
@@ -62,19 +62,19 @@ h1 {
   flex-wrap: wrap;
 }
 
-.photo{
+.photo {
   margin-top: 40px;
   flex-grow: 1;
 }
 
 .outer-container {
   margin-bottom: 100px;
-  display : flex;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.card{
+.card {
   background: conic-gradient(at 0% 30%, #ffffff 10%, #ffffff 30%, #2fb9e5 50%);
   display: flex;
   flex-direction: column;

@@ -60,12 +60,14 @@ export class AppTopBarComponent implements OnInit {
     this.checkAuthorized();
   }
 
-  async checkAuthorized(): Promise<void> {
+  checkAuthorized(): void {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
         this.authorizedAccount = this.storageService.currentUser;
         this.isAccount = true;
-        this.player = await this.playerService.getPlayerByUserId(this.authorizedAccount.id).toPromise();
+        this.playerService.getPlayerByUserId(this.authorizedAccount.id).subscribe(player => {
+          this.player = player;
+        });
       } else {
         StorageService.clear();
       }

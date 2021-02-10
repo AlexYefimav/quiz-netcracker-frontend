@@ -1,5 +1,5 @@
-import {Game} from "./game";
-import {User} from "./user";
+import {Game} from './game';
+import {User} from './user';
 
 export class Message {
   games: Game[];
@@ -7,4 +7,7 @@ export class Message {
   totalPages: number;
   pageNumber: number;
   pageSize: number;
+
+  constructor() {
+  }
 }

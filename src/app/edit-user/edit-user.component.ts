@@ -9,7 +9,7 @@ import {AbstractControl} from '@angular/forms';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  styleUrls: ['./edit-user.component.css', '../app.component.css']
 })
 export class EditUserComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
@@ -20,31 +20,38 @@ export class EditUserComponent implements OnInit {
   authorizedAccount: User;
   @Input() roleControl: AbstractControl;
   @Output() roleControlChange = new EventEmitter<AbstractControl>();
+  isLoading = true;
 
   constructor(private  userService: UserService,
               private router: Router,
               private  storageService: StorageService,
               private route: ActivatedRoute) {
-
   }
 
   ngOnInit(): void {
     if (this.checkAuthorized() != undefined) {
       if (this.route.snapshot.params.id != undefined) {
         this.isUpdateUser = true;
-        this.getUser(this.route.snapshot.params.id);
+        this.userService.getUserById(this.route.snapshot.params.id).subscribe(user => {
+            this.user = user;
+            this.isLoading = false;
+          }
+        );
       } else {
         this.isUpdateUser = false;
         this.user = new User();
+        this.isLoading = false;
       }
+    } else {
+      this.redirect('403');
     }
-    else { this.redirect('403'); }
 
   }
 
   redirect(url: string): void {
     this.router.navigate([url]);
   }
+
   checkAuthorized(): User {
     if (!StorageService.isEmpty()) {
       if (this.storageService.currentToken) {
@@ -69,14 +76,6 @@ export class EditUserComponent implements OnInit {
     return this.disable;
   }
 
-  private getUser( userId: string): void {
-    this.userService.getUserById(userId).subscribe( user =>
-    {
-      this.user = user;
-    }
-    );
-  }
-
   updateUser(): void {
     this.userService.updateUser(this.user).subscribe(user => this.user = user);
   }
@@ -97,8 +96,7 @@ export class EditUserComponent implements OnInit {
   checkForm(): void {
     if (this.roleControl.valid) {
       this.user.role = this.getRole();
-    }
-    else {
+    } else {
       this.user.role = null;
     }
     this.roleControlChange.emit(this.roleControl);

@@ -17,13 +17,13 @@ export class AddQuestionValidation {
     this.game = game;
   }
 
-  async createQuestionForm(): Promise<FormGroup> {
+  createQuestionForm(): FormGroup {
     return this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(6)]],
       description: ['', [Validators.required, Validators.minLength(6)]],
       category: ['', [Validators.required]],
       level: ['', [Validators.required]],
       photo: ['']
-    }, { validators: this.duplicateValidator.duplicateValidation(this.game.questions) });
+    }, {validators: this.duplicateValidator.duplicateValidation(this.game.questions)});
   }
 }

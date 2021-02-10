@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {Category} from "../model/category";
-import {Level} from "../model/level";
+import {Observable} from 'rxjs';
+import {Level} from '../model/level';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +19,5 @@ export class LevelService {
 
   getLevels(): Observable<Level[]> {
     return this.http.get<Level[]>(this.url);
-  }
-
-  getLevelById(id: string): Observable<Level> {
-    return this.http.get<Level>(this.url + id)
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Game} from '../model/game';
 import {Question} from '../model/question';
 import {MatAccordion} from '@angular/material/expansion';
@@ -32,9 +32,9 @@ export class AddQuestionComponent implements OnInit {
               private router: Router) {
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     if (this.checkAuthorized() != undefined) {
-      await this.initializeProperties();
+      this.initializeProperties();
     } else {
       this.redirect('403');
     }
@@ -57,21 +57,21 @@ export class AddQuestionComponent implements OnInit {
     return this.authorizedAccount;
   }
 
-  async addQuestion(): Promise<void> {
+  addQuestion(): void {
     if (this.questionForm.valid) {
       if (this.game.id == null) {
         this.game.player = this.storageService.currentUser.id;
       }
       this.question.temporaryIndex = this.game.questions.length + 1;
       this.game.questions.push(this.question);
-      await this.initializeProperties();
+      this.initializeProperties();
       this.answerForm = this.answerValidation.createAnswerForm();
     }
   }
 
-  async initializeProperties(): Promise<void> {
+  initializeProperties(): void {
     this.questionValidation.setGame(this.game);
-    this.questionForm = await this.questionValidation.createQuestionForm();
+    this.questionForm = this.questionValidation.createQuestionForm();
     this.question = new Question();
     this.question.answersSet = [];
     this.question.game = this.game.id;

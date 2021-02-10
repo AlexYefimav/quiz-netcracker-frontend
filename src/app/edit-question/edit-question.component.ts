@@ -35,16 +35,15 @@ export class EditQuestionComponent implements OnInit {
               private answerValidation: AddAnswerValidation) {
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     const currentLanguage = this.localSettingsService.getLanguage();
     this.translateService.use(currentLanguage);
-    if(this.checkAuthorized()!=undefined) {
-    this.questionValidation.setGame(this.game);
-    this.questionForm = await this.questionValidation.createQuestionForm(this.question);
-    this.answerValidation.setQuestion(this.question);
-    this.answerForm = this.answerValidation.createAnswerForm();
-    }
-    else this.redirect('403');
+    if (this.checkAuthorized() != undefined) {
+      this.questionValidation.setGame(this.game);
+      this.questionForm = this.questionValidation.createQuestionForm(this.question);
+      this.answerValidation.setQuestion(this.question);
+      this.answerForm = this.answerValidation.createAnswerForm();
+    } else this.redirect('403');
   }
 
   getTitle(): string {

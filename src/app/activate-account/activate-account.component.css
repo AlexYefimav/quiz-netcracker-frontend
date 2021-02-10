@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
   width: 400px;
@@ -8,17 +8,17 @@
   margin-top: 100px;
 }
 
-.header{
+.header {
   margin-left: auto;
   margin-right: auto;
 }
 
-.body{
+.body {
   margin-top: 15px;
   flex-grow: 1;
 }
 
-.action{
+.action {
   margin-left: auto;
   margin-right: auto;
 }

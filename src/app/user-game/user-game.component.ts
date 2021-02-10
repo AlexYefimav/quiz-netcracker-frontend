@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../model/user';
 import {UserService} from '../service/user.service';
 
@@ -10,16 +10,12 @@ import {UserService} from '../service/user.service';
 export class UserGameComponent implements OnInit {
   public users: () => IterableIterator<User>;
 
-  constructor(private userService: UserService) { }
-
-  ngOnInit(): void {
-    this.getUsers();
+  constructor(private userService: UserService) {
   }
 
-  private getUsers(): void {
+  ngOnInit(): void {
     this.userService.getUsers().subscribe(wrapperForUser => {
       this.users = wrapperForUser.values;
     })
   }
-
 }

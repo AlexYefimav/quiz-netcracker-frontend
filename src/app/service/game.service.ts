@@ -68,8 +68,8 @@ export class GameService {
     return this.http.put<Game>(this.url + 'update/' + game.id, game);
   }
 
-  deleteGame(id: string): Observable<Game> {
-    return this.http.delete<Game>(this.url + 'delete/' + id);
+  deleteGame(id: string, playerId: string): Observable<Game> {
+    return this.http.delete<Game>(this.url + 'delete/' + id + "/" + playerId);
   }
 
   uploadFile(formData: FormData): Observable<Photo> {

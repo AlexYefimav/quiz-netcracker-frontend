@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.container{
+.container {
   margin-right: auto;
   margin-left: auto;
 }
@@ -18,7 +18,7 @@
   width: 600px;
 }
 
-.title{
+.title {
   text-align: center;
 }
 
@@ -29,8 +29,17 @@
   margin-top: 15px;
 }
 
-.back{
+.back {
   margin-left: 20px;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
 
+.color-my-button {
+  color: #3f51b5;
+}

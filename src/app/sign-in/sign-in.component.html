@@ -35,12 +35,13 @@
       <p *ngIf="error" class="error">
         {{ error }}
       </p>
-      <p *ngIf="!showErrorMessage" >
+      <p *ngIf="!showErrorMessage">
         {{ 'SIGN_IN.BLOCK' | translate }}
       </p>
       <div class="button">
         <button mat-button (click)="onNoClick()">{{ 'SIGN_IN.EXIT' | translate }}</button>
-        <button type="submit" mat-button [disabled]="form.invalid"   [mat-dialog-close]="dialogAccount">{{ 'SIGN_IN.LOGIN' | translate }}</button>
+        <button type="submit" mat-button [disabled]="form.invalid"
+                [mat-dialog-close]="dialogAccount">{{ 'SIGN_IN.LOGIN' | translate }}</button>
       </div>
 
       <div class="text-left">

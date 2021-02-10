@@ -1,6 +1,9 @@
-import {Player} from "./player";
+import {Player} from './player';
 
-export class Playing{
+export class Playing {
   player: Player;
   answerColor: string[];
+
+  constructor() {
+  }
 }

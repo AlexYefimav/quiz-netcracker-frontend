@@ -1,43 +1,33 @@
-<div class="container">
+<div *ngIf="!isLoading;else loading">
   <div class="header">
     <h1 mat-dialog-title>{{ 'PLAYROOM.TITLE' | translate }}</h1>
   </div>
-  <div class="body">
-    <div class="title">
-      <div class="column-number">
-        <h3>№</h3>
-      </div>
-      <div class="column-name">
-        <h3>{{ 'PLAYROOM.COLUMN_NAME' | translate }}</h3>
-      </div>
-      <div class="column-delete">
-
-      </div>
-    </div>
-    <div *ngFor="let player of data.gameRoom.players; let i = index">
-      <div class="players">
-        <div class="column-number">
-          {{i + 1}}
-        </div>
-        <div class="column-name">
-          {{player.name}}
-        </div>
-        <div class="column-delete" *ngIf="this.data.gameRoom.players[0].id==this.data.player.id">
-          <button mat-icon-button (click)="deletePlayer(player.id)" >
+  <div>
+    <table cellspacing="0">
+      <tr>
+        <th>No.</th>
+        <th><span class="column-player">{{ 'PLAYROOM.COLUMN_NAME' | translate }}</span></th>
+        <th>&nbsp;</th>
+      </tr>
+      <tr *ngFor="let player of data.gameRoom.players; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{player.name}}</td>
+        <td class="column-delete" *ngIf="this.data.gameRoom.players[0].id==this.data.player.id">
+          <button mat-icon-button (click)="deletePlayer(player.id)">
             <mat-icon>clear</mat-icon>
           </button>
-        </div>
-      </div>
-    </div>
+        </td>
+      </tr>
+    </table>
   </div>
   <div class="actions">
     <div mat-dialog-actions>
       <div class="close">
-        <button mat-button mat-dialog-close>{{ 'PLAYROOM.BUTTON_LEAVE' | translate }}</button>
+        <button mat-button mat-dialog-close class="color-my-button">{{ 'PLAYROOM.BUTTON_LEAVE' | translate }}</button>
       </div>
       <div *ngIf="this.data.gameRoom.players[0].id==this.data.player.id; else notFirstPlayer">
         <div class="play">
-          <a mat-button (click)="startGame()" style="right: 0">{{ 'PLAYROOM.BUTTON_PLAY' | translate }}</a>
+          <a mat-button (click)="startGame()" class="color-my-button">{{ 'PLAYROOM.BUTTON_PLAY' | translate }}</a>
         </div>
       </div>
       <ng-template #notFirstPlayer>
@@ -48,3 +38,6 @@
     </div>
   </div>
 </div>
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

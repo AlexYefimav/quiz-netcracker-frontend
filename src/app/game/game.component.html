@@ -1,99 +1,104 @@
-<app-widget-search-bar-button></app-widget-search-bar-button>
-<div class="container">
-  <mat-card class="search">
-    <mat-card-title>{{ 'GAME.FILTERS' | translate }}</mat-card-title>
-    <mat-card-subtitle>
-      <mat-expansion-panel>
-        <mat-panel-title>
-          <mat-radio-group>
-            <mat-radio-button class="example-margin" value="name" (click)="sortByTitle()">
-              {{ 'FILTERS.NAME' | translate }}
-            </mat-radio-button>
-            <mat-radio-button class="example-margin" value="views" (click)="sortByViews()">
-              {{ 'FILTERS.VIEWS' | translate }}
-            </mat-radio-button>
-          </mat-radio-group>
-        </mat-panel-title>
-        <mat-expansion-panel-header>
-          {{ 'FILTERS.FILTERS' | translate }}
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-      <!--    <button class="btn btn-outline-success" type="submit" (click)="">-->
-      <!--      {{ 'FILTERS.APPLY' | translate }}-->
-      <!--    </button>-->
-    </mat-card-subtitle>
-    <mat-card-subtitle>
-      <mat-expansion-panel>
-        <mat-panel-title>
-          <mat-radio-group>
-            <mat-radio-button *ngFor="let gameCategory of gameCategories" value="{{gameCategory.title}}"
-                              (click)="sortByCategory(gameCategory.id)">
-              {{gameCategory.title}}
-            </mat-radio-button>
-          </mat-radio-group>
-        </mat-panel-title>
-        <mat-expansion-panel-header>
-          {{ 'FILTERS.CATEGORIES' | translate }}
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-    </mat-card-subtitle>
+<div *ngIf="!isLoading; else loading">
+  <app-widget-search-bar-button></app-widget-search-bar-button>
+  <div class="container">
+    <mat-card class="search">
+      <mat-card-title>{{ 'GAME.FILTERS' | translate }}</mat-card-title>
+      <mat-card-subtitle>
+        <mat-expansion-panel>
+          <mat-panel-title>
+            <mat-radio-group>
+              <mat-radio-button class="example-margin" value="name" (click)="sortByTitle()">
+                {{ 'FILTERS.NAME' | translate }}
+              </mat-radio-button>
+              <mat-radio-button class="example-margin" value="views" (click)="sortByViews()">
+                {{ 'FILTERS.VIEWS' | translate }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-panel-title>
+          <mat-expansion-panel-header>
+            {{ 'FILTERS.FILTERS' | translate }}
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <!--    <button class="btn btn-outline-success" type="submit" (click)="">-->
+        <!--      {{ 'FILTERS.APPLY' | translate }}-->
+        <!--    </button>-->
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        <mat-expansion-panel>
+          <mat-panel-title>
+            <mat-radio-group>
+              <mat-radio-button *ngFor="let gameCategory of gameCategories" value="{{gameCategory.title}}"
+                                (click)="sortByCategory(gameCategory.id)">
+                {{gameCategory.title}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-panel-title>
+          <mat-expansion-panel-header>
+            {{ 'FILTERS.CATEGORIES' | translate }}
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </mat-card-subtitle>
 
-  </mat-card>
-</div>
+    </mat-card>
+  </div>
 
-<div class="outer-container">
-  <form>
-    <div class="inner-container">
-      <div *ngFor="let game of pageSlice" style="margin-left: 100px;">
-        <mat-card class="card">
-          <mat-card-title>
-            <svg viewbox="0 0 100 20">
-              <defs>
-                <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="5%" stop-color="#326384"/>
-                  <stop offset="95%" stop-color="#123752"/>
-                </linearGradient>
-                <pattern id="wave" x="0" y="0" width="120" height="20" patternUnits="userSpaceOnUse">
-                  <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z"
-                        mask="url(#mask)" fill="url(#gradient)">
-                    <animateTransform
-                      attributeName="transform"
-                      begin="0s"
-                      dur="1.5s"
-                      type="translate"
-                      from="0,0"
-                      to="40,0"
-                      repeatCount="indefinite"/>
-                  </path>
-                </pattern>
-              </defs>
-              <text text-anchor="middle" x="150" y="15" font-size="20" fill="url(#wave)"
-                    fill-opacity="0.6">{{game.title}}</text>
-              <text text-anchor="middle" x="150" y="15" font-size="20" fill="url(#gradient)"
-                    fill-opacity="0.1">{{game.title}}</text>
-            </svg>
-          </mat-card-title>
-          <div class="photo" *ngIf="game.photo">
-            <a><img src="{{game.photo}}" width="200" height="200" alt="Photo from Amazon S3" class="round"></a>
-          </div>
-          <mat-card-subtitle style="margin-top: 20px;">
-            <a mat-raised-button href="/game/{{game.id}}">{{ 'GAME.VIEW' | translate }}</a>
-          </mat-card-subtitle>
-        </mat-card>
+  <div class="outer-container">
+    <form>
+      <div class="inner-container">
+        <div *ngFor="let game of pageSlice" style="margin-left: 100px;">
+          <mat-card class="card">
+            <mat-card-title>
+              <svg viewbox="0 0 100 20">
+                <defs>
+                  <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="5%" stop-color="#326384"/>
+                    <stop offset="95%" stop-color="#123752"/>
+                  </linearGradient>
+                  <pattern id="wave" x="0" y="0" width="120" height="20" patternUnits="userSpaceOnUse">
+                    <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z"
+                          mask="url(#mask)" fill="url(#gradient)">
+                      <animateTransform
+                        attributeName="transform"
+                        begin="0s"
+                        dur="1.5s"
+                        type="translate"
+                        from="0,0"
+                        to="40,0"
+                        repeatCount="indefinite"/>
+                    </path>
+                  </pattern>
+                </defs>
+                <text text-anchor="middle" x="150" y="15" font-size="20" fill="url(#wave)"
+                      fill-opacity="0.6">{{game.title}}</text>
+                <text text-anchor="middle" x="150" y="15" font-size="20" fill="url(#gradient)"
+                      fill-opacity="0.1">{{game.title}}</text>
+              </svg>
+            </mat-card-title>
+            <div class="photo" *ngIf="game.photo">
+              <a><img src="{{game.photo}}" width="200" height="200" alt="Photo from Amazon S3" class="round"></a>
+            </div>
+            <mat-card-subtitle style="margin-top: 20px;">
+              <a mat-raised-button href="/game/{{game.id}}">{{ 'GAME.VIEW' | translate }}</a>
+            </mat-card-subtitle>
+          </mat-card>
+        </div>
       </div>
+      <a mat-mini-fab color="primary" href="game/create" style="margin-top: 20px;">
+        <mat-icon>add</mat-icon>
+      </a>
+    </form>
+  </div>
+  <div class="place"></div>
+  <div>
+    <div class="footer">
+      <mat-paginator [length]="this.games?.length"
+                     [pageSize]="3"
+                     [pageSizeOptions]="[3,6, games?.length]"
+                     (page)="OnPageChange($event)">
+      </mat-paginator>
     </div>
-    <a mat-mini-fab color="primary" href="game/create" style="margin-top: 20px;">
-      <mat-icon>add</mat-icon>
-    </a>
-  </form>
-</div>
-<div class="place"></div>
-<div>
-  <div class="footer">
-    <mat-paginator [length]="this.games?.length"
-                   [pageSize]="3"
-                   [pageSizeOptions]="[3,6, games?.length]"
-                   (page)="OnPageChange($event)">
-    </mat-paginator>
   </div>
 </div>
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>
