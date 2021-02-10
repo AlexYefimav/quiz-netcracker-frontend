@@ -11,7 +11,7 @@
       </tr>
       <tr *ngFor="let player of data.gameRoom.players; let i = index">
         <td>{{i + 1}}</td>
-        <td>{{player.name}}</td>
+        <td>{{player.login}}</td>
         <td class="column-delete" *ngIf="this.data.gameRoom.players[0].id==this.data.player.id">
           <button mat-icon-button (click)="deletePlayer(player.id)">
             <mat-icon>clear</mat-icon>
