@@ -67,7 +67,7 @@ export class SignInComponent implements OnInit {
         }
       );
       this.user.password = undefined;
-      this.userService.getUserByLoginOrEmail(this.user.username).subscribe(
+      this.userService.getUserByLoginOrEmail(this.user.login).subscribe(
         user => {
           this.user = user;
           if (this.user.active) {
