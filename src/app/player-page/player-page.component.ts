@@ -62,8 +62,17 @@ export class PlayerPageComponent implements OnInit {
   }
 
   deleteGame(id: string): void {
+    this.isLoading = true;
     this.gameService.deleteGame(id, this.player.id).subscribe(()=>{
+      alert("DELETE")
       this.createdGames = this.createdGames.filter(g => g.id != id);
+      this.statisticsService.getGameWithStatistics(this.player.id).subscribe(passedGame=>{
+        this.passedGame = passedGame;
+        for (let i = 0; i < this.passedGame.length; i++) {
+          this.passedGame[i].index = i + 1;
+        }
+        this.isLoading = false;
+      });
     });
   }
 

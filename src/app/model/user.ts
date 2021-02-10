@@ -9,6 +9,7 @@ export class User {
   isAuthenticated: boolean;
   usersSet: User[];
   active: boolean;
+  username: string;
 
    constructor() {
   }
