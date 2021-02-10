@@ -7,15 +7,13 @@ table {
 }
 
 h1 {
-  color: #c2185b;
   text-align: center;
   margin-top: 2%;
+  color: #6464e2;
+  text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black, 3px 3px 6px rgba(0,0,0,.5);
 }
 
 .center {
   text-align: center;
 }
 
-.title {
-  /*  свойство для отступа от левой колонки*/
-}
