@@ -50,4 +50,7 @@ export class PlayerService {
   delete(id: string): Observable<Player> {
     return this.http.delete<Player>(this.url + '/delete/' + id);
   }
+  deleteGame(id: string, playerId: string): Observable<Game> {
+    return this.http.delete<Game>(this.url + '/deleteGame/' + id + "/" + playerId);
+  }
 }
