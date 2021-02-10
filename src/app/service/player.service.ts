@@ -39,10 +39,6 @@ export class PlayerService {
     return this.http.get<Player[]>(this.url);
   }
 
-  getPlayersByAccess(): Observable<Player[]> {
-    return this.http.get<Player[]>(this.url);
-  }
-
   saveGuest(login: string): Observable<Player> {
     return this.http.post<Player>(this.url + "/register-guest", login);
   }

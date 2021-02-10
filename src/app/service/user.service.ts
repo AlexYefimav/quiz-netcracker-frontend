@@ -42,17 +42,8 @@ export class UserService {
     return this.http.get<User>(this.url + "users/findUser/" + userId);
   }
 
-
-  getUserByLogin(username: string): Observable<User> {
-    return this.http.get<User>(`${this.url}users/${username}`);
-  }
-
   getUserByLoginOrEmail(username: string): Observable<User> {
     return this.http.get<User>(`${this.url}users/${username}`);
-  }
-
-  checkUserByLoginOrEmail(username: string): Observable<User> {
-    return this.http.get<User>(`${this.url}users/check/${username}`);
   }
 
   createUser(user: User): Observable<User> {

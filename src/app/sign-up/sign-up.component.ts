@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -7,8 +7,6 @@ import {MatAccordion} from "@angular/material/expansion";
 import {SigninService} from "../service/signin.service";
 import {SignUpValidation} from "../service/validation/sign-up-validator";
 import {UserService} from "../service/user.service";
-import {CountdownComponent, CountdownEvent} from "ngx-countdown";
-import {ActivateCode} from "../model/activate-code";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TranslateService} from '@ngx-translate/core';
 

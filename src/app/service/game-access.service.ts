@@ -22,12 +22,6 @@ export class GameAccessService {
        return this.http.get<boolean>(this.url+'/check/' + gameId+'/'+playerId);
   }
 
-  getGameAccessByGameAndPlayer(gameId,playerId: string): Observable<GameAccess> {
-   // return this.http.get<GameAccess>(this.url+'/' + gameId+'/'+playerId);
-    window.alert("ddd"+gameId+" "+playerId);
-    return this.http.get<GameAccess>('http://localhost:8443/game-access/353a7c22-28ef-4d43-b03d-f9a02c4d3e81/b2f3c218-8ac8-41c6-b136-ab4ce8005338');
-  }
-
   sendActivateCode(gameId,playerId: string): Observable<boolean> {
     return this.http.get<boolean>(this.url+'/sendActivateCode/' + gameId+'/'+playerId);
   }
