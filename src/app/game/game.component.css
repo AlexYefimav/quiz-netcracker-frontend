@@ -49,7 +49,7 @@ h1 {
 }
 
 .app-widget-search-bar {
-  max-width: 500px;
+  max-width: 100%;
   padding-bottom: 50px;
   margin: auto;
 }
@@ -83,13 +83,13 @@ h1 {
   box-shadow: 0 0 7px #666;
 }
 
-.round{
+.round {
   border-radius: 100px;
   box-shadow: 0 0 7px #666;
 }
 
-svg{
-  font-weight:bold;
-  max-width:600px;
-  height:27px;
+svg {
+  font-weight: bold;
+  max-width: 600px;
+  height: 27px;
 }
