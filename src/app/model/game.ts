@@ -9,8 +9,8 @@ export class Game {
   photo: string;
   player: string;
   index: number;
-  access: string;
   gameCategory: string;
+  access: string;
   views: string;
 
   constructor() {
