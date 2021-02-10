@@ -63,7 +63,7 @@ h1 {
 }
 
 .photo {
-  margin-top: 40px;
+  margin-top: 35px;
   flex-grow: 1;
 }
 
@@ -98,10 +98,15 @@ h1 {
 
 svg {
   font-weight: bold;
-  max-width: 600px;
-  height: 27px;
+  max-width: 150px;
+  height: 17px;
 }
 
 .example-margin {
   width: 200px;
+}
+
+.mat-card-title {
+  color: lightskyblue;
+  font-size: 19px;
 }

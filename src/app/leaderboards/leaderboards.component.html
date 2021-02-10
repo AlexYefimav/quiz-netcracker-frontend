@@ -6,11 +6,11 @@
       <div class="player">{{'LEADERS.NAME' | translate}}</div>
       <div class="rating">{{'LEADERS.RATING' | translate}}</div>
     </mat-card>
-    <div *ngFor="let entry of map.entries(); let i = index">
+    <div *ngFor="let entry of getValueOfMap; let i = index">
       <mat-card class="title">
         <div class="position">{{i + 1}}</div>
-        <div class="player">{{entry[0]}}</div>
-        <div class="rating">{{entry[1].toFixed(2)}}</div>
+        <div class="player">{{entry}}</div>
+        <div class="rating">{{map.get(entry).toFixed(2)}}</div>
       </mat-card>
     </div>
   </div>
