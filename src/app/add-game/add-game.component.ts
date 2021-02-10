@@ -210,7 +210,7 @@ export class AddGameComponent implements OnInit {
     formData.append('file', this.picture);
     this.photoService.uploadFile(formData).subscribe((result) => {
       this.game.photo = result.photo;
-      this.gameForm.get('photo').patchValue(this.picture.name);
+      this.gameForm.get('photo').patchValue(this.picture.login);
     });
   }
 }

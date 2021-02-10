@@ -67,7 +67,7 @@ export class EditUserComponent implements OnInit {
 
   isDisable(): string {
     if (this.user.login != null && this.user.login != '' &&
-      this.user.mail != null && this.user.mail != '' &&
+      this.user.email != null && this.user.email != '' &&
       this.user.role != null) {
       this.disable = 'false';
     } else {
@@ -101,5 +101,4 @@ export class EditUserComponent implements OnInit {
     }
     this.roleControlChange.emit(this.roleControl);
   }
-
 }

@@ -16,12 +16,13 @@ mat-dialog-content {
 .error {
   padding: 16px;
   width: 300px;
-  color: white;
+  color: steelblue;
   background-color: red;
 }
 
 .button {
   display: flex;
+  color: steelblue;
   justify-content: flex-end;
 }
 

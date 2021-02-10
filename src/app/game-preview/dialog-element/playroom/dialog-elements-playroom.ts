@@ -20,7 +20,7 @@ export class DialogElementsPlayroom {
 
   deletePlayer(id: string) {
     let message = {
-      name: this.data.player.name,
+      name: this.data.player.login,
       recipientId: id,
       gameRoomId: this.data.gameRoom.id
     }

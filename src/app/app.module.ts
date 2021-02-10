@@ -57,7 +57,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {EditPlayerComponent} from './edit-player/edit-player.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {CountdownModule} from 'ngx-countdown';
-import {SignInOnceComponent} from './sign-in-once/sign-in-once.component';
 import {LeaderboardsComponent} from './leaderboards/leaderboards.component';
 import {ClipboardModule} from 'ngx-clipboard';
 import {PlayerBlockAccessComponent} from './player-block-access/player-block-access.component';
@@ -107,7 +106,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomepageComponent,
     GameCategoryComponent,
     EditPlayerComponent,
-    SignInOnceComponent,
     PlayerBlockAccessComponent,
     PlayerGiveAccessComponent,
     LeaderboardsComponent,
