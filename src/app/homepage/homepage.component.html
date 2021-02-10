@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<div *ngIf="!isLoading;else loading">
 
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
@@ -16,36 +16,33 @@
 
 <!-- Container (About Section) -->
 <div class="w3-content w3-container w3-padding-64" id="about">
-  <h3 class="w3-center">ABOUT US</h3>
-  <p> Hello everyone, we are team from Netcracker educational sector and we pleased to show your our new project.
-    We created a new platform where you can play different quiz online alone or with other players. Also you can
-  create your own quiz, which can be on any topic and play it with your friends! We hope, that you would enjoy it
-  as we do.</p>
+  <h3 class="w3-center">{{'HOMEPAGE.ABOUT_US' | translate}}</h3>
+  <p> {{'HOMEPAGE.ABOUT_US_DESC' | translate}}</p>
 </div>
 
 <!-- Second Parallax Image with Portfolio Text -->
 <div class="bgimg-2 w3-display-container w3-opacity-min">
   <div class="w3-display-middle">
   <a href="/games">
-    <span class="w3-xxlarge w3-text-white w3-wide">Begin to play!</span>
+    <span class="w3-xxlarge w3-text-white w3-wide">{{'HOMEPAGE.BEGIN_PLAY' | translate}}</span>
   </a>
   </div>
 </div>
 
 <div class="w3-content w3-container w3-padding-64" id="about">
-  <h3 class="w3-center">HOW TO START PLAYING</h3>
-  <p> In order to feel comfortable and be able to create and modify your own games you need to
-    <a href="/sign_up">sign up</a>. If you are already registered - try to sign in.</p>
+  <h3 class="w3-center">{{'HOMEPAGE.HOW_TO_PLAY' | translate}}</h3>
+  <p> {{'HOMEPAGE.HOW_TO_PLAY_DESC_1' | translate}}
+    <a href="/sign_up">{{'HOMEPAGE.HOW_TO_PLAY_HREF' | translate}}</a>. {{'HOMEPAGE.HOW_TO_PLAY_DESC_2' | translate}}</p>
 </div>
 
 <div class="bgimg-2 w3-display-container w3-opacity-min">
   <div class="w3-display-middle">
-    <span class="w3-xxlarge w3-text-white w3-wide">Most Popular Games</span>
+    <span class="w3-xxlarge w3-text-white w3-wide">{{'HOMEPAGE.MOST_POPULAR_GAMES' | translate}}</span>
   </div>
 </div>
 
 <div class="w3-content w3-container w3-padding-64" id="about">
-  <h3 class="w3-center">TOP 3 POPULAR GAMES</h3>
+  <h3 class="w3-center">{{'HOMEPAGE.TOP_3_GAMES' | translate}}</h3>
   <mat-card>
     <mat-panel-title>
       {{ 'HOMEPAGE.POPULAR_GAMES' | translate }}
@@ -65,13 +62,13 @@
 
 <div class="bgimg-2 w3-display-container w3-opacity-min">
   <div class="w3-display-middle">
-      <span class="w3-xxlarge w3-text-white w3-wide">Advertisement</span>
+      <span class="w3-xxlarge w3-text-white w3-wide">{{ 'HOMEPAGE.ADVERTISEMENT' | translate }}</span>
   </div>
 </div>
 
 <div class="w3-content w3-container w3-padding-64" id="about">
-  <h3 class="w3-center">CONTACT US</h3>
-  <p> You can always contact us using social media links at the bottom of the page.</p>
+  <h3 class="w3-center">{{ 'HOMEPAGE.CONTACT_US' | translate }}</h3>
+  <p>{{ 'HOMEPAGE.CONTACT_US_DESC' | translate }}</p>
 </div>
 
 
@@ -113,7 +110,8 @@
 
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
-  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>
+    {{ 'HOMEPAGE.FOOTER_TOP' | translate }}</a>
   <div class="w3-xlarge w3-section">
     <a href="https://www.facebook.com/NetCrackerTech/">
       <i class="fa fa-facebook-official w3-hover-opacity"></i>
@@ -131,5 +129,10 @@
       <i class="fa fa-linkedin w3-hover-opacity"></i>
     </a>
   </div>
-  <p>Special thanks to our mentors <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green"></a></p>
+  <p>  {{ 'HOMEPAGE.SPECIAL_THANKS' | translate }}<a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green"></a></p>
 </footer>
+
+</div>
+<ng-template #loading>
+  <div class="spinner"></div>
+</ng-template>

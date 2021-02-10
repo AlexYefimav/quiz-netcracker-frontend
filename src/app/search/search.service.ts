@@ -16,6 +16,7 @@ export class SearchService {
     id: null,
     description: null,
     title: null,
+    photo: null,
   });
 
   private selectedOptions = new BehaviorSubject<SearchOption[]>([]);
