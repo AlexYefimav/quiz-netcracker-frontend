@@ -1,12 +1,11 @@
 export class User {
   id: string;
-  login: string;
+  login: string
   username: string;
   password: string;
-  mail: string;
+  email: string;
   role: string;
   player: string;
-  isActive: boolean;
   isAuthenticated: boolean;
   usersSet: User[];
   active: boolean;
@@ -14,13 +13,8 @@ export class User {
   index: number;
   temporaryIndex: number;
 
-  constructor() {
+   constructor() {
   }
 
-  equals(anotherAnswer: User): boolean {
-    return anotherAnswer.id == this.id
-      && anotherAnswer.login == this.login
-      && anotherAnswer.mail == this.mail;
-  }
 }
 

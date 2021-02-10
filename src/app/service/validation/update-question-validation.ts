@@ -41,12 +41,12 @@ export class UpdateQuestionValidation {
     if (this.categories == null) {
       this.categoryService.getCategories().subscribe(categories => {
         this.categories = categories;
-      })
-    }
-    for (const category of this.categories) {
-      if (category.id === categoryId) {
-        return category.title;
-      }
+        for (const category of this.categories) {
+          if (category.id === categoryId) {
+            return category.title;
+          }
+        }
+      });
     }
   }
 
@@ -57,12 +57,12 @@ export class UpdateQuestionValidation {
     if (this.levels == null) {
       this.levelService.getLevels().subscribe(levels => {
         this.levels = levels;
-      })
-    }
-    for (const level of this.levels) {
-      if (level.id === levelId) {
-        return level.title;
-      }
+        for (const level of this.levels) {
+          if (level.id === levelId) {
+            return level.title;
+          }
+        }
+      });
     }
   }
 

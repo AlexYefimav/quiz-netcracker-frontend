@@ -13,13 +13,13 @@
                     <mat-form-field>
                       <input type="text" matInput placeholder="Username" formControlName="login"
                              [errorStateMatcher]="errorMatcher">
-                      <mat-error *ngIf="login.hasError('minlength')">
+                      <mat-error *ngIf="userForm.get('login').errors?.minlength">
                         {{ 'SIGN_UP.LOGIN_3_CHARACTERS' | translate }}
                       </mat-error>
-                      <mat-error *ngIf="login.hasError('required')">
+                      <mat-error *ngIf="userForm.get('login').errors?.required">
                         {{ 'SIGN_UP.REQUIRED_LOGIN' | translate }}
                       </mat-error>
-                      <mat-error *ngIf="login.hasError('duplicate')">
+                      <mat-error *ngIf="userForm.get('login').errors?.duplicate">
                         {{ 'SIGN_UP.DUPLICATE_LOGIN' | translate }}
                       </mat-error>
                     </mat-form-field>
@@ -27,15 +27,15 @@
 
                   <p>
                     <mat-form-field>
-                      <input type="email" matInput placeholder="Email" formControlName="mail"
+                      <input type="email" matInput placeholder="Email" formControlName="email"
                              [errorStateMatcher]="errorMatcher">
-                      <mat-error *ngIf="mail.hasError('email') && !mail.hasError('required')">
-                        {{ 'SIGN_UP.VALID_EMAIL' | translate }}
+                      <mat-error *ngIf="userForm?.get('email').touched && userForm.get('email').errors?.required">
+                        {{ 'SIGN_UP.VALID_Email' | translate }}
                       </mat-error>
-                      <mat-error *ngIf="mail.hasError('required')">
-                        {{ 'SIGN_UP.REQUIRED_EMAIL' | translate }}
+                      <mat-error *ngIf="userForm.get('email').errors?.required">
+                        {{ 'SIGN_UP.REQUIRED_Email' | translate }}
                       </mat-error>
-                      <mat-error *ngIf="mail.hasError('duplicate')">
+                      <mat-error *ngIf="userForm.get('email').errors?.duplicate">
                         {{ 'SIGN_UP.DUPLICATE_EMAIL' | translate }}
                       </mat-error>
                     </mat-form-field>
@@ -45,10 +45,10 @@
                     <mat-form-field>
                       <input type="password" matInput placeholder="Password" formControlName="password"
                              [errorStateMatcher]="errorMatcher">
-                      <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required')">
+                      <mat-error *ngIf="userForm.get('password').errors?.minlength && !userForm.get('password').errors?.required">
                         {{ 'SIGN_UP.PASSWORD_6_CHARACTERS' | translate }}
                       </mat-error>
-                      <mat-error *ngIf="password.hasError('required')">
+                      <mat-error *ngIf="userForm.get('password').errors?.required">
                         {{ 'SIGN_UP.REQUIRED_PASSWORD' | translate }}
                       </mat-error>
                     </mat-form-field>
@@ -62,7 +62,7 @@
                       <mat-error *ngIf="!checkPasswords()">
                         {{ 'SIGN_UP.PASSWORD_DO_NOT_MATCH' | translate }}
                       </mat-error>
-                      <mat-error *ngIf="passwordRepeat.hasError('required')">
+                      <mat-error *ngIf="userForm.get('password').errors?.required">
                         {{ 'SIGN_UP.CONFIRM_PASSWORD' | translate }}
                       </mat-error>
                     </mat-form-field>

@@ -27,7 +27,7 @@ export class SignUpValidation {
   createUserForm(): FormGroup {
     return this.formBuilder.group({
       login: ['', [Validators.required, Validators.minLength(3)]],
-      mail: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       passwordRepeat: ['', [Validators.required]]
     }, {validators: this.duplicateValidator.duplicateValidation(this.users)});

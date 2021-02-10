@@ -10,7 +10,7 @@ import {User} from '../../model/user';
 })
 export class DuplicateValidator {
 
-  possibleDuplicateProperties = ['title', 'description', 'login', 'mail'];
+  possibleDuplicateProperties = ['title', 'description', 'login', 'email'];
   comparingValue: string;
   propertyName: string;
 

@@ -9,13 +9,12 @@ import {User} from '../model/user';
 import {AbstractControl, FormGroup} from '@angular/forms';
 import {UpdateGameValidation} from '../service/validation/update-game-validation';
 import {AddGameValidation} from '../service/validation/add-game-validation';
-import {TranslateService} from '@ngx-translate/core';
-import {LocalSettingsService} from '../service/localization/LocalSettingsService';
 import {CategoryService} from '../service/category.service';
 import {LevelService} from '../service/level.service';
 import {Category} from '../model/category';
 import {Level} from '../model/level';
 import {PhotoService} from '../service/photo.service';
+import {PlayerService} from '../service/player.service';
 
 @Component({
   selector: 'app-add-game',
@@ -34,8 +33,8 @@ export class AddGameComponent implements OnInit {
   authorizedAccount: User;
   @Input() accessControl: AbstractControl;
   @Output() accessControlChange = new EventEmitter<AbstractControl>();
-  categories: Category[];
-  levels: Level[];
+  categories: Category[] = [];
+  levels: Level[] = [];
   isLoading = true;
 
   constructor(private gameService: GameService,
@@ -44,43 +43,38 @@ export class AddGameComponent implements OnInit {
               private storageService: StorageService,
               private addGameValidation: AddGameValidation,
               private updateGameValidation: UpdateGameValidation,
-              private translateService: TranslateService,
-              private localeSettingsService: LocalSettingsService,
               private router: Router,
               private categoryService: CategoryService,
               private levelService: LevelService,
-              private photoService: PhotoService) {
+              private photoService: PhotoService,
+              private playerService: PlayerService) {
   }
 
   ngOnInit(): void {
-    const currentLanguage = this.localeSettingsService.getLanguage();
-    this.translateService.use(currentLanguage);
     this.categoryService.getCategories().subscribe(categories => {
       this.categories = categories;
+      this.levelService.getLevels().subscribe(levels => {
+        this.levels = levels;
+        if (this.checkAuthorized() != undefined) {
+          if (this.route.snapshot.params.gameId != null) {
+            this.gameService.getGameById(this.route.snapshot.params.gameId).subscribe(game => {
+              this.game = game;
+              this.isUpdateGame = true;
+              this.gameForm = this.updateGameValidation.createGameForm(this.game);
+              this.isLoading = false;
+            });
+          } else {
+            this.isUpdateGame = false;
+            this.game = new Game();
+            this.game.questions = [];
+            this.gameForm = this.addGameValidation.createGameForm();
+            this.isLoading = false;
+          }
+        } else {
+          this.redirect('403');
+        }
+      })
     })
-    this.levelService.getLevels().subscribe(levels => {
-      this.levels = levels;
-    })
-    this.translateService.use(currentLanguage)
-
-    if (this.checkAuthorized() != undefined) {
-      if (this.route.snapshot.params.gameId != null) {
-        this.gameService.getGameById(this.route.snapshot.params.gameId).subscribe(game => {
-          this.game = game;
-          this.isUpdateGame = true;
-          this.gameForm = this.updateGameValidation.createGameForm(this.game);
-          this.isLoading = false;
-        });
-      } else {
-        this.isUpdateGame = false;
-        this.game = new Game();
-        this.game.questions = [];
-        this.gameForm = this.addGameValidation.createGameForm();
-        this.isLoading = false;
-      }
-    } else {
-      this.redirect('403');
-    }
   }
 
   redirect(url: string): void {
@@ -154,6 +148,7 @@ export class AddGameComponent implements OnInit {
   }
 
   updateGame(): void {
+    this.isLoading = true;
     if (this.gameForm.valid) {
       this.setCategoryIdByName();
       this.setLevelIdByName();
@@ -161,16 +156,18 @@ export class AddGameComponent implements OnInit {
         this.game.access = this.selectedAccess;
         this.gameService.updateGame(this.game).subscribe(game => {
           this.game = game;
+          this.redirectTo('player/' + this.authorizedAccount.player);
         });
       } catch (error) {
         window.setTimeout(() => {
         }, 10000);
       }
     }
-    this.redirectTo('player/' + this.authorizedAccount.player);
+
   }
 
   createGame(game: Game): void {
+    this.isLoading = true;
     if (this.gameForm.valid) {
       this.setCategoryIdByName();
       this.setLevelIdByName();
@@ -179,12 +176,18 @@ export class AddGameComponent implements OnInit {
           this.game.access = this.selectedAccess;
           this.gameService.updateGame(this.game).subscribe(game => {
             this.game = game;
+            this.redirectTo('player/' + this.authorizedAccount.player);
           });
         } else {
-          this.game.player = this.storageService.currentUser.id;
-          this.game.access = this.selectedAccess;
-          this.gameService.createGame(game).subscribe(game => {
-            this.game = game;
+          let player;
+          this.playerService.getPlayerByUserId(this.storageService.currentUser.id).subscribe(p => {
+            player = p;
+            this.game.player = player.id;
+            this.game.access = this.selectedAccess;
+            this.gameService.createGame(game).subscribe(game => {
+              this.game = game;
+              this.redirectTo('player/' + this.authorizedAccount.player);
+            });
           });
         }
       } catch (error) {
@@ -192,7 +195,6 @@ export class AddGameComponent implements OnInit {
         }, 10000);
       }
     }
-    this.redirectTo('player/' + this.authorizedAccount.player);
   }
 
   checkForm(): void {
@@ -210,7 +212,7 @@ export class AddGameComponent implements OnInit {
     formData.append('file', this.picture);
     this.photoService.uploadFile(formData).subscribe((result) => {
       this.game.photo = result.photo;
-      this.gameForm.get('photo').patchValue(this.picture.name);
+      this.gameForm.get('photo').patchValue(this.picture.login);
     });
   }
 }

@@ -24,7 +24,7 @@
           <h1>{{ 'PLAYER_PAGE.PERSONAL_DATA' | translate }}</h1>
         </div>
         <div class="data">
-          <h3 *ngIf="player">{{ 'PLAYER_PAGE.NAME_PLAYER' | translate }}: {{player?.name}}</h3>
+          <h3 *ngIf="player">{{ 'PLAYER_PAGE.NAME_PLAYER' | translate }}: {{player?.login}}</h3>
           <h3>{{ 'PLAYER_PAGE.EMAIL' | translate }}: {{player?.email}}</h3>
         </div>
       </div>
@@ -133,7 +133,7 @@
       </div>
     </div>
     <ng-template #noPassedGame>
-      <h1 class="no-passed-game">{{ 'PLAYER_PAGE.NO_QUIZ' | translate }}</h1>
+      <h2 class="no-passed-game">{{ 'PLAYER_PAGE.NO_QUIZ' | translate }}</h2>
     </ng-template>
   </div>
 </div>

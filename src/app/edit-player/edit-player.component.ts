@@ -44,19 +44,13 @@ export class EditPlayerComponent implements OnInit {
   }
 
   isDisable(): string {
-    if (this.player.name != null && this.player.name != '' &&
+    if (this.player.login != null && this.player.login != '' &&
       this.player.email != null && this.player.email != '') {
       this.disable = 'false';
     } else {
       this.disable = 'disable';
     }
     return this.disable;
-  }
-
-  private getPlayer(playerId: string): void {
-    this.playerService.getOnePlayer(playerId).subscribe(player => {
-      this.player = player;
-    });
   }
 
   updatePlayer(): void {

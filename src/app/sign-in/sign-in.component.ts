@@ -49,10 +49,10 @@ export class SignInComponent implements OnInit {
   submit() {
     if (this.form.valid) {
 
-      this.login.value.toString().indexOf('@') === -1 ? this.player.name = this.login.value : this.player.email = this.login.value;
+      this.login.value.toString().indexOf('@') === -1 ? this.player.login = this.login.value : this.player.email = this.login.value;
       this.user.login = this.login.value;
+      this.user.username = this.user.login;
       this.user.password = this.password.value;
-      this.user.username = this.login.value;
 
       this.userService.signIn(this.user).subscribe(
         response => {
@@ -68,7 +68,7 @@ export class SignInComponent implements OnInit {
         }
       );
       this.user.password = undefined;
-      this.userService.getUserByLoginOrEmail(this.user.username).subscribe(
+      this.userService.getUserByLoginOrEmail(this.user.login).subscribe(
         user => {
           this.user = user;
           if (this.user.active) {
@@ -78,7 +78,6 @@ export class SignInComponent implements OnInit {
               }
             }, 2000);
             this.dialogAccount = this.user;
-            // this.router.navigate(['/games/']);
           } else {
             window.alert('Ваш профиль заблокирован');
           }

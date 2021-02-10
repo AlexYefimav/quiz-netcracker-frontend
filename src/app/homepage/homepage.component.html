@@ -1,35 +1,135 @@
-<div *ngIf="!isLoading;else loading">
-<div class="container">
- <mat-card class="back">
-  <mat-card>
-    <mat-card-title>
-      <a href="/games">{{ 'HOMEPAGE.GAME_LIST' | translate }}</a>
-    </mat-card-title>
-    <mat-card-subtitle>
-      <a href="/games">{{ 'HOMEPAGE.PLAY_GAMES' | translate }}</a>
-    </mat-card-subtitle>
-  </mat-card>
 
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+<!--    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">CHOOSE <span class="w3-hide-small">YOUR</span> QUIZ</span>-->
+  </div>
+</div>
+
+<!-- Container (About Section) -->
+<div class="w3-content w3-container w3-padding-64" id="about">
+  <h3 class="w3-center">ABOUT US</h3>
+  <p> Hello everyone, we are team from Netcracker educational sector and we pleased to show your our new project.
+    We created a new platform where you can play different quiz online alone or with other players. Also you can
+  create your own quiz, which can be on any topic and play it with your friends! We hope, that you would enjoy it
+  as we do.</p>
+</div>
+
+<!-- Second Parallax Image with Portfolio Text -->
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+  <a href="/games">
+    <span class="w3-xxlarge w3-text-white w3-wide">Begin to play!</span>
+  </a>
+  </div>
+</div>
+
+<div class="w3-content w3-container w3-padding-64" id="about">
+  <h3 class="w3-center">HOW TO START PLAYING</h3>
+  <p> In order to feel comfortable and be able to create and modify your own games you need to
+    <a href="/sign_up">sign up</a>. If you are already registered - try to sign in.</p>
+</div>
+
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+    <span class="w3-xxlarge w3-text-white w3-wide">Most Popular Games</span>
+  </div>
+</div>
+
+<div class="w3-content w3-container w3-padding-64" id="about">
+  <h3 class="w3-center">TOP 3 POPULAR GAMES</h3>
   <mat-card>
     <mat-panel-title>
       {{ 'HOMEPAGE.POPULAR_GAMES' | translate }}
     </mat-panel-title>
-    <mat-card-subtitle  class="viewes" *ngFor="let game of games" style="margin-left: 100px;">
-      {{game.title}} ---- {{game.views}} {{ 'HOMEPAGE.VIEWS' | translate }}
-    </mat-card-subtitle>
+    <div  class="viewes" *ngFor="let game of games">
+      <mat-card-subtitle>
+        <h3>
+        {{game.title}} ---- {{game.views}} {{ 'HOMEPAGE.VIEWS' | translate }}
+        </h3>
+      </mat-card-subtitle>
+    </div>
   </mat-card>
 
-  <mat-card>
-    <mat-panel-title>
-      {{ 'HOMEPAGE.ADVERTISING' | translate }}
-    </mat-panel-title>
-    {{ 'HOMEPAGE.FAILURE_ADVERTISING' | translate }}
-    <mat-card-subtitle>
-    </mat-card-subtitle>
-  </mat-card>
- </mat-card>
+
 </div>
+
+
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+      <span class="w3-xxlarge w3-text-white w3-wide">Advertisement</span>
+  </div>
 </div>
-<ng-template #loading>
-  <div class="spinner"></div>
-</ng-template>
+
+<div class="w3-content w3-container w3-padding-64" id="about">
+  <h3 class="w3-center">CONTACT US</h3>
+  <p> You can always contact us using social media links at the bottom of the page.</p>
+</div>
+
+
+<!--<div class="container">-->
+<!-- <mat-card class="back">-->
+<!--  <mat-card>-->
+<!--    <mat-card-title>-->
+<!--      <a href="/games">{{ 'HOMEPAGE.GAME_LIST' | translate }}</a>-->
+<!--    </mat-card-title>-->
+<!--    <mat-card-subtitle>-->
+<!--      <a href="/games">{{ 'HOMEPAGE.PLAY_GAMES' | translate }}</a>-->
+<!--    </mat-card-subtitle>-->
+<!--  </mat-card>-->
+
+<!--  <mat-card>-->
+<!--    <mat-panel-title>-->
+<!--      {{ 'HOMEPAGE.POPULAR_GAMES' | translate }}-->
+<!--    </mat-panel-title>-->
+<!--    <mat-card-subtitle  class="viewes" *ngFor="let game of games" style="margin-left: 100px;">-->
+<!--      {{game.title}} &#45;&#45;&#45;&#45; {{game.views}} {{ 'HOMEPAGE.VIEWS' | translate }}-->
+<!--    </mat-card-subtitle>-->
+<!--  </mat-card>-->
+
+<!--  <mat-card>-->
+<!--    <mat-panel-title>-->
+<!--      {{ 'HOMEPAGE.ADVERTISING' | translate }}-->
+<!--    </mat-panel-title>-->
+<!--    {{ 'HOMEPAGE.FAILURE_ADVERTISING' | translate }}-->
+<!--    <mat-card-subtitle>-->
+<!--    </mat-card-subtitle>-->
+<!--  </mat-card>-->
+<!-- </mat-card>-->
+<!--</div>-->
+
+<!--<ng-template #loading>-->
+<!--  <div class="spinner"></div>-->
+<!--</ng-template>-->
+
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <a href="https://www.facebook.com/NetCrackerTech/">
+      <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    </a>
+    <a href="https://www.instagram.com/ncqa_life/?hl=ru">
+      <i class="fa fa-instagram w3-hover-opacity"></i>
+    </a>
+    <a href="https://www.pinterest.com/pin/540713499011077266/">
+      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    </a>
+    <a href="https://twitter.com/netcrackertech">
+      <i class="fa fa-twitter w3-hover-opacity"></i>
+    </a>
+    <a href="https://www.linkedin.com/company/netcrackertech/?originalSubdomain=ru">
+      <i class="fa fa-linkedin w3-hover-opacity"></i>
+    </a>
+  </div>
+  <p>Special thanks to our mentors <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green"></a></p>
+</footer>
