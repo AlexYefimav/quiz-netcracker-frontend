@@ -66,27 +66,28 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  get login() {
+  getLogin() {
     return this.userForm?.get('login').value;
   }
 
-  get email() {
+  getEmail() {
     return this.userForm?.get('email').value;
   }
 
-  get password() {
+  getPassword() {
     return this.userForm?.get('password').value;
   }
 
-  get passwordRepeat() {
+  getPasswordRepeat() {
     return this.userForm?.get('passwordRepeat').value;
   }
 
   submitPlayer() {
     if (this.userForm.valid) {
-      this.user.login = this.login.value;
-      this.user.email = this.email.value;
-      this.user.password = this.password.value;
+      this.user.login = this.getLogin()
+      this.user.username=this.user.login;
+      this.user.email = this.getEmail()
+      this.user.password = this.getPassword()
       this.sendData();
     }
   }
@@ -96,7 +97,7 @@ export class SignUpComponent implements OnInit {
   }
 
   checkPasswords() {
-    this.isPasswordsEqual = this.password.value === this.passwordRepeat.value;
+    this.isPasswordsEqual = this.getPassword() === this.getPasswordRepeat();
     if (!this.isPasswordsEqual) {
       this.error = 'Пароли не совпадают';
     } else {

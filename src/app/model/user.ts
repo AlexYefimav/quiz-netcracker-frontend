@@ -9,6 +9,9 @@ export class User {
   isAuthenticated: boolean;
   usersSet: User[];
   active: boolean;
+  activationCode: string;
+  index: number;
+  temporaryIndex: number;
 
    constructor() {
   }

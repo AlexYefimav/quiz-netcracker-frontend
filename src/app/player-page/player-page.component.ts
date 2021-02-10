@@ -14,6 +14,7 @@ import {PlayerGiveAccessComponent} from '../player-give-access/player-give-acces
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TranslateService} from '@ngx-translate/core';
 import {StatisticsService} from '../service/statistics.service';
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-client-page',
@@ -31,6 +32,7 @@ export class PlayerPageComponent implements OnInit {
   constructor(private playerService: PlayerService,
               private storageService: StorageService,
               private gameService: GameService,
+              private userService: UserService,
               private router: Router,
               public dialog: MatDialog,
               private _snackBar: MatSnackBar,
@@ -63,8 +65,7 @@ export class PlayerPageComponent implements OnInit {
 
   deleteGame(id: string): void {
     this.isLoading = true;
-    this.gameService.deleteGame(id, this.player.id).subscribe(()=>{
-      alert("DELETE")
+    this.playerService.deleteGame(id, this.player.id).subscribe(()=>{
       this.createdGames = this.createdGames.filter(g => g.id != id);
       this.statisticsService.getGameWithStatistics(this.player.id).subscribe(passedGame=>{
         this.passedGame = passedGame;
