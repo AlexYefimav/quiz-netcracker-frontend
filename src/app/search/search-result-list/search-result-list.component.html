@@ -27,21 +27,11 @@
           <div *ngFor="let item of selectedOptions">
             <mat-card>
               <mat-card-title>
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
                 {{item.title}}
-                <mat-menu #menu="matMenu">
-                  <a mat-menu-item href="game/update/{{item.id}}">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
-                    <span>Edit</span>
-                  </a>
-                  <a mat-menu-item href="games" (click)="deleteGame(item.id)">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
-                    <span>Delete</span>
-                  </a>
-                </mat-menu>
               </mat-card-title>
+              <div class="photo" *ngIf="item.photo">
+                <a><img src="{{item.photo}}" width="200" height="200" alt="Photo from Amazon S3" class="round"></a>
+              </div>
               <mat-card-subtitle>
                 {{item.description}}
               </mat-card-subtitle>

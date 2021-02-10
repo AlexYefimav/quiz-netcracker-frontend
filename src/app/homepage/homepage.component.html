@@ -50,10 +50,16 @@
     <mat-panel-title>
       {{ 'HOMEPAGE.POPULAR_GAMES' | translate }}
     </mat-panel-title>
-    <mat-card-subtitle  class="viewes" *ngFor="let game of games" style="margin-left: 100px;">
-      {{game.title}} ---- {{game.views}} {{ 'HOMEPAGE.VIEWS' | translate }}
-    </mat-card-subtitle>
+    <div  class="viewes" *ngFor="let game of games">
+      <mat-card-subtitle>
+        <h3>
+        {{game.title}} ---- {{game.views}} {{ 'HOMEPAGE.VIEWS' | translate }}
+        </h3>
+      </mat-card-subtitle>
+    </div>
   </mat-card>
+
+
 </div>
 
 

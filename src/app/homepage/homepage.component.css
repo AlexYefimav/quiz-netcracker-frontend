@@ -9,20 +9,19 @@ h1 {
 }
 
 .mat-card {
-  /*background: #e91e63 url(src/assets/images/meme.png);*/
   background: #00bfff;
   color: oldlace;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  /*margin-left: auto;*/
-  /*margin-right: auto;*/
-  /*margin-top: 15px;*/
-  /*max-width: 500px;*/
-  /*max-height: 300px;*/
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  max-width: 750px;
   text-align: center;
-  margin: 5pc;
-  padding: 5pc;
+  width: 300px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 40px;
+  border: 3px solid #00bfff;
 
 }
 
@@ -69,6 +68,7 @@ h1 {
 
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
 body, html {
+
   height: 100%;
   color: #777;
   line-height: 1.8;
@@ -84,13 +84,13 @@ body, html {
 
 /* First image (Logo. Full height) */
 .bgimg-1 {
-  background-image: url("/assets/images/img_2.png");
+  background-image: url("https://quiz-netcracker-basket.s3.eu-north-1.amazonaws.com/1612968081714-img_2.png");
   min-height: 100%;
 }
 
 /* Second image (Portfolio) */
 .bgimg-2 {
-  background-image: url("/assets/images/img_4.png");
+  background-image: url("https://quiz-netcracker-basket.s3.eu-north-1.amazonaws.com/1612968094704-img_4.png");
   min-height: 400px;
 }
 
