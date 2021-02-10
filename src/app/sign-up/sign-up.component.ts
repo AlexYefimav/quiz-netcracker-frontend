@@ -84,7 +84,7 @@ export class SignUpComponent implements OnInit {
 
   submitPlayer() {
     if (this.userForm.valid) {
-      this.user.username = this.login.value;
+      this.user.login = this.login.value;
       this.user.email = this.mail.value;
       this.user.password = this.password.value;
       this.sendData();

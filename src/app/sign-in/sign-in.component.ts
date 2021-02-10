@@ -52,7 +52,6 @@ export class SignInComponent implements OnInit {
       this.login.value.toString().indexOf('@') === -1 ? this.player.login = this.login.value : this.player.email = this.login.value;
       this.user.login = this.login.value;
       this.user.password = this.password.value;
-      this.user.username = this.login.value;
 
       this.userService.signIn(this.user).subscribe(
         response => {
@@ -92,11 +91,11 @@ export class SignInComponent implements OnInit {
   }
 
   get login() {
-    return this.form.get('login').value;
+    return this.form.get('login');
   }
 
   get password() {
-    return this.form.get('password').value;
+    return this.form.get('password');
   }
 
 }
